@@ -6,9 +6,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float MaxHp { get; private set; }
-    public float CurrentHp { get; private set; }
-    public float MoveSpeed { get; private set; }
+    public float MaxHp { get { return maxHp; } }
+    public float CurrentHp { get { return currentHp; } }
+    public float MoveSpeed { get { return moveSpeed; } }
+
+    protected float maxHp;
+    protected float currentHp;
+    protected float moveSpeed;
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
