@@ -11,17 +11,17 @@ public abstract class State : MonoBehaviour
         owner = player;
     }
 
-    public void Enter()
+    public virtual void Enter()
     {
         
     }
 
-    public void StateUpdate()
+    public virtual void StateUpdate()
     {
 
     }
 
-    public void Exit()
+    public virtual void Exit()
     {
 
     }
