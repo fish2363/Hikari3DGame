@@ -24,4 +24,9 @@ public class StateMachine<T> where T : Enum
 		CurrentState = EnemyDict[changeState];
 		CurrentState.Enter();
 	}
+
+	public void AddState(T stateEnum, EnemyState<T> state)
+	{
+		EnemyDict.Add(stateEnum, state);
+	}
 }

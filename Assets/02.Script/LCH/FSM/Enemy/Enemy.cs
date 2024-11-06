@@ -1,8 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Enemy : MonoBehaviour
+public enum EnemyStatEnum
 {
-	
+    Idle,
+    Jump
+}
+public class Enemy : EnemySetting
+{
+
+    public StateMachine<EnemyStatEnum> stateMachine;
+    protected override void Awake()
+    {
+        base.Awake();
+        stateMachine = new StateMachine<EnemyStatEnum>();
+    }
 }
