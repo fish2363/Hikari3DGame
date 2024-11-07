@@ -6,7 +6,11 @@ using System;
 public enum EnemyStatEnum
 {
     Idle,
-    Jump
+    Jump,
+    Walk,
+    Attack,
+    Skill,
+    Dead
 }
 public class Enemy : EnemySetting
 {
