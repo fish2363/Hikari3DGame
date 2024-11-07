@@ -7,7 +7,9 @@ public class EnemyMovement : MonoBehaviour
 {
     private Rigidbody _rbCompo;
     private Vector3 moveDir;
-    public Action OnMove;
+
+    public Transform playerPos { get;  set; }
+
     public bool isMove { get; set; }
 
     private void Awake()
@@ -16,9 +18,9 @@ public class EnemyMovement : MonoBehaviour
         _rbCompo = GetComponent<Rigidbody>();
     }
 
-    public void CanMove(Transform playerPos, float moveSpeed)
+    public void CanMove(float moveSpeed)
     {
-         moveDir =  Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed);
+         moveDir = Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed);
     }
 
     

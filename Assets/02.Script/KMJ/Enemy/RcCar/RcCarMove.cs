@@ -8,4 +8,21 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+    }
+
+    public override void UpdateState()
+    {
+        _enemy.MoveCompo.playerPos = GameObject.Find("Player").transform;
+
+        _enemy.MoveCompo.CanMove(10);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
 }

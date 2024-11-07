@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RcCar : Enemy
 {
+
+
     protected override void Awake()
     {
         base.Awake();

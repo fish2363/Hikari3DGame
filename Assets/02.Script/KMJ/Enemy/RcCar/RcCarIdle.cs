@@ -10,14 +10,15 @@ public class RcCarIdle : EnemyState<EnemyStatEnum>
 
     public override void Enter()
     {
-        
+        base.Enter();
     }
     public override void UpdateState()
     {
-        //if(_enemy.MoveCompo)
+        if (_enemy.MoveCompo.isMove)
+            _stateMachine.ChangeState(EnemyStatEnum.Walk);
     }
     public override void Exit()
     {
-        
+        base.Exit();
     }
 }
