@@ -20,6 +20,4 @@ public class RcCar : Enemy
     {
         stateMachine.CurrentState.UpdateState();
     }
-
-   
 }
