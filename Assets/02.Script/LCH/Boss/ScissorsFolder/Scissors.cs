@@ -11,6 +11,6 @@ public class Scissors : BossBase
 
     public override void BossyDie()
     {
-        77
+        
     }
 }
