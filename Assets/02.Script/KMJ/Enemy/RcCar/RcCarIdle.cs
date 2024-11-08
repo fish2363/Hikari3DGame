@@ -11,6 +11,7 @@ public class RcCarIdle : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("³ª´Ù");
     }
     public override void UpdateState()
     {

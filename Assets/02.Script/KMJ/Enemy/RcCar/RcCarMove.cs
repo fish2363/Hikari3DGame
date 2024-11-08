@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class RcCarMove : EnemyState<EnemyStatEnum>
 {
+    int randomInteger;
     public RcCarMove(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
     public override void Enter()
     {
+        Debug.Log("나도 왔다");
         base.Enter();
+        randomInteger = Random.Range(0, 2);
     }
 
     public override void UpdateState()
     {
-        _enemy.MoveCompo.playerPos = GameObject.Find("Player").transform;
+        _enemy.MoveCompo.playerPos = GameObject.FindWithTag("Player").transform;
 
-        _enemy.MoveCompo.CanMove(10);
+        _enemy.MoveCompo.CanMove(_enemy._enemyStat.MoveSpeed);
+
+        if(_enemy.range == _enemy._enemyStat.AttackRadius)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Attack);
+        }
     }
 
     public override void Exit()
     {
-        base.Exit();
+        
     }
 
 }
