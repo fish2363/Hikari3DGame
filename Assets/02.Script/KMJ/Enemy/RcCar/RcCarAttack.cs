@@ -8,4 +8,25 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
     {
     }
 
+
+    public override void Enter()
+    {
+        Debug.Log("나 들어옴");
+        base.Enter();
+
+        if(Physics.Raycast(_enemy.transform.position,_enemy.transform.forward,_enemy.whatIsPlayer))
+        {
+            Debug.Log("너 맞음");
+        }
+    }
+
+    public override void UpdateState()
+    {
+        
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

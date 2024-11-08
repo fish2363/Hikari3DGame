@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemySetting : MonoBehaviour 
 {
-	[SerializeField] private EnemyStatSO _enemyStat;
+	public EnemyStatSO _enemyStat;
 
+    [field: SerializeField] public LayerMask whatIsPlayer;
+    [field : SerializeField] public float range { get; set; }
 	public EnemyMovement MoveCompo { get; protected set; }
 	public Animator AnimCompo { get; protected set; } //Visual안만들면 터짐~
 
@@ -13,5 +15,10 @@ public class EnemySetting : MonoBehaviour
     {
         MoveCompo = GetComponent<EnemyMovement>();
         AnimCompo = GetComponentInChildren<Animator>();
+    }
+
+    private void Update()
+    {
+        range = Vector3.Distance(MoveCompo.playerPos.position, transform.position);
     }
 }

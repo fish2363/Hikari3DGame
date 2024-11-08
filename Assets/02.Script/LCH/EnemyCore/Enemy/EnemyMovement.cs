@@ -14,13 +14,17 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
+        isMove = true;
         moveDir = transform.position;
         _rbCompo = GetComponent<Rigidbody>();
     }
 
     public void CanMove(float moveSpeed)
     {
-         moveDir = Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed);
+         transform.position = Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed * Time.deltaTime);
+
+        if (isMove == false)
+            moveDir = Vector3.zero;
     }
 
     
