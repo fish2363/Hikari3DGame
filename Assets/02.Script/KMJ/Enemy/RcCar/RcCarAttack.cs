@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RcCarAttack : EnemyState<EnemyStatEnum>
 {
@@ -13,16 +14,14 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
     {
         Debug.Log("나 들어옴");
         base.Enter();
-
-        if(Physics.Raycast(_enemy.transform.position,_enemy.transform.forward,_enemy.whatIsPlayer))
-        {
-            Debug.Log("너 맞음");
-        }
     }
 
     public override void UpdateState()
     {
-        
+        _stateMachine.ChangeState(EnemyStatEnum.Walk);
+
+        if (_enemy.hp <= 0)
+            _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
     public override void Exit()

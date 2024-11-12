@@ -18,5 +18,5 @@ MonoBehaviour:
   KnobackPower: 0
   AttackDealy: 0
   ContactAttaackRadius: 0
-  HP: 0
+  HP: 5
   MoveSpeed: 2

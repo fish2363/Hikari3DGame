@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySetting : MonoBehaviour 
 {
+    public float hp;
+
 	public EnemyStatSO _enemyStat;
 
     [field: SerializeField] public LayerMask whatIsPlayer;
@@ -13,12 +15,15 @@ public class EnemySetting : MonoBehaviour
 
     protected virtual void Awake()
     {
+        hp = _enemyStat.HP;
         MoveCompo = GetComponent<EnemyMovement>();
         AnimCompo = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        range = Vector3.Distance(MoveCompo.playerPos.position, transform.position);
+        
     }
+
+    
 }

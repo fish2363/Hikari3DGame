@@ -22,10 +22,21 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.MoveCompo.CanMove(_enemy._enemyStat.MoveSpeed);
 
-        if(_enemy.range == _enemy._enemyStat.AttackRadius)
+        _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
+
+        if(_enemy.range <= _enemy._enemyStat.ContactAttaackRadius)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Skill);
+        }
+
+        if (_enemy.range <= _enemy._enemyStat.AttackRadius)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
+
+
+        if (_enemy.hp <= 0)
+            _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
     public override void Exit()

@@ -17,6 +17,9 @@ public class RcCarIdle : EnemyState<EnemyStatEnum>
     {
         if (_enemy.MoveCompo.isMove)
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
+
+        if (_enemy._enemyStat.HP <= 0)
+            _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
     public override void Exit()
     {
