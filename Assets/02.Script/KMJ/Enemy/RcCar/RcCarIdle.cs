@@ -11,11 +11,15 @@ public class RcCarIdle : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("³ª´Ù");
     }
     public override void UpdateState()
     {
         if (_enemy.MoveCompo.isMove)
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
+
+        if (_enemy._enemyStat.HP <= 0)
+            _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
     public override void Exit()
     {
