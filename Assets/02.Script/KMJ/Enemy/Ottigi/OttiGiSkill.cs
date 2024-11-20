@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OttiGiSkill : MonoBehaviour
+public class OttiGiSkill : EnemyState<EnemyStatEnum>
 {
-    // Start is called before the first frame update
-    void Start()
+    private OttuGi _ottugi;
+    public OttiGiSkill(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+            
     }
 }
