@@ -20,10 +20,7 @@ public class NWindUpDollIdle : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
-        float distance = (_windUpDoll.player.transform.position 
-            - _windUpDoll.transform.position).magnitude;
-
-        if (distance < _windUpDoll.detectRadius)
+        if (_windUpDoll._distance < _windUpDoll.detectRadius)
         {
             _enemy.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }

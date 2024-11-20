@@ -24,7 +24,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
-        if(_enemy.range <= _enemy._enemyStat.ContactAttaackRadius)
+        if(_enemy.range <= _enemy._enemyStat.ContactAttackRadius)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
