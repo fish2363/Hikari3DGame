@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class RcCar : Enemy
 {
+    public bool _isSkill;
+
+    public bool _isAttack;
+
+    public bool _isSkillExit;
+
+    public bool _isAttackExit;
+
 
     protected override void Awake()
     {
+        _isSkill = true;
         base.Awake();
         stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this,stateMachine,"Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new RcCarMove(this, stateMachine, "Walk"));
@@ -20,5 +29,40 @@ public class RcCar : Enemy
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
+    }
+
+    public void DashSkill()
+    {
+        Debug.Log("¿¿");
+        StartCoroutine(Skill());
+    }
+
+    public void Attack()
+    {
+        StartCoroutine(AttackTime());
+    }
+
+
+    IEnumerator Skill()
+    {
+        _isSkill = false;
+        _isSkillExit = false;
+
+
+        yield return new WaitForSeconds(4f);
+        _isSkillExit = true;
+
+        yield return new WaitForSecondsRealtime(3f);
+        _isSkill = true;
+    }
+
+    IEnumerator AttackTime()
+    {
+        _isAttackExit = false;
+
+
+        yield return new WaitForSeconds(4f);
+
+        _isAttackExit = true;
     }
 }
