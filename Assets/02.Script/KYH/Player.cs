@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
 
-    public float jumpPower = 12f;
-
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
