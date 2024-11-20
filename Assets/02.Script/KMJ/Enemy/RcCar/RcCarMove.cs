@@ -15,7 +15,6 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         rcCar = _enemy.GetComponent<RcCar>();
         Debug.Log("나도 왔다");
         base.Enter();
-        randomInteger = Random.Range(0, 2);
     }
 
     public override void UpdateState()
@@ -27,7 +26,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
 
-        if(_enemy.range <= _enemy._enemyStat.ContactAttaackRadius && rcCar._isSkill)
+        if(_enemy.range <= _enemy._enemyStat.ContactAttackRadius && rcCar._isSkill)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }

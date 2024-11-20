@@ -25,7 +25,7 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
         
         if(ishit == true)
         {
-            
+            Debug.Log("æ∆¿’");
         }
 
     }
