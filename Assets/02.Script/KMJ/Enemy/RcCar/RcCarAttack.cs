@@ -18,7 +18,7 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
         Debug.Log("³ª µé¾î¿È");
         _player = GameObject.FindWithTag("Player");
         base.Enter();
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 20 * Time.deltaTime);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 5 * Time.deltaTime);
         rcCar.Attack();
     }
 
