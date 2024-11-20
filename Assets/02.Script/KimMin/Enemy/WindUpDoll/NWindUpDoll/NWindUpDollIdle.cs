@@ -17,6 +17,8 @@ public class NWindUpDollIdle : EnemyState<EnemyStatEnum>
     public override void UpdateState()
     {
         base.UpdateState();
+
+
     }
 
     public override void Exit()
