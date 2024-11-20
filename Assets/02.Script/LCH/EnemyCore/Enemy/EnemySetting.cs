@@ -14,4 +14,11 @@ public class EnemySetting : MonoBehaviour
         MoveCompo = GetComponent<EnemyMovement>();
         AnimCompo = GetComponentInChildren<Animator>();
     }
+
+    public Collider[] GetPlayerRange(Transform trm, float detectRadius, LayerMask whatIsPlayer)
+    {
+        Collider[] colliders = Physics.OverlapSphere(trm.position, detectRadius, whatIsPlayer);
+
+        return colliders ??= null;
+    }
 }
