@@ -12,6 +12,7 @@ public class RcCar : Enemy
 
     public bool _isAttackExit;
 
+
     protected override void Awake()
     {
         _isSkill = true;
@@ -47,7 +48,8 @@ public class RcCar : Enemy
         _isSkill = false;
         _isSkillExit = false;
 
-        yield return new WaitForSeconds(3f);
+
+        yield return new WaitForSeconds(4f);
         _isSkillExit = true;
 
         yield return new WaitForSecondsRealtime(3f);
@@ -58,7 +60,8 @@ public class RcCar : Enemy
     {
         _isAttackExit = false;
 
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(4f);
 
         _isAttackExit = true;
     }
