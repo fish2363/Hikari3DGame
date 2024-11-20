@@ -7,7 +7,9 @@ public abstract class BossBase : MonoBehaviour
 {
     public UnityEvent OnphaseEvent;
 
-    [SerializeField] private EnemyStatSO _enemystat;
+    public bool phase2 = false;
+
+    [field:SerializeField] public EnemyStatSO Enemystat { get; private set; }
 
     protected bool isPhaseEnd;
 
