@@ -5,6 +5,7 @@ using UnityEngine;
 public class RcCarSkill : EnemyState<EnemyStatEnum>
 {
     private GameObject _player;
+    private RcCar _rcCar;
 
     public RcCarSkill(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
@@ -12,6 +13,10 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
 
     public override void Enter()
     {
+        _rcCar = _enemy.GetComponent<RcCar>();
+
+        _rcCar.DashSkill();
+
         _player = GameObject.FindWithTag("Player");
 
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 20 * Time.deltaTime);
@@ -22,15 +27,20 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
         {
             
         }
+
     }
 
     public override void UpdateState()
     {
-        _stateMachine.ChangeState(EnemyStatEnum.Walk);
-            
 
-        if (_enemy.hp <= 0)
-            _stateMachine.ChangeState(EnemyStatEnum.Dead);
+        if(_rcCar._isSkillExit)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Walk);
+
+
+            if (_enemy.hp <= 0)
+                _stateMachine.ChangeState(EnemyStatEnum.Dead);
+        }
     }
 
     public override void Exit()
