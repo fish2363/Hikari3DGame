@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    [field: SerializeField] public InputReader InputReader { get; private set; }
+    [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
+
     public float MaxHp { get { return maxHp; } }
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
 
+    [SerializeField]
     protected float maxHp;
+    [SerializeField]
     protected float currentHp;
+    [SerializeField]
     protected float moveSpeed;
+
+    public float jumpPower = 12f;
+
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
@@ -26,6 +35,29 @@ public class Player : MonoBehaviour
             stateDictionary.Add(enumState,state);
         }
         ChangeState(StateEnum.Idle);
+
+        InputReader.OnDashEvent += HandleDashEvent;
+        InputReader.OnJumpEvent += HandleJumpEvent;
+    }
+
+    private void Update()
+    {
+        stateDictionary[currentEnum].StateUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        stateDictionary[currentEnum].FixedUpdate();
+    }
+
+    private void HandleJumpEvent()
+    {
+
+    }
+
+    private void HandleDashEvent()
+    {
+
     }
 
     public void ChangeState(StateEnum newEnum)
