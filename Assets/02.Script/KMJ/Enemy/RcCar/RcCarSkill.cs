@@ -19,7 +19,7 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
 
         _player = GameObject.FindWithTag("Player");
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 5 * Time.deltaTime);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 10);
 
        bool ishit = Physics.Raycast(_enemy.transform.position,_enemy.transform.forward, 2, _enemy.whatIsPlayer);
         
