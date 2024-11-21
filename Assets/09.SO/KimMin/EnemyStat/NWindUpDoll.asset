@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885da8cbebd400447867210f8f14a67e, type: 3}
   m_Name: NWindUpDoll
   m_EditorClassIdentifier: 
-  AttackRadius: 4
+  AttackRadius: 15
   WallRadius: 1
   AttackPoawer: 4
   KnockbackPower: 5
-  AttackDelay: 2
+  AttackDelay: 5
   ContactAttackRadius: 2
   HP: 10
   MoveSpeed: 5

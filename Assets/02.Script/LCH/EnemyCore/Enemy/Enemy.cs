@@ -21,9 +21,4 @@ public class Enemy : EnemySetting
         base.Awake();
         stateMachine = new StateMachine<EnemyStatEnum>();
     }
-
-    protected void StopImmediately()
-    {
-        player.RigidCompo.velocity = Vector3.zero;
-    }
 }
