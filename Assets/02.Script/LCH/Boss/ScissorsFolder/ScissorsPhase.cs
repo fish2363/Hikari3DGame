@@ -14,6 +14,8 @@ public class ScissorsPhase : MonoBehaviour
 
     private Player _targetPlayer;
 
+    [SerializeField] private ScissorsClone _scissorsClone;
+
     private void Awake()
     {
         _scissors = GetComponent<BossBase>();
@@ -26,13 +28,18 @@ public class ScissorsPhase : MonoBehaviour
 
         //switch (PhaseCount)
         //{
-            //    case 1:
-             //ScissorsPhase1();
-            //        break;
-            //case 2:
-             //ScissorsPhase2();
-                 //break;
-                ScissorsPhase3();
+        //    case 1:
+        //        ScissorsPhase1();
+        //        break;
+        //    case 2:
+        //        ScissorsPhase2();
+        //        break;
+        //    case 3:
+        //        ScissorsPhase3();
+        //        break;
+        //    case 4:
+                ScissorsPhase4();
+        //        break;
         //}
     }
 
@@ -55,6 +62,11 @@ public class ScissorsPhase : MonoBehaviour
     private void ScissorsPhase3()
     {
         StartCoroutine(SissorsPhaseCoroutine());
+    }
+
+    private void ScissorsPhase4()
+    {
+         Instantiate(_scissorsClone, -transform.position,Quaternion.identity);  
     }
 
     private IEnumerator SissorsPhaseCoroutine()
