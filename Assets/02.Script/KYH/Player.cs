@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
 
+    [SerializeField] private float _dashCoolTime;
+    private float _lastDashTime;
+
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
@@ -55,7 +58,20 @@ public class Player : MonoBehaviour
 
     private void HandleDashEvent()
     {
+        if (AttemptDash())
+        {
+            ChangeState(StateEnum.Dash);
+        }
+    }
 
+    private bool AttemptDash()
+    {
+        if (currentEnum == StateEnum.Dash) return false;
+
+        if (_lastDashTime + _dashCoolTime > Time.time) return false;
+
+        _lastDashTime = Time.time;
+        return true;
     }
 
     public void ChangeState(StateEnum newEnum)
