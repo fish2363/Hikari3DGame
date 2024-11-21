@@ -16,6 +16,13 @@ public class NWindUpDoll : WindUpDoll
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        Debug.Log(stateMachine.CurrentState);
+        stateMachine.CurrentState.UpdateState();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class NWindUpDollMove : EnemyState<EnemyStatEnum>
 {
-    private WindUpDoll _windUpDoll;
+    private NWindUpDoll _windUpDoll;
 
     public NWindUpDollMove(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        _windUpDoll = enemy as WindUpDoll;
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
+        _windUpDoll = enemy as NWindUpDoll;
     }
 
     public override void UpdateState()
