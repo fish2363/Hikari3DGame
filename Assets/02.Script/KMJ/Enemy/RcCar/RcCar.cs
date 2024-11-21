@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,11 @@ public class RcCar : Enemy
 
     public bool _isAttackExit;
 
+    private Transform _player;
 
     protected override void Awake()
     {
+        _player = GameObject.Find("Player").transform;
         _isSkill = true;
         base.Awake();
         stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this,stateMachine,"Idle"));
@@ -29,6 +32,12 @@ public class RcCar : Enemy
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        transform.LookAt(_player);
     }
 
     public void DashSkill()
