@@ -49,7 +49,7 @@ public class RcCar : Enemy
         _isSkillExit = false;
 
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         _isSkillExit = true;
 
         yield return new WaitForSecondsRealtime(3f);
@@ -61,7 +61,7 @@ public class RcCar : Enemy
         _isAttackExit = false;
 
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
 
         _isAttackExit = true;
     }

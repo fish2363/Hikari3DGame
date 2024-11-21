@@ -20,13 +20,20 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
+        Move();
 
+        if(_windUpDoll._distance <  _windUpDoll._enemyStat.AttackRadius)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
+        }
     }
 
     private void Move()
     {
-        Vector2 moveDir = (_windUpDoll.transform.position - _windUpDoll.transform.position).normalized;
+        Debug.Log("¹«ºù¸Ç");
+        Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
+        moveDir.y = 0;
 
-        _windUpDoll.RIgidCompo.velocity = moveDir;
+        _windUpDoll.RigidCompo.AddForce(moveDir * _enemy._enemyStat.MoveSpeed, ForceMode.Force);
     }
 }
