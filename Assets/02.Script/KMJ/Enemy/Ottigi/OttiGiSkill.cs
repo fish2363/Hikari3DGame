@@ -11,6 +11,6 @@ public class OttiGiSkill : EnemyState<EnemyStatEnum>
 
     public override void Enter()
     {
-            
+        _ottugi.Skill();
     }
 }

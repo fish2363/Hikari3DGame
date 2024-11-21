@@ -23,8 +23,12 @@ public class OttiGiAttack : EnemyState<EnemyStatEnum>
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
-            if (_enemy.hp <= 0)
-                _stateMachine.ChangeState(EnemyStatEnum.Dead);
         }
+
+        if (_enemy.hp <= 0)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Skill);
+        }
+
     }
 }

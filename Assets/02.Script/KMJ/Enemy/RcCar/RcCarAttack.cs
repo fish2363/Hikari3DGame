@@ -15,11 +15,23 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         rcCar = _enemy.GetComponent<RcCar>();
+
         Debug.Log("³ª µé¾î¿È");
+
         _player = GameObject.FindWithTag("Player");
+
         base.Enter();
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 10);
+
+        _enemy.RIgidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
+
         rcCar.Attack();
+
+        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 2, _enemy.whatIsPlayer);
+
+        if (ishit == true)
+        {
+            Debug.Log("Ã¼·Â±ðÀ½");
+        }
     }
 
     public override void UpdateState()
