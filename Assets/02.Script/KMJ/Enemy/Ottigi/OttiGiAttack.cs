@@ -31,4 +31,9 @@ public class OttiGiAttack : EnemyState<EnemyStatEnum>
         }
 
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

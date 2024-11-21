@@ -22,7 +22,7 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 
         base.Enter();
 
-        _enemy.RIgidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
+        _enemy.RigidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
 
         rcCar.Attack();
 

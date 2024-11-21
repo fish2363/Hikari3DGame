@@ -19,4 +19,9 @@ public class OttuGiIdle : EnemyState<EnemyStatEnum>
         }
 
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

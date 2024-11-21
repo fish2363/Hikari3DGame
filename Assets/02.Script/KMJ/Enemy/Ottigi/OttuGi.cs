@@ -35,6 +35,8 @@ public class OttuGi : Enemy
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
+
+        transform.LookAt(_player);
     }
 
     public void Attack()
@@ -44,8 +46,8 @@ public class OttuGi : Enemy
 
     public void Skill()
     {
-        Instantiate(_childPrefab, transform);
-        Instantiate(_childPrefab, transform);
+        Instantiate(_childPrefab);
+        Instantiate(_childPrefab);
 
         gameObject.SetActive(false);
     }
@@ -57,7 +59,7 @@ public class OttuGi : Enemy
 
         Vector3.MoveTowards(transform.position, _player.transform.position, 10);
 
-        RIgidCompo.AddForce(Vector3.up * _enemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(Vector3.up * _enemyStat.AttackPoawer, ForceMode.Impulse);
 
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
