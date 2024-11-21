@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySetting : MonoBehaviour 
 {
-    protected float hp;
+    public float hp;
 
 	public EnemyStatSO _enemyStat;
 
