@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 {
-    private float _dashPower = 10f, _dashTime = 0.5f;
+    private float _dashPower = 2f, _dashTime = 0.5f;
 
-    private WindUpDoll _windUpDoll;
+    private NWindUpDoll _windUpDoll;
 
     public NWindUpDollAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        _windUpDoll = enemy as WindUpDoll;
+        _windUpDoll = enemy as NWindUpDoll;
     }
 
     public override void Enter()
