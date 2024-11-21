@@ -19,11 +19,22 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
         HeadAttack();
     }
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+
+        float time = Time.time;
+        if(time  > _dashTime)
+        {
+            _enemy.stateMachine.ChangeState(EnemyStatEnum.Walk);
+        }
+    }
+
     private void HeadAttack()
     {
         Vector3 direction = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         direction.y = 0;
 
-        _windUpDoll.RIgidCompo.AddForce(direction * _dashPower, ForceMode.Impulse);
+        _windUpDoll.RigidCompo.AddForce(direction * _dashPower, ForceMode.Impulse);
     }
 }

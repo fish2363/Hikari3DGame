@@ -45,7 +45,7 @@ public class OttuGi : Enemy
     {
         _isSkillExit = false;
 
-        RIgidCompo.AddForce(Vector3.up * _enemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(Vector3.up * _enemyStat.AttackPoawer, ForceMode.Impulse);
 
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;

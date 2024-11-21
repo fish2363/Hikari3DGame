@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 637144191}
   - component: {fileID: 637144190}
   - component: {fileID: 637144189}
+  - component: {fileID: 637144194}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -186,15 +187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee1ea8ff90e8ed43933eab5e683c0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  _enemyStat: {fileID: 0}
+  hp: 10
+  _enemyStat: {fileID: 11400000, guid: 992f606ce10028d42b090bec80025d05, type: 2}
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
-  <range>k__BackingField: 0
-  player: {fileID: 0}
-  detectRadius: 4
-  atkRadius: 2
+    m_Bits: 64
+  <range>k__BackingField: 4
+  player: {fileID: 808337710}
+  detectRadius: 10
   _distance: 0
 --- !u!65 &637144190
 BoxCollider:
@@ -282,6 +282,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &637144194
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637144188}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &730850768
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +543,7 @@ Transform:
   m_GameObject: {fileID: 808337709}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55.19, y: 1.05, z: -32.14}
+  m_LocalPosition: {x: -55.19, y: 1.05, z: -20.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
