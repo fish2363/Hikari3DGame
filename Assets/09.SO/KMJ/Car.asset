@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885da8cbebd400447867210f8f14a67e, type: 3}
   m_Name: Car
   m_EditorClassIdentifier: 
-  AttackRadius: 10
+  AttackRadius: 2
   WallRadius: 0
-  AttackPoawer: 3
+  AttackPoawer: 2
   KnockbackPower: 0
   AttackDelay: 0
-  ContactAttackRadius: 5
+  ContactAttackRadius: 4
   HP: 5
   MoveSpeed: 2

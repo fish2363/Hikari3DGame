@@ -17,7 +17,6 @@ public class ScissorsPhase : MonoBehaviour
     private void Awake()
     {
         _scissors = GetComponent<BossBase>();
-        _rbCopmo = GetComponent<Rigidbody>();
         _targetPlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
@@ -27,29 +26,47 @@ public class ScissorsPhase : MonoBehaviour
 
         //switch (PhaseCount)
         //{
-        //    case 1:
-                //ScissorsPhase1();
-        //        break;
-               //case 2:
-                    ScissorsPhase2();
-                  //break;
+            //    case 1:
+             //ScissorsPhase1();
+            //        break;
+            //case 2:
+             //ScissorsPhase2();
+                 //break;
+                ScissorsPhase3();
         //}
     }
 
     private void ScissorsPhase2()
     {
-        _scissors.phase2 = true;
-        _rbCopmo.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
-        if(_rbCopmo.velocity.y < 0)
+        _scissors.RbCompo.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+        if (_scissors.RbCompo.velocity.y < 0)
         {
             Vector3 dir = (_targetPlayer.transform.position - transform.position).normalized;
-            _rbCopmo.velocity = dir;
+            _scissors.RbCompo.velocity = dir;
         }
     }
 
     private void ScissorsPhase1()
     {
         Vector3 direction = (_targetPlayer.transform.position - transform.position).normalized;
-        _rbCopmo.AddForce(direction * _dashPower, ForceMode.Impulse);
+        _scissors.RbCompo.AddForce(direction * _dashPower, ForceMode.Impulse);
+    }
+
+    private void ScissorsPhase3()
+    {
+        StartCoroutine(SissorsPhaseCoroutine());
+    }
+
+    private IEnumerator SissorsPhaseCoroutine()
+    {
+        float CurrentTime = 0;
+        while (CurrentTime <= 7)
+        {
+            CurrentTime += Time.deltaTime;
+            Vector3 direction = _targetPlayer.transform.position - transform.position;
+            _scissors.RbCompo.velocity = direction.normalized * _scissors.Enemystat.MoveSpeed;
+            yield return null;
+        }
+        _scissors.RbCompo.velocity = Vector3.zero;
     }
 }

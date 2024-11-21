@@ -37,4 +37,9 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

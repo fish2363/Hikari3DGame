@@ -24,12 +24,4 @@ public class Scissors : BossBase
     {
         
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-
-        }
-    }
 }
