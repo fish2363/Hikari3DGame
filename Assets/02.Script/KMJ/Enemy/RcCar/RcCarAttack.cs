@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class RcCarAttack : EnemyState<EnemyStatEnum>
+{
+    private GameObject _player;
+    RcCar rcCar;
+    public RcCarAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    {
+    }
+
+
+    public override void Enter()
+    {
+        rcCar = _enemy.GetComponent<RcCar>();
+
+        Debug.Log("³ª µé¾î¿È");
+
+        _player = GameObject.FindWithTag("Player");
+
+        base.Enter();
+
+        _enemy.RIgidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
+
+        rcCar.Attack();
+
+        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 2, _enemy.whatIsPlayer);
+
+        if (ishit == true)
+        {
+            Debug.Log("Ã¼·Â±ðÀ½");
+        }
+    }
+
+    public override void UpdateState()
+    {
+        
+        if(rcCar._isAttackExit)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Walk);
+
+            if (_enemy.hp <= 0)
+                _stateMachine.ChangeState(EnemyStatEnum.Dead);
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+}

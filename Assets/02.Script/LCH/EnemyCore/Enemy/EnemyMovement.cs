@@ -7,20 +7,24 @@ public class EnemyMovement : MonoBehaviour
 {
     private Rigidbody _rbCompo;
     private Vector3 moveDir;
-    public Action OnMove;
+
+    public Transform playerPos { get;  set; }
+
+    public bool isMove { get; set; }
 
     private void Awake()
     {
+        isMove = true;
         moveDir = transform.position;
         _rbCompo = GetComponent<Rigidbody>();
     }
 
-    public void CanMove(bool isMove, Transform playerPos, float moveSpeed)
+    public void CanMove(float moveSpeed)
     {
+         transform.position = Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed * Time.deltaTime);
+
         if (isMove == false)
-            _rbCompo.velocity = Vector3.zero;
-        else
-          moveDir =  Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed);
+            moveDir = Vector3.zero;
     }
 
     
