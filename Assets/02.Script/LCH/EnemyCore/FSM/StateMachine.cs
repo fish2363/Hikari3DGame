@@ -9,9 +9,9 @@ public class StateMachine<T> where T : Enum
 
 	public EnemyState<T> CurrentState { get; private set; }
 
-	private Enemy _enemy;
+	private EnemyAgent _enemy;
 
-	public void InitInitialize(T state,Enemy enemy)
+	public void InitInitialize(T state,EnemyAgent enemy)
     {
 		_enemy = enemy;
 		CurrentState = EnemyDict[state];

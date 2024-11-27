@@ -15,8 +15,8 @@ MonoBehaviour:
   AttackRadius: 0
   WallRadius: 0
   AttackPoawer: 0
-  KnobackPower: 0
-  AttackDealy: 0
-  ContactAttaackRadius: 0
+  KnockbackPower: 0
+  AttackDelay: 0
+  ContactAttackRadius: 0
   HP: 0
-  MoveSpeed: 5
+  MoveSpeed: 15

@@ -20,9 +20,8 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
-        _enemy.MoveCompo.playerPos = GameObject.FindWithTag("Player").transform;
+        _enemy.MoveCompo.playerPos = _enemy.player.transform;
 
-        _enemy.MoveCompo.CanMove(_enemy._enemyStat.MoveSpeed);
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
@@ -32,7 +31,7 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
 
-        if (_enemy.range <= _enemy._enemyStat.AttackRadius && _ottugi._isSkillExit)
+        if (_enemy.range <= _enemy.EnemyStat.AttackRadius && _ottugi._isSkillExit)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
