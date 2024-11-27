@@ -19,19 +19,16 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
-        _enemy.MoveCompo.playerPos = GameObject.FindWithTag("Player").transform;
-
-        _enemy.MoveCompo.CanMove(_enemy._enemyStat.MoveSpeed);
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
 
-        if(_enemy.range <= _enemy._enemyStat.ContactAttackRadius && rcCar._isSkill)
+        if(_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
 
-        if (_enemy.range <= _enemy._enemyStat.AttackRadius)
+        if (_enemy.range <= _enemy.EnemyStat.AttackRadius)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }

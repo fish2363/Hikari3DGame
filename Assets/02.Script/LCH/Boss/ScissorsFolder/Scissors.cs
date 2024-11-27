@@ -1,31 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BossState
+public class Scissors : BossBass
 {
-    Idle,
-    Wait,
-    Phase1,
-    Phase2,
-    Phase3,
-    Phase4,
-    Die,
-    Hit,
-}
-
-public class Scissors : EnemyAgent
-{
-    public StateMachine<BossState> BossStateMachine;
     protected override void Awake()
     {
         base.Awake();
         BossStateMachine = new StateMachine<BossState>();
+        BossStateMachine.AddState(BossState.Chase, new ScissorsChaseState(this, BossStateMachine,"Chase"));
     }
 
-    protected override void EnemyDie()
+    private void Start()
     {
-        
+        BossStateMachine.InitInitialize(BossState.Chase, this);
     }
 }
