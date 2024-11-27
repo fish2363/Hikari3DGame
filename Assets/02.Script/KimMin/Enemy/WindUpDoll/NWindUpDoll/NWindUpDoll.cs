@@ -5,6 +5,7 @@ using UnityEngine;
 public class NWindUpDoll : WindUpDoll
 {
     public float detectRadius = 4.0f;
+    public bool canAttack = true;
 
     protected override void Awake()
     {
