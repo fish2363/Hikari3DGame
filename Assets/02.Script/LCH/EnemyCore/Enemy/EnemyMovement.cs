@@ -27,5 +27,10 @@ public class EnemyMovement : MonoBehaviour
             moveDir = Vector3.zero;
     }
 
-    
+    public void StopImmediately()
+    {
+        _rbCompo.velocity = Vector3.zero;
+    }
+
+
 }

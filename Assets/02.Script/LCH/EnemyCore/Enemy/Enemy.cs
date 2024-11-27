@@ -13,12 +13,17 @@ public enum EnemyStatEnum
     Skill,
     Dead
 }
-public class Enemy : EnemySetting
+public class Enemy : EnemyAgent
 {
     public StateMachine<EnemyStatEnum> stateMachine;
     protected override void Awake()
     {
         base.Awake();
         stateMachine = new StateMachine<EnemyStatEnum>();
+    }
+
+    protected override void EnemyDie()
+    {
+      
     }
 }

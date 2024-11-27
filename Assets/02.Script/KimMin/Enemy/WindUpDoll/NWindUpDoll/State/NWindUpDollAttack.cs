@@ -8,7 +8,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 
     private NWindUpDoll _windUpDoll;
 
-    public NWindUpDollAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    public NWindUpDollAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
         _windUpDoll = enemy as NWindUpDoll;
     }
@@ -28,7 +28,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
         _currentTime += Time.deltaTime;
         if(_currentTime > _dashTime)
         {
-            _enemy.stateMachine.ChangeState(EnemyStatEnum.Walk);
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
     }
 
