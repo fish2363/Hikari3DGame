@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySetting : MonoBehaviour 
+public abstract class EnemyAgent : MonoBehaviour 
 {
     public float hp;
 
@@ -25,10 +25,7 @@ public class EnemySetting : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
     }
 
-    private void Update()
-    {
-        
-    }
 
+    protected abstract void EnemyDie();
     
 }

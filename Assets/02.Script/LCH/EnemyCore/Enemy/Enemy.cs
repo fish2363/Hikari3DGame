@@ -13,7 +13,7 @@ public enum EnemyStatEnum
     Skill,
     Dead
 }
-public class Enemy : EnemySetting
+public class Enemy : EnemyAgent
 {
     public StateMachine<EnemyStatEnum> stateMachine;
     protected override void Awake()
@@ -22,8 +22,8 @@ public class Enemy : EnemySetting
         stateMachine = new StateMachine<EnemyStatEnum>();
     }
 
-    protected void StopImmediately()
+    protected override void EnemyDie()
     {
-        player.RigidCompo.velocity = Vector3.zero;
+      
     }
 }

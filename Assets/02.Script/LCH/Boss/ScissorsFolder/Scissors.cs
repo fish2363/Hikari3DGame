@@ -3,24 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scissors : BossBase
+public enum BossState
 {
-    private void Start()
+    Idle,
+    Wait,
+    Phase1,
+    Phase2,
+    Phase3,
+    Phase4,
+    Die,
+    Hit,
+}
+
+public class Scissors : EnemyAgent
+{
+    public StateMachine<BossState> BossStateMachine;
+    protected override void Awake()
     {
-        BossAttack();
-    }
-    public override void BossAttack()
-    {
-        StartCoroutine(PhasePulse(1f));
+        base.Awake();
+        BossStateMachine = new StateMachine<BossState>();
     }
 
-    private IEnumerator PhasePulse(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        OnphaseEvent?.Invoke();
-    }
-
-    public override void BossyDie()
+    protected override void EnemyDie()
     {
         
     }
