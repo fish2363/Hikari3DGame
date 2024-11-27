@@ -5,6 +5,7 @@ using UnityEngine;
 public class DashState : State
 {
     private Player _player;
+    private Coroutine coroutine;
 
     public DashState(Player player) : base(player)
     {
@@ -14,6 +15,12 @@ public class DashState : State
     public override void Enter()
     {
         base.Enter();
+        coroutine = StartCoroutine(DashCoroutine());
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        yield return null;
     }
 
     public override void StateUpdate()
