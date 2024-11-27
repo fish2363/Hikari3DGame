@@ -17,7 +17,7 @@ public enum BossState
 
 public abstract class BossBass : EnemyAgent
 {
-   protected StateMachine<BossState> BossStateMachine;
+   public StateMachine<BossState> BossStateMachine;
 
     protected override void EnemyDie()
     {

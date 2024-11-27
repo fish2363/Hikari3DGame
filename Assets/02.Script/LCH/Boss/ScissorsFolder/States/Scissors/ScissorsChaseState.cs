@@ -13,6 +13,14 @@ public class ScissorsChaseState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
+        int timer = Random.Range(4, 7);
+        _scissors.StartCoroutine(ChangeWaitState(timer));
+    }
+
+    private IEnumerator ChangeWaitState(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        _scissors.BossStateMachine.ChangeState(BossState.Wait);
     }
 
     public override void UpdateState()
