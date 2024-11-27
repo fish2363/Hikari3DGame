@@ -7,11 +7,8 @@ public class WindUpDoll : Enemy
 {
     [HideInInspector] public float _distance;
 
-    private void Update()
+    protected virtual void Update()
     {
         _distance = (player.transform.position - transform.position).magnitude;
-        Debug.Log(stateMachine.CurrentState);
-
-        stateMachine.CurrentState.UpdateState();
     }
 }

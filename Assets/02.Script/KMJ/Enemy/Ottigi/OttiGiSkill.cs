@@ -11,6 +11,13 @@ public class OttiGiSkill : EnemyState<EnemyStatEnum>
 
     public override void Enter()
     {
-            
+
+        _ottugi = _enemy.GetComponent<OttuGi>();
+        _ottugi.Skill();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

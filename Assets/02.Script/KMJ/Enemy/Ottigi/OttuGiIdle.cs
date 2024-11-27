@@ -13,7 +13,15 @@ public class OttuGiIdle : EnemyState<EnemyStatEnum>
         if (_enemy.MoveCompo.isMove)
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
-        if (_enemy._enemyStat.HP <= 0)
-            _stateMachine.ChangeState(EnemyStatEnum.Dead);
+        if (_enemy.hp <= 0)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Skill);
+        }
+
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

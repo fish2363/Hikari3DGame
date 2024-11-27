@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class NWindUpDollMove : EnemyState<EnemyStatEnum>
 {
-    private WindUpDoll _windUpDoll;
+    private NWindUpDoll _windUpDoll;
 
     public NWindUpDollMove(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        _windUpDoll = enemy as WindUpDoll;
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
+        _windUpDoll = enemy as NWindUpDoll;
     }
 
     public override void UpdateState()
@@ -24,16 +19,17 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
 
         if(_windUpDoll._distance <  _windUpDoll._enemyStat.AttackRadius)
         {
+            if (!_windUpDoll.canAttack) return;
+
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
     }
 
     private void Move()
     {
-        Debug.Log("¹«ºù¸Ç");
         Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         moveDir.y = 0;
 
-        _windUpDoll.RigidCompo.AddForce(moveDir * _enemy._enemyStat.MoveSpeed, ForceMode.Force);
+        _windUpDoll.RigidCompo.velocity = moveDir * _enemy._enemyStat.MoveSpeed;
     }
 }

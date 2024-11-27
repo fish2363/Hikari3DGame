@@ -4,30 +4,38 @@ using UnityEngine;
 
 public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 {
-    private float _dashPower = 10f, _dashTime = 0.5f;
+    private float _dashPower = 25f, _currentTime, _dashTime = 0.5f;
 
-    private WindUpDoll _windUpDoll;
+    private NWindUpDoll _windUpDoll;
 
-    public NWindUpDollAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    public NWindUpDollAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        _windUpDoll = enemy as WindUpDoll;
+        _windUpDoll = enemy as NWindUpDoll;
     }
 
     public override void Enter()
     {
         base.Enter();
         HeadAttack();
+
+        _currentTime = 0;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        float time = Time.time;
-        if(time  > _dashTime)
+        _currentTime += Time.deltaTime;
+        if(_currentTime > _dashTime)
         {
-            _enemy.stateMachine.ChangeState(EnemyStatEnum.Walk);
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        StopImmediately(_windUpDoll);
     }
 
     private void HeadAttack()
@@ -36,5 +44,13 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
         direction.y = 0;
 
         _windUpDoll.RigidCompo.AddForce(direction * _dashPower, ForceMode.Impulse);
+        _windUpDoll.StartCoroutine(NWindUpDollDashRoutine());
+    }
+
+    private IEnumerator NWindUpDollDashRoutine()
+    {
+        _windUpDoll.canAttack = false;
+        yield return new WaitForSeconds(_enemy._enemyStat.AttackDelay);
+        _windUpDoll.canAttack = true;
     }
 }

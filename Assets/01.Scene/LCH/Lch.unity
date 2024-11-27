@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 1171192370}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -522,6 +522,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4785f3d7d7831c44cbee1095f08f3616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <InputReader>k__BackingField: {fileID: 11400000, guid: 1a040acad41af3347b4fda55c1d9ef5f,
+    type: 2}
+  <RigidCompo>k__BackingField: {fileID: 1205751174}
+  maxHp: 0
+  currentHp: 0
+  moveSpeed: 0
+  _dashCoolTime: 0
 --- !u!1 &1477705938
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dashPower: 25
   _jumpPower: 30
+  _scissorsClone: {fileID: 7456843227196609242, guid: b9c913636a8b074469a9a1d9cd205121,
+    type: 3}
 --- !u!114 &1477705940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,7 +594,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  phase2: 0
   <Enemystat>k__BackingField: {fileID: 11400000, guid: 297333f54229dec4fb01db00318edf1e,
     type: 2}
 --- !u!54 &1477705941
