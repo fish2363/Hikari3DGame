@@ -15,6 +15,8 @@ public class RcCar : Enemy
 
     private Transform _player;
 
+    private Vector3 _moveDir;
+
     protected override void Awake()
     {
         _player = GameObject.Find("Player").transform;
@@ -27,6 +29,8 @@ public class RcCar : Enemy
         stateMachine.AddState(EnemyStatEnum.Dead, new RcCarDie(this, stateMachine, "Die"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
+
+        
     }
 
     private void Update()
@@ -58,7 +62,12 @@ public class RcCar : Enemy
         _isSkillExit = false;
 
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+
+        Vector3 moveDir = _player.position - transform.position;
+
+        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
+
         _isSkillExit = true;
 
         yield return new WaitForSecondsRealtime(3f);
@@ -69,6 +78,9 @@ public class RcCar : Enemy
     {
         _isAttackExit = false;
 
+        Vector3 moveDir = _player.position - transform.position;
+
+        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
         yield return new WaitForSeconds(2f);
 

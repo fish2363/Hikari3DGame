@@ -7,6 +7,8 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
     private GameObject _player;
     private RcCar _rcCar;
 
+    
+
     public RcCarSkill(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
@@ -19,9 +21,8 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
 
         _player = GameObject.FindWithTag("Player");
 
-        _enemy.RigidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
 
-       bool ishit = Physics.Raycast(_enemy.transform.position,_enemy.transform.forward, 2, _enemy.whatIsPlayer);
+        bool ishit = Physics.Raycast(_enemy.transform.position,_enemy.transform.forward, 2, _enemy.whatIsPlayer);
         
         if(ishit == true)
         {
