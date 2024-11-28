@@ -5,7 +5,9 @@ using UnityEngine;
 public class OttiGiSkill : EnemyState<EnemyStatEnum>
 {
     private OttuGi _ottugi;
-    public OttiGiSkill(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+   
+
+    public OttiGiSkill(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TapeDie : EnemyState<EnemyStatEnum>
 {
-    public TapeDie(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+
+    public TapeDie(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 

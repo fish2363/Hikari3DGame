@@ -6,7 +6,8 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 {
     private RcCar rcCar;
     int randomInteger;
-    public RcCarMove(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public RcCarMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
@@ -22,6 +23,8 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
+        _enemy.RigidCompo.velocity = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed);
+          
 
         if(_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
         {

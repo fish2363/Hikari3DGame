@@ -5,13 +5,17 @@ using UnityEngine;
 public class TapeAttack : EnemyState<EnemyStatEnum>
 {
     private Tape _tape;
-    public TapeAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public TapeAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
+        enemy = _tape;
     }
 
     public override void Enter()
     {
+        _tape = _enemy.GetComponent<Tape>();
         _tape.Attack();
+        Debug.Log("안온거 맞지?");
     }
 
     public override void UpdateState()

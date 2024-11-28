@@ -7,10 +7,10 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 {
     private GameObject _player;
     RcCar rcCar;
-    public RcCarAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public RcCarAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
-
 
     public override void Enter()
     {
