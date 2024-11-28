@@ -11,6 +11,8 @@ public class Scissors : BossBass
         BossStateMachine.AddState(BossState.Chase, new ScissorsChaseState(this, BossStateMachine,"Chase"));
         BossStateMachine.AddState(BossState.Wait, new ScissorsWaitState(this, BossStateMachine,"Wait"));
         BossStateMachine.AddState(BossState.Phase1, new ScissorsPhase1State(this, BossStateMachine,"Phase1"));
+        BossStateMachine.AddState(BossState.Phase2, new ScissorsPhase2State(this, BossStateMachine,"Phase2"));
+        BossStateMachine.AddState(BossState.Phase3, new ScissorsPhase3State(this, BossStateMachine,"Phase3"));
     }
 
     private void Start()

@@ -16,7 +16,7 @@ public class ScissorsChaseState : EnemyState<BossState>
         base.Enter();
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
-        _scissors.PhaseEnd = false;
+        _scissors.IsPhaseEnd = false;
     }
 
     private IEnumerator ChangeWaitState(int timer)
