@@ -27,7 +27,7 @@ public class OttugiChildWalkk : EnemyState<EnemyStatEnum>
         _enemy.MoveCompo.playerPos = GameObject.FindWithTag("Player").transform;
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
-
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
         if (_enemy.hp <= 0)
         {

@@ -27,7 +27,7 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
-        _enemy.RigidCompo.velocity = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
 
         if (_enemy.hp <= 0)
