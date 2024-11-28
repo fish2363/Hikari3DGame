@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScissorsPhase1State : EnemyState<BossState>
+public class ScissorsPhase3State : EnemyState<BossState>
 {
     private Scissors _scissors;
     private bool _isAttackWait = true;
-    public ScissorsPhase1State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    private float originMoveSpeed = 0f;
+    public ScissorsPhase3State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _scissors = enemy as Scissors;
     }
@@ -16,21 +17,32 @@ public class ScissorsPhase1State : EnemyState<BossState>
     {
         base.Enter();
         _scissors.StartCoroutine(AttackWaitCoroutine());
+        originMoveSpeed = _scissors.EnemyStat.MoveSpeed;
+        _scissors.EnemyStat.MoveSpeed = 10f;
+        
     }
 
     private IEnumerator AttackWaitCoroutine()
     {
         yield return new WaitForSeconds(1f);
         _isAttackWait = false;
+
+        _scissors.StartCoroutine(PhaseEndCoroutine());
+    }
+
+    private IEnumerator PhaseEndCoroutine()
+    {
+        yield return new WaitForSeconds(7f);
+        _scissors.IsPhaseEnd = true;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (!_isAttackWait&&!_scissors.IsPhaseEnd)
+        if (!_scissors.IsPhaseEnd && !_isAttackWait)
         {
-            _scissors.RigidCompo.velocity = _scissors.player.transform.position*2;
-            _scissors.StartCoroutine(PhaseEndCoroutine());
+            _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
+            _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.MoveSpeed;
         }
 
         if (_scissors.IsPhaseEnd)
@@ -46,9 +58,9 @@ public class ScissorsPhase1State : EnemyState<BossState>
         _scissors.BossStateMachine.ChangeState(BossState.Chase);
     }
 
-    private IEnumerator PhaseEndCoroutine()
+    public override void Exit()
     {
-        yield return new WaitForSeconds(0.1f);
-        _scissors.IsPhaseEnd = true;
+        base.Exit();
+        _scissors.EnemyStat.MoveSpeed = originMoveSpeed;
     }
 }

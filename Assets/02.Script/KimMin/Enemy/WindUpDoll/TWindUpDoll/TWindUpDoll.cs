@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NWindUpDoll : WindUpDoll
+public class TWindUpDoll : WindUpDoll
 {
-    public float detectRadius = 4.0f;
-    public bool canAttack = true;
 
     protected override void Awake()
     {
@@ -20,14 +18,12 @@ public class NWindUpDoll : WindUpDoll
     protected override void Update()
     {
         base.Update();
+        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectRadius);
-
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
     }

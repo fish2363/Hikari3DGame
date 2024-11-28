@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BWindUpDollMove : EnemyState<EnemyStatEnum>
+public class TWindUpDollMove : EnemyState<EnemyStatEnum>
 {
-    private BWindUpDoll _windUpDoll;
+    private TWindUpDoll _windUpDoll;
     private Vector3 _nextPos;
 
-    public BWindUpDollMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    public TWindUpDollMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        _windUpDoll = enemy as BWindUpDoll;
+        _windUpDoll = enemy as TWindUpDoll;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        _windUpDoll.nextPos = _windUpDoll.GetNextPos();
+        _nextPos = _windUpDoll.GetNextPos();
     }
 
     public override void UpdateState()
@@ -34,12 +33,12 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
 
     private void MoveNextPos()
     {
-        Vector3 dir = (_windUpDoll.nextPos - _windUpDoll.transform.position).normalized;
+        Vector3 dir = (_nextPos - _windUpDoll.transform.position).normalized;
 
-        if ((_windUpDoll.nextPos - _windUpDoll.transform.position).magnitude <= 2f)
+        if ((_nextPos - _windUpDoll.transform.position).magnitude <= 2f)
         {
             _windUpDoll.MoveCompo.StopImmediately();
-            _windUpDoll.nextPos = _windUpDoll.GetNextPos();
+            _nextPos = _windUpDoll.GetNextPos();
         }
 
         _windUpDoll.RigidCompo.velocity = dir * _windUpDoll.EnemyStat.MoveSpeed;

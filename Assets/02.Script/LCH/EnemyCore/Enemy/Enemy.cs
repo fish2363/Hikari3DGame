@@ -9,6 +9,7 @@ public enum EnemyStatEnum
     Idle,
     Jump,
     Walk,
+    Chase,
     Attack,
     Skill,
     Dead
