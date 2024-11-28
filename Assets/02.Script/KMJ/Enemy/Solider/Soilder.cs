@@ -60,9 +60,9 @@ public class Soilder : Enemy
         _isMove = false;
 
         Instantiate(_bulletPrefab, transform);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         Instantiate(_bulletPrefab, transform);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         Instantiate(_bulletPrefab, transform);
 
 

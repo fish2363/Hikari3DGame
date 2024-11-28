@@ -16,6 +16,7 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         _rcCar = _enemy.GetComponent<RcCar>();
+        _rcCar._isLook = false;
 
         _rcCar.DashSkill();
 
@@ -28,6 +29,8 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
         {
             Debug.Log("Ã¼·Â±ðÀ½");
         }
+
+       
 
     }
 

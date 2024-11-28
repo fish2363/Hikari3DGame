@@ -26,7 +26,7 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 
         rcCar.Attack();
 
-        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 2, _enemy.whatIsPlayer);
+        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 1, _enemy.whatIsPlayer);
 
         if (ishit == true)
         {
