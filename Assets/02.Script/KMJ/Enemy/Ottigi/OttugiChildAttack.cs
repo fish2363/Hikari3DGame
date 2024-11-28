@@ -5,7 +5,8 @@ using UnityEngine;
 public class OttugiChildAttack : EnemyState<EnemyStatEnum>
 {
     private OttugiChild _ottugi;
-    public OttugiChildAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public OttugiChildAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
