@@ -18,6 +18,7 @@ public enum BossState
 public abstract class BossBass : EnemyAgent
 {
    public StateMachine<BossState> BossStateMachine;
+    public bool PhaseEnd;
 
     protected override void EnemyDie()
     {

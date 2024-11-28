@@ -27,10 +27,28 @@ public class ScissorsPhase1State : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        if (!_isAttackWait)
+        if (!_isAttackWait&&!_scissors.PhaseEnd)
         {
-            _scissors.RigidCompo.AddForce(new Vector3(_scissors.player.transform.position.x,_scissors.player.transform.position.y
-                ,_scissors.player.transform.position.z).normalized);
+            _scissors.RigidCompo.velocity = _scissors.player.transform.position*2;
+            _scissors.StartCoroutine(PhaseEndCoroutine());
         }
+
+        if (_scissors.PhaseEnd)
+        {
+            _scissors.RigidCompo.velocity = Vector3.zero;
+            _scissors.StartCoroutine(ChanseChaseState());
+        }
+    }
+
+    private IEnumerator ChanseChaseState()
+    {
+        yield return new WaitForSeconds(1f);
+        _scissors.BossStateMachine.ChangeState(BossState.Chase);
+    }
+
+    private IEnumerator PhaseEndCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _scissors.PhaseEnd = true;
     }
 }
