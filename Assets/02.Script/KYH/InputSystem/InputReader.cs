@@ -14,6 +14,7 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
     public Vector3 direction { get; private set; }
 
     public Vector2 moveDir { get; private set; }
+    private Vector2 prevDir;
 
     private KeyAction playerKeyAction;
 
@@ -39,6 +40,9 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         moveDir = context.ReadValue<Vector2>();
+
+        if(prevDir.x + moveDir.x == 0 || prevDir.y + moveDir.y == 0)
+        prevDir = moveDir;
         direction = new Vector3(moveDir.x, 0f, moveDir.y);
         OnMoveEvent?.Invoke(moveDir);
     }

@@ -26,12 +26,18 @@ public class MoveState : State
     public override void StateFixedUpdate()
     {
         base.StateFixedUpdate();
+        float animationSpeed;
+
         if (_player.InputReader.direction == Vector3.zero)
+        {
             _player.ChangeState(StateEnum.Idle);
+            animationSpeed = 0;
+            _player.animator.SetFloat("Velocity", animationSpeed);
+        }
         else
         {
             float currentMoveSpeed = _player.MoveSpeed * CONVERT_UNIT_VALUE;//속도 맞춰주는 거래요
-
+            animationSpeed = 1f;
             bool isOnSlope = IsOnSlope();
             bool isGrounded = _player.GroundCheck.IsGrounded();
             Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(_player.InputReader.direction) : _player.InputReader.direction;
@@ -50,9 +56,8 @@ public class MoveState : State
 
             LookAt();
             _player.RigidCompo.velocity = velocity * currentMoveSpeed + gravity;
+            _player.animator.SetFloat("Velocity", animationSpeed);
         }
-
-
     }
 
     public bool IsOnSlope()

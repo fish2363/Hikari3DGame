@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
 
+    [field : SerializeField] public Animator animator { get; private set; }
+
     [SerializeField] private float _dashCoolTime;
     private float _lastDashTime;
 
