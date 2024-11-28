@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OttuGiWalk : EnemyState<EnemyStatEnum>
+public class TapeWalk : EnemyState<EnemyStatEnum>
 {
-    private OttuGi _ottugi;
-    public OttuGiWalk(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    private Tape tape;
+    public TapeWalk(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
-
     public override void Enter()
     {
+        tape = _enemy.GetComponent<Tape>();
         base.Enter();
-
-        _ottugi = _enemy.GetComponent<OttuGi>();
-
-        
-        Debug.Log("나도 왔다");
     }
 
     public override void UpdateState()
@@ -28,16 +23,16 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
-
-        if (_enemy.hp <= 0)
-        {
-            _stateMachine.ChangeState(EnemyStatEnum.Skill);
-        }
-
-        if (_enemy.range <= _enemy._enemyStat.AttackRadius && _ottugi._isSkillExit)
+        if (_enemy.range <= _enemy._enemyStat.AttackRadius && tape._isAttack)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
+
+        if(_enemy.hp <= 0)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Dead);
+        }
+
     }
 
     public override void Exit()

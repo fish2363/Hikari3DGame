@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OttuGiWalk : EnemyState<EnemyStatEnum>
+public class OttugiChildWalkk : EnemyState<EnemyStatEnum>
 {
-    private OttuGi _ottugi;
-    public OttuGiWalk(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    private OttugiChild _ottugi;
+    public OttugiChildWalkk(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
-
 
     public override void Enter()
     {
         base.Enter();
+        _ottugi = _enemy.GetComponent<OttugiChild>();
 
-        _ottugi = _enemy.GetComponent<OttuGi>();
 
-        
         Debug.Log("나도 왔다");
+        base.Enter();
     }
 
     public override void UpdateState()
