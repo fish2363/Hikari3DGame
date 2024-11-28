@@ -20,6 +20,11 @@ public abstract class BossBass : EnemyAgent
    public StateMachine<BossState> BossStateMachine;
     public bool IsPhaseEnd;
 
+    protected virtual void Update()
+    {
+        BossStateMachine.CurrentState.UpdateState();
+    }
+
     protected override void EnemyDie()
     {
         

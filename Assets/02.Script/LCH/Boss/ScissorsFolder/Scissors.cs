@@ -19,9 +19,4 @@ public class Scissors : BossBass
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
     }
-
-    private void Update()
-    {
-        BossStateMachine.CurrentState.UpdateState();
-    }
 }
