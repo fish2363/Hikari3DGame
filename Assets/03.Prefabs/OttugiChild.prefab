@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4161018446918460419}
   - component: {fileID: 5847025115402186454}
   - component: {fileID: 6513440190609557540}
-  - component: {fileID: 876063644410071923}
   - component: {fileID: 5491550723022688707}
   - component: {fileID: 3463295133479220273}
+  - component: {fileID: -6255520702846532193}
   m_Layer: 0
   m_Name: OttugiChild
   m_TagString: Untagged
@@ -136,30 +136,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &876063644410071923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8691082789169435032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df9c071d1bb96764e94ca5324af12780, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
-  _enemyStat: {fileID: 11400000, guid: 071fff81556663d40b813935cc1b98c0, type: 2}
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 64
-  <range>k__BackingField: 0
-  player: {fileID: 0}
-  _isSkill: 0
-  _isAttack: 0
-  _isSkillExit: 0
-  _isAttackExit: 0
-  _childPrefab: {fileID: 0}
 --- !u!114 &5491550723022688707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,3 +169,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-6255520702846532193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691082789169435032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559cd99540398714a80ae923602cf096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  _enemyStat: {fileID: 11400000, guid: 071fff81556663d40b813935cc1b98c0, type: 2}
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
+  <range>k__BackingField: 0
+  player: {fileID: 0}
+  _isSkill: 0
+  _isAttack: 0
+  _isSkillExit: 0
+  _isAttackExit: 0
+  _childPrefab: {fileID: 0}

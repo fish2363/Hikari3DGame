@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State
+public abstract class State : MonoBehaviour
 {
     protected Player player;
 
@@ -21,7 +21,7 @@ public abstract class State
 
     }
 
-    public virtual void FixedUpdate()
+    public virtual void StateFixedUpdate()
     {
 
     }

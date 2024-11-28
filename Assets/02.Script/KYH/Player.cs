@@ -13,12 +13,17 @@ public class Player : MonoBehaviour
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
 
+    [field : SerializeField]
+    public GroundCheck GroundCheck { get; private set; }
+
     [SerializeField]
     protected float maxHp;
     [SerializeField]
     protected float currentHp;
     [SerializeField]
     protected float moveSpeed;
+
+    [field : SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
     private float _lastDashTime;
@@ -48,7 +53,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        stateDictionary[currentEnum].FixedUpdate();
+        stateDictionary[currentEnum].StateFixedUpdate();
     }
 
     private void HandleJumpEvent()

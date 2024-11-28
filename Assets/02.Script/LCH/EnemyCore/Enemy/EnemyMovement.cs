@@ -19,14 +19,6 @@ public class EnemyMovement : MonoBehaviour
         _rbCompo = GetComponent<Rigidbody>();
     }
 
-    public void CanMove(float moveSpeed)
-    {
-         transform.position = Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed * Time.deltaTime);
-
-        if (isMove == false)
-            moveDir = Vector3.zero;
-    }
-
     public void StopImmediately()
     {
         _rbCompo.velocity = Vector3.zero;

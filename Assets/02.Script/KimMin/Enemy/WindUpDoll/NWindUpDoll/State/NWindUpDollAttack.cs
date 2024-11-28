@@ -50,7 +50,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
     private IEnumerator NWindUpDollDashRoutine()
     {
         _windUpDoll.canAttack = false;
-        yield return new WaitForSeconds(_enemy._enemyStat.AttackDelay);
+        yield return new WaitForSeconds(_enemy.EnemyStat.AttackDelay);
         _windUpDoll.canAttack = true;
     }
 }

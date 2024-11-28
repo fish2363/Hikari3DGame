@@ -21,10 +21,10 @@ public class OttuGi : Enemy
         _isSkillExit = true;
         _isSkill = true;
         base.Awake();
-
+        //테스트용
         _player = GameObject.Find("Player").transform;
 
-        stateMachine.AddState(EnemyStatEnum.Idle, new OttuGiIdle(this, stateMachine, "Idle"));
+        stateMachine.AddState(EnemyStatEnum.Idle, new OttugiIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new OttuGiWalk(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new OttiGiAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new OttiGiSkill(this, stateMachine, "Skill"));
@@ -59,7 +59,14 @@ public class OttuGi : Enemy
 
         Vector3.MoveTowards(transform.position, _player.transform.position, 10);
 
-        RigidCompo.AddForce(Vector3.up * _enemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+
+        bool ishit = Physics.Raycast(transform.position,transform.forward, 2,whatIsPlayer);
+
+        if (ishit == true)
+        {
+            Debug.Log("체력깎음");
+        }
 
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;

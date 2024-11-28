@@ -63,6 +63,6 @@ public class BWindUpDoll : WindUpDoll
         Gizmos.DrawLine(transform.position, _nextPos);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _enemyStat.AttackRadius);
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
     }
 }

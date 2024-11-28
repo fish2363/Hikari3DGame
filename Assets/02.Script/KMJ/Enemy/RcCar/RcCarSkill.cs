@@ -7,7 +7,7 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
     private GameObject _player;
     private RcCar _rcCar;
 
-    public RcCarSkill(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    public RcCarSkill(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 

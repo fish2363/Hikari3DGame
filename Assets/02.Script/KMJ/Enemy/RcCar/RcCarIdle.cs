@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RcCarIdle : EnemyState<EnemyStatEnum>
 {
-    public RcCarIdle(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public RcCarIdle(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
@@ -18,7 +19,7 @@ public class RcCarIdle : EnemyState<EnemyStatEnum>
         if (_enemy.MoveCompo.isMove)
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
-        if (_enemy._enemyStat.HP <= 0)
+        if (_enemy.EnemyStat.HP <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
     public override void Exit()
