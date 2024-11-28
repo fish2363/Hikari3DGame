@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  EnemyStat: {fileID: 0}
+  EnemyStat: {fileID: 11400000, guid: bbfe9591e510ed24cbfbded7a04537bf, type: 2}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
@@ -550,6 +550,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 280585686813732458, guid: ab4548d6414805440bb76b2c3cb61fd5,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
       propertyPath: m_LocalPosition.x

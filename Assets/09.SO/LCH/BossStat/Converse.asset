@@ -19,4 +19,4 @@ MonoBehaviour:
   AttackDelay: 0
   ContactAttackRadius: 0
   HP: 0
-  MoveSpeed: 0
+  MoveSpeed: 5
