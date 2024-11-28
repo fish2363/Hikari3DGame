@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BWindUpDoll : WindUpDoll
 {
-    public float moveRadius = 15f;
-    public Vector3 startPos;
+    public GameObject explostionEffect;
+
+    public float explostionTime = 3.0f;
+
 
     protected override void Awake()
     {
@@ -24,9 +26,20 @@ public class BWindUpDoll : WindUpDoll
         stateMachine.CurrentState.UpdateState();
     }
 
+    public void InstantiateObject(GameObject targetObj, Vector3 pos)
+    {
+        Instantiate(targetObj, pos, Quaternion.identity);
+    }
+
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(startPos, moveRadius);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(transform.position, nextPos);
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);  
     }
 }
