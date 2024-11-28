@@ -21,7 +21,7 @@ public class OttuGi : Enemy
         _isSkillExit = true;
         _isSkill = true;
         base.Awake();
-
+        //테스트용
         _player = GameObject.Find("Player").transform;
 
         stateMachine.AddState(EnemyStatEnum.Idle, new OttugiIdle(this, stateMachine, "Idle"));
