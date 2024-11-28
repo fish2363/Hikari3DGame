@@ -20,7 +20,6 @@ public class NWindUpDoll : WindUpDoll
     protected override void Update()
     {
         base.Update();
-        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
     }
 

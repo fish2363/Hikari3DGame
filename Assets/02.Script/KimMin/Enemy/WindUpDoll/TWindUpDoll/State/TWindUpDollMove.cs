@@ -2,17 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TWindUpDollMove : MonoBehaviour
+public class TWindUpDollMove : EnemyState<EnemyStatEnum>
 {
-    // Start is called before the first frame update
-    void Start()
+    private TWindUpDoll _windUpDoll;
+    private Vector3 _nextPos;
+
+    public TWindUpDollMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        
+        _windUpDoll = enemy as TWindUpDoll;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+
+        _nextPos = _windUpDoll.GetNextPos();
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+
+        MoveNextPos();
+
+        if (_windUpDoll._distance <= _windUpDoll.EnemyStat.AttackRadius)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
+        }
+    }
+
+    private void MoveNextPos()
+    {
+        Vector3 dir = (_nextPos - _windUpDoll.transform.position).normalized;
+
+        if ((_nextPos - _windUpDoll.transform.position).magnitude <= 2f)
+        {
+            _windUpDoll.MoveCompo.StopImmediately();
+            _nextPos = _windUpDoll.GetNextPos();
+        }
+
+        _windUpDoll.RigidCompo.velocity = dir * _windUpDoll.EnemyStat.MoveSpeed;
     }
 }

@@ -17,7 +17,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.Enter();
 
-        _nextPos = _windUpDoll.GetNextPos();
+        _windUpDoll.nextPos = _windUpDoll.GetNextPos();
     }
 
     public override void UpdateState()
@@ -26,7 +26,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
 
         MoveNextPos();
 
-        if (_windUpDoll._distance <= _windUpDoll._enemyStat.AttackRadius)
+        if (_windUpDoll._distance <= _windUpDoll.EnemyStat.AttackRadius)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
@@ -34,14 +34,14 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
 
     private void MoveNextPos()
     {
-        Vector3 dir = (_nextPos - _windUpDoll.transform.position).normalized;
+        Vector3 dir = (_windUpDoll.nextPos - _windUpDoll.transform.position).normalized;
 
-        if ((_nextPos - _windUpDoll.transform.position).magnitude <= 2f)
+        if ((_windUpDoll.nextPos - _windUpDoll.transform.position).magnitude <= 2f)
         {
             _windUpDoll.MoveCompo.StopImmediately();
-            _nextPos = _windUpDoll.GetNextPos();
+            _windUpDoll.nextPos = _windUpDoll.GetNextPos();
         }
 
-        _windUpDoll.RigidCompo.velocity = dir * _windUpDoll._enemyStat.MoveSpeed;
+        _windUpDoll.RigidCompo.velocity = dir * _windUpDoll.EnemyStat.MoveSpeed;
     }
 }
