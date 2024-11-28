@@ -23,7 +23,7 @@ public class SoilderBullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position += _moveDir * 5 * Time.deltaTime;
+        transform.position += _moveDir * 9 * Time.deltaTime;
     }
     private void OnTriggerEnter(Collider other)
     {

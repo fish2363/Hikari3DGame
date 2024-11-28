@@ -17,6 +17,6 @@ MonoBehaviour:
   AttackPoawer: 3
   KnockbackPower: 0
   AttackDelay: 0
-  ContactAttackRadius: 0
+  ContactAttackRadius: 10
   HP: 4
   MoveSpeed: 2

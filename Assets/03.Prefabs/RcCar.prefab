@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 817240785929754100}
   - component: {fileID: 5237069263412001193}
   - component: {fileID: 5030517511518839358}
-  - component: {fileID: 4037634817976053088}
   - component: {fileID: 4047566103396824388}
   - component: {fileID: 7597013774016474790}
   - component: {fileID: 4355647917347112811}
@@ -88,29 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4037634817976053088
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3285957443374700532}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4047566103396824388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,11 +100,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  _enemyStat: {fileID: 11400000, guid: eb72bf89693be2d4b862863ed5013260, type: 2}
+  EnemyStat: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
   <range>k__BackingField: 0
+  targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   _isSkill: 0
   _isAttack: 0

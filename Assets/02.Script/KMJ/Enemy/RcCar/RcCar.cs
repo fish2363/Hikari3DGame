@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RcCar : Enemy
@@ -13,6 +11,8 @@ public class RcCar : Enemy
 
     public bool _isAttackExit;
 
+    public bool _isLook;
+
     private Transform _player;
 
     private Vector3 _moveDir;
@@ -22,7 +22,7 @@ public class RcCar : Enemy
         _player = GameObject.Find("Player").transform;
         _isSkill = true;
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this,stateMachine,"Idle"));
+        stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new RcCarMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new RcCarAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new RcCarSkill(this, stateMachine, "Skill"));
@@ -30,7 +30,7 @@ public class RcCar : Enemy
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
 
-        
+
     }
 
     private void Update()
@@ -41,7 +41,8 @@ public class RcCar : Enemy
 
     private void LookAtPlayer()
     {
-        transform.LookAt(_player);
+        if (_isLook)
+            transform.LookAt(_player);
     }
 
     public void DashSkill()
@@ -61,14 +62,18 @@ public class RcCar : Enemy
         _isSkill = false;
         _isSkillExit = false;
 
+        Transform playertransform = GameObject.FindWithTag("Player").transform;
+        Vector3 moveDir = playertransform.position - transform.position;
 
         yield return new WaitForSeconds(1f);
 
-        Vector3 moveDir = _player.position - transform.position;
 
         transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
+        yield return new WaitForSeconds(0.3f);
+        _isLook = true;
         _isSkillExit = true;
+
 
         yield return new WaitForSecondsRealtime(3f);
         _isSkill = true;
@@ -78,8 +83,12 @@ public class RcCar : Enemy
     {
         _isAttackExit = false;
 
-        Vector3 moveDir = _player.position - transform.position;
+        Transform playertransform = GameObject.FindWithTag("Player").transform;
 
+        Vector3 moveDir = playertransform.position - transform.position;
+
+
+        yield return new WaitForSeconds(0.3f);
         transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
         yield return new WaitForSeconds(2f);
