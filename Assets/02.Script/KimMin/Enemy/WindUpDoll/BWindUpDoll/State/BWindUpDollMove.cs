@@ -44,7 +44,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
         }
 
         _windUpDoll.RigidCompo.velocity = dir * _windUpDoll.
-            _enemyStat.MoveSpeed * Time.deltaTime;
+            EnemyStat.MoveSpeed * Time.deltaTime;
     }
 
     private Vector3 GetNextPos()

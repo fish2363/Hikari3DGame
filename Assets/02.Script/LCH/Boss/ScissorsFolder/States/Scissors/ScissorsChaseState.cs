@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScissorsChaseState : EnemyState<BossState>
 {
     private Scissors _scissors;
+    int timer = 0;
     public ScissorsChaseState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _scissors = enemy as Scissors;
@@ -13,6 +14,15 @@ public class ScissorsChaseState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
+        timer = Random.Range(4, 7);
+        _scissors.StartCoroutine(ChangeWaitState(timer));
+        _scissors.PhaseEnd = false;
+    }
+
+    private IEnumerator ChangeWaitState(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        _scissors.BossStateMachine.ChangeState(BossState.Wait);
     }
 
     public override void UpdateState()
@@ -20,5 +30,11 @@ public class ScissorsChaseState : EnemyState<BossState>
         base.UpdateState();
         _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
         _scissors.RigidCompo.velocity =  _scissors.targetDir.normalized * _scissors.EnemyStat.MoveSpeed;
-    } 
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        timer = 0;
+    }
 }

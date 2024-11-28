@@ -27,6 +27,6 @@ public class BWindUpDoll : WindUpDoll
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _enemyStat.AttackRadius);
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
     }
 }

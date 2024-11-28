@@ -9,10 +9,17 @@ public class Scissors : BossBass
         base.Awake();
         BossStateMachine = new StateMachine<BossState>();
         BossStateMachine.AddState(BossState.Chase, new ScissorsChaseState(this, BossStateMachine,"Chase"));
+        BossStateMachine.AddState(BossState.Wait, new ScissorsWaitState(this, BossStateMachine,"Wait"));
+        BossStateMachine.AddState(BossState.Phase1, new ScissorsPhase1State(this, BossStateMachine,"Phase1"));
     }
 
     private void Start()
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
+    }
+
+    private void Update()
+    {
+        BossStateMachine.CurrentState.UpdateState();
     }
 }

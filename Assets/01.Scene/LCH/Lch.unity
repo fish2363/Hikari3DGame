@@ -525,6 +525,7 @@ MonoBehaviour:
   <InputReader>k__BackingField: {fileID: 11400000, guid: 1a040acad41af3347b4fda55c1d9ef5f,
     type: 2}
   <RigidCompo>k__BackingField: {fileID: 1205751174}
+  <GroundCheck>k__BackingField: {fileID: 0}
   maxHp: 0
   currentHp: 0
   moveSpeed: 0
