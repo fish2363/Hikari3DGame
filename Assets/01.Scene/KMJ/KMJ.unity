@@ -725,6 +725,7 @@ MonoBehaviour:
   maxHp: 10
   currentHp: 0
   moveSpeed: 0
+  <animator>k__BackingField: {fileID: 0}
   _dashCoolTime: 0
 --- !u!54 &791723374
 Rigidbody:
@@ -3418,7 +3419,7 @@ PrefabInstance:
     - target: {fileID: 3285957443374700532, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4047566103396824388, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
         type: 3}
@@ -3466,7 +3467,7 @@ PrefabInstance:
     - target: {fileID: 1381926267188923606, guid: 6951bafea1a65af46989b41dfaba80a7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1381926267188923606, guid: 6951bafea1a65af46989b41dfaba80a7,
         type: 3}
@@ -3522,7 +3523,7 @@ PrefabInstance:
     - target: {fileID: 5095983445412103457, guid: 6951bafea1a65af46989b41dfaba80a7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

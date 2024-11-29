@@ -37,7 +37,7 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
     public override void UpdateState()
     {
 
-        if(_rcCar._isSkillExit)
+        if(_rcCar._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
         }

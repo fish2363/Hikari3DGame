@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 2
   WallRadius: 0
-  AttackPoawer: 30
+  AttackPoawer: 80
   KnockbackPower: 0
   AttackDelay: 0
-  ContactAttackRadius: 4
+  ContactAttackRadius: 2.5
   HP: 5
   MoveSpeed: 2

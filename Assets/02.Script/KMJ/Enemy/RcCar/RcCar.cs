@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class RcCar : Enemy
 {
-    public bool _isSkill;
-
     public bool _isAttack;
-
-    public bool _isSkillExit;
-
-    public bool _isAttackExit;
+    public bool _isSkill;
+    public bool _isMove;
+    public bool _isAttackTrue;
+    public bool _isSkillTrue;
 
     public bool _isLook;
 
@@ -29,8 +27,8 @@ public class RcCar : Enemy
         stateMachine.AddState(EnemyStatEnum.Dead, new RcCarDie(this, stateMachine, "Die"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
-
-
+        _isSkillTrue = false;
+        _isAttackTrue = false;
     }
 
     private void Update()
@@ -59,40 +57,61 @@ public class RcCar : Enemy
 
     IEnumerator Skill()
     {
+        _isLook = false;
+        _isAttack = false;
         _isSkill = false;
-        _isSkillExit = false;
+        _isMove = false;
 
         Transform playertransform = GameObject.FindWithTag("Player").transform;
         Vector3 moveDir = playertransform.position - transform.position;
 
         yield return new WaitForSeconds(1f);
-
-
+        _isSkillTrue = true;
         transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
         yield return new WaitForSeconds(0.3f);
+        _isSkillTrue = false;
         _isLook = true;
-        _isSkillExit = true;
+        _isMove = true;
 
+        yield return new WaitForSeconds(1.5f);
 
-        yield return new WaitForSecondsRealtime(3f);
+        _isAttack = true;
+
+        yield return new WaitForSecondsRealtime(1f);
         _isSkill = true;
     }
 
     IEnumerator AttackTime()
     {
-        _isAttackExit = false;
+        _isAttack = false;
+        _isMove = false;
 
         Transform playertransform = GameObject.FindWithTag("Player").transform;
 
         Vector3 moveDir = playertransform.position - transform.position;
 
-
-        yield return new WaitForSeconds(0.3f);
+        _isAttackTrue = true;
         transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
+        yield return new WaitForSeconds(0.2f);
+        _isAttackTrue = false;
+        _isMove = true;
         yield return new WaitForSeconds(2f);
+        _isAttack = true;
 
-        _isAttackExit = true;
+       
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && _isAttackTrue)
+        {
+            //기본공격
+        }
+        else if(collision.gameObject.CompareTag("Player") && _isSkillTrue)
+        {
+           //스킬공격
+        }
     }
 }

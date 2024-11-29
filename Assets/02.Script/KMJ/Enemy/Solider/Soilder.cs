@@ -46,6 +46,7 @@ public class Soilder : Enemy
 
     private void Update()
     {
+        transform.LookAt(player.transform);
         stateMachine.CurrentState.UpdateState();
     }
 
@@ -59,11 +60,11 @@ public class Soilder : Enemy
         _isAttack = false;
         _isMove = false;
 
-        Instantiate(_bulletPrefab, transform);
+        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform);
+        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform);
+        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
 
 
         yield return new WaitForSeconds(1.3f);

@@ -71,5 +71,4 @@ public class OttuGi : Enemy
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
     }
-
 }

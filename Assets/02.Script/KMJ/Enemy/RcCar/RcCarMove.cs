@@ -30,8 +30,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
-
-        if (_enemy.range <= _enemy.EnemyStat.AttackRadius)
+        else if (_enemy.range <= _enemy.EnemyStat.AttackRadius && rcCar._isAttack)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
