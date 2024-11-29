@@ -26,6 +26,7 @@ public class Tape : Enemy
 
     private void Update()
     {
+        transform.LookAt(player.transform);
         stateMachine.CurrentState.UpdateState();
     }
 
@@ -39,7 +40,7 @@ public class Tape : Enemy
         _isAttack = false;
         _isTrueMove = false;
 
-        Instantiate(_tapeBulletPrbs, transform);
+        Instantiate(_tapeBulletPrbs,transform.position, Quaternion.identity);
 
         print("æ∆¿’");
 

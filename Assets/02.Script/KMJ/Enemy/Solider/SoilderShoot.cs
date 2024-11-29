@@ -20,7 +20,7 @@ public class SoilderShoot : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
-        Debug.Log("¶öÁö ¤©¤·");
+       
         if(_soilder._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);

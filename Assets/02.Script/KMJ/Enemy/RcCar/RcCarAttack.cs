@@ -37,7 +37,7 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
     public override void UpdateState()
     {
         
-        if(rcCar._isAttackExit)
+        if(rcCar._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
