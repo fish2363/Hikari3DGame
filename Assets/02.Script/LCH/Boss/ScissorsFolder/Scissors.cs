@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Scissors : BossBass
 {
+
     protected override void Awake()
     {
         base.Awake();
@@ -15,8 +16,17 @@ public class Scissors : BossBass
         BossStateMachine.AddState(BossState.Phase3, new ScissorsPhase3State(this, BossStateMachine,"Phase3"));
     }
 
+
     private void Start()
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
+    }
+    protected override void AnimEndTrigger()
+    {
+        BossStateMachine.CurrentState.AnimationEndTrigger();
+    }
+    protected override void EnemyDie()
+    {
+        
     }
 }
