@@ -32,4 +32,9 @@ public class Enemy : EnemyAgent
     {
         hp -= AttackDamage;
     }
+
+    protected override void AnimEndTrigger()
+    {
+        
+    }
 }
