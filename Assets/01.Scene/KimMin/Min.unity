@@ -158,18 +158,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
-  _enemyStat: {fileID: 11400000, guid: 7bda702b4768d22488c797a42506bc89, type: 2}
+  EnemyStat: {fileID: 11400000, guid: 7bda702b4768d22488c797a42506bc89, type: 2}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
   <range>k__BackingField: 30
+  targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 808337710}
   _distance: 0
+  startPos: {x: 0, y: 2, z: 0}
+  nextPos: {x: 0, y: 0, z: 0}
   moveRadius: 30
-  explostionTime: 2
   explostionEffect: {fileID: 5677423748105066509, guid: cd1bd8a5aa6198449b3bfd141c450d9f,
     type: 3}
-  startPos: {x: 0, y: 2, z: 0}
+  explostionTime: 2
 --- !u!54 &264144458
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -473,13 +475,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  _enemyStat: {fileID: 11400000, guid: 992f606ce10028d42b090bec80025d05, type: 2}
+  EnemyStat: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
   <range>k__BackingField: 0
+  targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 808337710}
   _distance: 0
+  startPos: {x: 0, y: 0, z: 0}
+  nextPos: {x: 0, y: 0, z: 0}
+  moveRadius: 0
   detectRadius: 35
   canAttack: 1
 --- !u!1 &730850768
@@ -655,9 +661,11 @@ MonoBehaviour:
   <InputReader>k__BackingField: {fileID: 11400000, guid: 1a040acad41af3347b4fda55c1d9ef5f,
     type: 2}
   <RigidCompo>k__BackingField: {fileID: 808337711}
+  <GroundCheck>k__BackingField: {fileID: 0}
   maxHp: 0
   currentHp: 0
   moveSpeed: 10
+  <animator>k__BackingField: {fileID: 0}
   _dashCoolTime: 0
 --- !u!54 &808337711
 Rigidbody:
