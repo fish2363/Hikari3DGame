@@ -45,7 +45,6 @@ public class RcCar : Enemy
 
     public void DashSkill()
     {
-        Debug.Log("응");
         StartCoroutine(Skill());
     }
 
@@ -113,5 +112,15 @@ public class RcCar : Enemy
         {
            //스킬공격
         }
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
     }
 }

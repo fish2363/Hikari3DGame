@@ -74,4 +74,14 @@ public class Soilder : Enemy
         yield return new WaitForSeconds(2f);
         _isAttack = true;
     }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
+    }
 }
