@@ -21,12 +21,4 @@ public class Scissors : BossBass
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
     }
-    protected override void AnimEndTrigger()
-    {
-        BossStateMachine.CurrentState.AnimationEndTrigger();
-    }
-    protected override void EnemyDie()
-    {
-        
-    }
 }
