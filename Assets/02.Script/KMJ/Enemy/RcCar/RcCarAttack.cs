@@ -22,11 +22,11 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 
         base.Enter();
 
-        _enemy.RigidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.AttackPoawer * Time.deltaTime);
 
         rcCar.Attack();
 
-        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 2, _enemy.whatIsPlayer);
+        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 1, _enemy.whatIsPlayer);
 
         if (ishit == true)
         {
@@ -37,7 +37,7 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
     public override void UpdateState()
     {
         
-        if(rcCar._isAttackExit)
+        if(rcCar._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 

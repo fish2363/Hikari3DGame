@@ -21,7 +21,7 @@ public class OttuGi : Enemy
         _isSkillExit = true;
         _isSkill = true;
         base.Awake();
-        //테스트용
+        
         _player = GameObject.Find("Player").transform;
 
         stateMachine.AddState(EnemyStatEnum.Idle, new OttugiIdle(this, stateMachine, "Idle"));
@@ -57,11 +57,11 @@ public class OttuGi : Enemy
     {
         _isSkillExit = false;
 
-        Vector3.MoveTowards(transform.position, _player.transform.position, 10);
+        
 
         RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
 
-        bool ishit = Physics.Raycast(transform.position,transform.forward, 2,whatIsPlayer);
+        bool ishit = Physics.Raycast(transform.position,Vector3.down, 2,whatIsPlayer);
 
         if (ishit == true)
         {
@@ -71,5 +71,4 @@ public class OttuGi : Enemy
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
     }
-
 }
