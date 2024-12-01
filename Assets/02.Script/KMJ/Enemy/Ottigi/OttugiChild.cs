@@ -71,4 +71,14 @@ public class OttugiChild : Enemy
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
     }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
+    }
 }

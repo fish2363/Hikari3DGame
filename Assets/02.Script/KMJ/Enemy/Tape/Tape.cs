@@ -51,4 +51,14 @@ public class Tape : Enemy
 
         _isAttack = true;
     }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -34,4 +34,14 @@ public class WindUpDoll : Enemy
 
         return result;
     }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
+    }
 }
