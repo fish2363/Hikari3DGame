@@ -27,4 +27,9 @@ public class Enemy : EnemyAgent
     {
       
     }
+
+    public void Damage(float AttackDamage)
+    {
+        hp -= AttackDamage;
+    }
 }
