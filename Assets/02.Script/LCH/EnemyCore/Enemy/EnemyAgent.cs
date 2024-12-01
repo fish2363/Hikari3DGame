@@ -29,5 +29,7 @@ public abstract class EnemyAgent : MonoBehaviour
 
 
     protected abstract void EnemyDie();
+
+    protected abstract void AnimEndTrigger();
     
 }

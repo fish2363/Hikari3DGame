@@ -24,9 +24,4 @@ public abstract class BossBass : EnemyAgent
     {
         BossStateMachine.CurrentState.UpdateState();
     }
-
-    protected override void EnemyDie()
-    {
-        
-    }
 }
