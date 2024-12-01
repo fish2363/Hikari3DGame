@@ -42,7 +42,6 @@ public class Tape : Enemy
 
         Instantiate(_tapeBulletPrbs,transform.position, Quaternion.identity);
 
-        print("æ∆¿’");
 
         yield return new WaitForSeconds(2.4f);
 

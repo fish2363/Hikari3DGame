@@ -63,13 +63,6 @@ public class OttuGi : Enemy
         RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
         RigidCompo.AddForce(transform.forward * 1.3f, ForceMode.Impulse);
 
-        /*bool ishit = Physics.Raycast(transform.position,Vector3.down, 2,whatIsPlayer);
-
-        if (ishit == true)
-        {
-            Debug.Log("Ã¼·Â±ðÀ½");
-        }*/
-
         yield return new WaitForSeconds(1.4f);
         _isSkilling = false;
 
