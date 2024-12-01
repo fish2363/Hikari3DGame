@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3463295133479220273}
   - component: {fileID: -6255520702846532193}
   m_Layer: 0
-  m_Name: OttugiChild
+  m_Name: OttugiChilds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,5 +193,4 @@ MonoBehaviour:
   _isAttack: 0
   _isSkillExit: 0
   _isAttackExit: 0
-  _childPrefab: {fileID: 8691082789169435032, guid: f2430226d1c12f54d8c051003acba4c6,
-    type: 3}
+  _childPrefab: {fileID: 0}
