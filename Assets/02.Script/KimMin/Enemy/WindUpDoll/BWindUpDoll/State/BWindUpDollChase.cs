@@ -25,7 +25,7 @@ public class BWindUpDollChase : EnemyState<EnemyStatEnum>
 
         _currrentTime += Time.deltaTime;
 
-        if (_currrentTime >= _windUpDoll.explostionTime)
+        if (_currrentTime >= 3f)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }

@@ -8,17 +8,6 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
 {
     private TWindUpDoll _windUpDoll;
 
-    public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
-    public float angleRange = 30f;
-    public float radius = 3f;
-
-    Color _blue = new Color(0f, 0f, 1f, 0.2f);
-    Color _red = new Color(1f, 0f, 0f, 0.2f);
-
-    bool isCollision = false;
-
-    private Vector3 interV;
-
     public TWindUpDollChase(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
         _windUpDoll = enemy as TWindUpDoll;
@@ -36,9 +25,14 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         ChaseTarget();
         CheckSight();
 
-        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius)
+        if (_windUpDoll.isCollision)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
+        }
+
+        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
     }
 
@@ -52,35 +46,26 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
 
     private void CheckSight()
     {
-        if (target == null) return;
+        if (_windUpDoll.player == null) return;
 
-        interV = target.position - _windUpDoll.transform.position;
+        _windUpDoll.interV = _windUpDoll.player.transform.position - _windUpDoll.transform.position;
 
-        if (interV.magnitude <= radius)
+        if (_windUpDoll.interV.magnitude <= _windUpDoll.radius)
         {
-            float dot = Vector3.Dot(interV.normalized, _windUpDoll.transform.forward);
+            float dot = Vector3.Dot(_windUpDoll.interV.normalized, _windUpDoll.transform.forward);
             float theta = Mathf.Acos(dot);
             float degree = Mathf.Rad2Deg * theta;
 
-            if (degree <= angleRange / 2f)
+            if (degree <= _windUpDoll.angleRange / 2f)
             {
                 Debug.Log("시야 들어옴");
+                _windUpDoll.isCollision = true;
             }
             else
             {
                 Debug.Log("시야 나감");
+                _windUpDoll.isCollision = false;
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (interV == null) return;
-        //Debug.DrawRay(_windUpDoll.transform.position, new Vector3(0, 0, 0), Color.red);
-
-        Handles.color = isCollision ? _red : _blue;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        Handles.DrawSolidArc(_windUpDoll.transform.position, Vector3.up, _windUpDoll.transform.forward, angleRange / 2, radius);
-        Handles.DrawSolidArc(_windUpDoll.transform.position, Vector3.up, _windUpDoll.transform.forward, -angleRange / 2, radius);
     }
 }

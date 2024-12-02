@@ -1,9 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TWindUpDoll : WindUpDoll
 {
+    [HideInInspector] public Vector3 interV = Vector3.zero;
+    [HideInInspector] public bool isCollision = false;
+
+    public float angleRange = 30f;
+    public float radius = 3f;
+
+    Color _blue = new Color(0f, 0f, 1f, 0.2f);
+    Color _red = new Color(1f, 0f, 0f, 0.2f);
 
     protected override void Awake()
     {
@@ -26,5 +35,13 @@ public class TWindUpDoll : WindUpDoll
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
+
+        if (interV == null) return;
+        //Debug.DrawRay(_windUpDoll.transform.position, new Vector3(0, 0, 0), Color.red);
+
+        Handles.color = isCollision ? _red : _blue;
+        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
     }
 }

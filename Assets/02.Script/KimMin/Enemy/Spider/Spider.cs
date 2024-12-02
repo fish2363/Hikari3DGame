@@ -27,4 +27,14 @@ public class Spider : Enemy
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
     }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
+    }
 }
