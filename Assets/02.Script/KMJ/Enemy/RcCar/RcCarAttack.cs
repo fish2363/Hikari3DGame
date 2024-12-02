@@ -25,13 +25,6 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.AttackPoawer * Time.deltaTime);
 
         rcCar.Attack();
-
-        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 1, _enemy.whatIsPlayer);
-
-        if (ishit == true)
-        {
-            Debug.Log("Ã¼·Â±ðÀ½");
-        }
     }
 
     public override void UpdateState()

@@ -2,44 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RcCarMove : EnemyState<EnemyStatEnum>
+public class SoilderChase : EnemyState<EnemyStatEnum>
 {
-    private RcCar rcCar;
-    int randomInteger;
+    private Rigidbody _rbCompo;
 
-    public RcCarMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    private Soilder _soilder;
+    public SoilderChase(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
+        _soilder = enemy as Soilder;
     }
 
     public override void Enter()
     {
-        rcCar = _enemy.GetComponent<RcCar>();
-        Debug.Log("나도 왔다");
+        _rbCompo = _enemy.GetComponent<Rigidbody>();
         base.Enter();
     }
 
     public override void UpdateState()
     {
+        base.UpdateState();
+
+       
+       _soilder.transform.LookAt(_soilder.player.transform);
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
 
-        _enemy.transform.LookAt(_enemy.transform);
-        
-
-
-
-        if (_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
-        {
-            _stateMachine.ChangeState(EnemyStatEnum.Skill);
-        }
-        else if (_enemy.range <= _enemy.EnemyStat.AttackRadius && rcCar._isAttack)
+        if(_enemy.range <= _soilder.EnemyStat.AttackRadius && _soilder._isAttack)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
-
 
         if (_enemy.hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
@@ -47,7 +41,6 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
     public override void Exit()
     {
-        
+        base.Exit();
     }
-
 }
