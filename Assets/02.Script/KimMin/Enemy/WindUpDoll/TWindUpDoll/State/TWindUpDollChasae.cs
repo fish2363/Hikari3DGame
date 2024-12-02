@@ -7,7 +7,6 @@ using UnityEngine;
 public class TWindUpDollChase : EnemyState<EnemyStatEnum>
 {
     private TWindUpDoll _windUpDoll;
-    private float _currrentTime;
 
     public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
     public float angleRange = 30f;
@@ -28,7 +27,6 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        _currrentTime = 0;
     }
 
     public override void UpdateState()
@@ -40,7 +38,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
 
         if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius)
         {
-            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Skill);
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
     }
 
@@ -54,6 +52,8 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
 
     private void CheckSight()
     {
+        if (target == null) return;
+
         interV = target.position - _windUpDoll.transform.position;
 
         if (interV.magnitude <= radius)
