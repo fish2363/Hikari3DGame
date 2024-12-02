@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Spider : Enemy
 {
+    public LayerMask whatIsWall;
+    public bool isWall = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,11 +33,11 @@ public class Spider : Enemy
 
     protected override void AnimEndTrigger()
     {
-        throw new System.NotImplementedException();
+
     }
 
     protected override void EnemyDie()
     {
-        throw new System.NotImplementedException();
+
     }
 }
