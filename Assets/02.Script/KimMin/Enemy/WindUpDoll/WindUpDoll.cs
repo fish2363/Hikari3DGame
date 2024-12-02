@@ -7,10 +7,10 @@ using DG.Tweening;
 public class WindUpDoll : Enemy
 {
     [HideInInspector] public float _distance;
+    [HideInInspector] public Vector3 nextPos;
+    [HideInInspector] public Vector3 moveDir;
 
     public Vector3 startPos;
-    public Vector3 nextPos;
-    public Vector3 moveDir;
     public float moveRadius;
 
     private Vector3 _prev;
@@ -41,6 +41,16 @@ public class WindUpDoll : Enemy
 
     private void FlipEnemy()
     {
-        transform.rotation = Quaternion.LookRotation(RigidCompo.velocity);
+        transform.rotation = Quaternion.LookRotation(new Vector3(RigidCompo.velocity.x, 0, RigidCompo.velocity.z));
+    }
+
+    protected override void AnimEndTrigger()
+    {
+
+    }
+
+    protected override void EnemyDie()
+    {
+
     }
 }
