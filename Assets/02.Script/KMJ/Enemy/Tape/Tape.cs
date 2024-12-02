@@ -42,7 +42,6 @@ public class Tape : Enemy
 
         Instantiate(_tapeBulletPrbs,transform.position, Quaternion.identity);
 
-        print("æ∆¿’");
 
         yield return new WaitForSeconds(2.4f);
 
@@ -51,5 +50,15 @@ public class Tape : Enemy
         yield return new WaitForSeconds(3f);
 
         _isAttack = true;
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -14,7 +14,7 @@ public enum EnemyStatEnum
     Skill,
     Dead
 }
-public class Enemy : EnemyAgent
+public abstract class Enemy : EnemyAgent
 {
     public StateMachine<EnemyStatEnum> stateMachine;
     protected override void Awake()
@@ -23,8 +23,10 @@ public class Enemy : EnemyAgent
         stateMachine = new StateMachine<EnemyStatEnum>();
     }
 
-    protected override void EnemyDie()
+    public void Damage(float AttackDamage)
     {
-      
+        hp -= AttackDamage;
     }
+
+    protected abstract void AnimEndTrigger();
 }

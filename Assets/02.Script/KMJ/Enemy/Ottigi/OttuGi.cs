@@ -14,6 +14,8 @@ public class OttuGi : Enemy
 
     private Transform _player;
 
+    public bool _isSkilling;
+
     [SerializeField] private GameObject _childPrefab;
 
     protected override void Awake()
@@ -29,7 +31,7 @@ public class OttuGi : Enemy
         stateMachine.AddState(EnemyStatEnum.Attack, new OttiGiAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new OttiGiSkill(this, stateMachine, "Skill"));
 
-        stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
+        stateMachine.InitInitialize(EnemyStatEnum.Idle, this);  
     }
 
     private void Update()
@@ -46,8 +48,8 @@ public class OttuGi : Enemy
 
     public void Skill()
     {
-        Instantiate(_childPrefab);
-        Instantiate(_childPrefab);
+        Instantiate(_childPrefab,transform.position, Quaternion.identity);
+        Instantiate(_childPrefab, transform.position, Quaternion.identity);
 
         gameObject.SetActive(false);
     }
@@ -56,19 +58,33 @@ public class OttuGi : Enemy
     IEnumerator WaitSkill()
     {
         _isSkillExit = false;
-
-        
+        _isSkilling = true;
 
         RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(transform.forward * 1.3f, ForceMode.Impulse);
 
-        bool ishit = Physics.Raycast(transform.position,Vector3.down, 2,whatIsPlayer);
+        yield return new WaitForSeconds(1.4f);
+        _isSkilling = false;
 
-        if (ishit == true)
-        {
-            Debug.Log("Ã¼·Â±ðÀ½");
-        }
-
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.6f);
         _isSkillExit = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && _isSkilling)
+        {
+            print("³Ê ´êÀ½");
+        }
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
     }
 }

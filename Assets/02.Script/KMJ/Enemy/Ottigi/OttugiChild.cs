@@ -45,7 +45,18 @@ public class OttugiChild : Enemy
 
     public void Skill()
     {
-        gameObject.SetActive(false);
+        if(_childPrefab != null)
+        {
+            
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+            Instantiate(_childPrefab,transform.position, Quaternion.identity);
+
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 
@@ -59,5 +70,15 @@ public class OttugiChild : Enemy
 
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
     }
 }
