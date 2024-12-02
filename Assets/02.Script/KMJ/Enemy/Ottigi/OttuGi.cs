@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OttuGi : Enemy
@@ -23,22 +22,24 @@ public class OttuGi : Enemy
         _isSkillExit = true;
         _isSkill = true;
         base.Awake();
-        
-        _player = GameObject.Find("Player").transform;
+
+        _player = GameObject.FindWithTag("Player").transform;
 
         stateMachine.AddState(EnemyStatEnum.Idle, new OttugiIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new OttuGiWalk(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new OttiGiAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new OttiGiSkill(this, stateMachine, "Skill"));
 
-        stateMachine.InitInitialize(EnemyStatEnum.Idle, this);  
+        stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
     }
 
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
 
-        transform.LookAt(_player);
+
+        
+
     }
 
     public void Attack()
@@ -48,15 +49,25 @@ public class OttuGi : Enemy
 
     public void Skill()
     {
-        Instantiate(_childPrefab,transform.position, Quaternion.identity);
-        Instantiate(_childPrefab, transform.position, Quaternion.identity);
+        if (_childPrefab != null)
+        {
 
-        gameObject.SetActive(false);
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 
     IEnumerator WaitSkill()
     {
+        transform.rotation = transform.rotation;
+
         _isSkillExit = false;
         _isSkilling = true;
 
@@ -72,9 +83,12 @@ public class OttuGi : Enemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player") && _isSkilling)
+        if (collision.gameObject.CompareTag("Player") && _isSkilling)
         {
             print("≥  ¥Í¿Ω");
+            RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+            RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);
+
         }
     }
 

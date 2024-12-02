@@ -10,11 +10,11 @@ public class EnemyMovement : MonoBehaviour
 
     public Transform playerPos { get;  set; }
 
-    public bool isMove { get; set; }
+    [field : SerializeField] public bool isMove { get; set; }
 
     private void Awake()
     {
-        isMove = true;
+        isMove = false;
         moveDir = transform.position;
         _rbCompo = GetComponent<Rigidbody>();
     }

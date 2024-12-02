@@ -15,9 +15,11 @@ public class RcCar : Enemy
 
     private Vector3 _moveDir;
 
+   
+
     protected override void Awake()
     {
-        _player = GameObject.Find("Player").transform;
+        _player = GameObject.FindWithTag("Player").transform;
         _isSkill = true;
         base.Awake();
         stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this, stateMachine, "Idle"));
@@ -34,13 +36,7 @@ public class RcCar : Enemy
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
-        LookAtPlayer();
-    }
-
-    private void LookAtPlayer()
-    {
-        if (_isLook)
-            transform.LookAt(_player);
+      
     }
 
     public void DashSkill()
@@ -56,6 +52,8 @@ public class RcCar : Enemy
 
     IEnumerator Skill()
     {
+        
+
         _isLook = false;
         _isAttack = false;
         _isSkill = false;
@@ -79,6 +77,8 @@ public class RcCar : Enemy
 
         yield return new WaitForSecondsRealtime(1f);
         _isSkill = true;
+
+       
     }
 
     IEnumerator AttackTime()
@@ -98,8 +98,6 @@ public class RcCar : Enemy
         _isMove = true;
         yield return new WaitForSeconds(2f);
         _isAttack = true;
-
-       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -112,6 +110,8 @@ public class RcCar : Enemy
         {
            //스킬공격
         }
+
+        RigidCompo.velocity = Vector3.zero;
     }
 
     protected override void AnimEndTrigger()
