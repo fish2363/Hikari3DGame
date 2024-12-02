@@ -8,11 +8,11 @@ public class TWindUpDoll : WindUpDoll
     protected override void Awake()
     {
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Idle, new NWindUpDollIdle(this, stateMachine, "Idle"));
-        stateMachine.AddState(EnemyStatEnum.Walk, new NWindUpDollMove(this, stateMachine, "Walk"));
-        stateMachine.AddState(EnemyStatEnum.Attack, new NWindUpDollAttack(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyStatEnum.Walk, new TWindUpDollMove(this, stateMachine, "Walk"));
+        stateMachine.AddState(EnemyStatEnum.Chase, new TWindUpDollChase(this, stateMachine, "Chase"));
+        stateMachine.AddState(EnemyStatEnum.Attack, new TWindUpDollAttack(this, stateMachine, "Attack"));
 
-        stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
+        stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
     }
 
     protected override void Update()
