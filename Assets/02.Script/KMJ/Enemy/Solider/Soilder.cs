@@ -16,7 +16,7 @@ public class Soilder : Enemy
     protected override void Awake()
     {
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Walk, new SoilderWalk(this, stateMachine, "Walk"));
+        stateMachine.AddState(EnemyStatEnum.Walk, new SoilderWalk (this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Chase, new SoilderChase(this, stateMachine, "Chase"));
         stateMachine.AddState(EnemyStatEnum.Attack, new SoilderShoot(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Dead, new SoilderDie(this, stateMachine, "Die"));
