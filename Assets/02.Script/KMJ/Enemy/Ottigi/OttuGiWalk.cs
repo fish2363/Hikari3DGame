@@ -29,6 +29,7 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
 
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
+        _enemy.transform.LookAt(_enemy.player.transform);
 
         if (_enemy.hp <= 0)
         {
