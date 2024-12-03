@@ -618,6 +618,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2648082548065432875, guid: 5dbe010646043f749af75ab62b36cbf3,
+        type: 3}
+      propertyPath: whatIsPlayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4405788845410620623, guid: 5dbe010646043f749af75ab62b36cbf3,
         type: 3}
       propertyPath: m_LocalPosition.x
