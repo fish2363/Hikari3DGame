@@ -7,14 +7,6 @@ public class PencilSharpener : BossBass
 
     [field : SerializeField] public Pencil pencilBelt;
     [field: SerializeField] public Transform shotPos;
-    [SerializeField] private Vector3 _checkerSize;
-    [SerializeField] private LayerMask _whatIsWall;
-
-    public bool WallCheck()
-    {
-        Collider[] hitColliders = Physics.OverlapBox( transform.position,  _checkerSize / 2, Quaternion.identity,   _whatIsWall);
-        return hitColliders.Length > 0;
-    }
 
     protected override void Awake()
     {

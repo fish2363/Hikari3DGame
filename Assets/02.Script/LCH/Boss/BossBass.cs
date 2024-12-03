@@ -8,9 +8,13 @@ public enum BossState
     Wait,
     Chase,
     Phase1,
+    Phase1Wait,
     Phase2,
+    Phase2Wait,
     Phase3,
+    Phase3Wait,
     Phase4,
+    Phase4Wait,
     Die,
     Hit,
 }
