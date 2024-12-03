@@ -25,9 +25,9 @@ public class TWindUpDollMove : EnemyState<EnemyStatEnum>
 
         MoveNextPos();
 
-        if (_windUpDoll._distance <= _windUpDoll.EnemyStat.AttackRadius)
+        if (_windUpDoll._distance <= _windUpDoll.EnemyStat.AttackRadius + 5)
         {
-            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Chase);
         }
     }
 

@@ -6,7 +6,7 @@ public class Soilder : Enemy
     public Vector3 startPos;
     public float moveRadius = 10;
 
-    private Vector3 _prev;
+    private Vector3 _prev = Vector3.zero;
 
     public bool _isAttack { get; set; }
     [field: SerializeField] public bool _isMove { get; set; }

@@ -14,7 +14,7 @@ public abstract class EnemyAgent : MonoBehaviour
 	public Animator AnimCompo { get; protected set; } //Visual안만들면 터짐~
     public Rigidbody RigidCompo { get; protected set; }
 
-    public Vector3 targetDir;
+    [HideInInspector] public Vector3 targetDir;
 
     public Player player;
 
