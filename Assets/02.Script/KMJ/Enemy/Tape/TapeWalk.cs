@@ -18,7 +18,20 @@ public class TapeWalk : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
-        
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
+
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);

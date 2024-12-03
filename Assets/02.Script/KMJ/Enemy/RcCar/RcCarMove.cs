@@ -25,11 +25,21 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
+       // _enemy.transform.LookAt(_enemy.transform);
 
-        _enemy.transform.LookAt(_enemy.transform);
-        
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
 
 
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
 
         if (_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
         {
