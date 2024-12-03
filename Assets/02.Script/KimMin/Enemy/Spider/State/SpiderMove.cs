@@ -28,7 +28,7 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
     private void CheckWall()
     {
-        if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, 5f, _spider.whatIsWall))
+        if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, 3f, _spider.whatIsWall))
         {
             Debug.DrawRay(_spider.player.transform.position, hit.point, Color.red);
 
@@ -45,5 +45,6 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
         _spider.RigidCompo.constraints = RigidbodyConstraints.FreezePositionX;
         _spider.RigidCompo.constraints = RigidbodyConstraints.FreezePositionY;
         _spider.RigidCompo.constraints = RigidbodyConstraints.FreezeRotationX;
+        _spider.RigidCompo.useGravity = false;
     }
 }

@@ -7,6 +7,8 @@ public class Spider : Enemy
     public LayerMask whatIsWall;
     public bool isWall = false;
 
+    public bool _isWall = false;
+
     protected override void Awake()
     {
         base.Awake();
