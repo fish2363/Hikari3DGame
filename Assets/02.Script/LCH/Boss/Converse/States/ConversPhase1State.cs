@@ -16,6 +16,7 @@ public class ConversPhase1State : EnemyState<BossState>
 
     public override void Enter()
     {
+        Debug.Log("µé¾î°¨");
         base.Enter();
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1)

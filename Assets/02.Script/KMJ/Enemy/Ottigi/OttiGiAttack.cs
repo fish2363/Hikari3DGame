@@ -20,6 +20,7 @@ public class OttiGiAttack : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
+
         if (_ottugi._isSkillExit)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
