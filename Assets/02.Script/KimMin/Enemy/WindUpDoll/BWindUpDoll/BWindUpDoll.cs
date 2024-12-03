@@ -6,9 +6,6 @@ public class BWindUpDoll : WindUpDoll
 {
     public GameObject explostionEffect;
 
-    public float explostionTime = 3.0f;
-
-
     protected override void Awake()
     {
         base.Awake();

@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class TWindUpDollChase : EnemyState<EnemyStatEnum>
 {
     private TWindUpDoll _windUpDoll;
-    private float _currrentTime;
 
     public TWindUpDollChase(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
@@ -16,18 +16,23 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        _currrentTime = 0;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+
         ChaseTarget();
+        CheckSight();
+
+        if (_windUpDoll.isCollision)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
+        }
 
         if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius)
         {
-            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Skill);
-
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
     }
 
@@ -37,5 +42,30 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         moveDir.y = 0;
 
         _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.MoveSpeed * 2;
+    }
+
+    private void CheckSight()
+    {
+        if (_windUpDoll.player == null) return;
+
+        _windUpDoll.interV = _windUpDoll.player.transform.position - _windUpDoll.transform.position;
+
+        if (_windUpDoll.interV.magnitude <= _windUpDoll.radius)
+        {
+            float dot = Vector3.Dot(_windUpDoll.interV.normalized, _windUpDoll.transform.forward);
+            float theta = Mathf.Acos(dot);
+            float degree = Mathf.Rad2Deg * theta;
+
+            if (degree <= _windUpDoll.angleRange / 2f)
+            {
+                Debug.Log("시야 들어옴");
+                _windUpDoll.isCollision = true;
+            }
+            else
+            {
+                Debug.Log("시야 나감");
+                _windUpDoll.isCollision = false;
+            }
+        }
     }
 }
