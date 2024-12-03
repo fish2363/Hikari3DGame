@@ -22,8 +22,20 @@ public class SoilderChase : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
-       
-       _soilder.transform.LookAt(_soilder.player.transform);
+
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
