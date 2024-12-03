@@ -42,8 +42,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LightBrightness: 0.58
-    - _LightCutoff: 0.64
+    - _LightBrightness: 0.34
+    - _LightCutoff: 0.56
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
