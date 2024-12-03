@@ -29,6 +29,19 @@ public class OttugiChildWalkk : EnemyState<EnemyStatEnum>
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
         _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
 
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
         if (_enemy.hp <= 0)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);

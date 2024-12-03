@@ -25,12 +25,6 @@ public class Tape : Enemy
 
     private void Update()
     {
-        if (MoveCompo.isMove)
-            transform.LookAt(player.transform);
-
-
-        
-
         stateMachine.CurrentState.UpdateState();
     }
 
