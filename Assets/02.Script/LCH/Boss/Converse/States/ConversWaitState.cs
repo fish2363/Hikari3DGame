@@ -20,7 +20,7 @@ public class ConversWaitState : EnemyState<BossState>
     private IEnumerator PhaseSelect()
     {
         yield return new WaitForSeconds(0.5F);
-        int Phases = /*Random.Range(1, 4);*/ 4;
+        int Phases = /*Random.Range(1, 4);*/ 1;
 
         switch (Phases)
         {

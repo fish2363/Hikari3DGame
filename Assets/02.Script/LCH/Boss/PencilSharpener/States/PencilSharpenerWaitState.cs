@@ -22,7 +22,7 @@ public class PencilSharpenerWaitState : EnemyState<BossState>
     private IEnumerator PhaseSelect()
     {
         yield return new WaitForSeconds(0.5F);
-        int Phases = /*Random.Range(1, 3);*/ 2;
+        int Phases = /*Random.Range(1, 3);*/ 1;
 
         switch (Phases)
         {
