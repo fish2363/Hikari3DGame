@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OttugiChild : Enemy
@@ -35,7 +34,10 @@ public class OttugiChild : Enemy
     {
         stateMachine.CurrentState.UpdateState();
 
-        transform.LookAt(_player);
+        if (MoveCompo.isMove)
+            transform.LookAt(_player);
+
+     
     }
 
     public void Attack()
@@ -45,11 +47,11 @@ public class OttugiChild : Enemy
 
     public void Skill()
     {
-        if(_childPrefab != null)
+        if (_childPrefab != null)
         {
-            
+
             Instantiate(_childPrefab, transform.position, Quaternion.identity);
-            Instantiate(_childPrefab,transform.position, Quaternion.identity);
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
 
             gameObject.SetActive(false);
         }

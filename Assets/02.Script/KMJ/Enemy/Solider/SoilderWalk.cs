@@ -4,43 +4,49 @@ using UnityEngine;
 
 public class SoilderWalk : EnemyState<EnemyStatEnum>
 {
-    private Rigidbody _rbCompo;
-
-    private Soilder soilder;
+    private Vector3 _nextPos;
+    private Soilder _soilder;
     public SoilderWalk(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
-        soilder = enemy as Soilder;
+        _soilder = enemy as Soilder;
     }
 
     public override void Enter()
     {
-        _rbCompo = _enemy.GetComponent<Rigidbody>();
         base.Enter();
+        _nextPos = _soilder.GetNextPos();
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+        MoveNextPos();
 
-        _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
+       _soilder.transform.rotation = Quaternion.Euler(new Vector3(_soilder.RigidCompo.velocity.x,0
+           ,_soilder.RigidCompo.velocity.z));
 
-        Debug.Log("ππ¿” §©§∑");
+        if (_soilder._isMove)
+            _stateMachine.ChangeState(EnemyStatEnum.Chase);
 
-
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
-
-
-        if(_enemy.range <= soilder.EnemyStat.AttackRadius && soilder._isAttack)
-        {
-            _stateMachine.ChangeState(EnemyStatEnum.Attack);
-        }
-
-        if (_enemy.hp <= 0)
+        if (_soilder.hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
     public override void Exit()
     {
         base.Exit();
+    }
+
+    private void MoveNextPos()
+    {
+        Vector3 dir = (_nextPos - _soilder.transform.position).normalized;
+
+        if ((_nextPos - _soilder.transform.position).magnitude <= 2f)
+        {
+            _soilder.MoveCompo.StopImmediately();
+            _nextPos = _soilder.GetNextPos();
+        }
+
+        _soilder.RigidCompo.velocity = dir * _soilder.EnemyStat.MoveSpeed;
     }
 }

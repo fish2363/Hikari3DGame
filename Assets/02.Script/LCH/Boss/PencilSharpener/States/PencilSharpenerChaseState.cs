@@ -6,7 +6,6 @@ using UnityEngine;
 public class PencilSharpenerChaseState : EnemyState<BossState>
 {
     private PencilSharpener _pencilSharpener;
-    int timer = 0;
     public PencilSharpenerChaseState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
@@ -15,7 +14,7 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-         _pencilSharpener.StartCoroutine(ChangeWaitState(timer));
+        _pencilSharpener.StartCoroutine(ChangeWaitState(7));
         _pencilSharpener.IsPhaseEnd = false;
     }
 
@@ -35,6 +34,5 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
-        timer = 0;
     }
 }

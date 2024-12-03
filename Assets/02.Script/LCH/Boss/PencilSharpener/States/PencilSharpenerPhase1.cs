@@ -6,7 +6,6 @@ using UnityEngine;
 public class PencilSharpenerPhase1 : EnemyState<BossState>
 {
     private PencilSharpener _pencilSharpener;
-    private bool _isAttackWait = true;
     public PencilSharpenerPhase1(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
@@ -15,14 +14,16 @@ public class PencilSharpenerPhase1 : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 4,ForceMode.Impulse);
+        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8,ForceMode.Impulse);
         _pencilSharpener.StartCoroutine(AttackWaitCoroutine());
     }
 
     private IEnumerator AttackWaitCoroutine()
     {
+        _pencilSharpener.transform.LookAt(_pencilSharpener.player.transform.position);
         yield return new WaitForSeconds(2f);
-        _isAttackWait = false;
+        _pencilSharpener.InstanceObj(_pencilSharpener.shotPos, _pencilSharpener.pencilBelt, Quaternion.identity);
+        _pencilSharpener.IsPhaseEnd = true;
     }
 
     public override void UpdateState()
@@ -33,11 +34,18 @@ public class PencilSharpenerPhase1 : EnemyState<BossState>
             _pencilSharpener.RigidCompo.useGravity = false;
         }
 
-        _pencilSharpener.transform.LookAt(_pencilSharpener.player.transform.position);
 
-        if(!_isAttackWait && !_pencilSharpener.IsPhaseEnd)
+        if (_pencilSharpener.IsPhaseEnd)
         {
-            _pencilSharpener.InstanceObj(_pencilSharpener.shotPos , _pencilSharpener.pencilBelt, Quaternion.identity);
+            _pencilSharpener.RigidCompo.useGravity = true;
+            _pencilSharpener.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _pencilSharpener.StartCoroutine(ChangeChaseState());
         }
+    }
+
+    private IEnumerator ChangeChaseState()
+    {
+        yield return new WaitForSeconds(1f);
+        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }
 }
