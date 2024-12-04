@@ -7,7 +7,7 @@ public class ConversPhase4State : EnemyState<BossState>
 {
 
     private Converse _converse;
-    private bool _isAttackWait = true;
+    private float _originMoveSpeed;
     public ConversPhase4State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _converse = enemy as Converse;
@@ -16,17 +16,10 @@ public class ConversPhase4State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _converse.StartCoroutine(WaitAttackCoroutine());
+        _originMoveSpeed = _converse.EnemyStat.MoveSpeed;
         _converse.EnemyStat.MoveSpeed = 7f;
-    }
-
-    private IEnumerator WaitAttackCoroutine()
-    {
-        yield return new WaitForSeconds(1f);
-        _isAttackWait = false;
         _converse.StartCoroutine(PhaseEndCoroutine());
     }
-
     private IEnumerator PhaseEndCoroutine()
     {
         yield return new WaitForSeconds(7f);
@@ -36,7 +29,7 @@ public class ConversPhase4State : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        if (!_isAttackWait && !_converse.IsPhaseEnd)
+        if (!_converse.IsPhaseEnd)
         {
             _converse.targetDir = _converse.player.transform.position - _converse.transform.position;
             _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.MoveSpeed;
@@ -53,5 +46,11 @@ public class ConversPhase4State : EnemyState<BossState>
     {
         yield return new WaitForSeconds(1f);
         _converse.BossStateMachine.ChangeState(BossState.Chase);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _converse.EnemyStat.MoveSpeed = _originMoveSpeed;
     }
 }

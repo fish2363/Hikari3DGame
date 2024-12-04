@@ -19,8 +19,7 @@ public class ConversPhase1State : EnemyState<BossState>
         Debug.Log("µé¾î°¨");
         base.Enter();
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(1)
-            .Append(_converse.transform.DOJump(_converse.player.transform.position, 7f, 3, 2f).SetEase(Ease.Linear))
+        seq .Append(_converse.transform.DOJump(_converse.player.transform.position, 7f, 3, 2f).SetEase(Ease.Linear))
             .AppendCallback(()=> _converse.StartCoroutine(ChangeChaseState()));
     }
 
