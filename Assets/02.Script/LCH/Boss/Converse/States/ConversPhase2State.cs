@@ -6,7 +6,6 @@ using UnityEngine;
 public class ConversPhase2State : EnemyState<BossState>
 {
     private Converse _convers;
-    private bool _isAttackWait = true;
     public ConversPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _convers = enemy as Converse;
@@ -21,7 +20,9 @@ public class ConversPhase2State : EnemyState<BossState>
         base.UpdateState();
         if (_endTriggerCalled)
         {
+            Debug.Log("³¡¤¤");
             _convers.StartCoroutine(ChangeChaseState());
+            _endTriggerCalled = false;
         }
     }
 
