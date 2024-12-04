@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 4
   WallRadius: 1
-  AttackPoawer: 4
   KnockbackPower: 5
   AttackDelay: 0.5
   ContactAttackRadius: 2
-  HP: 10
-  MoveSpeed: 2
+  MinAttackDamage: 19
+  MaxAttackDamage: 28
+  Name: "\uAC70\uBBF8 \uC7A5\uB09C\uAC10"
+  Key: Spider
+  HP: 125
+  ProwlSpeed: 2
+  ChasingSpeed: 3

@@ -17,8 +17,8 @@ public class ScissorsPhase3State : EnemyState<BossState>
     {
         base.Enter();
         _scissors.StartCoroutine(AttackWaitCoroutine());
-        originMoveSpeed = _scissors.EnemyStat.MoveSpeed;
-        _scissors.EnemyStat.MoveSpeed = 10f;
+        originMoveSpeed = _scissors.EnemyStat.ProwlSpeed;
+        _scissors.EnemyStat.ProwlSpeed = 10f;
         
     }
 
@@ -42,7 +42,7 @@ public class ScissorsPhase3State : EnemyState<BossState>
         if (!_scissors.IsPhaseEnd && !_isAttackWait)
         {
             _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
-            _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.MoveSpeed;
+            _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.ProwlSpeed;
         }
 
         if (_scissors.IsPhaseEnd)
@@ -61,6 +61,6 @@ public class ScissorsPhase3State : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
-        _scissors.EnemyStat.MoveSpeed = originMoveSpeed;
+        _scissors.EnemyStat.ProwlSpeed = originMoveSpeed;
     }
 }

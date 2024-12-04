@@ -56,6 +56,6 @@ public class SoilderWalk : EnemyState<EnemyStatEnum>
             _nextPos = _soilder.GetNextPos();
         }
 
-        _soilder.RigidCompo.velocity = dir * _soilder.EnemyStat.MoveSpeed;
+        _soilder.RigidCompo.velocity = dir * _soilder.EnemyStat.ProwlSpeed;
     }
 }
