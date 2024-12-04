@@ -22,7 +22,19 @@ public class ConversPhase1WaitState : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        _converse.transform.LookAt(_converse.player.transform.position);
+        Vector3 direction = _converse.player.transform.position - _converse.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _converse.transform.rotation = lookRotation;
+        }
     }
 
     private IEnumerator ChangePhase1State()

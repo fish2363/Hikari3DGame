@@ -23,15 +23,7 @@ public abstract class BossBass : EnemyAgent
 {
    public StateMachine<BossState> BossStateMachine;
     public bool IsPhaseEnd;
-
-    [SerializeField] private Vector3 _checkerSize;
-    [SerializeField] private LayerMask _whatIsWall;
-
-    public bool WallCheck()
-    {
-        Collider[] hitColliders = Physics.OverlapBox(transform.position, _checkerSize / 2, Quaternion.identity, _whatIsWall);
-        return hitColliders.Length > 0;
-    }
+    public bool WallChecker = false;
     public void AnimEndTrigger()
     {
         BossStateMachine.CurrentState.AnimationEndTrigger();
@@ -47,11 +39,16 @@ public abstract class BossBass : EnemyAgent
         BossStateMachine.CurrentState.UpdateState();
     }
 
-
-    private void OnDrawGizmos()
+    private void OnCollisionEnter(Collision collision)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, _checkerSize);
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            WallChecker = true;
+        }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        WallChecker = false;
+    }
 }
