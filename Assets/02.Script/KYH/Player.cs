@@ -90,11 +90,12 @@ public class Player : MonoBehaviour
     }
     private bool AttemptAttaack()
     {
-        if (currentEnum == StateEnum.Attack) return false;
+        /*if (currentEnum == StateEnum.Attack) return false;
 
         if (_lastAttackTime + _attckCoolTime > Time.time) return false;
 
-        _lastAttackTime = Time.deltaTime;
+        _lastAttackTime = Time.deltaTime;*/
+
         return true;
 
     }

@@ -12,6 +12,8 @@ public class AttackState : State, IAttackable
 
     public override void Enter()
     {
+
+        _player.RigidCompo.velocity = Vector3.zero;
         base.Enter();
         RaycastHit[] hit = Physics.RaycastAll(_player.transform.position, _player.transform.forward, 3, _player.whatIsEnemy);
 
@@ -21,7 +23,9 @@ public class AttackState : State, IAttackable
         {
             foreach (RaycastHit hittor in hit)
             {
-                print(hittor.transform.name);
+                hittor.transform.TryGetComponent(out IAttackable attackIner);
+
+                attackIner.HitEnemy(10,3);
                 _player.ChangeState(StateEnum.Idle);
             }
         }
@@ -32,13 +36,6 @@ public class AttackState : State, IAttackable
         base.StateUpdate();
     }
 
-    IEnumerator GoMoveState()
-    {
-        yield return new WaitForSeconds(1.3f);
-
-        _player.ChangeState(StateEnum.Idle);
-    }
-
     public override void Exit()
     {
         base.Exit();
@@ -46,7 +43,7 @@ public class AttackState : State, IAttackable
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-        
+       
     }
 
     public void HitEnemy(float damage, float knockbackPower)
