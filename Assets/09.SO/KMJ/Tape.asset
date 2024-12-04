@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885da8cbebd400447867210f8f14a67e, type: 3}
   m_Name: Tape
   m_EditorClassIdentifier: 
-  AttackRadius: 10
+  AttackRadius: 17
   WallRadius: 0
   AttackPoawer: 0
   KnockbackPower: 0

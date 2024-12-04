@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OttugiChild : Enemy
@@ -35,7 +34,10 @@ public class OttugiChild : Enemy
     {
         stateMachine.CurrentState.UpdateState();
 
-        transform.LookAt(_player);
+        if (MoveCompo.isMove)
+            transform.LookAt(_player);
+
+     
     }
 
     public void Attack()
@@ -45,7 +47,18 @@ public class OttugiChild : Enemy
 
     public void Skill()
     {
-        gameObject.SetActive(false);
+        if (_childPrefab != null)
+        {
+
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 
@@ -55,9 +68,19 @@ public class OttugiChild : Enemy
 
         Vector3.MoveTowards(transform.position, _player.transform.position, 10);
 
-        //RigidCompo.AddForce(Vector3.up * _enemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
 
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
     }
 }

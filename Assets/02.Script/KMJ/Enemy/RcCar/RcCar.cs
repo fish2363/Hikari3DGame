@@ -1,48 +1,46 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RcCar : Enemy
 {
-    public bool _isSkill;
-
     public bool _isAttack;
+    public bool _isSkill;
+    public bool _isMove;
+    public bool _isAttackTrue;
+    public bool _isSkillTrue;
 
-    public bool _isSkillExit;
-
-    public bool _isAttackExit;
+    public bool _isLook;
 
     private Transform _player;
 
+    private Vector3 _moveDir;
+
+   
+
     protected override void Awake()
     {
-        _player = GameObject.Find("Player").transform;
+        _player = GameObject.FindWithTag("Player").transform;
         _isSkill = true;
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this,stateMachine,"Idle"));
+        stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new RcCarMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new RcCarAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new RcCarSkill(this, stateMachine, "Skill"));
         stateMachine.AddState(EnemyStatEnum.Dead, new RcCarDie(this, stateMachine, "Die"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
+        _isSkillTrue = false;
+        _isAttackTrue = false;
     }
 
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
-        LookAtPlayer();
-    }
-
-    private void LookAtPlayer()
-    {
-        transform.LookAt(_player);
+      
     }
 
     public void DashSkill()
     {
-        Debug.Log("응");
         StartCoroutine(Skill());
     }
 
@@ -54,24 +52,75 @@ public class RcCar : Enemy
 
     IEnumerator Skill()
     {
+        
+
+        _isLook = false;
+        _isAttack = false;
         _isSkill = false;
-        _isSkillExit = false;
+        _isMove = false;
 
+        Transform playertransform = GameObject.FindWithTag("Player").transform;
+        Vector3 moveDir = playertransform.position - transform.position;
 
-        yield return new WaitForSeconds(2f);
-        _isSkillExit = true;
+        yield return new WaitForSeconds(1f);
+        _isSkillTrue = true;
+        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(0.3f);
+        _isSkillTrue = false;
+        _isLook = true;
+        _isMove = true;
+
+        yield return new WaitForSeconds(1.5f);
+
+        _isAttack = true;
+
+        yield return new WaitForSecondsRealtime(1f);
         _isSkill = true;
+
+       
     }
 
     IEnumerator AttackTime()
     {
-        _isAttackExit = false;
+        _isAttack = false;
+        _isMove = false;
 
+        Transform playertransform = GameObject.FindWithTag("Player").transform;
 
+        Vector3 moveDir = playertransform.position - transform.position;
+
+        _isAttackTrue = true;
+        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
+
+        yield return new WaitForSeconds(0.2f);
+        _isAttackTrue = false;
+        _isMove = true;
         yield return new WaitForSeconds(2f);
+        _isAttack = true;
+    }
 
-        _isAttackExit = true;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && _isAttackTrue)
+        {
+            //기본공격
+        }
+        else if(collision.gameObject.CompareTag("Player") && _isSkillTrue)
+        {
+           //스킬공격
+        }
+
+        RigidCompo.velocity = Vector3.zero;
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
     }
 }

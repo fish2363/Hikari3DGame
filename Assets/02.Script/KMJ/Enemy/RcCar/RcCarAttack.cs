@@ -7,10 +7,10 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 {
     private GameObject _player;
     RcCar rcCar;
-    public RcCarAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public RcCarAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
-
 
     public override void Enter()
     {
@@ -22,22 +22,15 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 
         base.Enter();
 
-        _enemy.RigidCompo.AddForce(_enemy.transform.forward * 6, ForceMode.Impulse);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.AttackPoawer * Time.deltaTime);
 
         rcCar.Attack();
-
-        bool ishit = Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, 2, _enemy.whatIsPlayer);
-
-        if (ishit == true)
-        {
-            Debug.Log("Ã¼·Â±ðÀ½");
-        }
     }
 
     public override void UpdateState()
     {
         
-        if(rcCar._isAttackExit)
+        if(rcCar._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 

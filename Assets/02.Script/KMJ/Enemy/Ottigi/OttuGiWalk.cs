@@ -5,10 +5,10 @@ using UnityEngine;
 public class OttuGiWalk : EnemyState<EnemyStatEnum>
 {
     private OttuGi _ottugi;
-    public OttuGiWalk(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public OttuGiWalk(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
-
 
     public override void Enter()
     {
@@ -27,6 +27,21 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
+
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
 
         if (_enemy.hp <= 0)
         {

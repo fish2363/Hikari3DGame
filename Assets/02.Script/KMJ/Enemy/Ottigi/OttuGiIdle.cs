@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class OttugiIdle : EnemyState<EnemyStatEnum>
 {
-    public OttugiIdle(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    public OttugiIdle(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("³ª´Ù");
+        
     }
     public override void UpdateState()
     {

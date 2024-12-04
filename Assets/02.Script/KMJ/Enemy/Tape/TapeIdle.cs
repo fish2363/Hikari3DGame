@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TapeIdle : EnemyState<EnemyStatEnum>
 {
-    public TapeIdle(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    public TapeIdle(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 

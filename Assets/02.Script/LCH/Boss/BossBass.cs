@@ -18,10 +18,22 @@ public enum BossState
 public abstract class BossBass : EnemyAgent
 {
    public StateMachine<BossState> BossStateMachine;
-    public bool PhaseEnd;
+    public bool IsPhaseEnd;
+
+    public void AnimEndTrigger()
+    {
+        BossStateMachine.CurrentState.AnimationEndTrigger();
+    }
 
     protected override void EnemyDie()
     {
         
     }
+
+    protected virtual void Update()
+    {
+        BossStateMachine.CurrentState.UpdateState();
+    }
+
+
 }

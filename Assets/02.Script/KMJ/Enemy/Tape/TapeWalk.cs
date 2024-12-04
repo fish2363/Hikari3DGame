@@ -5,7 +5,8 @@ using UnityEngine;
 public class TapeWalk : EnemyState<EnemyStatEnum>
 {
     private Tape tape;
-    public TapeWalk(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public TapeWalk(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
@@ -17,13 +18,25 @@ public class TapeWalk : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
-        _enemy.MoveCompo.playerPos = GameObject.FindWithTag("Player").transform;
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
 
-        //_enemy.MoveCompo.CanMove(_enemy._enemyStat.MoveSpeed);
+        direction.y = 0;
 
-        _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
 
-        //if (_enemy.range <= _enemy._enemyStat.AttackRadius && tape._isAttack)
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
+
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
+
+        _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
+
+        if (_enemy.range <= _enemy.EnemyStat.AttackRadius && tape._isAttack)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }

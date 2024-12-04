@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OttuGi : Enemy
@@ -14,6 +13,8 @@ public class OttuGi : Enemy
 
     private Transform _player;
 
+    public bool _isSkilling;
+
     [SerializeField] private GameObject _childPrefab;
 
     protected override void Awake()
@@ -22,7 +23,7 @@ public class OttuGi : Enemy
         _isSkill = true;
         base.Awake();
 
-        _player = GameObject.Find("Player").transform;
+        _player = GameObject.FindWithTag("Player").transform;
 
         stateMachine.AddState(EnemyStatEnum.Idle, new OttugiIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new OttuGiWalk(this, stateMachine, "Walk"));
@@ -36,7 +37,9 @@ public class OttuGi : Enemy
     {
         stateMachine.CurrentState.UpdateState();
 
-        transform.LookAt(_player);
+
+        
+
     }
 
     public void Attack()
@@ -46,30 +49,56 @@ public class OttuGi : Enemy
 
     public void Skill()
     {
-        Instantiate(_childPrefab);
-        Instantiate(_childPrefab);
+        if (_childPrefab != null)
+        {
 
-        gameObject.SetActive(false);
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+            Instantiate(_childPrefab, transform.position, Quaternion.identity);
+
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 
     IEnumerator WaitSkill()
     {
-        _isSkillExit = false;
+        transform.rotation = transform.rotation;
 
-        Vector3.MoveTowards(transform.position, _player.transform.position, 10);
+        _isSkillExit = false;
+        _isSkilling = true;
 
         RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(transform.forward * 1.3f, ForceMode.Impulse);
 
-        bool ishit = Physics.Raycast(transform.position,transform.forward, 2,whatIsPlayer);
+        yield return new WaitForSeconds(1.4f);
+        _isSkilling = false;
 
-        if (ishit == true)
-        {
-            Debug.Log("Ã¼·Â±ðÀ½");
-        }
-
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.6f);
         _isSkillExit = true;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && _isSkilling)
+        {
+            print("³Ê ´êÀ½");
+            RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+            RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);
+
+        }
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
+    }
 }
