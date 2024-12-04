@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/WeaponData")]
-public abstract class WeaponData : ScriptableObject
+public class WeaponData : ScriptableObject
 {
     public string weaponName;
     public GameObject weaponModel;
     public int weaponDamage;
+    public float weaponAttackCoolTime;
     public AudioClip weaponSwingSound;
-
-    public abstract void PerformAttack(Player agent, LayerMask hittable, Vector3 direction);
 }
+
+interface IAttack
+{
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction);
+}
+ 

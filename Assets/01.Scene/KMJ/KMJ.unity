@@ -579,7 +579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &507612038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -792,6 +792,11 @@ PrefabInstance:
       propertyPath: currentHp
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 280585686813732458, guid: ab4548d6414805440bb76b2c3cb61fd5,
+        type: 3}
+      propertyPath: whatIsEnemy.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -851,6 +856,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202570440107935346, guid: ab4548d6414805440bb76b2c3cb61fd5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1131,6 +1141,9 @@ MonoBehaviour:
   gravity: -9.8
   <animator>k__BackingField: {fileID: 0}
   _dashCoolTime: 0
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &791723374
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2023,7 +2036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1302533541
 Transform:
   m_ObjectHideFlags: 0
@@ -4147,8 +4160,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3285957443374700532, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285957443374700532, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
+        type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4047566103396824388, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
         type: 3}
