@@ -7,6 +7,7 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 {
     private Spider _spider;
     private RaycastHit hit;
+    private Vector3 _nextPos;
 
     public SpiderMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
@@ -16,33 +17,47 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
     public override void UpdateState()
     {
         base.UpdateState();
-
-        MoveForward();
-        CheckWall();
+        MoveNextPos();
     }
 
-    private void MoveForward()
+    private void MoveNextPos()
     {
-        Vector3 moveDir = _spider.isWall ? Vector3.up : Vector3.forward;
+        Vector3 dir = (_nextPos - _spider.transform.position).normalized;
 
-        _spider.RigidCompo.velocity = moveDir * _spider.EnemyStat.MoveSpeed;
-
-        if (_spider.transform.position.y >= _spider.maxHeight)
+        if ((_nextPos - _spider.transform.position).magnitude <= 2f)
         {
-            Debug.Log("¸ØÃç");
-            _spider.stateMachine.ChangeState(EnemyStatEnum.Idle);
+            _spider.MoveCompo.StopImmediately();
+            _nextPos = _spider.GetNextPos();
         }
+
+        _spider.RigidCompo.velocity = dir * _spider.EnemyStat.MoveSpeed;
     }
 
-    private void CheckWall()
-    {
-        if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, _spider.transform.localScale.x / 2, _spider.whatIsWall))
+    /*    private void MoveForward()
         {
-            Debug.DrawRay(_spider.player.transform.position, hit.point, Color.red);
+            Vector3 moveDir = _spider.isWall ? Vector3.up : Vector3.forward;
 
-            if (!_spider.isWall) ChangeToWall();
-        }
-    }
+            _spider.RigidCompo.velocity = moveDir * _spider.EnemyStat.MoveSpeed;
+
+            if (_spider.transform.position.y >= _spider.maxHeight)
+            {
+                _spider.stateMachine.ChangeState(EnemyStatEnum.Idle);
+            }
+
+            if ((_spider.player.transform.position - _spider.transform.position).magnitude
+                < _spider.EnemyStat.AttackRadius * 3f)
+            {
+                _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
+            }
+        }*/
+
+    /*    private void CheckWall()
+        {
+            if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, _spider.transform.localScale.z / 2 + 0.1f, _spider.whatIsWall))
+            {
+                if (!_spider.isWall) ChangeToWall();
+            }
+        }*/
 
     private void ChangeToWall()
     {
