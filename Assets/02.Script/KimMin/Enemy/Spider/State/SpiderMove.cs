@@ -42,6 +42,6 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
             _nextPos = _spider.GetNextPos();
         }
 
-        _spider.RigidCompo.velocity = dir * _spider.EnemyStat.MoveSpeed;
+        _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;
     }
 }

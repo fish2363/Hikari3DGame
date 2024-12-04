@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 17
   WallRadius: 0
-  AttackPoawer: 0
   KnockbackPower: 0
   AttackDelay: 0
   ContactAttackRadius: 0
-  HP: 10
-  MoveSpeed: 2
+  MinAttackDamage: 25
+  MaxAttackDamage: 35
+  Name: "\uD14C\uC774\uD504"
+  Key: Tape
+  HP: 150
+  ProwlSpeed: 0
+  ChasingSpeed: 1.5

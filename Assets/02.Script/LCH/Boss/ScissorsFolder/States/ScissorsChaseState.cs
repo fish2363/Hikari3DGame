@@ -29,7 +29,7 @@ public class ScissorsChaseState : EnemyState<BossState>
     {
         base.UpdateState();
         _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
-        _scissors.RigidCompo.velocity =  _scissors.targetDir.normalized * _scissors.EnemyStat.MoveSpeed;
+        _scissors.RigidCompo.velocity =  _scissors.targetDir.normalized * _scissors.EnemyStat.ProwlSpeed;
     }
 
     public override void Exit()

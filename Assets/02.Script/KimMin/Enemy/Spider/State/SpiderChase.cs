@@ -50,7 +50,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_spider.player.transform.position - _spider.transform.position).normalized;
         moveDir.y = 0;
 
-        _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.MoveSpeed * 2;
+        _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed * 2;
     }
 
     private void CheckSight()
