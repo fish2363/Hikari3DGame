@@ -31,7 +31,11 @@ public class Player : MonoBehaviour
     [field : SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
+    [SerializeField] private float _attckCoolTime;
+    private float _lastAttackTime;
     private float _lastDashTime;
+
+    public LayerMask whatIsEnemy;
 
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
@@ -49,7 +53,9 @@ public class Player : MonoBehaviour
 
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
+        InputReader.AttackEvent += HandleAttackEvent;
     }
+
 
     private void Update()
     {
@@ -60,6 +66,15 @@ public class Player : MonoBehaviour
     {
         stateDictionary[currentEnum].StateFixedUpdate();
     }
+
+    private void HandleAttackEvent()
+    {
+        if (AttemptAttaack())
+        {
+            ChangeState(StateEnum.Attack);
+        }
+    }
+
 
     private void HandleJumpEvent()
     {
@@ -72,6 +87,16 @@ public class Player : MonoBehaviour
         {
             ChangeState(StateEnum.Dash);
         }
+    }
+    private bool AttemptAttaack()
+    {
+        if (currentEnum == StateEnum.Attack) return false;
+
+        if (_lastAttackTime + _attckCoolTime > Time.time) return false;
+
+        _lastAttackTime = Time.deltaTime;
+        return true;
+
     }
 
     private bool AttemptDash()
