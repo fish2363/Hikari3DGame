@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
 
+
     [field : SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
@@ -89,4 +90,65 @@ public class Player : MonoBehaviour
         currentEnum = newEnum;
         stateDictionary[currentEnum].Enter();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void MinusHp(float attackDamage)
+    {
+        currentHp -= attackDamage;
+    }
+
+    public void PlusHp(float Heal)
+    {
+        currentHp += Heal;
+    }
+
+    public void MinusMoveSpeed(float MinusSpeed)
+    {
+        moveSpeed -= MinusSpeed;
+
+        StartCoroutine(ReturnMoveSpeed());
+    }
+
+    public void PlusMoveSpeed(float PlusSpeed)
+    {
+        moveSpeed -= PlusSpeed;
+    }
+
+    private IEnumerator ReturnMoveSpeed()
+    {
+        yield return new WaitForSeconds(3f);
+
+        moveSpeed = 300;
+    }
+
 }
