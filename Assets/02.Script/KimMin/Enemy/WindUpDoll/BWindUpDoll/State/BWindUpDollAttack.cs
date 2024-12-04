@@ -25,7 +25,7 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
 
         _currrentTime += Time.deltaTime;
 
-        if (_currrentTime >= 3f)
+        if (_currrentTime >= Mathf.PI)
         {
             Explostion();
         }
@@ -35,6 +35,5 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         _windUpDoll.gameObject.SetActive(false);
         _windUpDoll.InstantiateObject(_windUpDoll.explostionEffect, _windUpDoll.transform.position);
-        Debug.Log("Æø¹ß");
     }
 }

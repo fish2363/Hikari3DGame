@@ -36,6 +36,8 @@ public class OttuGi : Enemy
     private void Update()
     {
         if (player == null) return;
+
+
         stateMachine.CurrentState.UpdateState();
 
 
@@ -55,11 +57,7 @@ public class OttuGi : Enemy
     {
         if (_childPrefab != null)
         {
-
-            Instantiate(_childPrefab, transform.position, Quaternion.identity);
-            Instantiate(_childPrefab, transform.position, Quaternion.identity);
-
-            gameObject.SetActive(false);
+            StartCoroutine(Die());
         }
         else
         {
@@ -85,12 +83,23 @@ public class OttuGi : Enemy
         _isSkillExit = true;
     }
 
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Instantiate(_childPrefab, transform.position, Quaternion.identity);
+        Instantiate(_childPrefab, transform.position, Quaternion.identity);
+
+        gameObject.SetActive(false);
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && _isSkilling)
         {
             collision.transform.TryGetComponent(out Player player);
-            player.MinusHp(EnemyStat.AttackPoawer);
+            player.MinusHp(EnemyStat.AttackPower);
 
             RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);

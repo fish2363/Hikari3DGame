@@ -19,7 +19,6 @@ public class BWindUpDoll : WindUpDoll
     protected override void Update()
     {
         base.Update();
-        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
     }
 

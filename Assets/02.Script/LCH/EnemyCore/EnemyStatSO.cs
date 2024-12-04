@@ -8,7 +8,7 @@ public class EnemyStatSO : ScriptableObject
 	[Header("AttackSetting")]
 	public float AttackRadius;
 	public float WallRadius;
-	public float AttackPoawer;
+	public float AttackPower;
 	public float KnockbackPower;
 	public float AttackDelay;
 	public float ContactAttackRadius;

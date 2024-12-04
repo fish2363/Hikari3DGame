@@ -119,12 +119,12 @@ public class RcCar : Enemy
         {
             //기본공격
             collision.transform.TryGetComponent(out Player player);
-            player.MinusHp(EnemyStat.AttackPoawer);
+            player.MinusHp(EnemyStat.AttackPower);
         }
         else if(collision.gameObject.CompareTag("Player") && _isSkillTrue)
         {
             //스킬공격
-            player.MinusHp(EnemyStat.AttackPoawer += 2);
+            player.MinusHp(EnemyStat.AttackPower += 2);
         }
         else if(collision.gameObject.CompareTag("Wall"))
         {

@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &120528349
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 264144457}
   - component: {fileID: 264144463}
   m_Layer: 0
-  m_Name: BWindUpDoll
+  m_Name: GitHub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &623811803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -918,7 +918,7 @@ PrefabInstance:
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.22
+      value: 35.88
       objectReference: {fileID: 0}
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
@@ -928,7 +928,7 @@ PrefabInstance:
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.67
+      value: -12.44
       objectReference: {fileID: 0}
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
@@ -1017,10 +1017,19 @@ MonoBehaviour:
   <range>k__BackingField: 5
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 565385439}
+  interV: {x: 0, y: 0, z: 0}
+  isCollision: 0
+  isWall: 0
+  canAttack: 1
+  maxHeight: 5
+  angleRange: 60
+  radius: 5
+  moveRadius: 5
+  skillCoolTime: 8
+  startPos: {x: 0, y: 0, z: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 512
-  isWall: 0
 --- !u!114 &1108675425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,7 +1151,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.26, y: 0.5, z: -2.797}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalScale: {x: 1.2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1454,7 +1463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1646006448
 MonoBehaviour:
   m_ObjectHideFlags: 0
