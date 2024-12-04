@@ -29,7 +29,8 @@ public class TapeBullet : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            print("´ê¾Ò¾î");
+            other.transform.TryGetComponent(out Player player);
+            
             gameObject.SetActive(false);
         }
     }

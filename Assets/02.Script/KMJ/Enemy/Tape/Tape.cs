@@ -26,6 +26,11 @@ public class Tape : Enemy
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
+
+        if (range <= 8)
+        {
+            MoveCompo.isMove = true;
+        }
     }
 
     public void Attack()
