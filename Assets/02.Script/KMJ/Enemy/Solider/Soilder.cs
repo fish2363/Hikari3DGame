@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Soilder : Enemy
+public class Soilder : Enemy, IAttackable
 {
     public Vector3 startPos;
     public float moveRadius = 10;
@@ -63,5 +63,15 @@ public class Soilder : Enemy
     protected override void EnemyDie()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        hp -= damage;
     }
 }
