@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : State, IAttack
+public class AttackState : State, IAttackable
 {
     private Player _player;
     public AttackState(Player player) : base(player)
@@ -45,6 +45,11 @@ public class AttackState : State, IAttack
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
     {
         
     }

@@ -11,9 +11,4 @@ public class WeaponData : ScriptableObject
     public float weaponAttackCoolTime;
     public AudioClip weaponSwingSound;
 }
-
-interface IAttack
-{
-    public void Attack(Player agent, LayerMask hittable, Vector3 direction);
-}
  

@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
-public class WindUpDoll : Enemy, IHitable
+public class WindUpDoll : Enemy,IAttackable
 {
     [HideInInspector] public float _distance;
     [HideInInspector] public Vector3 nextPos;
@@ -57,5 +57,10 @@ public class WindUpDoll : Enemy, IHitable
     public void HitEnemy(float damage, float knockbackPower)
     {
 
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
     }
 }
