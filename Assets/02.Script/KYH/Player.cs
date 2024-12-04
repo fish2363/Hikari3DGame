@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
+    [field: SerializeField] public CharacterController ControllerCompo { get; private set; }
 
     public float MaxHp { get { return maxHp; } }
     public float CurrentHp { get { return currentHp; } }
@@ -21,7 +22,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     protected float currentHp;
     [SerializeField]
-    protected float moveSpeed;
+    protected float moveSpeed, gravity = -9.8f;
+
+    public CharacterController CControllerCompo { get; private set; }
+    public bool IsRunning { get; private set; }
 
     [field : SerializeField] public Animator animator { get; private set; }
 
