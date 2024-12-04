@@ -16,9 +16,9 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         base.UpdateState();
 
         ChaseTarget();
+        CheckSight();
 
-        if ((_spider.player.transform.position - _spider.transform.position).magnitude
-            > _spider.EnemyStat.AttackRadius)
+        if (_spider.isCollision)
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
@@ -30,5 +30,21 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         moveDir.y = 0;
 
         _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.MoveSpeed * 2;
+    }
+
+    private void CheckSight()
+    {
+        if (_spider.player == null) return;
+
+        _spider.interV = _spider.player.transform.position - _spider.transform.position;
+
+        if (_spider.interV.magnitude <= _spider.radius)
+        {
+            float dot = Vector3.Dot(_spider.interV.normalized, _spider.transform.forward);
+            float theta = Mathf.Acos(dot);
+            float degree = Mathf.Rad2Deg * theta;
+
+            _spider.isCollision = degree <= _spider.angleRange / 2f ? true : false;
+        }
     }
 }
