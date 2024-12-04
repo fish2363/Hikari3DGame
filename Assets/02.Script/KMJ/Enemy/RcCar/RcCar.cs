@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RcCar : Enemy
+public class RcCar : Enemy, IAttackable
 {
     public bool _isAttack;
     public bool _isSkill;
@@ -138,5 +138,15 @@ public class RcCar : Enemy
     protected override void EnemyDie()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        hp -= damage;
     }
 }
