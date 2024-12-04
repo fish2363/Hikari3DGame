@@ -12,6 +12,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     private Vector3 _yRange;
     private Vector3 _xRange;
     private float _spawnRadius = 5f;
+    private int Count = 10;
     public PencilSharpenerPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
@@ -21,10 +22,17 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     {
         base.Enter();
         playerPosition = _pencilSharpener.player.transform.position;
-        for(int i = 0; i < 10; i++)
+        _pencilSharpener.StartCoroutine(DropBoomCoroutine());
+    }
+
+    private IEnumerator DropBoomCoroutine()
+    {
+        while(Count> 0)
         {
+            yield return new WaitForSeconds(0.5f);
             DropBoom();
         }
+        yield return null;
     }
 
     private void DropBoom()
@@ -40,6 +48,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
         {
             rb.useGravity = true; 
         }
+        Count -= 1;
     }
 
     private Vector3 GetRandomPositionAroundPlayer()

@@ -374,7 +374,8 @@ MonoBehaviour:
   pencilBelt: {fileID: 9077059784681249045, guid: 105b107ee34db614c9f016f1f40d1a35,
     type: 3}
   shotPos: {fileID: 1502697776}
-  _fallingObjectPrefab: {fileID: 1611294591}
+  _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
+    type: 3}
 --- !u!54 &194060339
 Rigidbody:
   m_ObjectHideFlags: 0
