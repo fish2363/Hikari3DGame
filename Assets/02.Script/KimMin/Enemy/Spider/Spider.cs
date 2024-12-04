@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Spider : Enemy
 {
+    [HideInInspector] public bool isWall = false;
     public LayerMask whatIsWall;
-    public bool isWall = false;
+    public float maxHeight = 10f;
 
     private readonly float _gravity = -9.81f;
     private Vector3 _gravityDir;

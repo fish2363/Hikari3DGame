@@ -23,19 +23,15 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
     private void MoveForward()
     {
-        Vector3 moveDir;
+        Vector3 moveDir = _spider.isWall ? Vector3.up : Vector3.forward;
 
-        if (!_spider.isWall)
+        _spider.RigidCompo.velocity = moveDir * _spider.EnemyStat.MoveSpeed;
+
+        if (_spider.transform.position.y >= _spider.maxHeight)
         {
-            moveDir = Vector3.forward * _spider.EnemyStat.MoveSpeed;
+            Debug.Log("∏ÿ√Á");
+            _spider.stateMachine.ChangeState(EnemyStatEnum.Idle);
         }
-        else
-        {
-            moveDir = Vector3.up * _spider.EnemyStat.MoveSpeed;
-        }
-
-        _spider.RigidCompo.velocity = moveDir;
-
     }
 
     private void CheckWall()
@@ -50,13 +46,9 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
     private void ChangeToWall()
     {
-        Debug.Log("∫Æ¥¿≤∏¡Æ..");
         _spider.isWall = true;
         _spider.transform.DORotate(new Vector3(-90, 0, 0), 0.5f);
 
-        _spider.RigidCompo.constraints = RigidbodyConstraints.FreezePositionX;
-        _spider.RigidCompo.constraints = RigidbodyConstraints.FreezePositionY;
-        _spider.RigidCompo.constraints = RigidbodyConstraints.FreezeRotationX;
         _spider.RigidCompo.useGravity = false;
     }
 }
