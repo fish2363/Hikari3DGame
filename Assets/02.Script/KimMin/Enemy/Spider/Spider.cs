@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Spider : Enemy, IHitable
+public class Spider : Enemy, IAttackable
 {
     private readonly float _gravity = -9.81f;
 
@@ -111,6 +111,11 @@ public class Spider : Enemy, IHitable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
+        hp -= damage;
+    }
 
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
     }
 }
