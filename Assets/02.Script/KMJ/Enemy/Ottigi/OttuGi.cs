@@ -99,7 +99,7 @@ public class OttuGi : Enemy
         if (collision.gameObject.CompareTag("Player") && _isSkilling)
         {
             collision.transform.TryGetComponent(out Player player);
-            player.MinusHp(EnemyStat.AttackPoawer);
+            player.MinusHp(EnemyStat.AttackPower);
 
             RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);

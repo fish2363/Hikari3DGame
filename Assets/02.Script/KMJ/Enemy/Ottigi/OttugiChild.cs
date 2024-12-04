@@ -68,7 +68,7 @@ public class OttugiChild : Enemy
 
         Vector3.MoveTowards(transform.position, _player.transform.position, 10);
 
-        RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPower, ForceMode.Impulse);
 
         yield return new WaitForSeconds(3f);
         _isSkillExit = true;
