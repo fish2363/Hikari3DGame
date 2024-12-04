@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
-public class WindUpDoll : Enemy
+public class WindUpDoll : Enemy, IHitable
 {
     [HideInInspector] public float _distance;
     [HideInInspector] public Vector3 nextPos;
@@ -50,6 +50,11 @@ public class WindUpDoll : Enemy
     }
 
     protected override void EnemyDie()
+    {
+
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
     {
 
     }
