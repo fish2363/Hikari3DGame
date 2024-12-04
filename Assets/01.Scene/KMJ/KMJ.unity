@@ -462,6 +462,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 280585686813732458, guid: ab4548d6414805440bb76b2c3cb61fd5,
+        type: 3}
+      propertyPath: currentHp
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 419062933892441308, guid: ab4548d6414805440bb76b2c3cb61fd5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -793,10 +798,12 @@ MonoBehaviour:
   <InputReader>k__BackingField: {fileID: 11400000, guid: 1a040acad41af3347b4fda55c1d9ef5f,
     type: 2}
   <RigidCompo>k__BackingField: {fileID: 791723374}
+  <ControllerCompo>k__BackingField: {fileID: 0}
   <GroundCheck>k__BackingField: {fileID: 1756519890}
   maxHp: 10
   currentHp: 0
   moveSpeed: 0
+  gravity: -9.8
   <animator>k__BackingField: {fileID: 0}
   _dashCoolTime: 0
 --- !u!54 &791723374
@@ -3422,7 +3429,7 @@ PrefabInstance:
     - target: {fileID: 3285957443374700532, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4047566103396824388, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
         type: 3}
@@ -3500,7 +3507,7 @@ PrefabInstance:
     - target: {fileID: 1154610410628996085, guid: 8c6e1ce1e63c82149b3c8e85969512a0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1920407671839936387, guid: 8c6e1ce1e63c82149b3c8e85969512a0,
         type: 3}

@@ -29,9 +29,14 @@ public class TapeBullet : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            other.transform.TryGetComponent(out Player player);
             
+            other.transform.TryGetComponent(out Player player);
+
+            if (player.MoveSpeed <= 170)
+                return;
+            player.MinusMoveSpeed(130);
             gameObject.SetActive(false);
         }
     }
+
 }

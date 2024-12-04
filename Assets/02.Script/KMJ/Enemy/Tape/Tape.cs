@@ -25,6 +25,8 @@ public class Tape : Enemy
 
     private void Update()
     {
+        if (player == null) return;
+
         stateMachine.CurrentState.UpdateState();
 
         if (range <= 8)
@@ -50,7 +52,7 @@ public class Tape : Enemy
 
         _isTrueMove = true;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
 
         _isAttack = true;
     }
