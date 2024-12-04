@@ -1,21 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PencilSharpenerPhase3WaitState : EnemyState<BossState>
+public class PencilSharpenerPhase2WaitState : EnemyState<BossState>
 {
 
     private PencilSharpener _pencilSharpener;
-    public PencilSharpenerPhase3WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public PencilSharpenerPhase2WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
-    }
 
-    public override void Enter()
-    {
-        base.Enter();
-        _pencilSharpener.StartCoroutine(ChangePhase3State());
+        _pencilSharpener.StartCoroutine(ChangePhase2State());
     }
 
     public override void UpdateState()
@@ -36,9 +31,9 @@ public class PencilSharpenerPhase3WaitState : EnemyState<BossState>
         }
     }
 
-    private IEnumerator ChangePhase3State()
+    private IEnumerator ChangePhase2State()
     {
         yield return new WaitForSeconds(1f);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Phase3);
+        _pencilSharpener.BossStateMachine.ChangeState(BossState.Phase2);
     }
 }

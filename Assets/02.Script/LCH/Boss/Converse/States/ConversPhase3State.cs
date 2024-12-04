@@ -29,7 +29,13 @@ public class ConversPhase3State : EnemyState<BossState>
 
     private IEnumerator ChangeChaseState()
     {
+        _convers.WallChecker = false;
         yield return new WaitForSeconds(1f);
         _convers.BossStateMachine.ChangeState(BossState.Chase);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }
