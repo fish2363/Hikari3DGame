@@ -23,12 +23,24 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
     private void MoveForward()
     {
-        _spider.RigidCompo.velocity = Vector3.forward * _spider.EnemyStat.MoveSpeed;
+        Vector3 moveDir;
+
+        if (!_spider.isWall)
+        {
+            moveDir = Vector3.forward * _spider.EnemyStat.MoveSpeed;
+        }
+        else
+        {
+            moveDir = Vector3.up * _spider.EnemyStat.MoveSpeed;
+        }
+
+        _spider.RigidCompo.velocity = moveDir;
+
     }
 
     private void CheckWall()
     {
-        if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, 3f, _spider.whatIsWall))
+        if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, _spider.transform.localScale.x / 2, _spider.whatIsWall))
         {
             Debug.DrawRay(_spider.player.transform.position, hit.point, Color.red);
 

@@ -7,8 +7,9 @@ public class Spider : Enemy
     public LayerMask whatIsWall;
     public bool isWall = false;
 
-    public bool _isWall = false;
-
+    private readonly float _gravity = -9.81f;
+    private Vector3 _gravityDir;
+    
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +26,19 @@ public class Spider : Enemy
     {
         Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleGravity();
+    }
+
+    private void HandleGravity()
+    {
+        _gravityDir = transform.up * _gravity;
+
+        Debug.Log(_gravityDir);
+        RigidCompo.velocity += _gravityDir;
     }
 
     private void OnDrawGizmos()
