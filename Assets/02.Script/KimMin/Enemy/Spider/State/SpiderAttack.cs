@@ -20,7 +20,7 @@ public class SpiderAttack : EnemyState<EnemyStatEnum>
 
         if (_currentTime > _spider.EnemyStat.AttackDelay)
         {
-            _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);
+            _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
         }
     }
 }

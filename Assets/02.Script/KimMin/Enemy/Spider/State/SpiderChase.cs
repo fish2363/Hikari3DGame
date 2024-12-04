@@ -30,7 +30,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         }
         if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
         {
-            _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
+            _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
 
         _time += Time.deltaTime;
@@ -39,7 +39,6 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         {
             _time = 0;
             int rand = Random.Range(0, 10);
-            Debug.Log(rand);
 
             if (rand == 1)
                 _spider.stateMachine.ChangeState(EnemyStatEnum.Skill);
