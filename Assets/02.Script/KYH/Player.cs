@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
+    [field: SerializeField] public CharacterController ControllerCompo { get; private set; }
 
     public float MaxHp { get { return maxHp; } }
     public float CurrentHp { get { return currentHp; } }
@@ -21,7 +22,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     protected float currentHp;
     [SerializeField]
-    protected float moveSpeed;
+    protected float moveSpeed, gravity = -9.8f;
+
+    public CharacterController CControllerCompo { get; private set; }
+    public bool IsRunning { get; private set; }
+
 
     [field : SerializeField] public Animator animator { get; private set; }
 
@@ -85,4 +90,65 @@ public class Player : MonoBehaviour
         currentEnum = newEnum;
         stateDictionary[currentEnum].Enter();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void MinusHp(float attackDamage)
+    {
+        currentHp -= attackDamage;
+    }
+
+    public void PlusHp(float Heal)
+    {
+        currentHp += Heal;
+    }
+
+    public void MinusMoveSpeed(float MinusSpeed)
+    {
+        moveSpeed -= MinusSpeed;
+
+        StartCoroutine(ReturnMoveSpeed());
+    }
+
+    public void PlusMoveSpeed(float PlusSpeed)
+    {
+        moveSpeed -= PlusSpeed;
+    }
+
+    private IEnumerator ReturnMoveSpeed()
+    {
+        yield return new WaitForSeconds(3f);
+
+        moveSpeed = 300;
+    }
+
 }

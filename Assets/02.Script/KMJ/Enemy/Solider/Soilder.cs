@@ -46,7 +46,13 @@ public class Soilder : Enemy
 
     private void Update()
     {
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
+
+        if (range <= 8)
+        {
+            _isMove = true;
+        }
     }
 
     public void Attack()
@@ -70,7 +76,8 @@ public class Soilder : Enemy
 
         _isMove = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(6f);
+
         _isAttack = true;
     }
 

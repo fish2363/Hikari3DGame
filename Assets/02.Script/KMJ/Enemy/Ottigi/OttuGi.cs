@@ -35,10 +35,14 @@ public class OttuGi : Enemy
 
     private void Update()
     {
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
 
-        
+        if (range <= 6)
+        {
+            MoveCompo.isMove = true;
+        }
 
     }
 
@@ -71,7 +75,7 @@ public class OttuGi : Enemy
         _isSkillExit = false;
         _isSkilling = true;
 
-        RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+        RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
         RigidCompo.AddForce(transform.forward * 1.3f, ForceMode.Impulse);
 
         yield return new WaitForSeconds(1.4f);
@@ -85,8 +89,10 @@ public class OttuGi : Enemy
     {
         if (collision.gameObject.CompareTag("Player") && _isSkilling)
         {
-            print("³Ê ´êÀ½");
-            RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
+            collision.transform.TryGetComponent(out Player player);
+            player.MinusHp(EnemyStat.AttackPoawer);
+
+            RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);
 
         }
