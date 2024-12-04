@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Spider : Enemy
+public class Spider : Enemy, IHitable
 {
     private readonly float _gravity = -9.81f;
 
@@ -105,6 +105,11 @@ public class Spider : Enemy
     }
 
     protected override void EnemyDie()
+    {
+
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
     {
 
     }

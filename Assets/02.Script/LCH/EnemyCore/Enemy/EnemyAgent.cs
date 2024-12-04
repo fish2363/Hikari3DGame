@@ -27,7 +27,6 @@ public abstract class EnemyAgent : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
-
     protected abstract void EnemyDie();
     
 }
