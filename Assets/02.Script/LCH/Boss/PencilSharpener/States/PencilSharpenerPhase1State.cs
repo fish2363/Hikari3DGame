@@ -1,12 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PencilSharpenerPhase1 : EnemyState<BossState>
+public class PencilSharpenerPhase1State : EnemyState<BossState>
 {
+
     private PencilSharpener _pencilSharpener;
-    public PencilSharpenerPhase1(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public PencilSharpenerPhase1State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
     }
@@ -14,7 +15,7 @@ public class PencilSharpenerPhase1 : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8,ForceMode.Impulse);
+        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8, ForceMode.Impulse);
         _pencilSharpener.StartCoroutine(AttackWaitCoroutine());
     }
 
@@ -29,7 +30,7 @@ public class PencilSharpenerPhase1 : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        if(_pencilSharpener.RigidCompo.velocity.y < 0)
+        if (_pencilSharpener.RigidCompo.velocity.y < 0)
         {
             _pencilSharpener.RigidCompo.useGravity = false;
         }
@@ -45,7 +46,13 @@ public class PencilSharpenerPhase1 : EnemyState<BossState>
 
     private IEnumerator ChangeChaseState()
     {
+        _pencilSharpener.IsPhaseEnd = false;
         yield return new WaitForSeconds(1f);
         _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

@@ -14,7 +14,7 @@ public class ConversPhase3WaitState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _converse.StartCoroutine(ChangePhase1State());
+        _converse.StartCoroutine(ChangePhase3State());
     }
 
     public override void UpdateState()
@@ -23,7 +23,7 @@ public class ConversPhase3WaitState : EnemyState<BossState>
         _converse.transform.LookAt(_converse.player.transform.position);
     }
 
-    private IEnumerator ChangePhase1State()
+    private IEnumerator ChangePhase3State()
     {
         yield return new WaitForSeconds(1f);
         _converse.BossStateMachine.ChangeState(BossState.Phase3);

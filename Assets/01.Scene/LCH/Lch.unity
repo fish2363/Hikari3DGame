@@ -261,7 +261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &194060334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -370,6 +370,10 @@ MonoBehaviour:
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   IsPhaseEnd: 0
+  _checkerSize: {x: 1.06, y: 1.05, z: 1.21}
+  _whatIsWall:
+    serializedVersion: 2
+    m_Bits: 512
   pencilBelt: {fileID: 9077059784681249045, guid: 105b107ee34db614c9f016f1f40d1a35,
     type: 3}
   shotPos: {fileID: 1502697776}
@@ -616,12 +620,32 @@ PrefabInstance:
     - target: {fileID: 2139292893577201527, guid: 5dbe010646043f749af75ab62b36cbf3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648082548065432875, guid: 5dbe010646043f749af75ab62b36cbf3,
+        type: 3}
+      propertyPath: _checkerSize.x
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648082548065432875, guid: 5dbe010646043f749af75ab62b36cbf3,
+        type: 3}
+      propertyPath: _checkerSize.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648082548065432875, guid: 5dbe010646043f749af75ab62b36cbf3,
+        type: 3}
+      propertyPath: _checkerSize.z
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648082548065432875, guid: 5dbe010646043f749af75ab62b36cbf3,
+        type: 3}
+      propertyPath: _whatIsWall.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 2648082548065432875, guid: 5dbe010646043f749af75ab62b36cbf3,
         type: 3}
       propertyPath: whatIsPlayer.m_Bits
-      value: 512
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 4405788845410620623, guid: 5dbe010646043f749af75ab62b36cbf3,
         type: 3}
