@@ -115,25 +115,16 @@ public class RcCar : Enemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player") && _isAttackTrue)
-        {
-            //기본공격
-            collision.transform.TryGetComponent(out Player player);
-            player.MinusHp(EnemyStat.AttackPower);
-        }
-        else if(collision.gameObject.CompareTag("Player") && _isSkillTrue)
-        {
-            //스킬공격
-            player.MinusHp(EnemyStat.AttackPower += 2);
-        }
-        else if(collision.gameObject.CompareTag("Wall"))
-        {
-            RigidCompo.velocity = Vector3.zero;
-        }
-
         if(collision.gameObject.CompareTag("Player"))
         {
-            RigidCompo.velocity = Vector3.zero;
+            //기본공격
+            int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
+            collision.transform.TryGetComponent(out Player player);
+
+            if (_isAttackTrue)
+                player.MinusHp(damage);
+            else if (_isSkillTrue)
+                player.MinusHp(damage += 2);
         }
 
         RigidCompo.velocity = Vector3.zero;

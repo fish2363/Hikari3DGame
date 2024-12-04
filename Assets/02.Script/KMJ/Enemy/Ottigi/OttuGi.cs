@@ -98,8 +98,9 @@ public class OttuGi : Enemy, IAttackable
     {
         if (collision.gameObject.CompareTag("Player") && _isSkilling)
         {
+            int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
             collision.transform.TryGetComponent(out Player player);
-            player.MinusHp(EnemyStat.AttackPower);
+            player.MinusHp(damage);
 
             RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);
@@ -109,12 +110,12 @@ public class OttuGi : Enemy, IAttackable
 
     protected override void AnimEndTrigger()
     {
-        throw new System.NotImplementedException();
+
     }
 
     protected override void EnemyDie()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)

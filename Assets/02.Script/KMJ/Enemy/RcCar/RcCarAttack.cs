@@ -22,8 +22,6 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 
         base.Enter();
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.AttackPower * Time.deltaTime);
-
         rcCar.Attack();
     }
 
