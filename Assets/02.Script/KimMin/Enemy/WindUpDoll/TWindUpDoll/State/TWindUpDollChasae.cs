@@ -56,16 +56,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
             float theta = Mathf.Acos(dot);
             float degree = Mathf.Rad2Deg * theta;
 
-            if (degree <= _windUpDoll.angleRange / 2f)
-            {
-                Debug.Log("시야 들어옴");
-                _windUpDoll.isCollision = true;
-            }
-            else
-            {
-                Debug.Log("시야 나감");
-                _windUpDoll.isCollision = false;
-            }
+            _windUpDoll.isCollision = degree <= _windUpDoll.angleRange / 2f ? true : false;
         }
     }
 }
