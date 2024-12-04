@@ -38,7 +38,10 @@ public class OttuGi : Enemy
         stateMachine.CurrentState.UpdateState();
 
 
-        
+        if (range <= 6)
+        {
+            MoveCompo.isMove = true;
+        }
 
     }
 
@@ -85,7 +88,8 @@ public class OttuGi : Enemy
     {
         if (collision.gameObject.CompareTag("Player") && _isSkilling)
         {
-            print("³Ê ´êÀ½");
+            print("ÀÀ¾ÆÀÕ ¾î");
+
             RigidCompo.AddForce(Vector3.up * EnemyStat.AttackPoawer, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);
 

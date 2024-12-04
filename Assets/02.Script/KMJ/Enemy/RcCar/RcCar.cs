@@ -36,6 +36,11 @@ public class RcCar : Enemy
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
+
+        if (range <= 6)
+        {
+            MoveCompo.isMove = true;
+        }
       
     }
 
@@ -64,9 +69,12 @@ public class RcCar : Enemy
 
         yield return new WaitForSeconds(1f);
         _isSkillTrue = true;
-        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
+
+        RigidCompo.velocity += moveDir * EnemyStat.AttackPoawer;
+        //transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
         yield return new WaitForSeconds(0.3f);
+        RigidCompo.velocity = Vector3.zero;
         _isSkillTrue = false;
         _isLook = true;
         _isMove = true;
@@ -75,7 +83,7 @@ public class RcCar : Enemy
 
         _isAttack = true;
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(3f);
         _isSkill = true;
 
        
@@ -91,12 +99,16 @@ public class RcCar : Enemy
         Vector3 moveDir = playertransform.position - transform.position;
 
         _isAttackTrue = true;
-        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
+        RigidCompo.velocity += moveDir * EnemyStat.AttackPoawer;
+        //transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
+
+        
         yield return new WaitForSeconds(0.2f);
+        RigidCompo.velocity = Vector3.zero;
         _isAttackTrue = false;
         _isMove = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         _isAttack = true;
     }
 
