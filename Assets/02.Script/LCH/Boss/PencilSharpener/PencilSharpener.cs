@@ -8,6 +8,8 @@ public class PencilSharpener : BossBass
     [field : SerializeField] public Pencil pencilBelt;
     [field: SerializeField] public Transform shotPos;
 
+    [field : SerializeField] public GameObject _fallingObjectPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -15,6 +17,8 @@ public class PencilSharpener : BossBass
         BossStateMachine.AddState(BossState.Chase, new PencilSharpenerChaseState(this, BossStateMachine, "Chase"));
         BossStateMachine.AddState(BossState.Wait, new PencilSharpenerWaitState(this, BossStateMachine, "Wait"));
         BossStateMachine.AddState(BossState.Phase1, new PencilSharpenerPhase1State(this, BossStateMachine, "Phase1"));
+        BossStateMachine.AddState(BossState.Phase2Wait, new PencilSharpenerPhase2WaitState(this, BossStateMachine, "Phase2Wait"));
+        BossStateMachine.AddState(BossState.Phase2, new PencilSharpenerPhase2State(this,BossStateMachine,"Phase2"));
         BossStateMachine.AddState(BossState.Phase3Wait, new PencilSharpenerPhase3WaitState(this, BossStateMachine, "Phase3Wait"));
         BossStateMachine.AddState(BossState.Phase3, new PencilSharpenerPhase3State(this,BossStateMachine,"Phase3"));
     }

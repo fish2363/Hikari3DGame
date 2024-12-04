@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class OttuGi : Enemy
+public class OttuGi : Enemy, IAttackable
 {
     public bool _isSkill;
 
@@ -36,6 +36,8 @@ public class OttuGi : Enemy
     private void Update()
     {
         if (player == null) return;
+
+
         stateMachine.CurrentState.UpdateState();
 
 
@@ -55,11 +57,7 @@ public class OttuGi : Enemy
     {
         if (_childPrefab != null)
         {
-
-            Instantiate(_childPrefab, transform.position, Quaternion.identity);
-            Instantiate(_childPrefab, transform.position, Quaternion.identity);
-
-            gameObject.SetActive(false);
+            StartCoroutine(Die());
         }
         else
         {
@@ -85,6 +83,17 @@ public class OttuGi : Enemy
         _isSkillExit = true;
     }
 
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Instantiate(_childPrefab, transform.position, Quaternion.identity);
+        Instantiate(_childPrefab, transform.position, Quaternion.identity);
+
+        gameObject.SetActive(false);
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && _isSkilling)
@@ -104,6 +113,16 @@ public class OttuGi : Enemy
     }
 
     protected override void EnemyDie()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
     {
         throw new System.NotImplementedException();
     }
