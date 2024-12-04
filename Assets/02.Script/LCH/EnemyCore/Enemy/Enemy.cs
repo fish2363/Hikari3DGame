@@ -28,5 +28,10 @@ public abstract class Enemy : EnemyAgent
         hp -= AttackDamage;
     }
 
+    public void StopImmediately()
+    {
+        RigidCompo.velocity = Vector3.zero;
+    }
+
     protected abstract void AnimEndTrigger();
 }
