@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+
 
 public class MoveState : State
 {
@@ -12,6 +14,7 @@ public class MoveState : State
     private RaycastHit slopeHit;
     private int groundLayer = 1 << LayerMask.NameToLayer("Ground");
     private float maxSlopeAngle;
+    private float rotateSpeed = 20f;
 
     public MoveState(Player player) : base(player)
     {
@@ -55,6 +58,7 @@ public class MoveState : State
             }
 
             LookAt();
+            //_player.ControllerCompo.Move(velocity * currentMoveSpeed + gravity);
             _player.RigidCompo.velocity = velocity * currentMoveSpeed + gravity;
             _player.animator.SetFloat("Velocity", animationSpeed);
         }
@@ -62,7 +66,7 @@ public class MoveState : State
 
     public bool IsOnSlope()
     {
-        Ray ray = new Ray(_player.transform.position, Vector3.down);
+        Ray ray = new(_player.transform.position, Vector3.down);
         if(Physics.Raycast(ray, out slopeHit, RAY_DISTANCE, groundLayer))
         {
             var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
@@ -80,7 +84,9 @@ public class MoveState : State
     private void LookAt()
     {
         Quaternion targetAngle = Quaternion.LookRotation(_player.InputReader.direction);
-        _player.RigidCompo.rotation = targetAngle;
+
+        _player.transform.rotation = Quaternion.Lerp(
+            _player.transform.rotation,targetAngle, Time.deltaTime * rotateSpeed);
     }
 
     public override void Exit()

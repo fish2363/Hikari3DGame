@@ -20,21 +20,21 @@ public class ConversWaitState : EnemyState<BossState>
     private IEnumerator PhaseSelect()
     {
         yield return new WaitForSeconds(0.5F);
-        int Phases = /*Random.Range(1, 4);*/ 1;
+        int Phases = Random.Range(1, 4);
 
         switch (Phases)
         {
             case 1:
-                _converse.BossStateMachine.ChangeState(BossState.Phase1);
+                _converse.BossStateMachine.ChangeState(BossState.Phase1Wait);
                 break;
             case 2:
-                _converse.BossStateMachine.ChangeState(BossState.Phase2);
+                _converse.BossStateMachine.ChangeState(BossState.Phase2Wait);
                 break;
             case 3:
-                _converse.BossStateMachine.ChangeState(BossState.Phase3);
+                _converse.BossStateMachine.ChangeState(BossState.Phase3Wait);
                 break;
             case 4:
-                _converse.BossStateMachine.ChangeState(BossState.Phase4);
+                _converse.BossStateMachine.ChangeState(BossState.Phase4Wait);
                 break;
         }
     }

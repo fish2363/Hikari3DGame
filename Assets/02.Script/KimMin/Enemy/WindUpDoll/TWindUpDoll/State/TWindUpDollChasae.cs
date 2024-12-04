@@ -30,7 +30,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
 
-        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius)
+        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius * 2)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
@@ -41,7 +41,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         moveDir.y = 0;
 
-        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.MoveSpeed * 2;
+        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.MoveSpeed * 2.5f;
     }
 
     private void CheckSight()
@@ -56,16 +56,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
             float theta = Mathf.Acos(dot);
             float degree = Mathf.Rad2Deg * theta;
 
-            if (degree <= _windUpDoll.angleRange / 2f)
-            {
-                Debug.Log("시야 들어옴");
-                _windUpDoll.isCollision = true;
-            }
-            else
-            {
-                Debug.Log("시야 나감");
-                _windUpDoll.isCollision = false;
-            }
+            _windUpDoll.isCollision = degree <= _windUpDoll.angleRange / 2f ? true : false;
         }
     }
 }

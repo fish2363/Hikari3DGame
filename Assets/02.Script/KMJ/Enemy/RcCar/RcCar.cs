@@ -35,7 +35,13 @@ public class RcCar : Enemy
 
     private void Update()
     {
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
+
+        if (range <= 6)
+        {
+            MoveCompo.isMove = true;
+        }
       
     }
 
@@ -52,8 +58,6 @@ public class RcCar : Enemy
 
     IEnumerator Skill()
     {
-        
-
         _isLook = false;
         _isAttack = false;
         _isSkill = false;
@@ -64,9 +68,12 @@ public class RcCar : Enemy
 
         yield return new WaitForSeconds(1f);
         _isSkillTrue = true;
-        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
-        yield return new WaitForSeconds(0.3f);
+        RigidCompo.velocity += moveDir * 10;
+
+        yield return new WaitForSeconds(0.1f);
+        RigidCompo.velocity = Vector3.zero;
+
         _isSkillTrue = false;
         _isLook = true;
         _isMove = true;
@@ -75,7 +82,7 @@ public class RcCar : Enemy
 
         _isAttack = true;
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(8f);
         _isSkill = true;
 
        
@@ -91,24 +98,42 @@ public class RcCar : Enemy
         Vector3 moveDir = playertransform.position - transform.position;
 
         _isAttackTrue = true;
-        transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
 
-        yield return new WaitForSeconds(0.2f);
+        RigidCompo.velocity += moveDir * 10;
+
+        yield return new WaitForSeconds(0.1f);
+        
+        RigidCompo.velocity = Vector3.zero;
         _isAttackTrue = false;
         _isMove = true;
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(3f);
         _isAttack = true;
     }
+
+   
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") && _isAttackTrue)
         {
             //기본공격
+            collision.transform.TryGetComponent(out Player player);
+            player.MinusHp(EnemyStat.AttackPoawer);
         }
         else if(collision.gameObject.CompareTag("Player") && _isSkillTrue)
         {
-           //스킬공격
+            //스킬공격
+            player.MinusHp(EnemyStat.AttackPoawer += 2);
+        }
+        else if(collision.gameObject.CompareTag("Wall"))
+        {
+            RigidCompo.velocity = Vector3.zero;
+        }
+
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            RigidCompo.velocity = Vector3.zero;
         }
 
         RigidCompo.velocity = Vector3.zero;

@@ -25,7 +25,7 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
 
         _currrentTime += Time.deltaTime;
 
-        if (_currrentTime >= 3f)
+        if (_currrentTime >= 1.772f)
         {
             Explostion();
         }

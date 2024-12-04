@@ -15,24 +15,13 @@ public class ConversPhase2State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _convers.StartCoroutine(WaitAttackCoroutine());
     }
-
-    private IEnumerator WaitAttackCoroutine()
-    {
-        yield return new WaitForSeconds(2f);
-        _isAttackWait = false;
-}
-
     public override void UpdateState()
     {
         base.UpdateState();
-        if (!_isAttackWait)
+        if (_endTriggerCalled)
         {
-            if (_endTriggerCalled)
-            {
-                _convers.StartCoroutine(ChangeChaseState());
-            }
+            _convers.StartCoroutine(ChangeChaseState());
         }
     }
 
