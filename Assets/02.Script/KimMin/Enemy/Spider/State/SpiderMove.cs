@@ -19,6 +19,7 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         _spider.StopImmediately();
+        _nextPos = _spider.GetNextPos();
     }
 
     public override void UpdateState()
@@ -34,13 +35,11 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
     private void MoveNextPos()
     {
-        Vector3 dir = (_nextPos - _spider.transform.position).normalized;
-
         if ((_nextPos - _spider.transform.position).magnitude <= 2f)
         {
             _spider.MoveCompo.StopImmediately();
             _nextPos = _spider.GetNextPos();
         }
-        _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;
+        _spider.RigidCompo.velocity = _nextPos * _spider.EnemyStat.ProwlSpeed;
     }
 }

@@ -30,7 +30,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
 
-        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius * 2)
+        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius * 2.5f)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
