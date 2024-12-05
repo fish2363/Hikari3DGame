@@ -23,8 +23,17 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
+     
 
+
+        if(_enemy.range <= 1)
+        {
+            _enemy.RigidCompo.velocity = Vector3.zero;
+        }
+        else
+        {
+            _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
+        }
        // _enemy.transform.LookAt(_enemy.transform);
 
         Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;

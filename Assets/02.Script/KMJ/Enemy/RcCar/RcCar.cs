@@ -125,9 +125,9 @@ public class RcCar : Enemy, IAttackable
                 player.MinusHp(damage);
             else if (_isSkillTrue)
                 player.MinusHp(damage += 2);
-        }
 
-        RigidCompo.velocity = Vector3.zero;
+            RigidCompo.velocity = Vector3.zero;
+        }
     }
 
     protected override void AnimEndTrigger()
