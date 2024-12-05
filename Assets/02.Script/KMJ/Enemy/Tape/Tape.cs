@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Tape : Enemy
+public class Tape : Enemy, IAttackable
 {
     public bool _isAttack;
 
@@ -65,5 +65,15 @@ public class Tape : Enemy
     protected override void EnemyDie()
     {
         throw new NotImplementedException();
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        hp -= damage;
     }
 }

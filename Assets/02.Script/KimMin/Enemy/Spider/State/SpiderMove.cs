@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpiderMove : EnemyState<EnemyStatEnum>
@@ -14,10 +15,21 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
         _spider = enemy as Spider;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        _spider.StopImmediately();
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();
         MoveNextPos();
+
+        if (_spider.distance < _spider.EnemyStat.AttackRadius * 4)
+        {
+            _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
+        }
     }
 
     private void MoveNextPos()
@@ -30,40 +42,6 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
             _nextPos = _spider.GetNextPos();
         }
 
-        _spider.RigidCompo.velocity = dir * _spider.EnemyStat.MoveSpeed;
-    }
-
-    /*    private void MoveForward()
-        {
-            Vector3 moveDir = _spider.isWall ? Vector3.up : Vector3.forward;
-
-            _spider.RigidCompo.velocity = moveDir * _spider.EnemyStat.MoveSpeed;
-
-            if (_spider.transform.position.y >= _spider.maxHeight)
-            {
-                _spider.stateMachine.ChangeState(EnemyStatEnum.Idle);
-            }
-
-            if ((_spider.player.transform.position - _spider.transform.position).magnitude
-                < _spider.EnemyStat.AttackRadius * 3f)
-            {
-                _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
-            }
-        }*/
-
-    /*    private void CheckWall()
-        {
-            if (Physics.Raycast(_spider.transform.position, _spider.transform.forward, out hit, _spider.transform.localScale.z / 2 + 0.1f, _spider.whatIsWall))
-            {
-                if (!_spider.isWall) ChangeToWall();
-            }
-        }*/
-
-    private void ChangeToWall()
-    {
-        _spider.isWall = true;
-        _spider.transform.DORotate(new Vector3(-90, 0, 0), 0.5f);
-
-        _spider.RigidCompo.useGravity = false;
+        _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;
     }
 }

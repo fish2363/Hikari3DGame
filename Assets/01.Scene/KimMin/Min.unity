@@ -249,7 +249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &264144457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,17 +1018,18 @@ MonoBehaviour:
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 565385439}
   interV: {x: 0, y: 0, z: 0}
-  isWall: 0
   isCollision: 0
+  isWall: 0
+  canAttack: 1
   maxHeight: 5
   angleRange: 60
-  radius: 10
+  radius: 5
   moveRadius: 5
+  skillCoolTime: 8
   startPos: {x: 0, y: 0, z: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 512
-  canAttack: 0
 --- !u!114 &1108675425
 MonoBehaviour:
   m_ObjectHideFlags: 0

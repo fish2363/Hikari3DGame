@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Spider : Enemy
+public class Spider : Enemy, IAttackable
 {
-    [HideInInspector] public Vector3 interV = Vector3.zero;
-    [HideInInspector] public bool isWall = false;
-    [HideInInspector] public bool isCollision = false;
+    private readonly float _gravity = -9.81f;
 
+    [HideInInspector] public Vector3 interV = Vector3.zero;
+    [HideInInspector] public bool isCollision = false;
+    [HideInInspector] public bool isWall = false;
+    [HideInInspector] public bool canAttack = true;
+
+    [HideInInspector] public float distance => (player.transform.position - transform.position).magnitude;
+
+    [Header("Setting")]
     public float maxHeight = 10f;
     public float angleRange = 30f;
     public float radius = 3f;
     public float moveRadius = 5f;
+    public float skillCoolTime = 8f;
 
     public Vector3 startPos;
-
     public LayerMask whatIsWall;
 
-    public bool canAttack = false;
-
-    private readonly float _gravity = -9.81f;
     private Vector3 _gravityDir;
     private Vector3 _prev;
 
@@ -30,7 +33,6 @@ public class Spider : Enemy
     protected override void Awake()
     {
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Idle, new SpiderIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new SpiderMove(this, stateMachine, "Move"));
         stateMachine.AddState(EnemyStatEnum.Chase, new SpiderChase(this, stateMachine, "Chase"));
         stateMachine.AddState(EnemyStatEnum.Attack, new SpiderAttack(this, stateMachine, "Attack"));
@@ -45,7 +47,6 @@ public class Spider : Enemy
         Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
         FlipEnemy();
-
     }
 
     private void FixedUpdate()
@@ -57,7 +58,6 @@ public class Spider : Enemy
     {
         _gravityDir = transform.up * _gravity;
 
-        Debug.Log(_gravityDir);
         RigidCompo.velocity += _gravityDir;
     }
 
@@ -86,8 +86,10 @@ public class Spider : Enemy
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius * 4);
 
         if (interV == null) return;
          Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
@@ -105,5 +107,15 @@ public class Spider : Enemy
     protected override void EnemyDie()
     {
 
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        hp -= damage;
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
     }
 }

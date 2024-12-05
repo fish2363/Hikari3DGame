@@ -5,10 +5,16 @@ using UnityEngine;
 public class SpiderChase : EnemyState<EnemyStatEnum>
 {
     private Spider _spider;
+    private float _time;
 
     public SpiderChase(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
         _spider = enemy as Spider;
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
     }
 
     public override void UpdateState()
@@ -22,6 +28,21 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
+        if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
+        {
+            _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);
+        }
+
+        _time += Time.deltaTime;
+
+        if (_time >= 1f)
+        {
+            _time = 0;
+            int rand = Random.Range(0, 10);
+
+            if (rand == 1)
+                _spider.stateMachine.ChangeState(EnemyStatEnum.Skill);
+        }
     }
 
     private void ChaseTarget()
@@ -29,7 +50,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_spider.player.transform.position - _spider.transform.position).normalized;
         moveDir.y = 0;
 
-        _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.MoveSpeed * 2;
+        _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed * 2;
     }
 
     private void CheckSight()

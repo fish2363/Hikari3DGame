@@ -28,7 +28,7 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     {
         base.UpdateState();
         _pencilSharpener.targetDir = _pencilSharpener.player.transform.position - _pencilSharpener.transform.position;
-        _pencilSharpener.RigidCompo.velocity = _pencilSharpener.targetDir.normalized * _pencilSharpener.EnemyStat.MoveSpeed;
+        _pencilSharpener.RigidCompo.velocity = _pencilSharpener.targetDir.normalized * _pencilSharpener.EnemyStat.ProwlSpeed;
     }
 
     public override void Exit()

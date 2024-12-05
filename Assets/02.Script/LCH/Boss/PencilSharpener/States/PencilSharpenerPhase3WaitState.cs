@@ -21,7 +21,19 @@ public class PencilSharpenerPhase3WaitState : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        _pencilSharpener.transform.LookAt(_pencilSharpener.player.transform.position);
+        Vector3 direction = _pencilSharpener.player.transform.position - _pencilSharpener.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _pencilSharpener.transform.rotation = lookRotation;
+        }
     }
 
     private IEnumerator ChangePhase3State()

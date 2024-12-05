@@ -41,6 +41,6 @@ public class TWindUpDollMove : EnemyState<EnemyStatEnum>
             _nextPos = _windUpDoll.GetNextPos();
         }
 
-        _windUpDoll.RigidCompo.velocity = dir * _windUpDoll.EnemyStat.MoveSpeed;
+        _windUpDoll.RigidCompo.velocity = dir * _windUpDoll.EnemyStat.ProwlSpeed;
     }
 }

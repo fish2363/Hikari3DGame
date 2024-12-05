@@ -29,10 +29,7 @@ public class SoilderWalk : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
-        if(_enemy.range <= 1.5)
-        {
-            _enemy.RigidCompo.velocity = Vector3.zero;
-        }
+        
 
 
         soilderObject.ToList().ForEach(t => t.transform.rotation = Quaternion.LookRotation(new Vector3(_enemy.RigidCompo.velocity.x, 0, _enemy.RigidCompo.velocity.z)));
@@ -59,6 +56,6 @@ public class SoilderWalk : EnemyState<EnemyStatEnum>
             _nextPos = _soilder.GetNextPos();
         }
 
-        _soilder.RigidCompo.velocity = dir * _soilder.EnemyStat.MoveSpeed;
+        _soilder.RigidCompo.velocity = dir * _soilder.EnemyStat.ProwlSpeed;
     }
 }
