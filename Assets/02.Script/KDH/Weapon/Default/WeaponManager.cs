@@ -1,13 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponManager : MonoBehaviour
 {
-
-
-
-    /*private MeshRenderer _meshRenderer;
+    private MeshRenderer _meshRenderer;
     private WeaponStorage _weaponStorage;
 
     public UnityEvent<GameObject> OnWeaponSwap;
@@ -61,7 +60,7 @@ public class WeaponManager : MonoBehaviour
         {
             OnMultipleWeapons?.Invoke();
         }
-        //SwapWeaponModel(weaponData.weaponModel);
+        SwapWeaponModel(weaponData.weaponModel);
     }
 
     public void SwapWeapon()
@@ -70,60 +69,6 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-       // SwapWeaponModel(_weaponStorage.SwapWeapon().weaponModel);
-    }*/
-
-    [SerializeField] private Player player;
-    public List<WeaponData> weaponList = new List<WeaponData>();
-    public SkinnedMeshRenderer weaponMesh;
-    private bool isChange;
-
-    private void Awake()
-    {
-        isChange = true;
+        SwapWeaponModel(_weaponStorage.SwapWeapon().weaponModel);
     }
-
-    private void Update()
-    {
-        ChangeWeapon();
-        weaponMesh.sharedMesh = player.currentWeaponData.weaponModel;
-        weaponMesh.material = player.currentWeaponData.weaponMaterial;
-        player.animator.runtimeAnimatorController = player.currentWeaponData.animatorControlloer;
-    }
-
-    private void ChangeWeapon()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && isChange)
-        {
-            player.currentWeaponData = weaponList[0];
-            StartCoroutine(ChangeWait());
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && isChange)
-        {
-            {
-                if (weaponList[1] == null)
-                    return;
-                player.currentWeaponData = weaponList[1];
-                StartCoroutine(ChangeWait());
-            }
-        }
-    }
-
-    public void AddWeaponData(WeaponData weaponData)
-    {
-        if (weaponList[1] == null)
-            weaponList[1] = weaponData;
-        else
-            weaponList.Add(weaponData);
-    }
-
-    private IEnumerator ChangeWait()
-    {
-        isChange = false;
-        yield return new WaitForSeconds(3f);
-
-        isChange = true;
-    }
-
-
 }

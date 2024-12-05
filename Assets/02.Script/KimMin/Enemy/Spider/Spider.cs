@@ -25,7 +25,6 @@ public class Spider : Enemy, IAttackable
     public LayerMask whatIsWall;
 
     private Vector3 _gravityDir;
-    private Vector3 _nextPos;
     private Vector3 _prev;
 
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
@@ -41,12 +40,11 @@ public class Spider : Enemy, IAttackable
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
         canAttack = false;
-        startPos = transform.position;
-        _nextPos = startPos;
     }
 
     private void Update()
     {
+        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
         FlipEnemy();
     }
@@ -73,28 +71,25 @@ public class Spider : Enemy, IAttackable
     {
         Vector3 radius = new Vector3(startPos.x + moveRadius, startPos.y, startPos.z + moveRadius);
 
-        Debug.Log(radius);
+        Vector3 result = new Vector3(
+            Random.Range(radius.x, -radius.x), startPos.y,
+            Random.Range(radius.z, -radius.z));
 
-        float x = Random.Range(radius.x, -radius.x);
-        float z = Random.Range(radius.z, -radius.z);
 
-        _nextPos = new Vector3(x, transform.localScale.y / 2, z);
-
-        if (_prev != null && (_prev - _nextPos).magnitude < 5)
+        if (_prev != null && (_prev - result).magnitude < 5)
         {
             return GetNextPos();
         }
 
-        return _nextPos;
+        return result;
     }
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(startPos, moveRadius);
-
-        Gizmos.color = Color.white;
-        Gizmos.DrawLine(transform.position, _nextPos);
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius * 4);
 
         if (interV == null) return;
          Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
@@ -111,17 +106,16 @@ public class Spider : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
-        Debug.Log("¢žÀ½");
+
     }
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        Hp -= damage;
-        Debug.Log(Hp);
+        hp -= damage;
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-
+        throw new System.NotImplementedException();
     }
 }
