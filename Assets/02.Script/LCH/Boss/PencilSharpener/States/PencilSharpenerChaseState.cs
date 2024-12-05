@@ -27,19 +27,6 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        Vector3 direction = _pencilSharpener.player.transform.position - _pencilSharpener.transform.position;
-
-        direction.y = 0;
-
-
-        if (direction.sqrMagnitude > 0.001f)
-        {
-            direction.Normalize();
-
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-            _pencilSharpener.transform.rotation = lookRotation;
-        }
         _pencilSharpener.targetDir = _pencilSharpener.player.transform.position - _pencilSharpener.transform.position;
         _pencilSharpener.RigidCompo.velocity = _pencilSharpener.targetDir.normalized * _pencilSharpener.EnemyStat.ProwlSpeed;
     }
