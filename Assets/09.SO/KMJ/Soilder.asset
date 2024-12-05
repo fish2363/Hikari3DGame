@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 15
   WallRadius: 0
-  AttackPoawer: 3
   KnockbackPower: 0
   AttackDelay: 0
   ContactAttackRadius: 10
-  HP: 4
-  MoveSpeed: 1
+  MinAttackDamage: 12
+  MaxAttackDamage: 25
+  Name: "\uBBF8\uB2C8\uC5B4\uCCD0 \uAD70\uC778"
+  Key: MiniSoldier
+  HP: 85
+  ProwlSpeed: 1.5
+  ChasingSpeed: 3

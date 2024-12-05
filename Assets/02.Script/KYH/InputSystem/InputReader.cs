@@ -63,4 +63,17 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
 
         return _beforeMouseWorldPos;
     }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            AttackEvent?.Invoke();
+        }
+    }
+
+    //public void OnDefence(InputAction.CallbackContext context)
+    //{
+    //    throw new NotImplementedException();
+    //}
 }

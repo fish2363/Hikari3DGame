@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 2
   WallRadius: 0
-  AttackPoawer: 2
   KnockbackPower: 0
   AttackDelay: 0
   ContactAttackRadius: 0
-  HP: 10
-  MoveSpeed: 3
+  MinAttackDamage: 14
+  MaxAttackDamage: 20
+  Name: "\uC624\uB69C\uAE30"
+  Key: RolyPoly
+  HP: 120
+  ProwlSpeed: 0
+  ChasingSpeed: 2
