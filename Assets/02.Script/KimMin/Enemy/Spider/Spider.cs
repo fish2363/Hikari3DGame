@@ -106,12 +106,13 @@ public class Spider : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
-        
+        Debug.Log("¢û¿Ω");
     }
 
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
+        Debug.Log(Hp);
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)

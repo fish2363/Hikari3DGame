@@ -56,7 +56,7 @@ public class WindUpDoll : Enemy,IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-
+        Hp -= damage;
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
