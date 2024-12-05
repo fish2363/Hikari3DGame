@@ -6,7 +6,6 @@ public enum StateEnum
 {
     Idle,
     Move,
-    Jump,
-    Fall,
     Attack,
+    Dash
 }

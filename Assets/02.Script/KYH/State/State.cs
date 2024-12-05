@@ -21,6 +21,11 @@ public abstract class State : MonoBehaviour
 
     }
 
+    public virtual void StateFixedUpdate()
+    {
+
+    }
+
     public virtual void Exit()
     {
 
