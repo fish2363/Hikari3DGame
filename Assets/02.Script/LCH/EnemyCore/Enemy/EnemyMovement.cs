@@ -10,22 +10,19 @@ public class EnemyMovement : MonoBehaviour
 
     public Transform playerPos { get;  set; }
 
-    public bool isMove { get; set; }
+    [field : SerializeField] public bool isMove { get; set; }
 
     private void Awake()
     {
-        isMove = true;
+        isMove = false;
         moveDir = transform.position;
         _rbCompo = GetComponent<Rigidbody>();
     }
 
-    public void CanMove(float moveSpeed)
+    public void StopImmediately()
     {
-         transform.position = Vector3.MoveTowards(transform.position,playerPos.position,moveSpeed * Time.deltaTime);
-
-        if (isMove == false)
-            moveDir = Vector3.zero;
+        _rbCompo.velocity = Vector3.zero;
     }
 
-    
+
 }

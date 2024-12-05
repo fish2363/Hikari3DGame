@@ -5,6 +5,7 @@ using UnityEngine;
 public class NWindUpDoll : WindUpDoll
 {
     public float detectRadius = 4.0f;
+    public bool canAttack = true;
 
     protected override void Awake()
     {
@@ -16,12 +17,18 @@ public class NWindUpDoll : WindUpDoll
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        stateMachine.CurrentState.UpdateState();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectRadius);
 
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, _enemyStat.AttackRadius);
+        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
     }
 }

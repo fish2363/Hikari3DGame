@@ -1,39 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RcCar : Enemy
+public class RcCar : Enemy, IAttackable
 {
-    public bool _isSkill;
-
     public bool _isAttack;
+    public bool _isSkill;
+    public bool _isMove;
+    public bool _isAttackTrue;
+    public bool _isSkillTrue;
 
-    public bool _isSkillExit;
+    public bool _isLook;
 
-    public bool _isAttackExit;
+    private Transform _player;
 
+    private Vector3 _moveDir;
+
+   
 
     protected override void Awake()
     {
+        _player = GameObject.FindWithTag("Player").transform;
         _isSkill = true;
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this,stateMachine,"Idle"));
+        stateMachine.AddState(EnemyStatEnum.Idle, new RcCarIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new RcCarMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new RcCarAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new RcCarSkill(this, stateMachine, "Skill"));
         stateMachine.AddState(EnemyStatEnum.Dead, new RcCarDie(this, stateMachine, "Die"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
+        _isSkillTrue = false;
+        _isAttackTrue = false;
     }
 
     private void Update()
     {
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
+
+        if (range <= 6)
+        {
+            MoveCompo.isMove = true;
+        }
+      
     }
 
     public void DashSkill()
     {
-        Debug.Log("응");
         StartCoroutine(Skill());
     }
 
@@ -45,24 +58,95 @@ public class RcCar : Enemy
 
     IEnumerator Skill()
     {
+        _isLook = false;
+        _isAttack = false;
         _isSkill = false;
-        _isSkillExit = false;
+        _isMove = false;
 
+        Transform playertransform = GameObject.FindWithTag("Player").transform;
+        Vector3 moveDir = playertransform.position - transform.position;
 
-        yield return new WaitForSeconds(2f);
-        _isSkillExit = true;
+        yield return new WaitForSeconds(1f);
+        _isSkillTrue = true;
 
-        yield return new WaitForSecondsRealtime(3f);
+        RigidCompo.velocity += moveDir * 10;
+
+        yield return new WaitForSeconds(0.1f);
+        RigidCompo.velocity = Vector3.zero;
+
+        _isSkillTrue = false;
+        _isLook = true;
+        _isMove = true;
+
+        yield return new WaitForSeconds(1.5f);
+
+        _isAttack = true;
+
+        yield return new WaitForSecondsRealtime(8f);
         _isSkill = true;
+
+       
     }
 
     IEnumerator AttackTime()
     {
-        _isAttackExit = false;
+        _isAttack = false;
+        _isMove = false;
 
+        Transform playertransform = GameObject.FindWithTag("Player").transform;
 
-        yield return new WaitForSeconds(2f);
+        Vector3 moveDir = playertransform.position - transform.position;
 
-        _isAttackExit = true;
+        _isAttackTrue = true;
+
+        RigidCompo.velocity += moveDir * 10;
+
+        yield return new WaitForSeconds(0.1f);
+        
+        RigidCompo.velocity = Vector3.zero;
+        _isAttackTrue = false;
+        _isMove = true;
+
+        yield return new WaitForSeconds(3f);
+        _isAttack = true;
+    }
+
+   
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            //기본공격
+            int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
+            collision.transform.TryGetComponent(out Player player);
+
+            if (_isAttackTrue)
+                player.MinusHp(damage);
+            else if (_isSkillTrue)
+                player.MinusHp(damage += 2);
+
+            RigidCompo.velocity = Vector3.zero;
+        }
+    }
+
+    protected override void AnimEndTrigger()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void EnemyDie()
+    {
+        
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        Hp -= damage;
     }
 }

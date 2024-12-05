@@ -7,40 +7,43 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
     private GameObject _player;
     private RcCar _rcCar;
 
-    public RcCarSkill(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+    
+
+    public RcCarSkill(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
     public override void Enter()
     {
         _rcCar = _enemy.GetComponent<RcCar>();
+        _rcCar._isLook = false;
 
         _rcCar.DashSkill();
 
         _player = GameObject.FindWithTag("Player");
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 10);
 
-       bool ishit = Physics.Raycast(_enemy.transform.position,_enemy.transform.forward, 2, _enemy.whatIsPlayer);
+        bool ishit = Physics.Raycast(_enemy.transform.position,_enemy.transform.forward, 2, _enemy.whatIsPlayer);
         
         if(ishit == true)
         {
-            Debug.Log("¾ÆÀÕ");
+            Debug.Log("Ã¼·Â±ðÀ½");
         }
+
+       
 
     }
 
     public override void UpdateState()
     {
 
-        if(_rcCar._isSkillExit)
+        if(_rcCar._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
-
-
-            if (_enemy.hp <= 0)
-                _stateMachine.ChangeState(EnemyStatEnum.Dead);
         }
+
+        if (_enemy.Hp <= 0)
+            _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
     public override void Exit()

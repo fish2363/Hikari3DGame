@@ -5,7 +5,8 @@ using UnityEngine;
 public class OttiGiAttack : EnemyState<EnemyStatEnum>
 {
     private OttuGi _ottugi;
-    public OttiGiAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public OttiGiAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
@@ -19,12 +20,22 @@ public class OttiGiAttack : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
+
         if (_ottugi._isSkillExit)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
-            if (_enemy.hp <= 0)
-                _stateMachine.ChangeState(EnemyStatEnum.Dead);
         }
+
+        if (_enemy.Hp <= 0)
+        {
+            _stateMachine.ChangeState(EnemyStatEnum.Skill);
+        }
+
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

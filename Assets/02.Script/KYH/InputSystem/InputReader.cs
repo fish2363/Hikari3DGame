@@ -7,13 +7,15 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(menuName = "SO/InputReader")]
 public class InputReader : ScriptableObject, KeyAction.IPlayerActions
 {
-    public event Action OnAttackEvent;
+    public event Action AttackEvent;
     public event Action OnDashEvent;
     public event Action OnJumpEvent;
-    public event Action OnWeaponSwapEvent;
     public event Action<Vector2> OnMoveEvent;
-
     public Vector3 direction { get; private set; }
+    [SerializeField] private LayerMask _whatIsGround;
+    public Vector2 MousePosition { get; private set; }
+    private Vector3 _beforeMouseWorldPos;
+
     public Vector2 moveDir { get; private set; }
 
     private KeyAction playerKeyAction;
@@ -31,12 +33,6 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
         playerKeyAction.Player.Enable(); //활성화
     }
 
-    public void OnDisable()
-    {
-        if (playerKeyAction != null)
-            playerKeyAction.Player.Disable(); // 비활성화
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -50,24 +46,34 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
         OnMoveEvent?.Invoke(moveDir);
     }
 
-    // 공격
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        MousePosition = context.ReadValue<Vector2>();
+    }
+
+    public Vector3 GetWorldMousePosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(MousePosition);
+
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _whatIsGround))
+        {
+            _beforeMouseWorldPos = hitInfo.point;
+            return hitInfo.point;
+        }
+
+        return _beforeMouseWorldPos;
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnAttackEvent?.Invoke();
+        {
+            AttackEvent?.Invoke();
+        }
     }
 
-    // 무기 교체
-    public void OnWeaponSwap(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnWeaponSwapEvent?.Invoke();
-    }
-
-    // 대시
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnDashEvent?.Invoke();
-    }
+    //public void OnDefence(InputAction.CallbackContext context)
+    //{
+    //    throw new NotImplementedException();
+    //}
 }

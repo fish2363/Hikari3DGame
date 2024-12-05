@@ -7,29 +7,32 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 {
     private GameObject _player;
     RcCar rcCar;
-    public RcCarAttack(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public RcCarAttack(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
-
 
     public override void Enter()
     {
         rcCar = _enemy.GetComponent<RcCar>();
+
         Debug.Log("³ª µé¾î¿È");
+
         _player = GameObject.FindWithTag("Player");
+
         base.Enter();
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, 10);
+
         rcCar.Attack();
     }
 
     public override void UpdateState()
     {
         
-        if(rcCar._isAttackExit)
+        if(rcCar._isMove)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
-            if (_enemy.hp <= 0)
+            if (_enemy.Hp <= 0)
                 _stateMachine.ChangeState(EnemyStatEnum.Dead);
         }
     }

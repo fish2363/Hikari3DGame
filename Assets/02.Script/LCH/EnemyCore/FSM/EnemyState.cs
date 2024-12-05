@@ -5,12 +5,12 @@ using System;
 
 public abstract class EnemyState<T> where T : Enum
 {
-    protected Enemy _enemy;
+    protected EnemyAgent _enemy;
     protected int _animBoolHash;
     protected StateMachine<T> _stateMachine;
     protected bool _endTriggerCalled;
 
-    public EnemyState(Enemy enemy, StateMachine<T> state, string animHashName)
+    public EnemyState(EnemyAgent enemy, StateMachine<T> state, string animHashName)
     {
         _enemy = enemy;
         _stateMachine = state;
@@ -24,13 +24,13 @@ public abstract class EnemyState<T> where T : Enum
 
     public virtual void Enter()
     {
-        //_enemy.AnimCompo.SetBool(_animBoolHash, true);
+        _enemy.AnimCompo.SetBool(_animBoolHash, true);
         _endTriggerCalled = false;
 
     }
     public virtual void Exit()
     {
-       // _enemy.AnimCompo.SetBool(_animBoolHash, false);
+        _enemy.AnimCompo.SetBool(_animBoolHash, false);
     }
 
     public virtual void LateUpdateState()
@@ -41,5 +41,11 @@ public abstract class EnemyState<T> where T : Enum
     public void AnimationEndTrigger()
     {
         _endTriggerCalled = true;
+    }
+
+    public void StopImmediately(Enemy enemy)
+    {
+        if (enemy.TryGetComponent(out Rigidbody rigid))
+            rigid.velocity = Vector3.zero;
     }
 }

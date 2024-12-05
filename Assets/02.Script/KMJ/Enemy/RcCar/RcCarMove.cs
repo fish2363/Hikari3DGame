@@ -6,7 +6,8 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 {
     private RcCar rcCar;
     int randomInteger;
-    public RcCarMove(Enemy enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
+
+    public RcCarMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
     }
 
@@ -19,25 +20,47 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
-        _enemy.MoveCompo.playerPos = GameObject.FindWithTag("Player").transform;
 
-        _enemy.MoveCompo.CanMove(_enemy._enemyStat.MoveSpeed);
+        _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
-        _enemy.range = Vector3.Distance(_enemy.MoveCompo.playerPos.position, _enemy.transform.position);
+     
 
 
-        if(_enemy.range <= _enemy._enemyStat.ContactAttackRadius && rcCar._isSkill)
+        if(_enemy.range <= 0.2)
+        {
+            _enemy.RigidCompo.velocity = Vector3.zero;
+        }
+        else
+        {
+            _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ChasingSpeed * Time.deltaTime);
+        }
+       // _enemy.transform.LookAt(_enemy.transform);
+
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _enemy.transform.rotation = lookRotation;
+        }
+
+        if (_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
-
-        if (_enemy.range <= _enemy._enemyStat.AttackRadius)
+        else if (_enemy.range <= _enemy.EnemyStat.AttackRadius && rcCar._isAttack)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
 
 
-        if (_enemy.hp <= 0)
+        if (_enemy.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

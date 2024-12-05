@@ -8,19 +8,42 @@ public class Player : MonoBehaviour
 {
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
-
-    [SerializeField] private WeaponManager weaponManager;
+    [field: SerializeField] public CharacterController ControllerCompo { get; private set; }
 
     public float MaxHp { get { return maxHp; } }
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
+
+
+    [field : SerializeField]
+    public GroundCheck GroundCheck { get; private set; }
+
+    [field : SerializeField]
+    public Transform RayTransform { get; private set; }
+
+    [field: SerializeField] public GameObject playerCam { get; set; }
+
 
     [SerializeField]
     protected float maxHp;
     [SerializeField]
     protected float currentHp;
     [SerializeField]
-    protected float moveSpeed;
+    protected float moveSpeed, gravity = -9.8f;
+
+    public CharacterController CControllerCompo { get; private set; }
+    public bool IsRunning { get; private set; }
+    public bool isAttack { get; set; }
+
+
+    [field: SerializeField] public WeaponData currentWeaponData;
+    [field : SerializeField] public Animator animator { get; private set; }
+
+    [SerializeField] private float _dashCoolTime;
+    [SerializeField] private float _attckCoolTime;
+    private float _lastDashTime;
+
+    public LayerMask whatIsEnemy;
 
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
@@ -28,10 +51,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (weaponManager == null)
-            weaponManager = GetComponentInChildren<WeaponManager>();
-
-        foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
+        foreach(StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
         {
             Type t = Type.GetType($"{enumState}State");
             State state = Activator.CreateInstance(t, new object[] { this }) as State;
@@ -41,9 +61,11 @@ public class Player : MonoBehaviour
 
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
-        InputReader.OnAttackEvent += HandleAttackEvent;
-        InputReader.OnWeaponSwapEvent += HandleWeaponSwap;
+        InputReader.AttackEvent += HandleAttackEvent;
+
+        isAttack = true;
     }
+
 
     private void Update()
     {
@@ -52,8 +74,17 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        stateDictionary[currentEnum].FixedUpdate();
+        stateDictionary[currentEnum].StateFixedUpdate();
     }
+
+    private void HandleAttackEvent()
+    {
+        if (isAttack)
+        {
+            ChangeState(StateEnum.Attack);
+        }
+    }
+
 
     private void HandleJumpEvent()
     {
@@ -62,27 +93,32 @@ public class Player : MonoBehaviour
 
     private void HandleDashEvent()
     {
-
+        if (AttemptDash())
+        {
+            ChangeState(StateEnum.Dash);
+        }
     }
 
-    private void HandleWeaponSwap()
+    /*private bool AttemptAttaack()
     {
-        if (weaponManager == null)
-            return;
+        if (currentEnum == StateEnum.Attack) return false;
 
-        weaponManager.SwapWeapon();
-    }
+        if (_lastAttackTime + _attckCoolTime > Time.time) return false;
 
-    private void HandleAttackEvent()
+        _lastAttackTime = Time.deltaTime;
+
+        return true;
+
+    }*/
+
+    private bool AttemptDash()
     {
-        if (weaponManager == null || weaponManager.GetCurrentWeapon() == null)
-            return;
+        if (currentEnum == StateEnum.Dash) return false;
 
-        WeaponData currentWeapon = weaponManager.GetCurrentWeapon();
-        Vector3 attackDirection = transform.forward;
-        LayerMask hittableLayer = LayerMask.GetMask("Enemy"); // 공격 대상 레이어 설정
+        if (_lastDashTime + _dashCoolTime > Time.time) return false;
 
-        currentWeapon.PerformAttack(this, hittableLayer, attackDirection);
+        _lastDashTime = Time.time;
+        return true;
     }
 
     public void ChangeState(StateEnum newEnum)
@@ -92,14 +128,42 @@ public class Player : MonoBehaviour
         stateDictionary[currentEnum].Enter();
     }
 
-    public void PickUp(WeaponData weaponData)
+    public void MinusHp(float attackDamage)
     {
-        if (weaponManager == null)
-        {
-            Debug.LogWarning("WeaponManager가 설정되지 않았습니다.");
-            return;
-        }
+        currentHp -= attackDamage;
+    }
 
-        weaponManager.PickUpWeapon(weaponData);
+    public void PlusHp(float Heal)
+    {
+        currentHp += Heal;
+    }
+
+    public void MinusMoveSpeed(float MinusSpeed)
+    {
+        moveSpeed -= MinusSpeed;
+
+        StartCoroutine(ReturnMoveSpeed());
+    }
+
+    public void PlusMoveSpeed(float PlusSpeed)
+    {
+        moveSpeed -= PlusSpeed;
+    }
+
+    private IEnumerator ReturnMoveSpeed()
+    {
+        yield return new WaitForSeconds(3f);
+
+        moveSpeed = 300;
+    }
+
+    
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(RayTransform.position, transform.forward);
+        Gizmos.color = Color.white;
     }
 }
