@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     [field : SerializeField]
     public Transform RayTransform { get; private set; }
 
+    [field: SerializeField] public GameObject playerCam { get; set; }
+
 
     [SerializeField]
     protected float maxHp;
@@ -39,7 +41,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _dashCoolTime;
     [SerializeField] private float _attckCoolTime;
-    private float _lastAttackTime;
     private float _lastDashTime;
 
     public LayerMask whatIsEnemy;
@@ -155,6 +156,8 @@ public class Player : MonoBehaviour
 
         moveSpeed = 300;
     }
+
+    
 
 
     private void OnDrawGizmos()

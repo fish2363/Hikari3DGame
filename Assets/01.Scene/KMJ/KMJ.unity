@@ -561,7 +561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400186, guid: b69d362dda29cbe41a4af495b4fd60c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.667
+      value: -0.16500068
       objectReference: {fileID: 0}
     - target: {fileID: 400186, guid: b69d362dda29cbe41a4af495b4fd60c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -943,7 +943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &507612038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1043,8 +1043,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1119927, y: 1.044338, z: 0.3929348}
-  m_Center: {x: -0.05599636, y: 0.42953432, z: 3.671692}
+  m_Size: {x: 1.2035842, y: 1.0572453, z: 0.48383617}
+  m_Center: {x: -0.01020062, y: 0.42308065, z: -0.025749683}
 --- !u!1 &552917355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1256,7 @@ Transform:
   m_GameObject: {fileID: 671859459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.468, z: 0}
+  m_LocalPosition: {x: 0, y: 0.317, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1463,6 +1463,7 @@ MonoBehaviour:
   <ControllerCompo>k__BackingField: {fileID: 0}
   <GroundCheck>k__BackingField: {fileID: 1756519890}
   <RayTransform>k__BackingField: {fileID: 0}
+  <playerCam>k__BackingField: {fileID: 0}
   maxHp: 10
   currentHp: 0
   moveSpeed: 0
@@ -1686,7 +1687,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 419062933391360333}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 38
     OrthographicSize: 10
@@ -2607,7 +2608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400186, guid: b69d362dda29cbe41a4af495b4fd60c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.649
+      value: -0.1830008
       objectReference: {fileID: 0}
     - target: {fileID: 400186, guid: b69d362dda29cbe41a4af495b4fd60c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2976,6 +2977,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1302533541}
     m_Modifications:
+    - target: {fileID: 687675762984301797, guid: 94d34f4802556844997e5f2cc4bf19e4,
+        type: 3}
+      propertyPath: EnemyStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 071fff81556663d40b813935cc1b98c0,
+        type: 2}
     - target: {fileID: 3288160632996447260, guid: 94d34f4802556844997e5f2cc4bf19e4,
         type: 3}
       propertyPath: m_Layer
@@ -3874,7 +3881,7 @@ Transform:
   m_GameObject: {fileID: 1560644155}
   serializedVersion: 2
   m_LocalRotation: {x: 0.06778773, y: -0.93031716, z: 0.21578638, w: 0.28870595}
-  m_LocalPosition: {x: 9.082532, y: 4.00641, z: 13.9173355}
+  m_LocalPosition: {x: 9.082533, y: 4.00641, z: 13.917337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4961,7 +4968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400186, guid: b69d362dda29cbe41a4af495b4fd60c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.622
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 400186, guid: b69d362dda29cbe41a4af495b4fd60c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6023,6 +6030,7 @@ MonoBehaviour:
   <ControllerCompo>k__BackingField: {fileID: 0}
   <GroundCheck>k__BackingField: {fileID: 3306053299441058941}
   <RayTransform>k__BackingField: {fileID: 671859460}
+  <playerCam>k__BackingField: {fileID: 857723496}
   maxHp: 145
   currentHp: 145
   moveSpeed: 300
@@ -6205,8 +6213,8 @@ Transform:
   m_Children:
   - {fileID: 2114437475769342301}
   - {fileID: 1722365303453583817}
-  - {fileID: 857723497}
   - {fileID: 671859460}
+  - {fileID: 857723497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -146.601, z: 0}
 --- !u!4 &451437604428010479
@@ -7396,7 +7404,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -3659700616610106681, guid: 7dbce4c2a5f18cf4da98dd033690d516, type: 3}
+  m_Mesh: {fileID: -2182832962020291474, guid: 7dbce4c2a5f18cf4da98dd033690d516, type: 3}
   m_Bones:
   - {fileID: 1197220014933450411}
   - {fileID: 222992108279478821}
@@ -19718,7 +19726,7 @@ PrefabInstance:
     - target: {fileID: 1397957764236888753, guid: 8f26b4cbab782e44e8300c2c0c7ad1cd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1397957764236888753, guid: 8f26b4cbab782e44e8300c2c0c7ad1cd,
         type: 3}
