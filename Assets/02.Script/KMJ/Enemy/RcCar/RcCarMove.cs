@@ -26,13 +26,13 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
      
 
 
-        if(_enemy.range <= 1)
+        if(_enemy.range <= 0.2)
         {
             _enemy.RigidCompo.velocity = Vector3.zero;
         }
         else
         {
-            _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
+            _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ChasingSpeed * Time.deltaTime);
         }
        // _enemy.transform.LookAt(_enemy.transform);
 
@@ -60,7 +60,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         }
 
 
-        if (_enemy.hp <= 0)
+        if (_enemy.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

@@ -31,8 +31,7 @@ public class AttackState : State, IAttackable
     }
 
     IEnumerator ChangeIdle()
-    {
-        yield return new WaitForSeconds(0.55f); 
+    { 
         RaycastHit[] hit = Physics.RaycastAll(_player.RayTransform.position, _player.transform.forward, 3, _player.whatIsEnemy);
 
         foreach(RaycastHit hittor in hit)
@@ -42,7 +41,7 @@ public class AttackState : State, IAttackable
             attackIner.HitEnemy(_player.currentWeaponData.weaponDamage, 3);
         }
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime);
         _player.isAttack = true;
         _player.animator.SetBool("Attack", false);
         _player.ChangeState(StateEnum.Idle);
