@@ -17,6 +17,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.Enter();
 
+        _windUpDoll.StopImmediately();
         _windUpDoll.nextPos = _windUpDoll.GetNextPos();
     }
 

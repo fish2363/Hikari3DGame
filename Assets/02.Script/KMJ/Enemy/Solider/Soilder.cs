@@ -62,7 +62,7 @@ public class Soilder : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
@@ -72,6 +72,6 @@ public class Soilder : Enemy, IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        hp -= damage;
+        Hp -= damage;
     }
 }

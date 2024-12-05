@@ -1,10 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AttackState : State, IAttackable
 {
     private Player _player;
+
+
     public AttackState(Player player) : base(player)
     {
         _player = player;
@@ -12,23 +14,40 @@ public class AttackState : State, IAttackable
 
     public override void Enter()
     {
-
-        _player.RigidCompo.velocity = Vector3.zero;
         base.Enter();
-        RaycastHit[] hit = Physics.RaycastAll(_player.transform.position, _player.transform.forward, 3, _player.whatIsEnemy);
+        Attack();
+    }
 
-        if (hit == null)
-            _player.ChangeState(StateEnum.Idle);
-        else
+    private void Attack()
+    {
+        _player.isAttack = false;
+        _player.animator.SetBool("Attack", true);
+        _player.RigidCompo.velocity = Vector3.zero;
+
+
+
+        _player.StartCoroutine(ChangeIdle());
+    }
+
+    IEnumerator ChangeIdle()
+    {
+        yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
+
+        RaycastHit[] hit = Physics.RaycastAll(_player.RayTransform.position, _player.transform.forward, 3, _player.whatIsEnemy);
+
+        foreach (RaycastHit hittor in hit)
         {
-            foreach (RaycastHit hittor in hit)
-            {
-                hittor.transform.TryGetComponent(out IAttackable attackIner);
+            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10,90);
 
-                attackIner.HitEnemy(10,3);
-                _player.ChangeState(StateEnum.Idle);
-            }
+            hittor.transform.TryGetComponent(out IAttackable attackIner);
+
+            attackIner.HitEnemy(_player.currentWeaponData.weaponDamage, 3);
         }
+
+        yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
+        _player.isAttack = true;
+        _player.animator.SetBool("Attack", false);
+        _player.ChangeState(StateEnum.Idle);
     }
 
     public override void StateUpdate()
@@ -38,16 +57,17 @@ public class AttackState : State, IAttackable
 
     public override void Exit()
     {
+        _player.animator.SetFloat("Velocity", 0);
         base.Exit();
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-       
+
     }
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        
+
     }
 }
