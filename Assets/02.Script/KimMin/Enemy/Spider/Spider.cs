@@ -106,12 +106,20 @@ public class Spider : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> parent of 828a0d3 (Merge pull request #58 from fish2363/KimMin)
     }
 
     public void HitEnemy(float damage, float knockbackPower)
     {
+<<<<<<< HEAD
         hp -= damage;
+=======
+        Hp -= damage;
+>>>>>>> parent of 828a0d3 (Merge pull request #58 from fish2363/KimMin)
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)

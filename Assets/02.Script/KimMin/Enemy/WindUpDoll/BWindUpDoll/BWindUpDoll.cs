@@ -13,7 +13,10 @@ public class BWindUpDoll : WindUpDoll
         stateMachine.AddState(EnemyStatEnum.Attack, new BWindUpDollAttack(this, stateMachine, "Attack"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
+<<<<<<< HEAD
         transform.position = startPos;
+=======
+>>>>>>> parent of 828a0d3 (Merge pull request #58 from fish2363/KimMin)
     }
 
     protected override void Update()

@@ -42,9 +42,12 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
             _nextPos = _spider.GetNextPos();
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> parent of 6305e7d (Merge branch 'Base' into KDY)
+=======
+>>>>>>> parent of 828a0d3 (Merge pull request #58 from fish2363/KimMin)
         _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;
     }
 }
