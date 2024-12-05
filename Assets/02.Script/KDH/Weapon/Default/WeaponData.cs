@@ -6,9 +6,11 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public string weaponName;
-    public GameObject weaponModel;
+    public Mesh weaponModel;
     public int weaponDamage;
     public float weaponAttackCoolTime;
     public AudioClip weaponSwingSound;
+    public Material weaponMaterial;
+    public RuntimeAnimatorController animatorControlloer;
 }
  
