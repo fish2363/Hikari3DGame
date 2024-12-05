@@ -1,12 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class EnemyAgent : MonoBehaviour 
+public abstract class EnemyAgent : MonoBehaviour
 {
-    public float hp;
+    private float hp;
 
-	public EnemyStatSO EnemyStat;
+    public float Hp
+    {
+        get => hp;
+
+        set
+        {
+            hp = value;
+
+            if (hp < 0)
+            {
+                hp = 0;
+                EnemyDie();
+            }
+        }
+    }
+
+    public EnemyStatSO EnemyStat;
 
     [field: SerializeField] public LayerMask whatIsPlayer;
     [field : SerializeField] public float range { get; set; }

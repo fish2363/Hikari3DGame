@@ -51,7 +51,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         }
 
 
-        if (_enemy.hp <= 0)
+        if (_enemy.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

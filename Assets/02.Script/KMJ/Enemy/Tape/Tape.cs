@@ -74,6 +74,6 @@ public class Tape : Enemy, IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        hp -= damage;
+        Hp -= damage;
     }
 }

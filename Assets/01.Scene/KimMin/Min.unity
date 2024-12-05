@@ -1458,7 +1458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1646006448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,8 +1499,8 @@ MonoBehaviour:
   moveRadius: 5
   interV: {x: 0, y: 0, z: 0}
   isCollision: 0
-  angleRange: 123
-  radius: 10
+  angleRange: 60
+  radius: 8
 --- !u!54 &1646006450
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1608,7 +1608,7 @@ Transform:
   m_GameObject: {fileID: 1646006447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -1.89}
+  m_LocalPosition: {x: 2.63, y: 1, z: -20.02}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
