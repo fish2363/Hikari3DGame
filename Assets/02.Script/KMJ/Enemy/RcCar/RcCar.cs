@@ -147,6 +147,6 @@ public class RcCar : Enemy, IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        hp -= damage;
+        Hp -= damage;
     }
 }

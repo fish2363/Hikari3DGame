@@ -37,7 +37,7 @@ public class SpiderSkill : EnemyState<EnemyStatEnum>
     {
         _spider.canAttack = false;
         _spider.transform
-            .DOJump(_spider.player.transform.position, 8f, 1, 1f)
+            .DOJump(_spider.player.transform.position, 12f, 1, 1.5f)
             .OnComplete(() =>
             {
                 _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);

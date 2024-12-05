@@ -43,7 +43,7 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
             _enemy.transform.rotation = lookRotation;
         }
 
-        if (_enemy.hp <= 0)
+        if (_enemy.Hp <= 0)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
