@@ -26,10 +26,10 @@ public class WindUpDoll : Enemy,IAttackable
     {
         Vector3 radius = new Vector3(startPos.x + moveRadius, startPos.y, startPos.z + moveRadius);
 
-        Vector3 result = new Vector3(
-            Random.Range(radius.x, -radius.x), startPos.y,
-            Random.Range(radius.z, -radius.z));
+        float x = Random.Range(radius.x, -radius.x);
+        float z = Random.Range(radius.z, -radius.z);
 
+        Vector3 result = new Vector3(x, transform.localScale.y / 2, z);
 
         if (_prev != null && (_prev - result).magnitude < 5)
         {
@@ -56,11 +56,11 @@ public class WindUpDoll : Enemy,IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-
+        Hp -= damage;
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-        throw new System.NotImplementedException();
+
     }
 }

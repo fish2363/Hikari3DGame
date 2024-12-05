@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,10 +41,15 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 
     private void HeadAttack()
     {
-        Vector3 direction = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
+        Vector3 playerDir = _windUpDoll.player.transform.position;
+        playerDir.y = _windUpDoll.transform.localScale.y / 2;
+
+        Vector3 direction = (playerDir - _windUpDoll.transform.position).normalized;
         direction.y = 0;
 
-        _windUpDoll.RigidCompo.AddForce(direction * _dashPower, ForceMode.Impulse);
+        _windUpDoll.transform
+            .DOMove(playerDir - direction * 3f, 0.5f);
+
         _windUpDoll.StartCoroutine(NWindUpDollDashRoutine());
     }
 

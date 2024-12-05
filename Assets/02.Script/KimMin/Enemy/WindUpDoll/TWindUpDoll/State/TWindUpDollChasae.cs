@@ -30,7 +30,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
 
-        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius * 2)
+        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius * 2.5f)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
@@ -41,7 +41,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         moveDir.y = 0;
 
-        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed * 2.5f;
+        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ChasingSpeed;
     }
 
     private void CheckSight()

@@ -125,9 +125,9 @@ public class RcCar : Enemy, IAttackable
                 player.MinusHp(damage);
             else if (_isSkillTrue)
                 player.MinusHp(damage += 2);
-        }
 
-        RigidCompo.velocity = Vector3.zero;
+            RigidCompo.velocity = Vector3.zero;
+        }
     }
 
     protected override void AnimEndTrigger()
@@ -137,7 +137,7 @@ public class RcCar : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
@@ -147,6 +147,6 @@ public class RcCar : Enemy, IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        hp -= damage;
+        Hp -= damage;
     }
 }

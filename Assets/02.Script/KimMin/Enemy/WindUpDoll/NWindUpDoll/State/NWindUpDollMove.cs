@@ -30,6 +30,6 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         moveDir.y = 0;
 
-        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed;
+        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ChasingSpeed;
     }
 }
