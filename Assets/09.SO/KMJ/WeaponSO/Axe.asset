@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponName: Axe
   weaponModel: {fileID: -2182832962020291474, guid: 7dbce4c2a5f18cf4da98dd033690d516,
     type: 3}
-  weaponDamage: 10
-  weaponAttackCoolTime: 0
+  weaponDamage: 45
+  weaponAttackCoolTime: 1.25
   weaponSwingSound: {fileID: 0}
   weaponMaterial: {fileID: 2100000, guid: 619c38dce3f0e4147ba498226a4d3455, type: 2}
   animatorControlloer: {fileID: 9100000, guid: aa51ede3bd950fa46a51a8457a31e2ac, type: 2}
