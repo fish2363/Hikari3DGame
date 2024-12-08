@@ -21,6 +21,7 @@ public class ConversPhase2State : EnemyState<BossState>
         if (_endTriggerCalled)
         {
             _convers.StartCoroutine(ChangeChaseState());
+            _endTriggerCalled = false;
         }
     }
 

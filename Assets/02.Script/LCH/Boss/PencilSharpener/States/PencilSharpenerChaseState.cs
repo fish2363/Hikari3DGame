@@ -50,6 +50,5 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
-        timer = 0;
     }
 }

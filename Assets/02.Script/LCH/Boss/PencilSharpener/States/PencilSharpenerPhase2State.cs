@@ -25,6 +25,14 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
         _pencilSharpener.StartCoroutine(DropBoomCoroutine());
     }
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        if(Count <= 0)
+        {
+            _pencilSharpener.IsPhaseEnd = true;
+        }
+    }
 
     private IEnumerator ChangeChaseStaet()
     {
@@ -34,7 +42,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private IEnumerator DropBoomCoroutine()
     {
-        while(Count> 0)
+        while(Count >= 0)
         {
             yield return new WaitForSeconds(0.5f);
             DropBoom();
@@ -44,22 +52,27 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private void DropBoom()
     {
-        if (Count <= 0)
+        if (!_pencilSharpener.IsPhaseEnd)
         {
-            _pencilSharpener.StartCoroutine(ChangeChaseStaet());
+            playerPosition = _pencilSharpener.player.transform.position;
+
+            Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
+
+            GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
+
+            Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.useGravity = true;
+            }
+            Count -= 1;
         }
-        playerPosition = _pencilSharpener.player.transform.position;
-
-        Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
-
-        GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
-
-        Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (_pencilSharpener.IsPhaseEnd)
         {
-            rb.useGravity = true; 
+           _pencilSharpener.StartCoroutine(ChangeChaseStaet());
+            return;
         }
-        Count -= 1;
+       
     }
 
     private Vector3 GetRandomPositionAroundPlayer()
