@@ -26,13 +26,13 @@ public class ScissorsWaitState : EnemyState<BossState>
         switch (Phases)
         {
             case 1:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase1);
+                _scissors.BossStateMachine.ChangeState(BossState.Phase1Wait);
                 break;
             case 2:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase2);
+                _scissors.BossStateMachine.ChangeState(BossState.Phase2Wait);
                 break;
             case 3:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase3);
+                _scissors.BossStateMachine.ChangeState(BossState.Phase3Wait);
                 break;
             case 4:
                 _scissors.BossStateMachine.ChangeState(BossState.Phase4);
