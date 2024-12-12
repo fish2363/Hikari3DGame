@@ -7,6 +7,7 @@ public class TWindUpDoll : WindUpDoll
 {
     [HideInInspector] public Vector3 interV = Vector3.zero;
     [HideInInspector] public bool isCollision = false;
+    [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 2f;
 
     public float angleRange = 30f;
     public float radius = 3f;
@@ -22,12 +23,12 @@ public class TWindUpDoll : WindUpDoll
         stateMachine.AddState(EnemyStatEnum.Attack, new TWindUpDollAttack(this, stateMachine, "Attack"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
+        GetNextPos();
     }
 
     protected override void Update()
     {
         base.Update();
-        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
     }
 
@@ -35,8 +36,11 @@ public class TWindUpDoll : WindUpDoll
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
+
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius * 2.5f);
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+        Gizmos.DrawWireSphere(startPos, moveRadius);
+        Gizmos.DrawLine(transform.position, nextPos);
 
         if (interV == null) return;
             Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
