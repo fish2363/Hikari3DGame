@@ -20,6 +20,7 @@ public class ConversPhase2State : EnemyState<BossState>
         base.UpdateState();
         if (_endTriggerCalled)
         {
+            Debug.Log("³¡¤¤");
             _convers.StartCoroutine(ChangeChaseState());
             _endTriggerCalled = false;
         }
