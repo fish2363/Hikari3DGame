@@ -13,6 +13,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     private Vector3 _xRange;
     private float _spawnRadius = 5f;
     private int Count = 10;
+    private Coroutine _coroutine;
     public PencilSharpenerPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
@@ -22,13 +23,23 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     {
         base.Enter();
         playerPosition = _pencilSharpener.player.transform.position;
-        _pencilSharpener.StartCoroutine(DropBoomCoroutine());
+      _coroutine = _pencilSharpener.StartCoroutine(DropBoomCoroutine());
     }
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        if(Count <= 0)
+        {
+            _pencilSharpener.StopCoroutine(_coroutine);
+            _pencilSharpener.StartCoroutine(ChangeChaseStaet());
+        }
+    }
 
     private IEnumerator ChangeChaseStaet()
     {
         yield return new WaitForSeconds(1F);
+        Count = 10;
         _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }
 
@@ -44,11 +55,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private void DropBoom()
     {
-        if (Count <= 0)
-        {
-            _pencilSharpener.StartCoroutine(ChangeChaseStaet());
-        }
-        playerPosition = _pencilSharpener.player.transform.position;
+         playerPosition = _pencilSharpener.player.transform.position;
 
         Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
 
@@ -68,11 +75,5 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
         float x = Mathf.Cos(angle) * _spawnRadius;
         float z = Mathf.Sin(angle) * _spawnRadius;
         return new Vector3(x, 10f, z);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        Count = 10;
     }
 }

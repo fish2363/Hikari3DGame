@@ -15,7 +15,7 @@ public class PencilSharpenerPhase1State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8);
+        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8, ForceMode.Impulse);
         _pencilSharpener.StartCoroutine(AttackWaitCoroutine());
     }
 
