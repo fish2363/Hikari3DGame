@@ -32,7 +32,14 @@ public class TapeWalk : EnemyState<EnemyStatEnum>
             _enemy.transform.rotation = lookRotation;
         }
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ProwlSpeed * Time.deltaTime);
+        if (_enemy.range <= 0.2)
+        {
+            _enemy.RigidCompo.velocity = Vector3.zero;
+        }
+        else
+        {
+            _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ChasingSpeed * Time.deltaTime);
+        }
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
@@ -41,7 +48,7 @@ public class TapeWalk : EnemyState<EnemyStatEnum>
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
 
-        if(_enemy.hp <= 0)
+        if(_enemy.Hp <= 0)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
         }
