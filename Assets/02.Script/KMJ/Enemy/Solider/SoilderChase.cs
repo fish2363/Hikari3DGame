@@ -31,12 +31,7 @@ public class SoilderChase : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ProwlSpeed * Time.deltaTime);
-
-        if (_enemy.range <= 1.5)
-        {
-            _enemy.RigidCompo.velocity = Vector3.zero;
-        }
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ChasingSpeed * Time.deltaTime);
 
 
         if (_enemy.range <= _soilder.EnemyStat.AttackRadius && _soilder._isAttack)
@@ -44,7 +39,7 @@ public class SoilderChase : EnemyState<EnemyStatEnum>
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
 
-        if (_enemy.hp <= 0)
+        if (_enemy.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
