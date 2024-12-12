@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
-    [field: SerializeField] public CharacterController ControllerCompo { get; private set; }
+    [field: SerializeField] public Transform virtualCamera { get; private set; }
 
+    
     public float MaxHp { get { return maxHp; } }
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }

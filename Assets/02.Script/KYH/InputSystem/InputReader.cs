@@ -12,9 +12,6 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
     public event Action OnJumpEvent;
     public event Action<Vector2> OnMoveEvent;
     public Vector3 direction { get; private set; }
-    [SerializeField] private LayerMask _whatIsGround;
-    public Vector2 MousePosition { get; private set; }
-    private Vector3 _beforeMouseWorldPos;
 
     public Vector2 moveDir { get; private set; }
 
@@ -42,25 +39,7 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         moveDir = context.ReadValue<Vector2>();
-        direction = new Vector3(moveDir.x, 0f, moveDir.y);
+        direction = new Vector3(moveDir.x, 0f, moveDir.y).normalized;
         OnMoveEvent?.Invoke(moveDir);
-    }
-
-    public void OnAim(InputAction.CallbackContext context)
-    {
-        MousePosition = context.ReadValue<Vector2>();
-    }
-
-    public Vector3 GetWorldMousePosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(MousePosition);
-
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _whatIsGround))
-        {
-            _beforeMouseWorldPos = hitInfo.point;
-            return hitInfo.point;
-        }
-
-        return _beforeMouseWorldPos;
     }
 }
