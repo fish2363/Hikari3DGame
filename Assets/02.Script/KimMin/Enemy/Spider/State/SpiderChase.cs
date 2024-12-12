@@ -38,7 +38,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         if (_time >= 1f)
         {
             _time = 0;
-            int rand = Random.Range(0, 5);
+            int rand = Random.Range(0, 10);
 
             if (rand == 1)
                 _spider.stateMachine.ChangeState(EnemyStatEnum.Skill);
@@ -50,7 +50,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_spider.player.transform.position - _spider.transform.position).normalized;
         moveDir.y = 0;
 
-        _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ChasingSpeed;
+        _spider.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed * 2;
     }
 
     private void CheckSight()

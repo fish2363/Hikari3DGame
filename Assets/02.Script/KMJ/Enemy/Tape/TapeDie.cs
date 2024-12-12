@@ -17,7 +17,6 @@ public class TapeDie : EnemyState<EnemyStatEnum>
 
     public override void UpdateState()
     {
-        _enemy.gameObject.SetActive(false);
         base.UpdateState();
     }
 

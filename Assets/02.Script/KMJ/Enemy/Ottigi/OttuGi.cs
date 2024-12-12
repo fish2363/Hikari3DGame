@@ -79,7 +79,7 @@ public class OttuGi : Enemy, IAttackable
         yield return new WaitForSeconds(1.4f);
         _isSkilling = false;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.6f);
         _isSkillExit = true;
     }
 
@@ -125,7 +125,6 @@ public class OttuGi : Enemy, IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        Hp -= damage;
-        print("¾Æ¾ß");
+        throw new System.NotImplementedException();
     }
 }

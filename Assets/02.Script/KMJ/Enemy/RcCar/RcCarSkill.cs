@@ -42,7 +42,7 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
 
-        if (_enemy.Hp <= 0)
+        if (_enemy.hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

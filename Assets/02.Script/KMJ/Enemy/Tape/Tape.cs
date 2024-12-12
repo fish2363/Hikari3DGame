@@ -64,7 +64,7 @@ public class Tape : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
-       
+        throw new NotImplementedException();
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
@@ -74,6 +74,6 @@ public class Tape : Enemy, IAttackable
 
     public void HitEnemy(float damage, float knockbackPower)
     {
-        Hp -= damage;
+        hp -= damage;
     }
 }
