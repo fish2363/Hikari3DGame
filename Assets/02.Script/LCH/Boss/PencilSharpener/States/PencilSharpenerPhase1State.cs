@@ -15,13 +15,13 @@ public class PencilSharpenerPhase1State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8);
+        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8,ForceMode.Impulse);
         _pencilSharpener.StartCoroutine(AttackWaitCoroutine());
     }
 
     private IEnumerator AttackWaitCoroutine()
     {
-        _pencilSharpener.transform.LookAt(_pencilSharpener.player.transform.position);
+        _pencilSharpener.transform.LookAt(_pencilSharpener.player.transform);
         yield return new WaitForSeconds(2f);
         _pencilSharpener.InstanceObj(_pencilSharpener.shotPos, _pencilSharpener.pencilBelt, Quaternion.identity);
         _pencilSharpener.IsPhaseEnd = true;

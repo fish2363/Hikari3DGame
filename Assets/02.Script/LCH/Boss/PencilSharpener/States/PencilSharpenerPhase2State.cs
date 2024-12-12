@@ -27,52 +27,44 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     public override void UpdateState()
     {
-        base.UpdateState();
+
         if(Count <= 0)
         {
-            _pencilSharpener.IsPhaseEnd = true;
+            _pencilSharpener.StartCoroutine(ChangeChaseState());
         }
-    }
-
-    private IEnumerator ChangeChaseStaet()
-    {
-        yield return new WaitForSeconds(1F);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }
 
     private IEnumerator DropBoomCoroutine()
     {
-        while(Count >= 0)
+        if (Count > 0)
         {
             yield return new WaitForSeconds(0.5f);
             DropBoom();
+            Count -= 1;
         }
-        yield return null;
+    }
+
+    private IEnumerator ChangeChaseState()
+    {
+        yield return new WaitForSeconds(1F);
+    
+         _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+          _pencilSharpener.IsPhaseEnd = false;
     }
 
     private void DropBoom()
     {
-        if (!_pencilSharpener.IsPhaseEnd)
-        {
-            playerPosition = _pencilSharpener.player.transform.position;
+         playerPosition = _pencilSharpener.player.transform.position;
 
-            Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
+         Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
 
-            GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
-
-            Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.useGravity = true;
-            }
-            Count -= 1;
-        }
-        if (_pencilSharpener.IsPhaseEnd)
-        {
-           _pencilSharpener.StartCoroutine(ChangeChaseStaet());
-            return;
-        }
-       
+         GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
+        
+         Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
+         if (rb != null)
+         {
+              rb.useGravity = true;
+         }
     }
 
     private Vector3 GetRandomPositionAroundPlayer()
@@ -87,5 +79,6 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     {
         base.Exit();
         Count = 10;
+       
     }
 }

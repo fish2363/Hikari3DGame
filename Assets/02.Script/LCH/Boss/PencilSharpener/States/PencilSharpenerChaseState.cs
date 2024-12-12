@@ -16,6 +16,7 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("µé¾î°¨");
         timer = Random.Range(4, 7);
         _pencilSharpener.StartCoroutine(ChangeWaitState(timer));
         _pencilSharpener.IsPhaseEnd = false;
