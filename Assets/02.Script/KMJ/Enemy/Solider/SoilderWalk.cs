@@ -37,7 +37,7 @@ public class SoilderWalk : EnemyState<EnemyStatEnum>
         if (_soilder._isMove)
             _stateMachine.ChangeState(EnemyStatEnum.Chase);
 
-        if (_soilder.hp <= 0)
+        if (_soilder.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

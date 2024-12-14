@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System;
 
 public class ScissorsPhase2State : EnemyState<BossState>
 {
     private Scissors _scissors;
     private bool _isAttackWait;
+    private Transform _cameraPos;
     public ScissorsPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _scissors = enemy as Scissors;
@@ -14,28 +17,39 @@ public class ScissorsPhase2State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _scissors.StartCoroutine(AttackWaitCoroutine());
-    }
-
-    private IEnumerator AttackWaitCoroutine()
-    {
-        yield return new WaitForSeconds(1f);
-        _isAttackWait = false;
+        _cameraPos = GameObject.FindWithTag("VirtualCamera").transform;
+        _scissors.transform.DOMoveY(_scissors.transform.position.y + 25, 1F);
+        _scissors.StartCoroutine(AttackEnemy());
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (!_isAttackWait && !_scissors.IsPhaseEnd)
-        {
-            _scissors.RigidCompo.AddForce(Vector3.up * 40, ForceMode.Impulse);
-            if(_scissors.RigidCompo.velocity.magnitude < 0)
-            {
-                _scissors.RigidCompo.useGravity = false;
-                _scissors.transform.position = _scissors.player.transform.position;
-            }
-        }
+      
     }
 
+    private IEnumerator AttackEnemy()
+    {
+        Sequence seq = DOTween.Sequence();
+        yield return new WaitForSeconds(0.2f);
+        _scissors.transform.position =
+            new Vector3(_scissors.player.transform.position.x,
+        _scissors.transform.position.y,
+        _scissors.player.transform.position.z);
+        yield return new WaitForSeconds(1f);
+        _scissors.transform.position =
+            new Vector3(_scissors.player.transform.position.x,
+        _scissors.transform.position.y,
+        _scissors.player.transform.position.z);
+        seq.Append(_scissors.transform.DOMove(_scissors.player.transform.position, 0.25f).SetEase(Ease.Linear))
+            .AppendCallback(()=>_scissors.StartCoroutine(ChangeChaseState()));
 
+    }
+
+    private IEnumerator ChangeChaseState()
+    {
+        Debug.Log("A->C");
+        yield return new WaitForSeconds(1f);
+        _scissors.BossStateMachine.ChangeState(BossState.Chase);
+    }
 }
