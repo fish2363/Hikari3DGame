@@ -30,7 +30,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     {
        while(true)
         {
-            if (!_pencilSharpener.IsPhaseEnd)
+            if (!_pencilSharpener.IsPhaseEnd && Count > 0)
             {
                  yield return new WaitForSeconds(0.5f);
                  DropBoom();
@@ -41,6 +41,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
             {
                 _pencilSharpener.IsPhaseEnd = true;
                 _pencilSharpener.StartCoroutine(ChangeChaseState());
+                break;
             }
             yield return null;
         }
@@ -48,6 +49,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private IEnumerator ChangeChaseState()
     {
+        _pencilSharpener.IsPhaseEnd = false;
         yield return new WaitForSeconds(1F);
          _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }
@@ -78,7 +80,5 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
-        Count = 10;
-       
     }
 }

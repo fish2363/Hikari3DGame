@@ -16,8 +16,8 @@ public class ConversPhase4State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _originMoveSpeed = _converse.EnemyStat.ProwlSpeed;
-        _converse.EnemyStat.ProwlSpeed = 7f;
+        _originMoveSpeed = _converse.EnemyStat.ChasingSpeed;
+        _converse.EnemyStat.ChasingSpeed = 7f;
         _converse.StartCoroutine(PhaseEndCoroutine());
     }
     private IEnumerator PhaseEndCoroutine()
@@ -32,7 +32,7 @@ public class ConversPhase4State : EnemyState<BossState>
         if (!_converse.IsPhaseEnd)
         {
             _converse.targetDir = _converse.player.transform.position - _converse.transform.position;
-            _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ProwlSpeed;
+            _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ChasingSpeed;
         }
 
         if (_converse.IsPhaseEnd)
@@ -51,6 +51,6 @@ public class ConversPhase4State : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
-        _converse.EnemyStat.ProwlSpeed = _originMoveSpeed;
+        _converse.EnemyStat.ChasingSpeed = _originMoveSpeed;
     }
 }
