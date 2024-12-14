@@ -75,19 +75,21 @@ public class WeaponManager : MonoBehaviour
 
     [SerializeField] private Player player;
     public List<WeaponData> weaponList = new List<WeaponData>();
-    public SkinnedMeshRenderer weaponMesh;
+    public MeshFilter weaponMesh;
+    public MeshRenderer weaponMaterial;
     private bool isChange;
 
     private void Awake()
     {
         isChange = true;
+        player.currentWeaponData = weaponList[0];
     }
 
     private void Update()
     {
         ChangeWeapon();
-        weaponMesh.sharedMesh = player.currentWeaponData.weaponModel;
-        weaponMesh.material = player.currentWeaponData.weaponMaterial;
+        weaponMesh.mesh = player.currentWeaponData.weaponModel;
+        weaponMaterial.material = player.currentWeaponData.weaponMaterial;
         player.animator.runtimeAnimatorController = player.currentWeaponData.animatorControlloer;
     }
 
@@ -107,6 +109,13 @@ public class WeaponManager : MonoBehaviour
                 StartCoroutine(ChangeWait());
             }
         }
+        else if(Input.GetKeyDown(KeyCode.Alpha3) && isChange)
+        {
+            if (weaponList[2] == null)
+                return;
+            player.currentWeaponData = weaponList[2];
+            StartCoroutine(ChangeWait());
+        }
     }
 
     public void AddWeaponData(WeaponData weaponData)
@@ -120,7 +129,7 @@ public class WeaponManager : MonoBehaviour
     private IEnumerator ChangeWait()
     {
         isChange = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
 
         isChange = true;
     }

@@ -122,9 +122,15 @@ public class RcCar : Enemy, IAttackable
             collision.transform.TryGetComponent(out Player player);
 
             if (_isAttackTrue)
+            {
+                player.RigidCompo.velocity = Vector3.zero;
                 player.MinusHp(damage);
+            }
             else if (_isSkillTrue)
+            {
                 player.MinusHp(damage += 2);
+                player.RigidCompo.velocity = Vector3.zero;
+            }
 
             RigidCompo.velocity = Vector3.zero;
         }

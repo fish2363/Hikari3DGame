@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class SoilderObject : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _shootTransform;
 
     private Soilder _soilder;
+
+    
 
     private GameObject _player;
 
@@ -51,11 +55,11 @@ public class SoilderObject : MonoBehaviour
         _soilder._isAttack = false;
         _soilder._isMove = false;
 
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
 
 
         yield return new WaitForSeconds(0.5f);

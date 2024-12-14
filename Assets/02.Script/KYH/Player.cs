@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public bool IsRunning { get; private set; }
     public bool isAttack { get; set; }
 
+    public Vector3 size;
 
     [field: SerializeField] public WeaponData currentWeaponData;
     [field : SerializeField] public Animator animator { get; private set; }
@@ -163,7 +164,7 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(RayTransform.position, transform.forward);
+        Gizmos.DrawWireCube(RayTransform.position, size);
         Gizmos.color = Color.white;
     }
 }
