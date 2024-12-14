@@ -14,15 +14,8 @@ public class Player : MonoBehaviour
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
 
-
     [field : SerializeField]
     public GroundCheck GroundCheck { get; private set; }
-
-    [field : SerializeField]
-    public Transform RayTransform { get; private set; }
-
-    [field: SerializeField] public GameObject playerCam { get; set; }
-
 
     [SerializeField]
     protected float maxHp;
@@ -33,14 +26,13 @@ public class Player : MonoBehaviour
 
     public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
-    public bool isAttack { get; set; }
 
 
-    [field: SerializeField] public WeaponData currentWeaponData;
     [field : SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
     [SerializeField] private float _attckCoolTime;
+    private float _lastAttackTime;
     private float _lastDashTime;
 
     public LayerMask whatIsEnemy;
@@ -62,8 +54,6 @@ public class Player : MonoBehaviour
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
         InputReader.AttackEvent += HandleAttackEvent;
-
-        isAttack = true;
     }
 
 
@@ -79,7 +69,7 @@ public class Player : MonoBehaviour
 
     private void HandleAttackEvent()
     {
-        if (isAttack)
+        if (AttemptAttaack())
         {
             ChangeState(StateEnum.Attack);
         }
@@ -98,18 +88,17 @@ public class Player : MonoBehaviour
             ChangeState(StateEnum.Dash);
         }
     }
-
-    /*private bool AttemptAttaack()
+    private bool AttemptAttaack()
     {
-        if (currentEnum == StateEnum.Attack) return false;
+        /*if (currentEnum == StateEnum.Attack) return false;
 
         if (_lastAttackTime + _attckCoolTime > Time.time) return false;
 
-        _lastAttackTime = Time.deltaTime;
+        _lastAttackTime = Time.deltaTime;*/
 
         return true;
 
-    }*/
+    }
 
     private bool AttemptDash()
     {
@@ -127,6 +116,37 @@ public class Player : MonoBehaviour
         currentEnum = newEnum;
         stateDictionary[currentEnum].Enter();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void MinusHp(float attackDamage)
     {
@@ -157,13 +177,4 @@ public class Player : MonoBehaviour
         moveSpeed = 300;
     }
 
-    
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(RayTransform.position, transform.forward);
-        Gizmos.color = Color.white;
-    }
 }

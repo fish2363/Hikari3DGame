@@ -29,7 +29,7 @@ public class SoilderShoot : EnemyState<EnemyStatEnum>
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
-        if (_soilder.Hp <= 0)
+        if (_soilder.hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

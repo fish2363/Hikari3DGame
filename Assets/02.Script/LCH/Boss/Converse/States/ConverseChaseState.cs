@@ -30,7 +30,7 @@ public class ConverseChaseState : EnemyState<BossState>
     {
         base.UpdateState();
         _converse.targetDir = _converse.player.transform.position - _converse.transform.position;
-        _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ChasingSpeed;
+        _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ProwlSpeed;
     }
 
     public override void Exit()
