@@ -8,10 +8,14 @@ public class Spider : Enemy, IAttackable
     private readonly float _gravity = -9.81f;
 
     [HideInInspector] public Vector3 interV = Vector3.zero;
+    [HideInInspector] public Vector3 _radius = Vector3.zero;
+    [HideInInspector] public Vector3 nextPos;
+
     [HideInInspector] public bool isCollision = false;
     [HideInInspector] public bool isWall = false;
     [HideInInspector] public bool canAttack = true;
 
+    [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 4f;
     [HideInInspector] public float distance => (player.transform.position - transform.position).magnitude;
 
     [Header("Setting")]
@@ -39,6 +43,8 @@ public class Spider : Enemy, IAttackable
         stateMachine.AddState(EnemyStatEnum.Skill, new SpiderSkill(this, stateMachine, "Skill"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
+
+        startPos = transform.position;
         canAttack = false;
     }
 
@@ -69,19 +75,19 @@ public class Spider : Enemy, IAttackable
 
     public Vector3 GetNextPos()
     {
-        Vector3 radius = new Vector3(startPos.x + moveRadius, startPos.y, startPos.z + moveRadius);
+        _radius = new Vector3(moveRadius, startPos.y, moveRadius) / 2;
 
-        Vector3 result = new Vector3(
-            Random.Range(radius.x, -radius.x), startPos.y,
-            Random.Range(radius.z, -radius.z));
+        float x = Random.Range(_radius.x, -_radius.x);
+        float z = Random.Range(_radius.z, -_radius.z);
 
+        nextPos = startPos + new Vector3(x, transform.localScale.y, z);
 
-        if (_prev != null && (_prev - result).magnitude < 5)
+        if (_prev != null && (_prev - nextPos).magnitude < 3)
         {
             return GetNextPos();
         }
 
-        return result;
+        return nextPos;
     }
 
     private void OnDrawGizmos()
@@ -89,7 +95,9 @@ public class Spider : Enemy, IAttackable
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius * 4);
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+        Gizmos.DrawWireSphere(transform.position, moveRadius);
+        Gizmos.DrawLine(transform.position, nextPos);
 
         if (interV == null) return;
          Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);

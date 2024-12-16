@@ -15,13 +15,22 @@ public class TWindUpDollAttack : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-
-        Debug.Log("Attack");
+        _windUpDoll.isCollision = true;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
+        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _windUpDoll.isCollision = false;
     }
 }
