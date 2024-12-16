@@ -76,7 +76,12 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Player player;
     public List<WeaponData> weaponList = new List<WeaponData>();
 <<<<<<< HEAD
+<<<<<<< HEAD
     public SkinnedMeshRenderer weaponMesh;
+=======
+    public MeshFilter weaponMesh;
+    public MeshRenderer weaponMaterial;
+>>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
 =======
     public MeshFilter weaponMesh;
     public MeshRenderer weaponMaterial;
@@ -87,6 +92,10 @@ public class WeaponManager : MonoBehaviour
     {
         isChange = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        player.currentWeaponData = weaponList[0];
+>>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
 =======
         player.currentWeaponData = weaponList[0];
 >>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
@@ -96,8 +105,13 @@ public class WeaponManager : MonoBehaviour
     {
         ChangeWeapon();
 <<<<<<< HEAD
+<<<<<<< HEAD
         weaponMesh.sharedMesh = player.currentWeaponData.weaponModel;
         weaponMesh.material = player.currentWeaponData.weaponMaterial;
+=======
+        weaponMesh.mesh = player.currentWeaponData.weaponModel;
+        weaponMaterial.material = player.currentWeaponData.weaponMaterial;
+>>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
 =======
         weaponMesh.mesh = player.currentWeaponData.weaponModel;
         weaponMaterial.material = player.currentWeaponData.weaponMaterial;
@@ -121,7 +135,10 @@ public class WeaponManager : MonoBehaviour
                 StartCoroutine(ChangeWait());
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3) && isChange)
         {
@@ -129,6 +146,9 @@ public class WeaponManager : MonoBehaviour
                 return;
             player.currentWeaponData = weaponList[2];
             StartCoroutine(ChangeWait());
+<<<<<<< HEAD
+>>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
+=======
 >>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
         }
     }
