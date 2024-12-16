@@ -8,7 +8,6 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 {
     private Spider _spider;
     private RaycastHit hit;
-    private Vector3 _nextPos;
 
     public SpiderMove(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
@@ -26,7 +25,7 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
         base.UpdateState();
         MoveNextPos();
 
-        if (_spider.distance < _spider.EnemyStat.AttackRadius * 4)
+        if (_spider.distance < _spider.detectRadius)
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
         }
@@ -34,12 +33,12 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
     private void MoveNextPos()
     {
-        Vector3 dir = (_nextPos - _spider.transform.position).normalized;
+        Vector3 dir = (_spider.nextPos - _spider.transform.position).normalized;
 
-        if ((_nextPos - _spider.transform.position).magnitude <= 2f)
+        if ((_spider.nextPos - _spider.transform.position).magnitude <= 2f)
         {
             _spider.MoveCompo.StopImmediately();
-            _nextPos = _spider.GetNextPos();
+            _spider.nextPos = _spider.GetNextPos();
         }
         _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;
     }
