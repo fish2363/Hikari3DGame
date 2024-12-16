@@ -29,6 +29,19 @@ public class ConverseChaseState : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
+        Vector3 direction = _converse.player.transform.position - _converse.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _converse.transform.rotation = lookRotation;
+        }
         _converse.targetDir = _converse.player.transform.position - _converse.transform.position;
         _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ChasingSpeed;
     }
@@ -36,6 +49,5 @@ public class ConverseChaseState : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
-        timer = 0;
     }
 }

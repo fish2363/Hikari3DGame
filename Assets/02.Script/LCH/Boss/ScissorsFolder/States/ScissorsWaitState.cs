@@ -20,7 +20,7 @@ public class ScissorsWaitState : EnemyState<BossState>
 
     private IEnumerator PhaseSelect()
     {
-        yield return new WaitForSeconds(0.5F);
+        yield return new WaitForSeconds(0.5f);
         int Phases = /*Random.Range(1, 4);*/ 4;
 
         switch (Phases)
