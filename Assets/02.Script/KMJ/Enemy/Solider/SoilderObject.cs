@@ -51,11 +51,19 @@ public class SoilderObject : MonoBehaviour
         _soilder._isAttack = false;
         _soilder._isMove = false;
 
+<<<<<<< HEAD
         Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.3f);
         Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.3f);
         Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+=======
+        Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
+>>>>>>> parent of 98c2c09 (fix - WeaponOutpit)
 
 
         yield return new WaitForSeconds(0.5f);
