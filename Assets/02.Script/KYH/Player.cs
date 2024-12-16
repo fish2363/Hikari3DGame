@@ -160,10 +160,10 @@ public class Player : MonoBehaviour
     
 
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(RayTransform.position, transform.forward);
-        Gizmos.color = Color.white;
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawRay(RayTransform.position, transform.forward);
+    //    Gizmos.color = Color.white;
+    //}
 }
