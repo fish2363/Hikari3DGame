@@ -14,13 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 0
   WallRadius: 0
+  AttackPoawer: 0
   KnockbackPower: 0
   AttackDelay: 0
   ContactAttackRadius: 0
-  MinAttackDamage: 0
-  MaxAttackDamage: 0
-  Name: 
-  Key: 
   HP: 0
-  ProwlSpeed: 0
-  ChasingSpeed: 5
+  MoveSpeed: 5

@@ -30,9 +30,19 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     {
        while(true)
         {
-           yield return new WaitForSeconds(0.5f);
-           DropBoom();
-           yield return null;
+            if (!_pencilSharpener.IsPhaseEnd)
+            {
+                 yield return new WaitForSeconds(0.5f);
+                 DropBoom();
+                 Count -= 1;
+            }
+
+            if(!_pencilSharpener.IsPhaseEnd && Count <= 0)
+            {
+                _pencilSharpener.IsPhaseEnd = true;
+                _pencilSharpener.StartCoroutine(ChangeChaseState());
+            }
+            yield return null;
         }
     }
 
@@ -44,30 +54,31 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private void DropBoom()
     {
-        if(Count > 0 && !_pencilSharpener.IsPhaseEnd)
-        {
-            playerPosition = _pencilSharpener.player.transform.position;
-            playerPosition = new Vector3(playerPosition.x, playerPosition.y + 10, playerPosition.z);
-            GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, playerPosition, Quaternion.identity);
+         playerPosition = _pencilSharpener.player.transform.position;
 
-            Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.useGravity = true;
-            }
-            Count--;
-        }
-        else if(Count <= 0 && !_pencilSharpener.IsPhaseEnd)
-        {
-            _pencilSharpener.IsPhaseEnd = true;
-            _pencilSharpener.StartCoroutine(ChangeChaseState());
-        }
-       
+         Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
+
+         GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
+        
+         Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
+         if (rb != null)
+         {
+              rb.useGravity = true;
+         }
+    }
+
+    private Vector3 GetRandomPositionAroundPlayer()
+    {
+        float angle = Random.Range(0, 360);
+        float x = Mathf.Cos(angle) * _spawnRadius;
+        float z = Mathf.Sin(angle) * _spawnRadius;
+        return new Vector3(x, 10f, z);
     }
 
     public override void Exit()
     {
         base.Exit();
-        _pencilSharpener.IsPhaseEnd = false;   
+        Count = 10;
+       
     }
 }

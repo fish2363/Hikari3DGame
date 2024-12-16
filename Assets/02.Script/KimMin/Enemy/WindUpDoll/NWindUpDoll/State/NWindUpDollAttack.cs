@@ -35,7 +35,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+        StopImmediately(_windUpDoll);
     }
 
     private void HeadAttack()

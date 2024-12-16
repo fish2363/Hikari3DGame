@@ -24,10 +24,5 @@ public class EnemyMovement : MonoBehaviour
         _rbCompo.velocity = Vector3.zero;
     }
 
-    public void StopImmediately(Enemy enemy)
-    {
-        if (enemy.TryGetComponent(out Rigidbody rigid))
-            rigid.velocity = Vector3.zero;
-    }
 
 }
