@@ -15,7 +15,6 @@ public class IdleState : State
 
     public override void Enter()
     {
-        base.Enter();
         _player.RigidCompo.velocity = Vector3.zero;
     }
 

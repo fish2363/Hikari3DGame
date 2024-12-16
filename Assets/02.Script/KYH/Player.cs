@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
     public bool isAttack { get; set; }
+    public bool isSheld { get; set; }
 
     public Vector3 size;
 
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     private float _lastDashTime;
 
     public LayerMask whatIsEnemy;
+    public float armorSheld = 0;
 
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
@@ -63,7 +65,9 @@ public class Player : MonoBehaviour
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
         InputReader.AttackEvent += HandleAttackEvent;
+        InputReader.SheldEvent += HandleSheldEvent;
 
+        isSheld = true;
         isAttack = true;
     }
 
@@ -86,6 +90,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void HandleSheldEvent()
+    {
+        if (isSheld && isAttack)
+            ChangeState(StateEnum.Sheld);
+    }
 
     private void HandleJumpEvent()
     {
@@ -103,10 +112,10 @@ public class Player : MonoBehaviour
     /*private bool AttemptAttaack()
     {
         if (currentEnum == StateEnum.Attack) return false;
+     
+        if (_lastAttackTime + _attckCoolTime > Time.time) return  false;
 
-        if (_lastAttackTime + _attckCoolTime > Time.time) return false;
-
-        _lastAttackTime = Time.deltaTime;
+        _lastAttackTime = Time.deltaTime;         
 
         return true;
 
@@ -131,7 +140,7 @@ public class Player : MonoBehaviour
 
     public void MinusHp(float attackDamage)
     {
-        currentHp -= attackDamage;
+        currentHp -= attackDamage += armorSheld;
     }
 
     public void PlusHp(float Heal)

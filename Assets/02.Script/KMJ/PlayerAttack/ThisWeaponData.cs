@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateEnum
+public class ThisWeaponData : MonoBehaviour
 {
-    Idle,
-    Move,
-    Attack,
-    Dash,
-    Sheld
+    public WeaponData weaponData;
 }

@@ -14,7 +14,6 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         rcCar = _enemy.GetComponent<RcCar>();
-        Debug.Log("나도 왔다");
         base.Enter();
     }
 

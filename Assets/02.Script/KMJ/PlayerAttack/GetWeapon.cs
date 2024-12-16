@@ -21,7 +21,7 @@ public class GetWeapon : MonoBehaviour
         {
             Gettxt.text = $"{gameObject.name} get!";
             Gettxt.DOFade(0, 3);
-            other.GetComponentInChildren<WeaponManager>().AddWeaponData(_thisWeapon);
+            other.GetComponentInChildren<WeaponManager>().GetWeapon(_thisWeapon);
             Destroy(gameObject);
         }
     }

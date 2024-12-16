@@ -55,7 +55,7 @@ public class RcCar : Enemy, IAttackable
         StartCoroutine(AttackTime());
     }
 
-
+    #region 스킬
     IEnumerator Skill()
     {
         _isLook = false;
@@ -88,8 +88,12 @@ public class RcCar : Enemy, IAttackable
        
     }
 
+    #endregion
+
+    #region 공격
     IEnumerator AttackTime()
     {
+ 
         _isAttack = false;
         _isMove = false;
 
@@ -111,7 +115,7 @@ public class RcCar : Enemy, IAttackable
         _isAttack = true;
     }
 
-   
+    #endregion
 
     private void OnCollisionEnter(Collision collision)
     {

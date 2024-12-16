@@ -16,7 +16,6 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
     {
         rcCar = _enemy.GetComponent<RcCar>();
 
-        Debug.Log("³ª µé¾î¿È");
 
         _player = GameObject.FindWithTag("Player");
 

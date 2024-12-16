@@ -56,9 +56,9 @@ public class SoilderObject : MonoBehaviour
         _soilder._isMove = false;
 
         Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         Instantiate(_bulletPrefab, _shootTransform.position, Quaternion.identity);
 
 

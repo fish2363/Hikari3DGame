@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ee285ef4bfbf674f8de514615101583, type: 3}
-  m_Name: Axe
+  m_Name: Pencil
   m_EditorClassIdentifier: 
-  weaponName: Axe
-  weaponModel: {fileID: -2182832962020291474, guid: 7dbce4c2a5f18cf4da98dd033690d516,
-    type: 3}
+  weaponName: Pencil
+  weaponModel: {fileID: 4300002, guid: 15ef60605620c474aa1e03ce62daa909, type: 3}
   weaponDamage: 45
   weaponAttackCoolTime: 1.1
   weaponSwingSound: {fileID: 0}
   weaponMaterial: {fileID: 2100000, guid: 619c38dce3f0e4147ba498226a4d3455, type: 2}
-  animatorControlloer: {fileID: 9100000, guid: aa51ede3bd950fa46a51a8457a31e2ac, type: 2}
+  animatorControlloer: {fileID: 9100000, guid: 50f693bdeae208f4a860a82742df310d, type: 2}

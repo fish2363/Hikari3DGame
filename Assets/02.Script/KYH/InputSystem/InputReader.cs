@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "SO/InputReader")]
 public class InputReader : ScriptableObject, KeyAction.IPlayerActions
 {
+    public event Action SheldEvent;
     public event Action AttackEvent;
     public event Action OnDashEvent;
     public event Action OnJumpEvent;
@@ -70,6 +72,12 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
         {
             AttackEvent?.Invoke();
         }
+    }
+
+    public void OnSheld(InputAction.CallbackContext context)         
+    {
+        if (context.performed)
+            SheldEvent?.Invoke();
     }
 
     //public void OnDefence(InputAction.CallbackContext context)
