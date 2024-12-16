@@ -17,6 +17,7 @@ public class ScissorsPhase2State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("³Ê ¹¹¾ß");
         _cameraPos = GameObject.FindWithTag("VirtualCamera").transform;
         _scissors.transform.DOMoveY(_scissors.transform.position.y + 25, 1F);
         _scissors.StartCoroutine(AttackEnemy());

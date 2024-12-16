@@ -16,8 +16,37 @@ public class PencilSharpenerPhase3State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(_pencilSharpener.player.transform.position * 10f, ForceMode.Impulse);
-     
+        Transform nearestWall = FindNearestWall();
+        if (nearestWall != null)
+        {
+            Vector3 directionToWall = (nearestWall.position - _pencilSharpener.transform.position).normalized;
+
+            _pencilSharpener.RigidCompo.AddForce(directionToWall * 7f, ForceMode.Impulse);
+        }
+        else
+        {
+            Debug.LogWarning("벽을 찾을 수 없습니다!");
+        }
+    }
+
+    private Transform FindNearestWall()
+    {
+        Transform nearestWall = null;
+        float nearestDistance = Mathf.Infinity;
+
+        Collider[] walls = Physics.OverlapSphere(_pencilSharpener.transform.position, 20f, LayerMask.GetMask("Wall"));
+        foreach (Collider wall in walls)
+        {
+            float distanceToPlayer = Vector3.Distance(wall.transform.position, _pencilSharpener.player.transform.position);
+
+            if (distanceToPlayer < nearestDistance)
+            {
+                nearestDistance = distanceToPlayer;
+                nearestWall = wall.transform;
+            }
+        }
+
+        return nearestWall;
     }
     public override void UpdateState()
     {
