@@ -37,12 +37,12 @@ public class ScissorsPhase4WaitState : EnemyState<BossState>
             {
                 _scissors.RigidCompo.velocity = Vector3.zero;
                 _scissors.transform.position = targetPosition;
-                _scissors.StartCoroutine(ChangeToChaseState());
+                _scissors.StartCoroutine(ChangeToPhase4State());
             });
         }
     }
 
-    private IEnumerator ChangeToChaseState()
+    private IEnumerator ChangeToPhase4State()
     {
         yield return new WaitForSeconds(1f);
         _scissors.BossStateMachine.ChangeState(BossState.Phase4);

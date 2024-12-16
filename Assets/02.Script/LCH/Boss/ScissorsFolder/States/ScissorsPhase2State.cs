@@ -26,7 +26,7 @@ public class ScissorsPhase2State : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-      
+
     }
 
     private IEnumerator AttackEnemy()
@@ -43,7 +43,7 @@ public class ScissorsPhase2State : EnemyState<BossState>
         _scissors.transform.position.y,
         _scissors.player.transform.position.z);
         seq.Append(_scissors.transform.DOMove(_scissors.player.transform.position, 0.25f).SetEase(Ease.Linear))
-            .AppendCallback(()=>_scissors.StartCoroutine(ChangeChaseState()));
+            .AppendCallback(() => _scissors.StartCoroutine(ChangeChaseState()));
 
     }
 

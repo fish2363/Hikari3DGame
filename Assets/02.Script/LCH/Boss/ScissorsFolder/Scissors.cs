@@ -19,6 +19,7 @@ public class Scissors : BossBass
         BossStateMachine.AddState(BossState.Phase3, new ScissorsPhase3State(this, BossStateMachine,"Phase3"));
         BossStateMachine.AddState(BossState.Phase3Wait, new ScissorsPhase3WaitState(this, BossStateMachine,"PhaseWait3"));
         BossStateMachine.AddState(BossState.Phase4Wait, new ScissorsPhase4WaitState(this, BossStateMachine,"PhaseWait4"));
+        BossStateMachine.AddState(BossState.Phase4, new ScissorsPhase4State(this, BossStateMachine,"Phase4"));
     }
 
 

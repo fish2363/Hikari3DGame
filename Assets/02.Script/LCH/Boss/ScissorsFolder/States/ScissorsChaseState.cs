@@ -14,6 +14,7 @@ public class ScissorsChaseState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("너 왜 처음이 아니야");
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
         _scissors.IsPhaseEnd = false;

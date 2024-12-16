@@ -42,10 +42,4 @@ public abstract class EnemyState<T> where T : Enum
     {
         _endTriggerCalled = true;
     }
-
-    public void StopImmediately(Enemy enemy)
-    {
-        if (enemy.TryGetComponent(out Rigidbody rigid))
-            rigid.velocity = Vector3.zero;
-    }
 }
