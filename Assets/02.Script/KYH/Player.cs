@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public float MaxHp { get { return maxHp; } }
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
-
+    public CinemachineFreeLook freelook;
 
     [field: SerializeField]
     public GroundCheck GroundCheck { get; private set; }
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
         print(currentHp);
         stateDictionary[currentEnum].StateUpdate();
     }
