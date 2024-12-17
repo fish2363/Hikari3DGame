@@ -15,7 +15,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
     {
         rcCar = _enemy.GetComponent<RcCar>();
         Debug.Log("나도 왔다");
-        base.Enter();
+       
     }
 
     public override void UpdateState()

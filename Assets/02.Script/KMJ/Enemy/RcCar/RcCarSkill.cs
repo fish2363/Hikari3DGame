@@ -15,23 +15,13 @@ public class RcCarSkill : EnemyState<EnemyStatEnum>
 
     public override void Enter()
     {
+        base.Enter();
         _rcCar = _enemy.GetComponent<RcCar>();
         _rcCar._isLook = false;
 
         _rcCar.DashSkill();
 
         _player = GameObject.FindWithTag("Player");
-
-
-        bool ishit = Physics.Raycast(_enemy.transform.position,_enemy.transform.forward, 2, _enemy.whatIsPlayer);
-        
-        if(ishit == true)
-        {
-            Debug.Log("Ã¼·Â±ðÀ½");
-        }
-
-       
-
     }
 
     public override void UpdateState()
