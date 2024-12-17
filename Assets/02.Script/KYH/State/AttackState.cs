@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using System.Numerics;
 
 public class AttackState : State, IAttackable
 {
@@ -22,7 +23,7 @@ public class AttackState : State, IAttackable
     {
         _player.isAttack = false;
         _player.animator.SetBool("Attack", true);
-        _player.RigidCompo.velocity = Vector3.zero;
+        _player.RigidCompo.velocity = UnityEngine.Vector3.zero;
 
 
 
@@ -33,9 +34,9 @@ public class AttackState : State, IAttackable
     {
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
 
-        RaycastHit[] hit = Physics.RaycastAll(_player.RayTransform.position, _player.transform.forward, 3, _player.whatIsEnemy);
+        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.size, _player.transform.rotation, _player.whatIsEnemy);
 
-        foreach (RaycastHit hittor in hit)
+        foreach (Collider hittor in hit)
         {
             _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10,90);
 
@@ -61,7 +62,7 @@ public class AttackState : State, IAttackable
         base.Exit();
     }
 
-    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    public void Attack(Player agent, LayerMask hittable, UnityEngine.Vector3 direction)
     {
 
     }

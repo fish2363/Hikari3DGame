@@ -16,17 +16,11 @@ public class ScissorsPhase2State : EnemyState<BossState>
 
     public override void Enter()
     {
+        Debug.Log("´Ï ¿Ö ½ÇÇàµÅ");
         base.Enter();
-        Debug.Log("³Ê ¹¹¾ß");
         _cameraPos = GameObject.FindWithTag("VirtualCamera").transform;
         _scissors.transform.DOMoveY(_scissors.transform.position.y + 25, 1F);
         _scissors.StartCoroutine(AttackEnemy());
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
-
     }
 
     private IEnumerator AttackEnemy()
@@ -43,7 +37,7 @@ public class ScissorsPhase2State : EnemyState<BossState>
         _scissors.transform.position.y,
         _scissors.player.transform.position.z);
         seq.Append(_scissors.transform.DOMove(_scissors.player.transform.position, 0.25f).SetEase(Ease.Linear))
-            .AppendCallback(() => _scissors.StartCoroutine(ChangeChaseState()));
+            .AppendCallback(()=>_scissors.StartCoroutine(ChangeChaseState()));
 
     }
 

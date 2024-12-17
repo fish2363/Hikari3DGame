@@ -48,7 +48,7 @@ public class Soilder : Enemy, IAttackable
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 5)
+        if (range <= 8)
         {
             _isMove = true;
         }

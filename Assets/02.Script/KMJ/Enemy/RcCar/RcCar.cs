@@ -142,7 +142,7 @@ public class RcCar : Enemy, IAttackable
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void HitEnemy(float damage, float knockbackPower)

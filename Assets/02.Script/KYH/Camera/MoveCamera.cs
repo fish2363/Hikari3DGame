@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class MoveCamera : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MoveCamera : MonoBehaviour
 
     [SerializeField]
     private float speed;
+    public CinemachineVirtualCamera virtualCamera;
 
     private Vector3 difValue;
     public float Yaxis;
@@ -26,6 +28,12 @@ public class MoveCamera : MonoBehaviour
     //    difValue = transform.position - followTarget.transform.position;
     //    difValue = new Vector3(Mathf.Abs(difValue.x), Mathf.Abs(difValue.y) - 3, Mathf.Abs(difValue.z));
     //}
+
+    private void Awake()
+    {
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
+    }
+
 
     private void LateUpdate()
     {

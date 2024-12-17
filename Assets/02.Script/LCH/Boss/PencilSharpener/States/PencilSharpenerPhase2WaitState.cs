@@ -9,7 +9,11 @@ public class PencilSharpenerPhase2WaitState : EnemyState<BossState>
     public PencilSharpenerPhase2WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
+    }
 
+    public override void Enter()
+    {
+        base.Enter();
         _pencilSharpener.StartCoroutine(ChangePhase2State());
     }
 

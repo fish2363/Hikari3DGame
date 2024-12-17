@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ScissorsPhase3WaitState : EnemyState<BossState>
 {
-
     private Scissors _scissors;
 
     public ScissorsPhase3WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _scissors = enemy as Scissors;
+
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
         _scissors.StartCoroutine(ChangePhase3State());
     }
 
