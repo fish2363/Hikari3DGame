@@ -14,7 +14,7 @@ public class ScissorsChaseState : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("너 왜 처음이 아니야");
+        Debug.Log("따라가기");
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
         _scissors.IsPhaseEnd = false;
@@ -29,6 +29,19 @@ public class ScissorsChaseState : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
+        Vector3 direction = _scissors.player.transform.position - _scissors.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _scissors.transform.rotation = lookRotation;
+        }
         _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
         _scissors.RigidCompo.velocity =  _scissors.targetDir.normalized * _scissors.EnemyStat.ChasingSpeed;
     }
@@ -36,5 +49,6 @@ public class ScissorsChaseState : EnemyState<BossState>
     public override void Exit()
     {
         base.Exit();
+        timer = 0;
     }
 }

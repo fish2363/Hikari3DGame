@@ -8,7 +8,7 @@ public abstract class State : MonoBehaviour
 
     public State(Player owner)
     {
-        owner = player;
+        player = owner;
     }
 
     public virtual void Enter()

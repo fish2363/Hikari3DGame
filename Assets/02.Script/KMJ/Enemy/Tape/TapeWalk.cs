@@ -20,7 +20,7 @@ public class TapeWalk : EnemyState<EnemyStatEnum>
     {
         Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
 
-        direction.y = 0;
+        direction.y = 90;
 
 
         if (direction.sqrMagnitude > 0.001f)
@@ -32,7 +32,7 @@ public class TapeWalk : EnemyState<EnemyStatEnum>
             _enemy.transform.rotation = lookRotation;
         }
 
-        if (_enemy.range <= 0.2)
+        if (_enemy.range <= 1f)
         {
             _enemy.RigidCompo.velocity = Vector3.zero;
         }
