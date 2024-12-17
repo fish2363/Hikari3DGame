@@ -9,15 +9,11 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private PencilSharpener _pencilSharpener;
     private Vector3 playerPosition;
-    private Vector3 _yRange;
-    private Vector3 _xRange;
-    private float _spawnRadius = 5f;
     private int Count = 0;
     public PencilSharpenerPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
     }
-
     public override void Enter()
     {
         base.Enter();
@@ -28,26 +24,26 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private IEnumerator DropBoomCoroutine()
     {
-       while(true)
+        while (Count > 0 && !_pencilSharpener.IsPhaseEnd)
         {
-           yield return new WaitForSeconds(0.5f);
-           DropBoom();
-           yield return null;
+            yield return new WaitForSeconds(0.5f); 
+            DropBoom(); 
         }
-    }
 
-    private IEnumerator ChangeChaseState()
-    {
-        yield return new WaitForSeconds(1F);
-         _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+        if (Count <= 0 && !_pencilSharpener.IsPhaseEnd)
+        {
+            _pencilSharpener.IsPhaseEnd = true;
+            _pencilSharpener.StartCoroutine(ChangeChaseState());
+        }
     }
 
     private void DropBoom()
     {
-        if(Count > 0 && !_pencilSharpener.IsPhaseEnd)
+        if (Count > 0 && !_pencilSharpener.IsPhaseEnd)
         {
             playerPosition = _pencilSharpener.player.transform.position;
-            playerPosition = new Vector3(playerPosition.x, playerPosition.y + 10, playerPosition.z);
+            playerPosition = new Vector3(playerPosition.x, playerPosition.y + 10, playerPosition.z); 
+
             GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, playerPosition, Quaternion.identity);
 
             Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
@@ -55,19 +51,19 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
             {
                 rb.useGravity = true;
             }
-            Count--;
+
+            Count--; 
         }
-        else if(Count <= 0 && !_pencilSharpener.IsPhaseEnd)
-        {
-            _pencilSharpener.IsPhaseEnd = true;
-            _pencilSharpener.StartCoroutine(ChangeChaseState());
-        }
-       
+    }
+
+    private IEnumerator ChangeChaseState()
+    {
+        yield return new WaitForSeconds(1F);
+        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }
 
     public override void Exit()
     {
         base.Exit();
-        _pencilSharpener.IsPhaseEnd = false;   
     }
 }

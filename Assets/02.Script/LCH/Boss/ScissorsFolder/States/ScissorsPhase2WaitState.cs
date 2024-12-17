@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScissorsPhase2WaitStaet : EnemyState<BossState>
+public class ScissorsPhase2WaitState : EnemyState<BossState>
 {
 
     private Scissors _scissors;
 
-    public ScissorsPhase2WaitStaet(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public ScissorsPhase2WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _scissors = enemy as Scissors;
+       
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
         _scissors.StartCoroutine(ChangePhase2State());
     }
 
@@ -33,6 +39,7 @@ public class ScissorsPhase2WaitStaet : EnemyState<BossState>
 
     private IEnumerator ChangePhase2State()
     {
+        Debug.Log("너 이상해");
         yield return new WaitForSeconds(1f);
         _scissors.BossStateMachine.ChangeState(BossState.Phase2);
     }
