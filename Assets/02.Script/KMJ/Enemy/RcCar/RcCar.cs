@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RcCar : Enemy
+public class RcCar : Enemy, IAttackable
 {
     public bool _isAttack;
     public bool _isSkill;
@@ -35,6 +35,7 @@ public class RcCar : Enemy
 
     private void Update()
     {
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
         if (range <= 6)
@@ -57,8 +58,6 @@ public class RcCar : Enemy
 
     IEnumerator Skill()
     {
-        
-
         _isLook = false;
         _isAttack = false;
         _isSkill = false;
@@ -70,11 +69,11 @@ public class RcCar : Enemy
         yield return new WaitForSeconds(1f);
         _isSkillTrue = true;
 
-        RigidCompo.velocity += moveDir * EnemyStat.AttackPoawer;
-        //transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
+        RigidCompo.velocity += moveDir * 10;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         RigidCompo.velocity = Vector3.zero;
+
         _isSkillTrue = false;
         _isLook = true;
         _isMove = true;
@@ -83,7 +82,7 @@ public class RcCar : Enemy
 
         _isAttack = true;
 
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(8f);
         _isSkill = true;
 
        
@@ -100,30 +99,35 @@ public class RcCar : Enemy
 
         _isAttackTrue = true;
 
-        RigidCompo.velocity += moveDir * EnemyStat.AttackPoawer;
-        //transform.position += moveDir * EnemyStat.AttackPoawer * Time.deltaTime;
+        RigidCompo.velocity += moveDir * 10;
 
+        yield return new WaitForSeconds(0.1f);
         
-        yield return new WaitForSeconds(0.2f);
         RigidCompo.velocity = Vector3.zero;
         _isAttackTrue = false;
         _isMove = true;
-        yield return new WaitForSeconds(4f);
+
+        yield return new WaitForSeconds(3f);
         _isAttack = true;
     }
 
+   
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player") && _isAttackTrue)
+        if(collision.gameObject.CompareTag("Player"))
         {
             //기본공격
-        }
-        else if(collision.gameObject.CompareTag("Player") && _isSkillTrue)
-        {
-           //스킬공격
-        }
+            int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
+            collision.transform.TryGetComponent(out Player player);
 
-        RigidCompo.velocity = Vector3.zero;
+            if (_isAttackTrue)
+                player.MinusHp(damage);
+            else if (_isSkillTrue)
+                player.MinusHp(damage += 2);
+
+            RigidCompo.velocity = Vector3.zero;
+        }
     }
 
     protected override void AnimEndTrigger()
@@ -133,6 +137,16 @@ public class RcCar : Enemy
 
     protected override void EnemyDie()
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
+        
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        Hp -= damage;
     }
 }

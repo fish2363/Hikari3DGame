@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Tape : Enemy
+public class Tape : Enemy, IAttackable
 {
     public bool _isAttack;
 
@@ -25,6 +25,8 @@ public class Tape : Enemy
 
     private void Update()
     {
+        if (player == null) return;
+
         stateMachine.CurrentState.UpdateState();
 
         if (range <= 8)
@@ -50,7 +52,7 @@ public class Tape : Enemy
 
         _isTrueMove = true;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
 
         _isAttack = true;
     }
@@ -62,6 +64,16 @@ public class Tape : Enemy
 
     protected override void EnemyDie()
     {
+       
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
         throw new NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        Hp -= damage;
     }
 }

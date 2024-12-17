@@ -1,12 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class WeaponManager : MonoBehaviour
 {
-    private MeshRenderer _meshRenderer;
+
+
+
+    /*private MeshRenderer _meshRenderer;
     private WeaponStorage _weaponStorage;
 
     public UnityEvent<GameObject> OnWeaponSwap;
@@ -60,7 +61,7 @@ public class WeaponManager : MonoBehaviour
         {
             OnMultipleWeapons?.Invoke();
         }
-        SwapWeaponModel(weaponData.weaponModel);
+        //SwapWeaponModel(weaponData.weaponModel);
     }
 
     public void SwapWeapon()
@@ -69,6 +70,90 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-        SwapWeaponModel(_weaponStorage.SwapWeapon().weaponModel);
+       // SwapWeaponModel(_weaponStorage.SwapWeapon().weaponModel);
+    }*/
+
+    [SerializeField] private Player player;
+    private bool isChange;
+    public List<GameObject> weaponCount = new List<GameObject>();
+    public List<GameObject> LeftWeaponManager = new List<GameObject>();
+
+    private void Awake()
+    {
+        isChange = true;
+        print(weaponCount[0].transform.GetChild(0).GetComponent<ThisWeaponData>().weaponData.weaponName);
+        player.currentWeaponData = weaponCount[0].transform.GetChild(0).GetComponent<ThisWeaponData>().weaponData;
+        player.animator.runtimeAnimatorController = weaponCount[0].transform.GetChild(0).GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
+
+    }
+
+    private void Update()
+    {
+        ChangeWeapon();
+
+        if (player.currentWeaponData.weaponName == "Clip")
+        {
+            LeftWeaponManager.ForEach(F => F.SetActive(false));
+            LeftWeaponManager[0].SetActive(true);
+        }
+        else if (player.currentWeaponData.weaponName == "Pencil")
+        {
+            LeftWeaponManager.ForEach(F => F.SetActive(false));
+            LeftWeaponManager[1].SetActive(true);
+        }
+        else
+            LeftWeaponManager.ForEach(F => F.SetActive(false));
+    }
+
+    public void GetWeapon(WeaponData weaponData)
+    {
+
+        weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}"));
+
+    }
+
+    private void ChangeWeapon()
+    {
+        if (isChange)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                if (weaponCount[0] == null)
+                    return;
+                ChangeItem(0, 0);
+                StartCoroutine(ChangeWait());
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                if (weaponCount[1] == null)
+                    return;
+                ChangeItem(0, 1);
+                StartCoroutine(ChangeWait());
+
+            }
+
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (weaponCount[2] == null)
+                    return;
+                ChangeItem(0, 2);
+                StartCoroutine(ChangeWait());
+
+            }
+        }
+    }
+    private void ChangeItem(int childNum, int ItemNum)
+    {
+        weaponCount.ForEach(f => f.transform.GetChild(childNum).gameObject.SetActive(false));
+        weaponCount[ItemNum].transform.GetChild(childNum).gameObject.SetActive(true);
+        player.currentWeaponData = weaponCount[ItemNum].transform.GetChild(childNum).GetComponent<ThisWeaponData>().weaponData;
+        player.animator.runtimeAnimatorController = weaponCount[ItemNum].transform.GetChild(childNum).GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
+    }
+
+    private IEnumerator ChangeWait()
+    {
+        isChange = true;
+        yield return new WaitForSeconds(3f);
+        isChange = false;
     }
 }

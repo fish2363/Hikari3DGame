@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 10
   WallRadius: 1
-  AttackPoawer: 4
   KnockbackPower: 5
   AttackDelay: 5
   ContactAttackRadius: 2
-  HP: 10
-  MoveSpeed: 5
+  MinAttackDamage: 37
+  MaxAttackDamage: 46
+  Name: "\uD3ED\uBC1C \uD0DC\uC5FD \uC778\uD615"
+  Key: BWindUpDoll
+  HP: 250
+  ProwlSpeed: 1
+  ChasingSpeed: 2.5

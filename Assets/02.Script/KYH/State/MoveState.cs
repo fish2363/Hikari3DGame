@@ -26,6 +26,7 @@ public class MoveState : State
 
     public override void Enter()
     {
+        print("Okay");
         base.Enter();
     }
 

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SoilderShoot : EnemyState<EnemyStatEnum>
 {
     private Soilder _soilder;
+    private SoilderObject[] soilderObject;
+
     public SoilderShoot(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
         _soilder = enemy as Soilder;
@@ -12,8 +15,9 @@ public class SoilderShoot : EnemyState<EnemyStatEnum>
 
     public override void Enter()
     {
+        soilderObject = _enemy.GetComponentsInChildren<SoilderObject>();
         base.Enter();
-        _soilder.Attack();
+        soilderObject.ToList().ForEach(t => t.Attack());
     }
 
     public override void UpdateState()
@@ -25,7 +29,7 @@ public class SoilderShoot : EnemyState<EnemyStatEnum>
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
-        if (_soilder.hp <= 0)
+        if (_soilder.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

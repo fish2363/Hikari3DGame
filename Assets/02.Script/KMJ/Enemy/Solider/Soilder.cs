@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Soilder : Enemy
+public class Soilder : Enemy, IAttackable
 {
     public Vector3 startPos;
     public float moveRadius = 10;
@@ -10,8 +10,6 @@ public class Soilder : Enemy
 
     public bool _isAttack { get; set; }
     [field: SerializeField] public bool _isMove { get; set; }
-
-    [SerializeField] private GameObject _bulletPrefab;
 
     protected override void Awake()
     {
@@ -22,6 +20,7 @@ public class Soilder : Enemy
         stateMachine.AddState(EnemyStatEnum.Dead, new SoilderDie(this, stateMachine, "Die"));
 
         _isAttack = true;
+        _isMove = false;
     }
 
     private void Start()
@@ -33,7 +32,7 @@ public class Soilder : Enemy
     {
         Vector3 radius = new Vector3(startPos.x + moveRadius, startPos.y , startPos.z + moveRadius);
 
-        Vector3 result = new Vector3(Random.Range(radius.x, -radius.x), startPos.y, Random.Range(radius.z, -radius.z));
+        Vector3 result = new Vector3(Random.Range(radius.x, -radius.x),startPos.y, Random.Range(radius.z, -radius.z));
 
 
         if (_prev != null && (_prev - result).magnitude < 5)
@@ -46,39 +45,15 @@ public class Soilder : Enemy
 
     private void Update()
     {
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
         if (range <= 8)
         {
-            MoveCompo.isMove = true;
+            _isMove = true;
         }
     }
 
-    public void Attack()
-    {
-        StartCoroutine(AttackCoolTime());
-    }
-
-    IEnumerator AttackCoolTime()
-    {
-        _isAttack = false;
-        _isMove = false;
-
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-
-
-        yield return new WaitForSeconds(1.3f);
-
-        _isMove = true;
-
-        yield return new WaitForSeconds(2f);
-
-        _isAttack = true;
-    }
 
     protected override void AnimEndTrigger()
     {
@@ -87,6 +62,16 @@ public class Soilder : Enemy
 
     protected override void EnemyDie()
     {
+       
+    }
+
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    {
         throw new System.NotImplementedException();
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        Hp -= damage;
     }
 }

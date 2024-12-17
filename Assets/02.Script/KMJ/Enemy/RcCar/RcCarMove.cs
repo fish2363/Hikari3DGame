@@ -23,10 +23,6 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.MoveSpeed * Time.deltaTime);
-
-       // _enemy.transform.LookAt(_enemy.transform);
-
         Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
 
         direction.y = 0;
@@ -34,12 +30,23 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         if (direction.sqrMagnitude > 0.001f)
         {
-            direction.Normalize();
+             direction.Normalize();
 
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-            _enemy.transform.rotation = lookRotation;
+            _enemy.transform.rotation = Quaternion.LookRotation(direction);
         }
+
+
+        if (_enemy.range <= 0.2)
+        {
+            _enemy.RigidCompo.velocity = Vector3.zero;
+        }
+        else
+        {
+            _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.ChasingSpeed * Time.deltaTime);
+        }
+       // _enemy.transform.LookAt(_enemy.transform);
+
+        
 
         if (_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
         {
@@ -51,7 +58,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         }
 
 
-        if (_enemy.hp <= 0)
+        if (_enemy.Hp <= 0)
             _stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 

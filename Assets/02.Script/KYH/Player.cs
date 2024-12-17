@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Cinemachine;
 
@@ -16,8 +17,15 @@ public class Player : MonoBehaviour
     public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
 
-    [field : SerializeField]
+
+    [field: SerializeField]
     public GroundCheck GroundCheck { get; private set; }
+
+    [field: SerializeField]
+    public Transform RayTransform { get; private set; }
+
+    [field: SerializeField] public GameObject playerCam { get; set; }
+
 
     [SerializeField]
     protected float maxHp;
@@ -28,11 +36,20 @@ public class Player : MonoBehaviour
 
     public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
+    public bool isAttack { get; set; }
+    public bool isBlock { get; set; }
 
-    [field : SerializeField] public Animator animator { get; private set; }
+    public Vector3 size;
+
+
+    [field: SerializeField] public WeaponData currentWeaponData;
+    [field: SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
+    [SerializeField] private float _attckCoolTime;
     private float _lastDashTime;
+
+    public LayerMask whatIsEnemy;
 
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
@@ -40,20 +57,27 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        foreach(StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
+        foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
         {
             Type t = Type.GetType($"{enumState}State");
             State state = Activator.CreateInstance(t, new object[] { this }) as State;
-            stateDictionary.Add(enumState,state);
+            stateDictionary.Add(enumState, state);
         }
         ChangeState(StateEnum.Idle);
 
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
+        InputReader.AttackEvent += HandleAttackEvent;
+        InputReader.OnSheldEvent += HandleBlaockEvent;
+
+        isAttack = true;
+        isBlock = true;
     }
+
 
     private void Update()
     {
+        print(currentHp);
         stateDictionary[currentEnum].StateUpdate();
     }
 
@@ -61,6 +85,26 @@ public class Player : MonoBehaviour
     {
         stateDictionary[currentEnum].StateFixedUpdate();
     }
+
+    private void HandleAttackEvent()
+    {
+        if (isAttack)
+        {
+            ChangeState(StateEnum.Attack);
+        }
+    }
+
+    private void HandleBlaockEvent()
+    {
+        if(currentWeaponData.weaponName == "Pencil")
+        {
+            if (isBlock)
+            {
+                ChangeState(StateEnum.Sheld);
+            }
+        }
+    }
+
 
     private void HandleJumpEvent()
     {
@@ -74,6 +118,18 @@ public class Player : MonoBehaviour
             ChangeState(StateEnum.Dash);
         }
     }
+
+    /*private bool AttemptAttaack()
+    {
+        if (currentEnum == StateEnum.Attack) return false;
+
+        if (_lastAttackTime + _attckCoolTime > Time.time) return false;
+
+        _lastAttackTime = Time.deltaTime;
+
+        return true;
+
+    }*/
 
     private bool AttemptDash()
     {
@@ -90,5 +146,49 @@ public class Player : MonoBehaviour
         stateDictionary[currentEnum].Exit();
         currentEnum = newEnum;
         stateDictionary[currentEnum].Enter();
+    }
+
+    public void MinusHp(float attackDamage)
+    {
+        if (!isBlock)
+            currentHp -= attackDamage/2;
+        else if(isBlock)
+        {
+            currentHp -= attackDamage; 
+        }
+    }
+
+    public void PlusHp(float Heal)
+    {
+        currentHp += Heal;
+    }
+
+    public void MinusMoveSpeed(float MinusSpeed)
+    {
+        moveSpeed -= MinusSpeed;
+
+        StartCoroutine(ReturnMoveSpeed());
+    }
+
+    public void PlusMoveSpeed(float PlusSpeed)
+    {
+        moveSpeed -= PlusSpeed;
+    }
+
+    private IEnumerator ReturnMoveSpeed()
+    {
+        yield return new WaitForSeconds(3f);
+
+        moveSpeed = 300;
+    }
+
+
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(RayTransform.position, size);
+        Gizmos.color = Color.white;
     }
 }

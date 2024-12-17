@@ -22,8 +22,6 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
 
         base.Enter();
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _enemy.player.transform.position, _enemy.EnemyStat.AttackPoawer * Time.deltaTime);
-
         rcCar.Attack();
     }
 
@@ -34,7 +32,7 @@ public class RcCarAttack : EnemyState<EnemyStatEnum>
         {
             _stateMachine.ChangeState(EnemyStatEnum.Walk);
 
-            if (_enemy.hp <= 0)
+            if (_enemy.Hp <= 0)
                 _stateMachine.ChangeState(EnemyStatEnum.Dead);
         }
     }

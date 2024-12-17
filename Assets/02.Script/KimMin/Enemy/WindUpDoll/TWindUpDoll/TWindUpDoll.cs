@@ -7,6 +7,7 @@ public class TWindUpDoll : WindUpDoll
 {
     [HideInInspector] public Vector3 interV = Vector3.zero;
     [HideInInspector] public bool isCollision = false;
+    [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 2f;
 
     public float angleRange = 30f;
     public float radius = 3f;
@@ -22,25 +23,29 @@ public class TWindUpDoll : WindUpDoll
         stateMachine.AddState(EnemyStatEnum.Attack, new TWindUpDollAttack(this, stateMachine, "Attack"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
+        GetNextPos();
     }
 
     protected override void Update()
     {
         base.Update();
-        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
 
-        if (interV == null) return;
-        //Debug.DrawRay(_windUpDoll.transform.position, new Vector3(0, 0, 0), Color.red);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+        Gizmos.DrawWireSphere(startPos, moveRadius);
+        Gizmos.DrawLine(transform.position, nextPos);
 
-        Handles.color = isCollision ? _red : _blue;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+        if (interV == null) return;
+            Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
+
+        Handles.color = isCollision ? _red : _blue; 
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
     }

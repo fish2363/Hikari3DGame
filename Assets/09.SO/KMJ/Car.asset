@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: 2
   WallRadius: 0
-  AttackPoawer: 10
   KnockbackPower: 0
   AttackDelay: 0
   ContactAttackRadius: 2.5
-  HP: 5
-  MoveSpeed: 2
+  MinAttackDamage: 30
+  MaxAttackDamage: 45
+  Name: "RC\uCE74"
+  Key: RCCar
+  HP: 200
+  ProwlSpeed: 0
+  ChasingSpeed: 1.5
