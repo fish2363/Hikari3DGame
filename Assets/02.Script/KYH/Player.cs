@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -15,10 +16,10 @@ public class Player : MonoBehaviour
     public float MoveSpeed { get { return moveSpeed; } }
 
 
-    [field : SerializeField]
+    [field: SerializeField]
     public GroundCheck GroundCheck { get; private set; }
 
-    [field : SerializeField]
+    [field: SerializeField]
     public Transform RayTransform { get; private set; }
 
     [field: SerializeField] public GameObject playerCam { get; set; }
@@ -34,10 +35,13 @@ public class Player : MonoBehaviour
     public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
     public bool isAttack { get; set; }
+    public bool isBlock { get; set; }
+
+    public Vector3 size;
 
 
     [field: SerializeField] public WeaponData currentWeaponData;
-    [field : SerializeField] public Animator animator { get; private set; }
+    [field: SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
     [SerializeField] private float _attckCoolTime;
@@ -51,24 +55,27 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        foreach(StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
+        foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
         {
             Type t = Type.GetType($"{enumState}State");
             State state = Activator.CreateInstance(t, new object[] { this }) as State;
-            stateDictionary.Add(enumState,state);
+            stateDictionary.Add(enumState, state);
         }
         ChangeState(StateEnum.Idle);
 
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
         InputReader.AttackEvent += HandleAttackEvent;
+        InputReader.OnSheldEvent += HandleBlaockEvent;
 
         isAttack = true;
+        isBlock = true;
     }
 
 
     private void Update()
     {
+        print(currentHp);
         stateDictionary[currentEnum].StateUpdate();
     }
 
@@ -82,6 +89,17 @@ public class Player : MonoBehaviour
         if (isAttack)
         {
             ChangeState(StateEnum.Attack);
+        }
+    }
+
+    private void HandleBlaockEvent()
+    {
+        if(currentWeaponData.weaponName == "Pencil")
+        {
+            if (isBlock)
+            {
+                ChangeState(StateEnum.Sheld);
+            }
         }
     }
 
@@ -130,7 +148,12 @@ public class Player : MonoBehaviour
 
     public void MinusHp(float attackDamage)
     {
-        currentHp -= attackDamage;
+        if (!isBlock)
+            currentHp -= attackDamage/2;
+        else if(isBlock)
+        {
+            currentHp -= attackDamage; 
+        }
     }
 
     public void PlusHp(float Heal)
@@ -157,13 +180,13 @@ public class Player : MonoBehaviour
         moveSpeed = 300;
     }
 
-    
+
 
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(RayTransform.position, transform.forward);
+        Gizmos.DrawWireCube(RayTransform.position, size);
         Gizmos.color = Color.white;
     }
 }

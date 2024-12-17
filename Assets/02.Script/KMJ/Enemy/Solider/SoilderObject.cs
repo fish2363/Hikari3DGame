@@ -10,6 +10,8 @@ public class SoilderObject : MonoBehaviour
 
     private GameObject _player;
 
+    [SerializeField] private Transform _shootTransfrom;
+
     private void Awake()
     {
         _soilder = GetComponentInParent<Soilder>();
@@ -51,11 +53,11 @@ public class SoilderObject : MonoBehaviour
         _soilder._isAttack = false;
         _soilder._isMove = false;
 
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        Instantiate(_bulletPrefab, _shootTransfrom.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(_bulletPrefab, _shootTransfrom.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(_bulletPrefab, _shootTransfrom.position, Quaternion.identity);
 
 
         yield return new WaitForSeconds(0.5f);

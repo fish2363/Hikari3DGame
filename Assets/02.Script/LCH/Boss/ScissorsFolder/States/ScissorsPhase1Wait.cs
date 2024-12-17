@@ -38,6 +38,7 @@ public class ScissorsPhase1Wait : EnemyState<BossState>
 
     private IEnumerator ChangePhase1State()
     {
+        Debug.Log("§∏§§¿ÃªÛ«ÿ");
         yield return new WaitForSeconds(1f);
         _scissors.BossStateMachine.ChangeState(BossState.Phase1);
     }
