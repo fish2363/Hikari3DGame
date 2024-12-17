@@ -16,16 +16,11 @@ public class ScissorsPhase2State : EnemyState<BossState>
 
     public override void Enter()
     {
+        Debug.Log("´Ï ¿Ö ½ÇÇàµÅ");
         base.Enter();
         _cameraPos = GameObject.FindWithTag("VirtualCamera").transform;
         _scissors.transform.DOMoveY(_scissors.transform.position.y + 25, 1F);
         _scissors.StartCoroutine(AttackEnemy());
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
-      
     }
 
     private IEnumerator AttackEnemy()

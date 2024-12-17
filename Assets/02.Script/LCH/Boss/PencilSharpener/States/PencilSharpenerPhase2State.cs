@@ -9,15 +9,11 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private PencilSharpener _pencilSharpener;
     private Vector3 playerPosition;
-    private Vector3 _yRange;
-    private Vector3 _xRange;
-    private float _spawnRadius = 5f;
     private int Count = 0;
     public PencilSharpenerPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
     {
         _pencilSharpener = enemy as PencilSharpener;
     }
-
     public override void Enter()
     {
         base.Enter();
@@ -28,57 +24,46 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
 
     private IEnumerator DropBoomCoroutine()
     {
-       while(true)
+        while (Count > 0 && !_pencilSharpener.IsPhaseEnd)
         {
-            if (!_pencilSharpener.IsPhaseEnd)
+            yield return new WaitForSeconds(0.5f); 
+            DropBoom(); 
+        }
+
+        if (Count <= 0 && !_pencilSharpener.IsPhaseEnd)
+        {
+            _pencilSharpener.IsPhaseEnd = true;
+            _pencilSharpener.StartCoroutine(ChangeChaseState());
+        }
+    }
+
+    private void DropBoom()
+    {
+        if (Count > 0 && !_pencilSharpener.IsPhaseEnd)
+        {
+            playerPosition = _pencilSharpener.player.transform.position;
+            playerPosition = new Vector3(playerPosition.x, playerPosition.y + 10, playerPosition.z); 
+
+            GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, playerPosition, Quaternion.identity);
+
+            Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                 yield return new WaitForSeconds(0.5f);
-                 DropBoom();
-                 Count -= 1;
+                rb.useGravity = true;
             }
 
-            if(!_pencilSharpener.IsPhaseEnd && Count <= 0)
-            {
-                _pencilSharpener.IsPhaseEnd = true;
-                _pencilSharpener.StartCoroutine(ChangeChaseState());
-            }
-            yield return null;
+            Count--; 
         }
     }
 
     private IEnumerator ChangeChaseState()
     {
         yield return new WaitForSeconds(1F);
-         _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
-    }
-
-    private void DropBoom()
-    {
-         playerPosition = _pencilSharpener.player.transform.position;
-
-         Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
-
-         GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
-        
-         Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
-         if (rb != null)
-         {
-              rb.useGravity = true;
-         }
-    }
-
-    private Vector3 GetRandomPositionAroundPlayer()
-    {
-        float angle = Random.Range(0, 360);
-        float x = Mathf.Cos(angle) * _spawnRadius;
-        float z = Mathf.Sin(angle) * _spawnRadius;
-        return new Vector3(x, 10f, z);
+        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }
 
     public override void Exit()
     {
         base.Exit();
-        Count = 10;
-       
     }
 }

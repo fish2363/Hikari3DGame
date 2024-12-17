@@ -21,7 +21,7 @@ public class ScissorsWaitState : EnemyState<BossState>
     private IEnumerator PhaseSelect()
     {
         yield return new WaitForSeconds(0.5F);
-        int Phases = /*Random.Range(1, 4);*/ 2;
+        int Phases = /*Random.Range(1, 4);*/ 4;
 
         switch (Phases)
         {
@@ -30,12 +30,13 @@ public class ScissorsWaitState : EnemyState<BossState>
                 break;
             case 2:
                 _scissors.BossStateMachine.ChangeState(BossState.Phase2Wait);
+                Debug.Log("이거때문이지롱");
                 break;
             case 3:
                 _scissors.BossStateMachine.ChangeState(BossState.Phase3Wait);
                 break;
             case 4:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase4);
+                _scissors.BossStateMachine.ChangeState(BossState.Phase4Wait);
                 break;
         }
     }
