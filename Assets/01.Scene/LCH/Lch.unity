@@ -2895,6 +2895,7 @@ GameObject:
   - component: {fileID: 240051703}
   - component: {fileID: 240051702}
   - component: {fileID: 240051701}
+  - component: {fileID: 240051705}
   m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Wall
@@ -2988,6 +2989,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &240051705
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240051700}
+  serializedVersion: 4
+  m_Mass: 1e+9
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &249945193
 GameObject:
   m_ObjectHideFlags: 0
@@ -11004,6 +11032,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1039992480274645251, guid: 3acfce5629c0c57449595cbe5663f0da,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 6084031216543500346, guid: 3acfce5629c0c57449595cbe5663f0da,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11054,6 +11087,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6153265541318318302, guid: 3acfce5629c0c57449595cbe5663f0da,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ad5cd051f6ca92244a92c7bb798d1cc0, type: 2}
     - target: {fileID: 8032496398704748937, guid: 3acfce5629c0c57449595cbe5663f0da,
         type: 3}
       propertyPath: m_Name
@@ -11130,7 +11168,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171192364}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1e+9
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -11782,6 +11820,7 @@ GameObject:
   - component: {fileID: 1215266415}
   - component: {fileID: 1215266414}
   - component: {fileID: 1215266413}
+  - component: {fileID: 1215266417}
   m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Wall
@@ -11875,6 +11914,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1215266417
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215266412}
+  serializedVersion: 4
+  m_Mass: 1e+9
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1218738546
 GameObject:
   m_ObjectHideFlags: 0
@@ -14700,7 +14766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494113998}
   serializedVersion: 2
-  m_LocalRotation: {x: -1.1787975e-15, y: 0.957826, z: -3.9293096e-15, w: -0.287349}
+  m_LocalRotation: {x: 1.1787975e-15, y: 0.957826, z: 3.9293096e-15, w: -0.287349}
   m_LocalPosition: {x: 9.50793, y: 0.25, z: 14.864244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15428,6 +15494,7 @@ GameObject:
   - component: {fileID: 1611294594}
   - component: {fileID: 1611294593}
   - component: {fileID: 1611294592}
+  - component: {fileID: 1611294596}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Wall
@@ -15521,6 +15588,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1611294596
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611294591}
+  serializedVersion: 4
+  m_Mass: 1e+9
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1644820905
 GameObject:
   m_ObjectHideFlags: 0
@@ -18741,6 +18835,7 @@ GameObject:
   - component: {fileID: 1997571670}
   - component: {fileID: 1997571669}
   - component: {fileID: 1997571668}
+  - component: {fileID: 1997571672}
   m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Wall
@@ -18834,6 +18929,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &1997571672
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997571667}
+  serializedVersion: 4
+  m_Mass: 1e+9
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2000175098
 GameObject:
   m_ObjectHideFlags: 0
@@ -19402,7 +19524,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052818132}
   serializedVersion: 2
-  m_LocalRotation: {x: -1.1787975e-15, y: 0.957826, z: -3.9293096e-15, w: -0.287349}
+  m_LocalRotation: {x: 1.1787975e-15, y: 0.957826, z: 3.9293096e-15, w: -0.287349}
   m_LocalPosition: {x: 9.50793, y: 0.25, z: 14.864244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19866,6 +19988,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1332404117638099340, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 14.837815
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499097176694701112, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fbb53c92ea466d24a829b54be04e2d07, type: 2}
+    - target: {fileID: 2499097176694701112, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751766179545291420, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299341045822557878, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -100.66621
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299341045822557878, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -101.1527
+      objectReference: {fileID: 0}
     - target: {fileID: 8439767050486827992, guid: 4c307d3a0075b254da6c7401ae923718,
         type: 3}
       propertyPath: m_Name
@@ -19874,7 +20026,27 @@ PrefabInstance:
     - target: {fileID: 8439767050486827992, guid: 4c307d3a0075b254da6c7401ae923718,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729933989239239384, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 78.93813
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729933989239239384, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 79.22075
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897205647527146130, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 89.93438
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897205647527146130, guid: 4c307d3a0075b254da6c7401ae923718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -16.914806
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7143672015445019355, guid: 4c307d3a0075b254da6c7401ae923718, type: 3}
