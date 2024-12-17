@@ -13,6 +13,6 @@ public class RotateWindUp : MonoBehaviour
 
     private void Rotate()
     {
-        transform.rotation *= Quaternion.Euler(0, 0, speed * Time.deltaTime);
+        transform.RotateAround(transform.position, Vector3.right, speed * Time.deltaTime);
     }
 }
