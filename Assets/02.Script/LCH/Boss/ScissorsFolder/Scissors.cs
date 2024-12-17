@@ -6,7 +6,6 @@ public class Scissors : BossBass
 {
 
     public Vector3 originPos;
-    public bool isGround;
 
     protected override void Awake()
     {
@@ -29,21 +28,5 @@ public class Scissors : BossBass
     private void Start()
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGround = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGround = false;
-        }
     }
 }

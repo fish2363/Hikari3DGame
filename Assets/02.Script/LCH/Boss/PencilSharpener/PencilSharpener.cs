@@ -22,6 +22,7 @@ public class PencilSharpener : BossBass
         BossStateMachine.AddState(BossState.Phase3Wait, new PencilSharpenerPhase3WaitState(this, BossStateMachine, "Phase3Wait"));
         BossStateMachine.AddState(BossState.Phase3, new PencilSharpenerPhase3State(this,BossStateMachine,"Phase3"));
     }
+
     private void Start()
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
