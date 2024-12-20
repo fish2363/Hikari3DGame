@@ -15,6 +15,8 @@ public class RcCar : Enemy, IAttackable
 
     private Vector3 _moveDir;
 
+    public ShowEffect hitEffect;
+
    
 
     protected override void Awake()
@@ -148,5 +150,8 @@ public class RcCar : Enemy, IAttackable
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
+        var hit = Instantiate(hitEffect);
+        hit.SetPositionAndPlay(transform.position, transform);
+        print(hit);
     }
 }
