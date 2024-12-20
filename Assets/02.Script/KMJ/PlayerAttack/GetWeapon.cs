@@ -18,10 +18,10 @@ public class GetWeapon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
-        {
+        {                 
             Gettxt.text = $"{gameObject.name} get!";
             Gettxt.DOFade(0, 3);
-            other.GetComponentInChildren<WeaponManager>().AddWeaponData(_thisWeapon);
+            other.GetComponentInChildren<WeaponManager>().GetWeapon(_thisWeapon);
             Destroy(gameObject);
         }
     }

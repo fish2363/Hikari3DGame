@@ -20,7 +20,9 @@ public class Converse : BossBass
         BossStateMachine.AddState(BossState.Phase4, new ConversPhase4State(this, BossStateMachine, "Phase4"));
         BossStateMachine.AddState(BossState.Phase4Wait, new ConversPhase4WaitState(this, BossStateMachine, "Phase4Wait"));
     }
-    private void Start()
+
+
+    private void OnEnable()
     {
         BossStateMachine.InitInitialize(BossState.Chase, this);
     }

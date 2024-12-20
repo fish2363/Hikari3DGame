@@ -24,7 +24,7 @@ public abstract class EnemyState<T> where T : Enum
 
     public virtual void Enter()
     {
-        //_enemy.AnimCompo.SetBool(_animBoolHash, true);
+       // _enemy.AnimCompo.SetBool(_animBoolHash, true);
         _endTriggerCalled = false;
 
     }

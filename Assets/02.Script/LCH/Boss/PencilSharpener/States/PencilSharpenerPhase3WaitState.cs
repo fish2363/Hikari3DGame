@@ -38,7 +38,7 @@ public class PencilSharpenerPhase3WaitState : EnemyState<BossState>
 
     private IEnumerator ChangePhase3State()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         _pencilSharpener.BossStateMachine.ChangeState(BossState.Phase3);
     }
 }

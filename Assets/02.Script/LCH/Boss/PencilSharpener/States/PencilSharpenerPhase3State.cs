@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PencilSharpenerPhase3State : EnemyState<BossState>
 {
@@ -16,51 +17,13 @@ public class PencilSharpenerPhase3State : EnemyState<BossState>
     public override void Enter()
     {
         base.Enter();
-        Transform nearestWall = FindNearestWall();
-        if (nearestWall != null)
-        {
-            Vector3 directionToWall = (nearestWall.position - _pencilSharpener.transform.position).normalized;
-
-            _pencilSharpener.RigidCompo.AddForce(directionToWall * 7f, ForceMode.Impulse);
-        }
-        else
-        {
-            Debug.LogWarning("벽을 찾을 수 없습니다!");
-        }
+        Sequence seq = DOTween.Sequence();
+       seq.Append(_pencilSharpener.transform.DOJump(_pencilSharpener.player.transform.position, 7f, 1, 1.5f)
+           .AppendCallback(()=> _pencilSharpener.StartCoroutine(ChangeToChase())));
     }
 
-    private Transform FindNearestWall()
+    private IEnumerator ChangeToChase()
     {
-        Transform nearestWall = null;
-        float nearestDistance = Mathf.Infinity;
-
-        Collider[] walls = Physics.OverlapSphere(_pencilSharpener.transform.position, 20f, LayerMask.GetMask("Wall"));
-        foreach (Collider wall in walls)
-        {
-            float distanceToPlayer = Vector3.Distance(wall.transform.position, _pencilSharpener.player.transform.position);
-
-            if (distanceToPlayer < nearestDistance)
-            {
-                nearestDistance = distanceToPlayer;
-                nearestWall = wall.transform;
-            }
-        }
-
-        return nearestWall;
-    }
-    public override void UpdateState()
-    {
-        base.UpdateState();
-        if (_pencilSharpener.WallChecker)
-        {
-            _pencilSharpener.RigidCompo.velocity = Vector3.zero;
-            _pencilSharpener.StartCoroutine(ChangeChaseState());
-        }
-    }
-
-    private IEnumerator ChangeChaseState()
-    {
-        _pencilSharpener.WallChecker = false;
         yield return new WaitForSeconds(1f);
         _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
     }

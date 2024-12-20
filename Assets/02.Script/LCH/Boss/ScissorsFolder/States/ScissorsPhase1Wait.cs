@@ -9,6 +9,12 @@ public class ScissorsPhase1Wait : EnemyState<BossState>
     {
         _scissors = enemy as Scissors;
 
+        
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
         _scissors.StartCoroutine(ChangePhase1State());
     }
 

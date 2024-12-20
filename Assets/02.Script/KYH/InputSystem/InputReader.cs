@@ -10,6 +10,7 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
     public event Action AttackEvent;
     public event Action OnDashEvent;
     public event Action OnJumpEvent;
+    public event Action OnSheldEvent;
     public event Action<Vector2> OnMoveEvent;
     public Vector3 direction { get; private set; }
     [SerializeField] private LayerMask _whatIsGround;
@@ -69,6 +70,14 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
         if (context.performed)
         {
             AttackEvent?.Invoke();
+        }
+    }
+
+    public void OnSheld(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            OnSheldEvent?.Invoke();
         }
     }
 
