@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingManager : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class SettingManager : MonoBehaviour
 
     [SerializeField] private Slider sensitivitySlider;//°¨µµ
     private float _sensitivity = 1.5f;
+
+    [SerializeField]
+    private TextMeshProUGUI text;
 
     private void Awake()
     {
@@ -87,6 +91,7 @@ public class SettingManager : MonoBehaviour
         if (type == 1)
         {
             Sensitivity = sensitivitySlider.value;
+            text.text = sensitivitySlider.value.ToString().Substring(0,2);
         }
     }
 }

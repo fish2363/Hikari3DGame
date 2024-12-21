@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class MainMenuButton : MonoBehaviour
     private string nameScene;
     [SerializeField] private Image blackImage;
     [SerializeField] private Image vinette;
+    [SerializeField] private GameObject filter;
+    [SerializeField] private PlayableDirector startTimeLine;
 
     [SerializeField] private AudioSource bgm;
 
@@ -27,10 +30,9 @@ public class MainMenuButton : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.DOFade(0, .5f);
-
+        startTimeLine.Play();
         //이후 작업
         bgm.Stop();
-
 
         blackImage.GetComponent<FadeEffect>().FadeIn();
 
@@ -41,6 +43,7 @@ public class MainMenuButton : MonoBehaviour
     {
         vinette.DOFade(0, 2);
         yield return new WaitForSecondsRealtime(5);
+        filter.SetActive(false);
         SceneManager.LoadScene(nameScene);
     }
 }
