@@ -126,6 +126,7 @@ public class OttuGi : Enemy, IAttackable
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
-        print("¾Æ¾ß");
+        var hit = Instantiate(getDamageEffect);
+        hit.SetPositionAndPlay(transform.position, transform);
     }
 }
