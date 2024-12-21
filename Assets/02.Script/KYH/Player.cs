@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     
     public float MaxHp { get { return maxHp; } }
-    public float CurrentHp { get { return currentHp; } }
+  //  public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
     public CinemachineFreeLook freelook;
 
@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     protected float maxHp;
-    [SerializeField]
-    protected float currentHp;
+
+    [field : SerializeField]
+    public NotifyValue<float> currentHp { get; set; } = new NotifyValue<float>();
+
     [SerializeField]
     protected float moveSpeed, gravity = -9.8f;
 
@@ -159,16 +161,16 @@ public class Player : MonoBehaviour
     public void MinusHp(float attackDamage)
     {
         if (!isBlock)
-            currentHp -= attackDamage/2;
+            currentHp.Value -= attackDamage/2;
         else if(isBlock)
         {
-            currentHp -= attackDamage; 
+            currentHp.Value -= attackDamage; 
         }
     }
 
     public void PlusHp(float Heal)
     {
-        currentHp += Heal;
+        currentHp.Value += Heal;
     }
 
     public void MinusMoveSpeed(float MinusSpeed)
