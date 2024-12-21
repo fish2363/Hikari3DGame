@@ -1707,10 +1707,12 @@ MonoBehaviour:
   <range>k__BackingField: 0
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  getDamageEffect: {fileID: 0}
   _isAttack: 0
   _isTrueMove: 0
   _tapeBulletPrbs: {fileID: 2111081160886793335, guid: c130a7913f7d0bd4fa657823fdd8b397,
     type: 3}
+  _shootTranform: {fileID: 0}
 --- !u!1 &1020997865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,6 +2484,7 @@ MonoBehaviour:
   <range>k__BackingField: 0
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  getDamageEffect: {fileID: 0}
   startPos: {x: 0, y: -0.64, z: 0}
   moveRadius: 10
   <_isMove>k__BackingField: 0
@@ -2655,7 +2658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1837033893
 Transform:
   m_ObjectHideFlags: 0
@@ -6822,7 +6825,8 @@ MonoBehaviour:
   <RayTransform>k__BackingField: {fileID: 0}
   <playerCam>k__BackingField: {fileID: 0}
   maxHp: 0
-  currentHp: 0
+  <currentHp>k__BackingField:
+    value: 0
   moveSpeed: 300
   gravity: -9.8
   size: {x: 0, y: 0, z: 0}
@@ -6833,6 +6837,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 0
+  attackEffect: {fileID: 0}
 --- !u!1 &1561061453085860922
 GameObject:
   m_ObjectHideFlags: 0
@@ -17101,12 +17106,12 @@ PrefabInstance:
     - target: {fileID: 816147890019664202, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000021470432
+      value: -0.0000000021470428
       objectReference: {fileID: 0}
     - target: {fileID: 816147890019664202, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.2703234e-10
+      value: -1.2703232e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1268220792982786175, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
@@ -17162,6 +17167,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749734099554100295, guid: 09d9139aab395f2408e712d277385fb2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.007770706
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749734099554100295, guid: 09d9139aab395f2408e712d277385fb2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00017353441
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}

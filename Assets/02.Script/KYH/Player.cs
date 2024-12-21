@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
     [field: SerializeField] public Transform virtualCamera { get; private set; }
 
-    
+    public bool isStop { get; set; }
     public float MaxHp { get { return maxHp; } }
   //  public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; }  }
@@ -80,17 +80,23 @@ public class Player : MonoBehaviour
         maxHp = currentHp.Value;
     }
 
-    private void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 
     private void Update()
     {
+        if(!isStop)
+        {
+            try
+            {
+                freelook.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
+            }
+            catch (Exception e)
+            {
+                print("Mainmenu부터 실행하지 않으면 ESC 안됨미다");
+            }
+            print(currentHp);
+            stateDictionary[currentEnum].StateUpdate();
+        }
         Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
-        print(currentHp);
-        stateDictionary[currentEnum].StateUpdate();
     }
 
     private void FixedUpdate()
@@ -100,9 +106,12 @@ public class Player : MonoBehaviour
 
     private void HandleAttackEvent()
     {
-        if (isAttack)
+        if (!isStop)
         {
-            ChangeState(StateEnum.Attack);
+            if (isAttack)
+            {
+                ChangeState(StateEnum.Attack);
+            }
         }
     }
 
@@ -125,9 +134,12 @@ public class Player : MonoBehaviour
 
     private void HandleDashEvent()
     {
-        if (AttemptDash())
+        if (!isStop)
         {
-            ChangeState(StateEnum.Dash);
+            if (AttemptDash())
+            {
+                ChangeState(StateEnum.Dash);
+            }
         }
     }
 
@@ -162,11 +174,14 @@ public class Player : MonoBehaviour
 
     public void MinusHp(float attackDamage)
     {
-        if (!isBlock)
-            currentHp.Value -= attackDamage/2;
-        else if(isBlock)
+        if (!isStop)
         {
-            currentHp.Value -= attackDamage; 
+            if (!isBlock)
+                currentHp.Value -= attackDamage / 2;
+            else if (isBlock)
+            {
+                currentHp.Value -= attackDamage;
+            }
         }
     }
 
