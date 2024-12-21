@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScissorsPhase1Wait : EntityState
+public class ScissorsPhase1WaitState : EntityState
 {
     private Scissors _scissors;
 
-    public ScissorsPhase1Wait(Entity entity, AnimParamSO animParam) : base(entity, animParam)
+    public ScissorsPhase1WaitState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
         _scissors = entity as Scissors;
 

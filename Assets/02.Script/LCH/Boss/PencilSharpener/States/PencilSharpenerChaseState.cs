@@ -32,6 +32,7 @@ public class PencilSharpenerChaseState : EntityState
     public override void UpdateState()
     {
         base.UpdateState();
+        _pencilSharpener.StartCoroutine(DamgeToPlayer());
         Vector3 direction = _pencilSharpener.player.transform.position - _pencilSharpener.transform.position;
 
         direction.y = 0;
@@ -47,6 +48,12 @@ public class PencilSharpenerChaseState : EntityState
         }
         _pencilSharpener.targetDir = _pencilSharpener.player.transform.position - _pencilSharpener.transform.position;
         _pencilSharpener.RigidCompo.velocity = _pencilSharpener.targetDir.normalized * _pencilSharpener.EnemyStat.ChasingSpeed;
+    }
+
+    private IEnumerator DamgeToPlayer()
+    {
+        yield return new WaitForSeconds(0.7f);
+        _pencilSharpener.CastDamge.CastDamage();
     }
 
     public override void Exit()

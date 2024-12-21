@@ -9,6 +9,7 @@ public class ScissorsChaseState : EntityState
 
     public ScissorsChaseState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
+        _scissors = entity as Scissors;
     }
 
     public override void Enter()

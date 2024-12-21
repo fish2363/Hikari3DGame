@@ -2,34 +2,23 @@ using UnityEngine;
 
 public class DamageCast : MonoBehaviour
 {
-    [SerializeField] private ContactFilter2D _contactFilter;
+    [SerializeField] private LayerMask _whatIsPlayer;
     [SerializeField] private int _maxAvailableCount = 4;
     [SerializeField] private Vector3 _castSize;
     [SerializeField] private float _damage = 5f;
     [SerializeField] private Vector3 _knockBackForce = new Vector2(5f, 3f);
-    private Collider2D[] _colliders;
+    public Collider[] cnt;
 
     protected Entity _owner;
-    public void InitCaster(Entity owner)
-    {
-        _owner = owner;
-        _colliders = new Collider2D[_maxAvailableCount];
-    }
-
     public void CastDamage()
     {
-        Vector3 start = (Vector3)transform.position - _castSize * 0.5f;
-        Vector3 end = start + _castSize;
-        int cnt = Physics2D.OverlapArea(start, end, _contactFilter, _colliders);
+       cnt  = Physics.OverlapBox(transform.position, _castSize, Quaternion.identity, _whatIsPlayer);
 
-        Vector3 atkDirection = _owner.transform.right;
-        Vector3 knockBackForce = _knockBackForce;
-        knockBackForce.x *= atkDirection.x;
-        for (int i = 0; i < cnt; i++)
+        for (int i = 0; i < cnt.Length; i++)
         {
-            if (_colliders[i].TryGetComponent(out IDamageable damageable))
+            if (cnt[i].TryGetComponent(out IDamageable damageable))
             {
-                damageable.ApplyDamage(_damage, atkDirection, knockBackForce, _owner);
+                damageable.ApplyDamage(_damage);
             }
         }
     }

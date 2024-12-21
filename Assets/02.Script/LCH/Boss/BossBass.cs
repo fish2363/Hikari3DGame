@@ -8,7 +8,7 @@ public abstract class BossBass : Entity
     public bool IsPhaseEnd;
     public bool WallChecker = false;
 
-    [SerializeField] private EntityFSMSO _ghostFSM;
+    [SerializeField] private EntityFSMSO _bossFSM;
 
     [SerializeField] protected StateMachine _stateMachine;
 
@@ -26,11 +26,23 @@ public abstract class BossBass : Entity
     {
         base.Awake();
         RigidCompo = GetComponent<Rigidbody>();
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
+    protected override void AfterInitialize()
+    {
+        base.AfterInitialize();
+        _stateMachine = new StateMachine(_bossFSM, this);
     }
 
     public void ChangeState(BossState newState)
     {
         _stateMachine.ChageState(newState);
+    }
+
+    protected virtual void Update()
+    {
+        _stateMachine.currentState.UpdateState();
     }
 
     public EntityState GetState(StateSO state)

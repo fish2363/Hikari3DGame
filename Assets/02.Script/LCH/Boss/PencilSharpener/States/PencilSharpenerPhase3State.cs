@@ -23,6 +23,12 @@ public class PencilSharpenerPhase3State : EntityState
            .AppendCallback(()=> _pencilSharpener.StartCoroutine(ChangeToChase())));
     }
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _pencilSharpener.CastDamge.CastDamage();
+    }
+
     private IEnumerator ChangeToChase()
     {
         yield return new WaitForSeconds(1f);

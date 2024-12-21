@@ -10,7 +10,7 @@ public class EntityHealth : MonoBehaviour, IEntityComponent, IDamageable
     private Entity _entity;
     private EntityMover _mover;
 
-    public event Action<Entity> OnHit;
+    public event Action OnHit;
     public event Action OnDeath;
     
     public void Initialize(Entity entity)
@@ -18,28 +18,23 @@ public class EntityHealth : MonoBehaviour, IEntityComponent, IDamageable
         _entity = entity;
         _mover = _entity.GetCompo<EntityMover>();
         
+    }
+
+    private void Start()
+    {
         _currentHealth = MaxHealth;
+        
     }
 
 
-    public void ApplyDamage(float damage, Vector3 direction, Vector3 knockBack, Entity dealer)
+    public void ApplyDamage(float damage)
     {
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, MaxHealth);
-        StartCoroutine(ApplyKnockBack(knockBack));
-        OnHit?.Invoke(dealer);
+        OnHit?.Invoke();
 
         if (_currentHealth <= 0)
         {
             OnDeath?.Invoke();
         }
-    }
-
-    private IEnumerator ApplyKnockBack(Vector2 knockBack)
-    {
-        _mover.CanManualMove = false;
-        _mover.StopImmediately(true);
-        _mover.AddForceToEntity(knockBack);
-        yield return new WaitForSeconds(_knockBackTime);
-        _mover.CanManualMove = true;
     }
 }

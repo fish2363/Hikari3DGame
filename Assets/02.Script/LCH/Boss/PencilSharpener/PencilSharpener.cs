@@ -10,6 +10,14 @@ public class PencilSharpener : BossBass
 
     [field : SerializeField] public GameObject _fallingObjectPrefab;
 
+    public DamageCast CastDamge;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        CastDamge = GetComponentInChildren<DamageCast>();
+    }
+
     private void Start()
     {
         _stateMachine.Initialize(BossState.Chase);

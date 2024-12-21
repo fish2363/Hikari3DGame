@@ -5,7 +5,7 @@ public class AnimParamSO : ScriptableObject
 {
     public enum ParamType
     {
-        Float, Boolean, Integer, Trigger
+        Boolean, Float, Integer, Trigger
     }
     
     public string paramName;

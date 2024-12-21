@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe27a1a13f2ba3e4799ab286b40ddcc8, type: 3}
+  m_Name: PencilSharpener
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 11400000, guid: e8d97573b8fda8a439665abdd02855e3, type: 2}
+  - {fileID: 11400000, guid: 012f370ddaeb45e47808df9d90dd5775, type: 2}
+  - {fileID: 11400000, guid: 785483b6607ace4458e8b5907e689e47, type: 2}
+  - {fileID: 11400000, guid: 58739c20942353b429de6f6662e0c29f, type: 2}
+  - {fileID: 11400000, guid: b937d08934921a94db425306c04c95ee, type: 2}
+  - {fileID: 11400000, guid: f17ab17a4568ec54cbd7cad6a977911a, type: 2}
+  - {fileID: 11400000, guid: 5da746609b928e945bbe53d02839c81c, type: 2}
