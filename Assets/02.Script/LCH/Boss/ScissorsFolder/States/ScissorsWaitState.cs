@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ScissorsWaitState : EnemyState<BossState>
+public class ScissorsWaitState : EntityState
 {
     private Scissors _scissors;
-    public ScissorsWaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ScissorsWaitState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _scissors = enemy as Scissors;
+        _scissors = entity as Scissors;
+
     }
 
     public override void Enter()
@@ -26,17 +28,17 @@ public class ScissorsWaitState : EnemyState<BossState>
         switch (Phases)
         {
             case 1:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase1Wait);
+                _scissors.ChangeState(BossState.Phase1Wait);
                 break;
             case 2:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase2Wait);
+                _scissors.ChangeState(BossState.Phase2Wait);
                 Debug.Log("이거때문이지롱");
                 break;
             case 3:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase3Wait);
+                _scissors.ChangeState(BossState.Phase3Wait);
                 break;
             case 4:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase4Wait);
+                _scissors.ChangeState(BossState.Phase4Wait);
                 break;
         }
     }
