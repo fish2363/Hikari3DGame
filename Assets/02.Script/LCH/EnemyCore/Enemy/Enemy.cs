@@ -12,7 +12,8 @@ public enum EnemyStatEnum
     Chase,
     Attack,
     Skill,
-    Dead
+    Dead,
+    Stun
 }
 public abstract class Enemy : EnemyAgent
 {

@@ -15,6 +15,11 @@ public class RcCar : Enemy, IAttackable
 
     private Vector3 _moveDir;
 
+    public ShowEffect hitEffect;
+
+    public ShowEffect stunEffect;
+
+    public Transform stunTransform;
    
 
     protected override void Awake()
@@ -27,6 +32,7 @@ public class RcCar : Enemy, IAttackable
         stateMachine.AddState(EnemyStatEnum.Attack, new RcCarAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new RcCarSkill(this, stateMachine, "Skill"));
         stateMachine.AddState(EnemyStatEnum.Dead, new RcCarDie(this, stateMachine, "Die"));
+        stateMachine.AddState(EnemyStatEnum.Stun, new RcStun(this, stateMachine, "Stun"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
         _isSkillTrue = false;
@@ -127,12 +133,21 @@ public class RcCar : Enemy, IAttackable
                 player.MinusHp(damage += 2);
 
             RigidCompo.velocity = Vector3.zero;
+
+            stateMachine.ChangeState(EnemyStatEnum.Stun);
         }
     }
 
     protected override void AnimEndTrigger()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void StunEffect()
+    {
+        var stun = Instantiate(stunEffect);
+
+        stun.SetPositionAndPlay(stunTransform.position, transform);
     }
 
     protected override void EnemyDie()
@@ -148,5 +163,8 @@ public class RcCar : Enemy, IAttackable
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
+        var hit = Instantiate(hitEffect);
+        hit.SetPositionAndPlay(transform.position, transform);
+        print(hit);
     }
 }

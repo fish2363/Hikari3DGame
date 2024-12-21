@@ -77,14 +77,17 @@ public class WeaponManager : MonoBehaviour
     private bool isChange;
     public List<GameObject> weaponCount = new List<GameObject>();
     public List<GameObject> LeftWeaponManager = new List<GameObject>();
+    [SerializeField] private GameObject currentWeaapon;
+
+    
 
     private void Awake()
     {
-        isChange = true;
-        print(weaponCount[0].transform.GetChild(0).GetComponent<ThisWeaponData>().weaponData.weaponName);
-        player.currentWeaponData = weaponCount[0].transform.GetChild(0).GetComponent<ThisWeaponData>().weaponData;
-        player.animator.runtimeAnimatorController = weaponCount[0].transform.GetChild(0).GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
-
+        isChange = false;
+        print(weaponCount[0].GetComponent<ThisWeaponData>().weaponData.weaponName);
+        player.currentWeaponData = weaponCount[0].GetComponent<ThisWeaponData>().weaponData;
+        player.animator.runtimeAnimatorController = weaponCount[0].GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
+        currentWeaapon = weaponCount[0];
     }
 
     private void Update()
@@ -107,18 +110,16 @@ public class WeaponManager : MonoBehaviour
 
     public void GetWeapon(WeaponData weaponData)
     {
-
-        weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}"));
-
+        weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}").transform.GetChild(0).gameObject);
     }
 
     private void ChangeWeapon()
     {
-        if (isChange)
+        if (!isChange)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                if (weaponCount[0] == null)
+                if (weaponCount[1] == null || weaponCount[2] == null)
                     return;
                 ChangeItem(0, 0);
                 StartCoroutine(ChangeWait());
@@ -144,10 +145,11 @@ public class WeaponManager : MonoBehaviour
     }
     private void ChangeItem(int childNum, int ItemNum)
     {
-        weaponCount.ForEach(f => f.transform.GetChild(childNum).gameObject.SetActive(false));
-        weaponCount[ItemNum].transform.GetChild(childNum).gameObject.SetActive(true);
-        player.currentWeaponData = weaponCount[ItemNum].transform.GetChild(childNum).GetComponent<ThisWeaponData>().weaponData;
-        player.animator.runtimeAnimatorController = weaponCount[ItemNum].transform.GetChild(childNum).GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
+        currentWeaapon.gameObject.SetActive(false);
+        weaponCount[ItemNum].gameObject.SetActive(true);
+        currentWeaapon = weaponCount[ItemNum];
+        player.currentWeaponData = weaponCount[ItemNum].GetComponent<ThisWeaponData>().weaponData;
+        player.animator.runtimeAnimatorController = weaponCount[ItemNum].GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
     }
 
     private IEnumerator ChangeWait()
