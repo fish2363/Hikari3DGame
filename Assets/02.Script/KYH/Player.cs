@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
 
     public ShowEffect attackEffect;
 
+    float scroll;
+
     private void Awake()
     {
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
@@ -96,7 +98,10 @@ public class Player : MonoBehaviour
             print(currentHp);
             stateDictionary[currentEnum].StateUpdate();
         }
-        Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
+        scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
+        freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
+        freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
+
     }
 
     private void FixedUpdate()
