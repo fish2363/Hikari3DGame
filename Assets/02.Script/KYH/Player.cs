@@ -55,6 +55,8 @@ public class Player : MonoBehaviour
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
 
+    public ShowEffect attackEffect;
+
     private void Awake()
     {
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
@@ -74,6 +76,11 @@ public class Player : MonoBehaviour
         isBlock = true;
     }
 
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
@@ -183,6 +190,11 @@ public class Player : MonoBehaviour
         moveSpeed = 300;
     }
 
+    public void ShowAttackEffect()
+    {
+        var attacEffect = Instantiate(attackEffect);
+        attacEffect.SetPositionAndPlay(transform.position, transform);
+    }
 
 
 

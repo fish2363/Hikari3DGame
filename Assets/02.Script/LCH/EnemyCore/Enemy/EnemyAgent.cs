@@ -35,6 +35,8 @@ public abstract class EnemyAgent : MonoBehaviour
 
     public Player player;
 
+    public ShowEffect getDamageEffect;
+
     protected virtual void Awake()
     {
         hp = EnemyStat.HP;
