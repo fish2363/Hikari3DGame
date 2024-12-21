@@ -2920,7 +2920,7 @@ GameObject:
   - component: {fileID: 1201841304371152530}
   m_Layer: 0
   m_Name: PlayerCam
-  m_TagString: Untagged
+  m_TagString: VirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7142,7 +7142,7 @@ GameObject:
   - component: {fileID: 7525982105981400318}
   - component: {fileID: 3909293677300602987}
   - component: {fileID: 4456167878642410500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player(Test)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7201,7 +7201,8 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  attackEffect: {fileID: 0}
+  attackEffect: {fileID: 6021288747852077177, guid: 0fecd790876c3d54eb8648cf3fee863a,
+    type: 3}
 --- !u!54 &7525982105981400318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7264,7 +7265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bdfed7e36b67046baf2e023d274c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
+  MaxHealth: 100
   _currentHealth: 0
   _knockBackTime: 0.5
 --- !u!1 &3175232767641148968
@@ -13111,7 +13112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5446779985088751506}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0199411, y: 0.9742913, z: -0.09572159, w: 0.20296827}
+  m_LocalRotation: {x: 0.019941103, y: 0.9742913, z: -0.09572159, w: 0.20296827}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14011,13 +14012,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6883377547540175313}
   weaponCount:
-  - {fileID: 8945911850304716482}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4586124999048634875}
   LeftWeaponManager:
   - {fileID: 3524864556045780277}
   - {fileID: 526413571170572261}
-  currentWeaapon: {fileID: 8945911850304716482}
+  currentWeaapon: {fileID: 0}
 --- !u!1 &6153298202146619737
 GameObject:
   m_ObjectHideFlags: 0
