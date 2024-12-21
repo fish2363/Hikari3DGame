@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
 
     
     public float MaxHp { get { return maxHp; } }
-    public float CurrentHp { get { return currentHp; } }
-    public float MoveSpeed { get { return moveSpeed; } }
+  //  public float CurrentHp { get { return currentHp; } }
+    public float MoveSpeed { get { return moveSpeed; }  }
     public CinemachineFreeLook freelook;
 
     [field: SerializeField]
@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     protected float maxHp;
-    [SerializeField]
-    protected float currentHp;
+
+    [field : SerializeField]
+    public NotifyValue<float> currentHp { get; set; } = new NotifyValue<float>();
+
     [SerializeField]
     protected float moveSpeed, gravity = -9.8f;
 
@@ -55,6 +57,8 @@ public class Player : MonoBehaviour
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
 
+    public ShowEffect attackEffect;
+
     private void Awake()
     {
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
@@ -72,8 +76,15 @@ public class Player : MonoBehaviour
 
         isAttack = true;
         isBlock = true;
+
+        maxHp = currentHp.Value;
     }
 
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
@@ -152,16 +163,16 @@ public class Player : MonoBehaviour
     public void MinusHp(float attackDamage)
     {
         if (!isBlock)
-            currentHp -= attackDamage/2;
+            currentHp.Value -= attackDamage/2;
         else if(isBlock)
         {
-            currentHp -= attackDamage; 
+            currentHp.Value -= attackDamage; 
         }
     }
 
     public void PlusHp(float Heal)
     {
-        currentHp += Heal;
+        currentHp.Value += Heal;
     }
 
     public void MinusMoveSpeed(float MinusSpeed)
@@ -183,6 +194,11 @@ public class Player : MonoBehaviour
         moveSpeed = 300;
     }
 
+    public void ShowAttackEffect()
+    {
+        var attacEffect = Instantiate(attackEffect);
+        attacEffect.SetPositionAndPlay(transform.position, transform);
+    }
 
 
 

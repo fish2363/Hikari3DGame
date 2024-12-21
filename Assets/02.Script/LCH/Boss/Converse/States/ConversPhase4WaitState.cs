@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConversPhase4WaitState : EnemyState<BossState>
+public class ConversPhase4WaitState : EntityState
 {
     private Converse _converse;
 
-    public ConversPhase4WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public ConversPhase4WaitState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _converse = enemy as Converse;
+        _converse = entity as Converse;
     }
 
     public override void Enter()
@@ -20,7 +20,7 @@ public class ConversPhase4WaitState : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+        Vector3 direction = _converse.player.transform.position - _converse.transform.position;
 
         direction.y = 0;
 
@@ -31,13 +31,13 @@ public class ConversPhase4WaitState : EnemyState<BossState>
 
             Quaternion lookRotation = Quaternion.LookRotation(direction);
 
-            _enemy.transform.rotation = lookRotation;
+            _converse.transform.rotation = lookRotation;
         }
     }
 
     private IEnumerator ChangePhase1State()
     {
         yield return new WaitForSeconds(1f);
-        _converse.BossStateMachine.ChangeState(BossState.Phase4);
+        _converse.ChangeState(BossState.Phase4);
     }
 }
