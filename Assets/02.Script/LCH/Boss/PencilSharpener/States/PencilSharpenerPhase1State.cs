@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PencilSharpenerPhase1State : EnemyState<BossState>
+public class PencilSharpenerPhase1State : EntityState
 {
 
     private PencilSharpener _pencilSharpener;
 
-    public PencilSharpenerPhase1State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public PencilSharpenerPhase1State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _pencilSharpener = enemy as PencilSharpener;
+        _pencilSharpener = entity as PencilSharpener;
     }
 
     public override void Enter()
@@ -41,7 +41,7 @@ public class PencilSharpenerPhase1State : EnemyState<BossState>
     private IEnumerator ChangeChaseState()
     {
         yield return new WaitForSeconds(1f);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+        _pencilSharpener.ChangeState(BossState.Chase);
     }
 
     public override void Exit()

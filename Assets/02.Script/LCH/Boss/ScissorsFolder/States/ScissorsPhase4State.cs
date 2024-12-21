@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class ScissorsPhase4State : EnemyState<BossState>
+public class ScissorsPhase4State : EntityState
 {
 
     private Scissors _scissors;
 
-    public ScissorsPhase4State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public ScissorsPhase4State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _scissors = enemy as Scissors;
+        _scissors = entity as Scissors;
+
     }
 
     public override void Enter()
@@ -40,7 +41,7 @@ public class ScissorsPhase4State : EnemyState<BossState>
     {
         _scissors.transform.DOJump(_scissors.originPos, 15F, 1, 0.5F);
         yield return new WaitForSeconds(1f);
-        _scissors.BossStateMachine.ChangeState(BossState.Chase);
+        _scissors.ChangeState(BossState.Chase);
     }
 
     private Transform FindFarstWall()

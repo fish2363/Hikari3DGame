@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConversPhase2State : EnemyState<BossState>
+public class ConversPhase2State : EntityState
 {
-    private Converse _convers;
-    public ConversPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    private Converse _converse;
+
+    public ConversPhase2State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _convers = enemy as Converse;
+        _converse = entity as Converse;
     }
 
     public override void Enter()
@@ -18,17 +19,17 @@ public class ConversPhase2State : EnemyState<BossState>
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_endTriggerCalled)
+        if (_isTriggerCall)
         {
             Debug.Log("³¡¤¤");
-            _convers.StartCoroutine(ChangeChaseState());
-            _endTriggerCalled = false;
+            _converse.StartCoroutine(ChangeChaseState());
+            _isTriggerCall = false;
         }
     }
 
     private IEnumerator ChangeChaseState()
     {
         yield return new WaitForSeconds(1f);
-        _convers.BossStateMachine.ChangeState(BossState.Chase);
+        _converse.ChangeState(BossState.Chase);
     }
 }

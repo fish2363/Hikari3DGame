@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class ConversPhase1State : EnemyState<BossState>
+public class ConversPhase1State : EntityState
 {
 
     private Converse _converse;
 
-    public ConversPhase1State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public ConversPhase1State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _converse = enemy as Converse;
+        _converse = entity as Converse;
     }
 
     public override void Enter()
@@ -26,6 +26,6 @@ public class ConversPhase1State : EnemyState<BossState>
     private IEnumerator ChangeChaseState()
     {
         yield return new WaitForSeconds(1f);
-        _converse.BossStateMachine.ChangeState(BossState.Chase);
+        _converse.ChangeState(BossState.Chase);
     }
 }

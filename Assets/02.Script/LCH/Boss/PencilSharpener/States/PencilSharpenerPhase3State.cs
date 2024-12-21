@@ -4,14 +4,15 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-public class PencilSharpenerPhase3State : EnemyState<BossState>
+public class PencilSharpenerPhase3State : EntityState
 {
 
     private PencilSharpener _pencilSharpener;
 
-    public PencilSharpenerPhase3State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public PencilSharpenerPhase3State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _pencilSharpener = enemy as PencilSharpener;
+        _pencilSharpener = entity as PencilSharpener;
+
     }
 
     public override void Enter()
@@ -25,6 +26,6 @@ public class PencilSharpenerPhase3State : EnemyState<BossState>
     private IEnumerator ChangeToChase()
     {
         yield return new WaitForSeconds(1f);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+        _pencilSharpener.ChangeState(BossState.Chase);
     }
 }

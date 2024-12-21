@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConverseChaseState : EnemyState<BossState>
+public class ConverseChaseState : EntityState
 {
     private Converse _converse;
     int timer = 0;
 
-    public ConverseChaseState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public ConverseChaseState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _converse = enemy as Converse;
+        _converse = entity as Converse;
     }
 
     public override void Enter()
@@ -23,7 +23,7 @@ public class ConverseChaseState : EnemyState<BossState>
     private IEnumerator ChangeWaitState(int timer)
     {
         yield return new WaitForSeconds(timer);
-        _converse.BossStateMachine.ChangeState(BossState.Wait);
+        _converse.ChangeState(BossState.Wait);
     }
 
     public override void UpdateState()

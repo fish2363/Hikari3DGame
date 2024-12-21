@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PencilSharpenerChaseState : EnemyState<BossState>
+public class PencilSharpenerChaseState : EntityState
 {
     private PencilSharpener _pencilSharpener;
     private int timer;
-    public PencilSharpenerChaseState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public PencilSharpenerChaseState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _pencilSharpener = enemy as PencilSharpener;
+        _pencilSharpener = entity as PencilSharpener;
     }
 
     public override void Enter()
@@ -25,7 +26,7 @@ public class PencilSharpenerChaseState : EnemyState<BossState>
     private IEnumerator ChangeWaitState(int timer)
     {
         yield return new WaitForSeconds(timer);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Wait);
+        _pencilSharpener.ChangeState(BossState.Wait);
     }
 
     public override void UpdateState()
