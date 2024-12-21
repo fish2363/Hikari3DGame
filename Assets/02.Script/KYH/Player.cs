@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     
     public float MaxHp { get { return maxHp; } }
   //  public float CurrentHp { get { return currentHp; } }
-    public float MoveSpeed { get { return moveSpeed; } }
+    public float MoveSpeed { get { return moveSpeed; }  }
     public CinemachineFreeLook freelook;
 
     [field: SerializeField]
@@ -76,6 +76,8 @@ public class Player : MonoBehaviour
 
         isAttack = true;
         isBlock = true;
+
+        maxHp = currentHp.Value;
     }
 
     private void Start()

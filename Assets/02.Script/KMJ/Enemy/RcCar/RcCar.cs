@@ -20,7 +20,7 @@ public class RcCar : Enemy, IAttackable
     public ShowEffect stunEffect;
 
     public Transform stunTransform;
-   
+
 
     protected override void Awake()
     {
@@ -48,7 +48,7 @@ public class RcCar : Enemy, IAttackable
         {
             MoveCompo.isMove = true;
         }
-      
+
     }
 
     public void DashSkill()
@@ -91,7 +91,7 @@ public class RcCar : Enemy, IAttackable
         yield return new WaitForSecondsRealtime(8f);
         _isSkill = true;
 
-       
+
     }
 
     IEnumerator AttackTime()
@@ -108,7 +108,7 @@ public class RcCar : Enemy, IAttackable
         RigidCompo.velocity += moveDir * 10;
 
         yield return new WaitForSeconds(0.1f);
-        
+
         RigidCompo.velocity = Vector3.zero;
         _isAttackTrue = false;
         _isMove = true;
@@ -117,24 +117,31 @@ public class RcCar : Enemy, IAttackable
         _isAttack = true;
     }
 
-   
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             //기본공격
             int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
             collision.transform.TryGetComponent(out Player player);
 
             if (_isAttackTrue)
+            {
                 player.MinusHp(damage);
+                stateMachine.ChangeState(EnemyStatEnum.Stun);
+
+            }
             else if (_isSkillTrue)
+            {
+                stateMachine.ChangeState(EnemyStatEnum.Stun);
                 player.MinusHp(damage += 2);
+            }
 
             RigidCompo.velocity = Vector3.zero;
 
-            stateMachine.ChangeState(EnemyStatEnum.Stun);
+
         }
     }
 
@@ -152,12 +159,12 @@ public class RcCar : Enemy, IAttackable
 
     protected override void EnemyDie()
     {
-        
+
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-        
+
     }
 
     public void HitEnemy(float damage, float knockbackPower)
