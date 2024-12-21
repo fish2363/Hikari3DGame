@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConversWaitState : EnemyState<BossState>
+public class ConversWaitState : EntityState
 {
 
     private Converse _converse;
-    public ConversWaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ConversWaitState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _converse = enemy as Converse;
+        _converse = entity as Converse;
     }
 
     public override void Enter()
@@ -25,16 +26,16 @@ public class ConversWaitState : EnemyState<BossState>
         switch (Phases)
         {
             case 1:
-                _converse.BossStateMachine.ChangeState(BossState.Phase1Wait);
+                _converse.ChangeState(BossState.Phase1Wait);
                 break;
             case 2:
-                _converse.BossStateMachine.ChangeState(BossState.Phase2Wait);
+                _converse.ChangeState(BossState.Phase2Wait);
                 break;
             case 3:
-                _converse.BossStateMachine.ChangeState(BossState.Phase3Wait);
+                _converse.ChangeState(BossState.Phase3Wait);
                 break;
             case 4:
-                _converse.BossStateMachine.ChangeState(BossState.Phase4Wait);
+                _converse.ChangeState(BossState.Phase4Wait);
                 break;
         }
     }

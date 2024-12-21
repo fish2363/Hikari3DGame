@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScissorsChaseState : EnemyState<BossState>
+public class ScissorsChaseState : EntityState
 {
     private Scissors _scissors;
     int timer = 0;
-    public ScissorsChaseState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ScissorsChaseState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _scissors = enemy as Scissors;
+        _scissors = entity as Scissors;
     }
 
     public override void Enter()
@@ -23,7 +24,7 @@ public class ScissorsChaseState : EnemyState<BossState>
     private IEnumerator ChangeWaitState(int timer)
     {
         yield return new WaitForSeconds(timer);
-        _scissors.BossStateMachine.ChangeState(BossState.Wait);
+        _scissors.ChangeState(BossState.Wait);
     }
 
     public override void UpdateState()

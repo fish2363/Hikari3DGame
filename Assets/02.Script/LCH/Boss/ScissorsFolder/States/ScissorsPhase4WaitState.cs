@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class ScissorsPhase4WaitState : EnemyState<BossState>
+public class ScissorsPhase4WaitState : EntityState
 {
 	private Scissors _scissors;
 	private Transform _nearestWall;
 
-	public ScissorsPhase4WaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName)
-		: base(enemy, state, animHashName)
-	{
-		_scissors = enemy as Scissors;
+    public ScissorsPhase4WaitState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
+    {
+		_scissors = entity as Scissors;
+
 	}
 
 	public override void Enter()
@@ -31,7 +31,7 @@ public class ScissorsPhase4WaitState : EnemyState<BossState>
 	{
 		Debug.Log("³¡³ª¹ö·Ç");
 		yield return new WaitForSeconds(1f);
-		_scissors.BossStateMachine.ChangeState(BossState.Phase4);
+		_scissors.ChangeState(BossState.Phase4);
 	}
 
 	private Transform FindNearestWall()
