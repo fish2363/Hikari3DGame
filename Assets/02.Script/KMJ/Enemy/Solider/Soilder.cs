@@ -73,5 +73,8 @@ public class Soilder : Enemy, IAttackable
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
+        var hitEffect = Instantiate(getDamageEffect);
+        hitEffect.SetPositionAndPlay(transform.position, transform);
+
     }
 }

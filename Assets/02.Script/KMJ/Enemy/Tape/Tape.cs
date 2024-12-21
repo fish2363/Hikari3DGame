@@ -9,6 +9,7 @@ public class Tape : Enemy, IAttackable
     public bool _isTrueMove;
 
     [SerializeField] private GameObject _tapeBulletPrbs;
+    [SerializeField] private Transform _shootTranform;
 
     protected override void Awake()
     {
@@ -45,7 +46,7 @@ public class Tape : Enemy, IAttackable
         _isAttack = false;
         _isTrueMove = false;
 
-        Instantiate(_tapeBulletPrbs, transform.position, Quaternion.identity);
+        Instantiate(_tapeBulletPrbs, _shootTranform.position, Quaternion.identity);
 
 
         yield return new WaitForSeconds(2.4f);
@@ -75,5 +76,7 @@ public class Tape : Enemy, IAttackable
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
+        var hit = Instantiate(getDamageEffect);
+        hit.SetPositionAndPlay(transform.position, transform);
     }
 }
