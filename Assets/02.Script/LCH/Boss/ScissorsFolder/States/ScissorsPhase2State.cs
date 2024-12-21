@@ -24,6 +24,12 @@ public class ScissorsPhase2State : EntityState
         _scissors.StartCoroutine(AttackEnemy());
     }
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _scissors.DamgeCaster.CastDamage();
+    }
+
     private IEnumerator AttackEnemy()
     {
         Sequence seq = DOTween.Sequence();

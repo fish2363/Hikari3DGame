@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4211440739110399851}
   - component: {fileID: 8430735360231596354}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: DamgeCast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 6368304113059986235}
   - component: {fileID: 7130312400179905421}
   - component: {fileID: 5215499972774647555}
+  - component: {fileID: 8298924916794974168}
   m_Layer: 0
   m_Name: KaWe (2)
   m_TagString: Untagged
@@ -255,6 +256,7 @@ MonoBehaviour:
   RigidCompo: {fileID: 0}
   player: {fileID: 0}
   originPos: {x: 0, y: 0, z: 0}
+  DamgeCaster: {fileID: 0}
 --- !u!95 &5215499972774647555
 Animator:
   serializedVersion: 5
@@ -276,6 +278,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8298924916794974168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807181735809483894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdc6f54ac21aa6438248c7314a93622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9042532094950556738
 GameObject:
   m_ObjectHideFlags: 0
