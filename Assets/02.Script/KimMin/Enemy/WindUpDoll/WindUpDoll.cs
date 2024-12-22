@@ -25,8 +25,6 @@ public class WindUpDoll : Enemy, IDamageable
     protected virtual void Update()
     {
         _distance = (player.transform.position - transform.position).magnitude;
-
-        FlipEnemy();
     }
 
     public Vector3 GetNextPos()
@@ -46,7 +44,7 @@ public class WindUpDoll : Enemy, IDamageable
         return nextPos;
     }
 
-    private void FlipEnemy()
+    public void FlipEnemy()
     {
         transform.rotation = Quaternion.LookRotation(new Vector3(RigidCompo.velocity.x, 0, RigidCompo.velocity.z));
     }

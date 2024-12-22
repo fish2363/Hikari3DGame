@@ -15,6 +15,7 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
+        _windUpDoll.FlipEnemy();
         Move();
 
         if(_windUpDoll._distance <  _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)

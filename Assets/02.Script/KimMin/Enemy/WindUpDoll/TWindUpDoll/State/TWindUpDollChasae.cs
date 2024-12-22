@@ -22,6 +22,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
+        _windUpDoll.FlipEnemy();
         ChaseTarget();
         CheckSight();
 
