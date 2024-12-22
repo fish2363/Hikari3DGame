@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Spider : Enemy, IAttackable
+public class Spider : Enemy, IDamageable
 {
     private readonly float _gravity = -9.81f;
 
@@ -34,6 +34,12 @@ public class Spider : Enemy, IAttackable
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
     private Color _red = new Color(1f, 0f, 0f, 0.2f);
 
+    private void OnValidate()
+    {
+        startPos = transform.position;
+        GetNextPos();
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -44,7 +50,6 @@ public class Spider : Enemy, IAttackable
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
 
-        startPos = transform.position;
         canAttack = false;
     }
 
@@ -117,13 +122,16 @@ public class Spider : Enemy, IAttackable
         
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
-    {
-        Hp -= damage;
-    }
-
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
 
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Hp -= damage;
+
+        var item = Instantiate(getDamageEffect);
+        item.SetPositionAndPlay(transform.position, transform);
     }
 }
