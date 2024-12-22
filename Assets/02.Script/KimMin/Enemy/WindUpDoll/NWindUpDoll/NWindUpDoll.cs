@@ -13,7 +13,10 @@ public class NWindUpDoll : WindUpDoll
         stateMachine.AddState(EnemyStatEnum.Idle, new NWindUpDollIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new NWindUpDollMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new NWindUpDollAttack(this, stateMachine, "Attack"));
+    }
 
+    private void Start()
+    {
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
     }
 
