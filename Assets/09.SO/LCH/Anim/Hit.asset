@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ec75a900dee98408970939b496e73b, type: 3}
   m_Name: Hit
   m_EditorClassIdentifier: 
-  paramName: Dead
+  paramName: Hit
   paramType: 0
-  hashValue: 1293411866
+  hashValue: 1654612129
