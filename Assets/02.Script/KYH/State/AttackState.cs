@@ -25,7 +25,7 @@ public class AttackState : State, IAttackable
         _player.animator.SetBool("Attack", true);
         _player.RigidCompo.velocity = UnityEngine.Vector3.zero;
 
-
+        _player.ShowAttackEffect();
 
         _player.StartCoroutine(ChangeIdle());
     }

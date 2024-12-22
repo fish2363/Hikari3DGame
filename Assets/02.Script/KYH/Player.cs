@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
     [field: SerializeField] public Transform virtualCamera { get; private set; }
 
-    
+    public bool isStop { get; set; }
     public float MaxHp { get { return maxHp; } }
-    public float CurrentHp { get { return currentHp; } }
-    public float MoveSpeed { get { return moveSpeed; } }
+  //  public float CurrentHp { get { return currentHp; } }
+    public float MoveSpeed { get { return moveSpeed; }  }
     public CinemachineFreeLook freelook;
 
     [field: SerializeField]
@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     protected float maxHp;
-    [SerializeField]
-    protected float currentHp;
+
+    [field : SerializeField]
+    public NotifyValue<float> currentHp { get; set; } = new NotifyValue<float>();
+
     [SerializeField]
     protected float moveSpeed, gravity = -9.8f;
 
@@ -55,6 +57,10 @@ public class Player : MonoBehaviour
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
 
+    public ShowEffect attackEffect;
+
+    float scroll;
+
     private void Awake()
     {
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
@@ -72,14 +78,30 @@ public class Player : MonoBehaviour
 
         isAttack = true;
         isBlock = true;
+
+        maxHp = currentHp.Value;
     }
 
 
     private void Update()
     {
-        Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
-        print(currentHp);
-        stateDictionary[currentEnum].StateUpdate();
+        if(!isStop)
+        {
+            try
+            {
+                freelook.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
+            }
+            catch (Exception e)
+            {
+                print("Mainmenu부터 실행하지 않으면 ESC 안됨미다");
+            }
+            print(currentHp);
+            stateDictionary[currentEnum].StateUpdate();
+        }
+        scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
+        freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
+        freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
+
     }
 
     private void FixedUpdate()
@@ -89,9 +111,12 @@ public class Player : MonoBehaviour
 
     private void HandleAttackEvent()
     {
-        if (isAttack)
+        if (!isStop)
         {
-            ChangeState(StateEnum.Attack);
+            if (isAttack)
+            {
+                ChangeState(StateEnum.Attack);
+            }
         }
     }
 
@@ -114,9 +139,12 @@ public class Player : MonoBehaviour
 
     private void HandleDashEvent()
     {
-        if (AttemptDash())
+        if (!isStop)
         {
-            ChangeState(StateEnum.Dash);
+            if (AttemptDash())
+            {
+                ChangeState(StateEnum.Dash);
+            }
         }
     }
 
@@ -151,17 +179,20 @@ public class Player : MonoBehaviour
 
     public void MinusHp(float attackDamage)
     {
-        if (!isBlock)
-            currentHp -= attackDamage/2;
-        else if(isBlock)
+        if (!isStop)
         {
-            currentHp -= attackDamage; 
+            if (!isBlock)
+                currentHp.Value -= attackDamage / 2;
+            else if (isBlock)
+            {
+                currentHp.Value -= attackDamage;
+            }
         }
     }
 
     public void PlusHp(float Heal)
     {
-        currentHp += Heal;
+        currentHp.Value += Heal;
     }
 
     public void MinusMoveSpeed(float MinusSpeed)
@@ -183,6 +214,11 @@ public class Player : MonoBehaviour
         moveSpeed = 300;
     }
 
+    public void ShowAttackEffect()
+    {
+        var attacEffect = Instantiate(attackEffect);
+        attacEffect.SetPositionAndPlay(transform.position, transform);
+    }
 
 
 

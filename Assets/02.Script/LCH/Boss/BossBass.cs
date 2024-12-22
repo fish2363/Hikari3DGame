@@ -3,40 +3,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BossState
+public abstract class BossBass : Entity
 {
-    Wait,
-    Chase,
-    Phase1,
-    Phase1Wait,
-    Phase2,
-    Phase2Wait,
-    Phase3,
-    Phase3Wait,
-    Phase4,
-    Phase4Wait,
-    Die,
-    Hit,
-}
-
-public abstract class BossBass : EnemyAgent
-{
-   public StateMachine<BossState> BossStateMachine;
     public bool IsPhaseEnd;
     public bool WallChecker = false;
-    public void AnimEndTrigger()
+
+    [SerializeField] private EntityFSMSO _bossFSM;
+
+    [SerializeField] protected StateMachine _stateMachine;
+
+    [field : SerializeField] public EnemyStatSO EnemyStat;
+
+    public Vector3 targetDir;
+
+    public Rigidbody RigidCompo;
+
+    public EntityState CurrentState => _stateMachine.currentState;
+
+    private EntityHealth _health; 
+
+    public Player player;
+
+    [field:SerializeField] public ShowEffect effet;
+
+    protected override void Awake()
     {
-        BossStateMachine.CurrentState.AnimationEndTrigger();
+        base.Awake();
+        RigidCompo = GetComponent<Rigidbody>();
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _health = GetCompo<EntityHealth>();
+        _health.OnDeath += DeadState;
+        _health.OnHit += HitState;
     }
 
-    protected override void EnemyDie()
+    private void HitState()
     {
-        
+        if (IsDead) return;
+        _stateMachine.ChageState(BossState.Hit);
+    }
+
+    private void DeadState()
+    {
+        _stateMachine.ChageState(BossState.Die);
+    }
+
+    protected override void AfterInitialize()
+    {
+        base.AfterInitialize();
+        _stateMachine = new StateMachine(_bossFSM, this);
+    }
+
+    public void ChangeState(BossState newState)
+    {
+        _stateMachine.ChageState(newState);
     }
 
     protected virtual void Update()
+    { 
+        _stateMachine.currentState.UpdateState();
+    }
+
+    public EntityState GetState(StateSO state)
     {
-        BossStateMachine.CurrentState.UpdateState();
+        return _stateMachine.GetState(state.stateName);
     }
 
     private void OnCollisionEnter(Collision collision)

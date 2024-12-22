@@ -12,7 +12,8 @@ public enum EnemyStatEnum
     Chase,
     Attack,
     Skill,
-    Dead
+    Dead,
+    Stun
 }
 public abstract class Enemy : EnemyAgent
 {
@@ -21,11 +22,6 @@ public abstract class Enemy : EnemyAgent
     {
         base.Awake();
         stateMachine = new StateMachine<EnemyStatEnum>();
-    }
-
-    public void StopImmediately()
-    {
-        RigidCompo.velocity = Vector3.zero;
     }
 
     protected abstract void AnimEndTrigger();

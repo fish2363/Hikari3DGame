@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PencilSharpenerPhase2State : EnemyState<BossState>
+public class PencilSharpenerPhase2State : EntityState
 {
 
     private PencilSharpener _pencilSharpener;
     private Vector3 playerPosition;
     private int Count = 0;
-    public PencilSharpenerPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public PencilSharpenerPhase2State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _pencilSharpener = enemy as PencilSharpener;
+        _pencilSharpener = entity as PencilSharpener;
+
     }
+
     public override void Enter()
     {
         base.Enter();
@@ -59,7 +62,7 @@ public class PencilSharpenerPhase2State : EnemyState<BossState>
     private IEnumerator ChangeChaseState()
     {
         yield return new WaitForSeconds(1F);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+        _pencilSharpener.ChangeState(BossState.Chase);
     }
 
     public override void Exit()

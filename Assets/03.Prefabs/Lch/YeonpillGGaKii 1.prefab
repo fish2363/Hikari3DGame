@@ -484,6 +484,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6477060197180082939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2945055312688440754}
+  - component: {fileID: 5482934196439677617}
+  m_Layer: 0
+  m_Name: DamgeCaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2945055312688440754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477060197180082939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.26, z: -0.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6084031216543500346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5482934196439677617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477060197180082939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47be9d58e9620c948afcd896ba291f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _maxAvailableCount: 4
+  _castSize: {x: 1.95, y: 3.92, z: 1.95}
+  _damage: 5
+  _knockBackForce: {x: 5, y: 3, z: 0}
+  cnt: []
 --- !u!1 &7873927844978338082
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,13 +654,14 @@ GameObject:
   - component: {fileID: 1039992480274645251}
   - component: {fileID: 3568116179378575248}
   - component: {fileID: 6153265541318318302}
+  - component: {fileID: 8236352467954807116}
   m_Layer: 0
   m_Name: YeonpillGGaKii 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6084031216543500346
 Transform:
   m_ObjectHideFlags: 0
@@ -629,6 +682,7 @@ Transform:
   - {fileID: 4071924398766065563}
   - {fileID: 1570043217093416431}
   - {fileID: 3824018423739464748}
+  - {fileID: 2945055312688440754}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1039992480274645251
@@ -670,20 +724,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a87c6edc435734aae996b28ffb4303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyStat: {fileID: 11400000, guid: a52cba9cd71f19344b5564ca2c4a8c4a, type: 2}
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 64
-  <range>k__BackingField: 0
-  targetDir: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
   IsPhaseEnd: 0
   WallChecker: 0
+  _bossFSM: {fileID: 11400000, guid: 13b8043140479b647bb9b40cf868f33f, type: 2}
+  EnemyStat: {fileID: 11400000, guid: a52cba9cd71f19344b5564ca2c4a8c4a, type: 2}
+  targetDir: {x: 0, y: 0, z: 0}
+  RigidCompo: {fileID: 0}
+  player: {fileID: 0}
+  effet: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563, type: 3}
   pencilBelt: {fileID: 9077059784681249045, guid: 105b107ee34db614c9f016f1f40d1a35,
     type: 3}
   shotPos: {fileID: 3824018423739464748}
   _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
     type: 3}
+  CastDamge: {fileID: 0}
 --- !u!95 &6153265541318318302
 Animator:
   serializedVersion: 5
@@ -705,6 +759,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8236352467954807116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032496398704748937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8806f5b1a143714ebd8c7993ae1416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9136939356166239220
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +796,7 @@ Transform:
   m_GameObject: {fileID: 9136939356166239220}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.203, z: 0.855}
+  m_LocalPosition: {x: 0, y: 1.203, z: 1.113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
