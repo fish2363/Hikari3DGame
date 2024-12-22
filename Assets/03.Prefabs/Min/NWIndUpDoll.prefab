@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8867446588914355481}
   - component: {fileID: 4172283138466248849}
   - component: {fileID: 2509597400540181836}
+  - component: {fileID: 4472479791099646779}
   m_Layer: 0
   m_Name: NWIndUpDoll
   m_TagString: Untagged
@@ -153,10 +154,25 @@ MonoBehaviour:
   <range>k__BackingField: 0
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  getDamageEffect: {fileID: 6021288747852077177, guid: 0fecd790876c3d54eb8648cf3fee863a,
+    type: 3}
   _distance: 0
   nextPos: {x: 0, y: 0, z: 0}
   moveDir: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
   moveRadius: 0
-  detectRadius: 35
+  detectRadius: 20
   canAttack: 1
+--- !u!114 &4472479791099646779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742548977126682083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0bbd096e26c75c419908d0dcf31ad10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <isMove>k__BackingField: 0

@@ -17,7 +17,8 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        _spider.StopImmediately();
+        _spider.MoveCompo.StopImmediately(_spider);
+
     }
 
     public override void UpdateState()
@@ -37,7 +38,7 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
 
         if ((_spider.nextPos - _spider.transform.position).magnitude <= 2f)
         {
-            _spider.MoveCompo.StopImmediately();
+            _spider.MoveCompo.StopImmediately(_spider);
             _spider.nextPos = _spider.GetNextPos();
         }
         _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;
