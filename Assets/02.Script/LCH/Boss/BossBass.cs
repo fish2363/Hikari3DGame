@@ -33,6 +33,13 @@ public abstract class BossBass : Entity
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _health = GetCompo<EntityHealth>();
         _health.OnDeath += DeadState;
+        _health.OnHit += HitState;
+    }
+
+    private void HitState()
+    {
+        if (IsDead) return;
+        _stateMachine.ChageState(BossState.Hit);
     }
 
     private void DeadState()

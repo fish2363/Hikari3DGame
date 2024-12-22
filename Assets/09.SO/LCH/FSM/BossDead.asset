@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5428fa6a22a2dd04c9b35ea3c7c827b0, type: 3}
   m_Name: BossDead
   m_EditorClassIdentifier: 
-  stateName: 0
-  className: 
-  animParam: {fileID: 0}
+  stateName: 10
+  className: BossDeadState
+  animParam: {fileID: 11400000, guid: a995be519e127da4987a69036a07f494, type: 2}

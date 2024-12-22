@@ -15,6 +15,7 @@ public class BossHitState : EntityState
         base.Enter();
 
         var item = GameObject.Instantiate(_boss.effet);
+        item.SetPositionAndPlay(_boss.transform.position, _boss.transform);
     }
 
     public override void Exit()
