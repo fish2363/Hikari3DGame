@@ -20,13 +20,24 @@ public abstract class BossBass : Entity
 
     public EntityState CurrentState => _stateMachine.currentState;
 
+    private EntityHealth _health; 
+
     public Player player;
+
+    [field:SerializeField] public ShowEffect effet;
 
     protected override void Awake()
     {
         base.Awake();
         RigidCompo = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _health = GetCompo<EntityHealth>();
+        _health.OnDeath += DeadState;
+    }
+
+    private void DeadState()
+    {
+        _stateMachine.ChageState(BossState.Die);
     }
 
     protected override void AfterInitialize()
@@ -41,7 +52,7 @@ public abstract class BossBass : Entity
     }
 
     protected virtual void Update()
-    {
+    { 
         _stateMachine.currentState.UpdateState();
     }
 
