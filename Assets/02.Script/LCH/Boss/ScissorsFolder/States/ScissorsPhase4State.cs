@@ -37,6 +37,12 @@ public class ScissorsPhase4State : EntityState
         });
     }
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _scissors.DamgeCaster.CastDamage();
+    }
+
     private IEnumerator ChangeToChase()
     {
         _scissors.transform.DOJump(_scissors.originPos, 15F, 1, 0.5F);
