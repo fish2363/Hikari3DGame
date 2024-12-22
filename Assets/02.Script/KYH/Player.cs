@@ -61,6 +61,10 @@ public class Player : MonoBehaviour
 
     float scroll;
 
+    public CinemachineVirtualCamera leftCamera;
+    public CinemachineVirtualCamera rightCamera;
+    public bool isCameraOn;
+
     private void Awake()
     {
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
         InputReader.OnJumpEvent += HandleJumpEvent;
         InputReader.AttackEvent += HandleAttackEvent;
         InputReader.OnSheldEvent += HandleBlaockEvent;
+        InputReader.OnZoomEvent += HandleZoomEvent;
 
         isAttack = true;
         isBlock = true;
@@ -82,14 +87,53 @@ public class Player : MonoBehaviour
         maxHp = currentHp.Value;
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void HandleZoomEvent()
+    {
+        isCameraOn = !isCameraOn;
+        if (isCameraOn)
+        {
+            if (!SettingManager.Instance.LRInversion)
+            {
+                print("¿Þ");
+                leftCamera.Priority = 11;
+            }
+            else
+            {
+                print("¿À");
+                rightCamera.Priority = 11;
+            }
+        }
+        else
+        {
+            if (!SettingManager.Instance.LRInversion)
+            {
+                print("¿Þ");
+                leftCamera.Priority = 0;
+            }
+            else
+            {
+                print("¿À");
+                rightCamera.Priority = 0;
+
+            }
+        }
+    }
 
     private void Update()
     {
+        
         if(!isStop)
         {
             try
             {
                 freelook.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
+                freelook.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
             }
             catch (Exception e)
             {
@@ -101,6 +145,24 @@ public class Player : MonoBehaviour
         scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
         freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
         freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
+
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 direction = (transform.position - freelook.transform.position).normalized;
+        RaycastHit[] hits = Physics.RaycastAll(freelook.transform.position, direction, Mathf.Infinity,
+            1 << LayerMask.NameToLayer("Wall"));
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            MeshRenderer[] obj = hits[i].transform.GetComponentsInChildren<MeshRenderer>();
+
+            for(int j =0; j<obj.Length;j++)
+            {
+                obj[j].material.color = new Color(obj[j].material.color.r, obj[j].material.color.g, obj[j].material.color.b, 0.2f);
+            }
+        }
 
     }
 

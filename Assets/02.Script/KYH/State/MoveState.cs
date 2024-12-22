@@ -97,18 +97,25 @@ public class MoveState : State
     private void LookAt()
     {
         var rot = Camera.main.transform.rotation;
-        Vector3 moveVector;
-        GetCommonMoveVectorFromPlayerInput(_player.InputReader.direction.x, _player.InputReader.direction.z, rot, out moveVector);
+        if(!_player.isCameraOn)
+        {
+            Vector3 moveVector;
+            GetCommonMoveVectorFromPlayerInput(_player.InputReader.direction.x, _player.InputReader.direction.z, rot, out moveVector);
 
-        Quaternion targetAngle = Quaternion.LookRotation(moveVector);
-        _player.transform.rotation = Quaternion.Lerp(
-        _player.transform.rotation, targetAngle, Time.deltaTime * rotateSpeed);
+            Quaternion targetAngle = Quaternion.LookRotation(moveVector);
+            _player.transform.rotation = Quaternion.Lerp(
+            _player.transform.rotation, targetAngle, Time.deltaTime * rotateSpeed);
 
-        //_player.transform.forward = moveVector;
-        moveDir = moveVector;
-        moveDir.y = 0;
+            //_player.transform.forward = moveVector;
+            moveDir = moveVector;
+            moveDir.y = 0;
 
-        Debug.Log($"x:{_player.InputReader.direction.x} y:{_player.InputReader.direction.y} dir:{moveDir}");
+            Debug.Log($"x:{_player.InputReader.direction.x} y:{_player.InputReader.direction.y} dir:{moveDir}");
+        }
+        else
+        {
+            
+        }
     }
 
     public override void Exit()

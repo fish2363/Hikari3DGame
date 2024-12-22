@@ -20,6 +20,7 @@ public class MoveCamera : MonoBehaviour
     private float rotationMin = -10f;
     private float rotationMax =80f;
     private float smoothTime =0.02f;
+    [SerializeField]
     private float distance =7f;
     private Vector3 currentVel;
 
