@@ -18,6 +18,7 @@ public class BossDeadState : EntityState
     {
         base.Enter();
         _boss.IsDead = true;
+        _boss.RigidCompo.isKinematic = true;
         _boss.gameObject.layer = _deadLayer;
     }
 }

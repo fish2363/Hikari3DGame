@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9123956648587873269}
   - component: {fileID: 6855042093294260062}
   - component: {fileID: 5998914650756120553}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TWindUpdDoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,11 +103,15 @@ MonoBehaviour:
   <range>k__BackingField: 5
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  getDamageEffect: {fileID: 0}
+  getDamageEffect: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563,
+    type: 3}
+  stunEffect: {fileID: 4889642763405941913, guid: ced1e4629e8d2414e847606e9f0d72c6,
+    type: 3}
+  _stunTrasform: {fileID: 3051414050913196484}
   _distance: 0
   nextPos: {x: 0, y: 0, z: 0}
   moveDir: {x: 5, y: 0, z: 0}
-  startPos: {x: 50, y: 0, z: 50}
+  startPos: {x: -67, y: 0.5, z: 15}
   moveRadius: 20
   interV: {x: 0, y: 0, z: 0}
   isCollision: 0
@@ -126,6 +130,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <isMove>k__BackingField: 0
+--- !u!1 &6311249550246840479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3051414050913196484}
+  m_Layer: 0
+  m_Name: StunTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3051414050913196484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311249550246840479}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.94, z: -0.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4370443040714377182}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4263879391884779573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,7 +236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8f620072b6a35f54a8e6b26fb3f6475f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3051414050913196484}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f620072b6a35f54a8e6b26fb3f6475f,
         type: 3}

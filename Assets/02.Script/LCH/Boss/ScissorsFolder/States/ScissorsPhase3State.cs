@@ -21,7 +21,7 @@ public class ScissorsPhase3State : EntityState
         _originDamge += _scissors.DamgeCaster.Damage;
         _scissors.DamgeCaster.Damage = 20f;
         originMoveSpeed = _scissors.EnemyStat.ChasingSpeed;
-        _scissors.EnemyStat.ChasingSpeed = 10f;
+        _scissors.EnemyStat.ChasingSpeed = 2f;
      
         _scissors.StartCoroutine(PlayerChase());
         
@@ -42,10 +42,13 @@ public class ScissorsPhase3State : EntityState
 
     private IEnumerator ChanseChaseState()
     {
-        yield return new WaitForSeconds(1f);
-        _scissors.ChangeState(BossState.Chase);
-        _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
-        _scissors.DamgeCaster.Damage = _originDamge;
-        Debug.Log(_scissors.EnemyStat.ChasingSpeed);
+        if (!_scissors.IsDead)
+        {
+            yield return new WaitForSeconds(1f);
+            _scissors.ChangeState(BossState.Chase);
+            _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
+            _scissors.DamgeCaster.Damage = _originDamge;
+            
+        }
     }
 }

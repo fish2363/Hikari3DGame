@@ -24,7 +24,10 @@ public class ScissorsChaseState : EntityState
     private IEnumerator ChangeWaitState(int timer)
     {
         yield return new WaitForSeconds(timer);
-        _scissors.ChangeState(BossState.Wait);
+        if (!_scissors.IsDead)
+        {
+            _scissors.ChangeState(BossState.Wait);
+        }
     }
 
     public override void UpdateState()

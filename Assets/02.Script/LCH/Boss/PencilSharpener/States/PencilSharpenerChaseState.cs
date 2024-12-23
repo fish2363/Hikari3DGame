@@ -25,8 +25,11 @@ public class PencilSharpenerChaseState : EntityState
 
     private IEnumerator ChangeWaitState(int timer)
     {
-        yield return new WaitForSeconds(timer);
-        _pencilSharpener.ChangeState(BossState.Wait);
+        if (!_pencilSharpener.IsDead)
+        {
+            yield return new WaitForSeconds(timer);
+            _pencilSharpener.ChangeState(BossState.Wait);
+        }
     }
 
     public override void UpdateState()

@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, IDamageable
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
     [field: SerializeField] public Transform virtualCamera { get; private set; }
 
+    public bool isFullSheld { get; set; }
     public bool isShield { get; set; }
     public bool isStop { get; set; }
 
@@ -119,6 +120,7 @@ public class Player : MonoBehaviour, IDamageable
         _isSkillCoolTime = true;
         _isSkill = true;
         currentCamera = freelook;
+        isFullSheld = false;
     }
 
     private void Start()
@@ -329,11 +331,15 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!isStop)
         {
-            if (!isBlock)
+            if (isFullSheld)
                 return;
             else if (isBlock)
             {
                 currentHp.Value -= damage;
+            }
+            else if(!isShield)
+            {
+                currentHp.Value -= damage / 2;
             }
         }
     }

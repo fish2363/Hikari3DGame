@@ -999,6 +999,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1201841304371152530, guid: 119ad4e1c9f877444b383d5bac5376fe,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678536426334860021, guid: 119ad4e1c9f877444b383d5bac5376fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1995369345685429713, guid: 119ad4e1c9f877444b383d5bac5376fe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1134,6 +1144,11 @@ PrefabInstance:
       propertyPath: <currentHp>k__BackingField.value
       value: 3000
       objectReference: {fileID: 0}
+    - target: {fileID: 7779370914497959397, guid: 119ad4e1c9f877444b383d5bac5376fe,
+        type: 3}
+      propertyPath: m_TagString
+      value: VirtualCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 9140767438194778314, guid: 119ad4e1c9f877444b383d5bac5376fe,
         type: 3}
       propertyPath: m_Name
@@ -1255,11 +1270,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 800976011500056090, guid: 131655edbe4271847b600eaf88013712,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4526980493147139085, guid: 131655edbe4271847b600eaf88013712,
         type: 3}
       propertyPath: m_Name
@@ -1314,21 +1324,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6756715633899526682, guid: 131655edbe4271847b600eaf88013712,
-        type: 3}
-      propertyPath: WhatIsWall.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 6756715633899526682, guid: 131655edbe4271847b600eaf88013712,
-        type: 3}
-      propertyPath: GroundChecker.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 6756715633899526682, guid: 131655edbe4271847b600eaf88013712,
-        type: 3}
-      propertyPath: _groundChecker.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1755,16 +1750,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PencilSharpener
       objectReference: {fileID: 0}
-    - target: {fileID: 1613810998116403422, guid: 190f6589b898b0f49a67b83e545bcb7a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781794045226537079, guid: 190f6589b898b0f49a67b83e545bcb7a,
-        type: 3}
-      propertyPath: _damage
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7219049846091421951, guid: 190f6589b898b0f49a67b83e545bcb7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1814,11 +1799,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7766873904981582148, guid: 190f6589b898b0f49a67b83e545bcb7a,
-        type: 3}
-      propertyPath: MaxHealth
-      value: 1350
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
