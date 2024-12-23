@@ -5,23 +5,11 @@ using Cinemachine;
 
 public class MoveCamera : MonoBehaviour
 {
+
+    public Transform combatLookAt;
+    public Transform orientation;
     [SerializeField]
-    private Transform followTarget;
-
-    [SerializeField]
-    private float speed;
-    public CinemachineVirtualCamera virtualCamera;
-
-    private Vector3 difValue;
-    public float Yaxis;
-    public float Xaxis;
-
-    private float rotSensitive = 3f;
-    private float rotationMin = -10f;
-    private float rotationMax =80f;
-    private float smoothTime =0.02f;
-    private float distance =7f;
-    private Vector3 currentVel;
+    private Player player;
 
     //private void Start()
     //{
@@ -29,30 +17,19 @@ public class MoveCamera : MonoBehaviour
     //    difValue = new Vector3(Mathf.Abs(difValue.x), Mathf.Abs(difValue.y) - 3, Mathf.Abs(difValue.z));
     //}
 
-    private void Awake()
-    {
-        virtualCamera = GetComponent<CinemachineVirtualCamera>();
-    }
-
-
-    private void LateUpdate()
-    {
-        Yaxis = Yaxis + Input.GetAxis("Mouse X") * rotSensitive;
-        Xaxis = Xaxis + Input.GetAxis("Mouse Y") * rotSensitive;
-
-        Xaxis = Mathf.Clamp(Xaxis, rotationMin, rotationMax);
-
-        difValue = Vector3.SmoothDamp(difValue, new Vector3(Xaxis, Yaxis),
-            ref currentVel, smoothTime);
-        this.transform.eulerAngles = difValue;
-
-        transform.position = followTarget.position - transform.forward * distance;
-    }
 
     private void Update()
     {
-        //transform.position = Vector3.Lerp(transform.position,
-        //    followTarget.transform.position - difValue, speed
-        //    );
+        if(player.isCameraOn)
+        {
+            Vector3 viewDir = player.gameObject.transform.position - new Vector3(transform.position.x, player.gameObject.transform.position.y, transform.position.z);
+            orientation.forward = viewDir.normalized;
+
+
+            Vector3 dirToCombatLookAt = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y, transform.position.z);
+            orientation.forward = dirToCombatLookAt.normalized;
+
+            player.gameObject.transform.forward = dirToCombatLookAt.normalized;
+        }
     }
 }

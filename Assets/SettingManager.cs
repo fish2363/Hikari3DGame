@@ -25,6 +25,7 @@ public class SettingManager : MonoBehaviour
     public Dictionary<string, bool> boolSettings = new Dictionary<string, bool>
     {
         { "WayMark", true },
+        { "Change", true },
 
     };
     public float Sensitivity
@@ -35,6 +36,8 @@ public class SettingManager : MonoBehaviour
 
     [SerializeField] private Slider sensitivitySlider;//°¨µµ
     private float _sensitivity = 1.5f;
+
+    public bool LRInversion { get; set; } = true;
 
     [SerializeField]
     private TextMeshProUGUI text;
@@ -77,9 +80,10 @@ public class SettingManager : MonoBehaviour
             {
                 //GameObject.Find("PlayerCharacter(AudioInput)").GetComponent<Animator>().enabled = true;
             }
-            else if (settingName == "MotionBlur" && FindGameObjectByName("MotionBlurVolume"))
+            else if (settingName == "Change" && FindGameObjectByName("LeftCamera") && FindGameObjectByName("RightCamera"))
             {
-                FindGameObjectByName("MotionBlurVolume").SetActive(true);
+                LRInversion = !LRInversion;
+                print(LRInversion);
             }
         }
     }
