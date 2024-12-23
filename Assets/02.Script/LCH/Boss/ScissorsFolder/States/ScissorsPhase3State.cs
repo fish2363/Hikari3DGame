@@ -8,6 +8,7 @@ public class ScissorsPhase3State : EntityState
     private Scissors _scissors;
     private bool _isAttackWait = true;
     private float originMoveSpeed = 0f;
+    private float _originDamge;
 
     public ScissorsPhase3State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
@@ -17,6 +18,8 @@ public class ScissorsPhase3State : EntityState
     public override void Enter()
     {
         base.Enter();
+        _originDamge = _scissors.DamgeCaster.Damage;
+        _scissors.DamgeCaster.Damage = 20f;
         _scissors.StartCoroutine(AttackWaitCoroutine());
         originMoveSpeed = _scissors.EnemyStat.ChasingSpeed;
         _scissors.EnemyStat.ChasingSpeed = 10f;
@@ -63,5 +66,6 @@ public class ScissorsPhase3State : EntityState
     {
         base.Exit();
         _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
+        _scissors.DamgeCaster.Damage = _originDamge;
     }
 }

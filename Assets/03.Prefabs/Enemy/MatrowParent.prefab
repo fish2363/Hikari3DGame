@@ -80,21 +80,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7245027302758431228, guid: 36bc20ad5dcb3404cbecb7239afde1e8,
         type: 3}
-      propertyPath: EnemyStat
-      value: 
-      objectReference: {fileID: 11400000, guid: 071fff81556663d40b813935cc1b98c0,
-        type: 2}
-    - target: {fileID: 7245027302758431228, guid: 36bc20ad5dcb3404cbecb7239afde1e8,
-        type: 3}
       propertyPath: _childPrefab
       value: 
       objectReference: {fileID: 3136629681093692584, guid: 36bc20ad5dcb3404cbecb7239afde1e8,
-        type: 3}
-    - target: {fileID: 7245027302758431228, guid: 36bc20ad5dcb3404cbecb7239afde1e8,
-        type: 3}
-      propertyPath: getDamageEffect
-      value: 
-      objectReference: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

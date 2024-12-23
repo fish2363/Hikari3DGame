@@ -7,6 +7,7 @@ public class ScissorsPhase4State : EntityState
 {
 
     private Scissors _scissors;
+    private float _originDamge;
 
     public ScissorsPhase4State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
@@ -17,7 +18,9 @@ public class ScissorsPhase4State : EntityState
     public override void Enter()
     {
         base.Enter();
-		Transform farWall = FindFarstWall();
+        _originDamge = _scissors.DamgeCaster.Damage;
+        _scissors.DamgeCaster.Damage = 45f;
+        Transform farWall = FindFarstWall();
 		Vector3 directionAwayFromWall = (_scissors.transform.position - farWall.position).normalized;
 		Vector3 targetPosition = farWall.position - directionAwayFromWall * 3f;
 
@@ -99,5 +102,10 @@ public class ScissorsPhase4State : EntityState
             .OnComplete(onComplete);
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        _scissors.DamgeCaster.Damage = _originDamge;
+    }
 }
 //217206

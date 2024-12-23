@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Tape : Enemy, IAttackable
+public class Tape : Enemy, IDamageable
 {
     public bool _isAttack;
 
@@ -73,7 +73,8 @@ public class Tape : Enemy, IAttackable
         throw new NotImplementedException();
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
         var hit = Instantiate(getDamageEffect);

@@ -19,6 +19,11 @@ public class EnemyMovement : MonoBehaviour
         _rbCompo = GetComponent<Rigidbody>();
     }
 
+    public void StopImmediately()
+    {
+        _rbCompo.velocity = Vector3.zero;
+    }
+
     public void StopImmediately(Enemy enemy)
     {
         if (enemy.TryGetComponent(out Rigidbody rigid))
