@@ -99,6 +99,14 @@ public class InputReader : ScriptableObject, KeyAction.IPlayerActions
         }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnDashEvent?.Invoke();
+        }
+    }
+
     //public void OnDefence(InputAction.CallbackContext context)
     //{
     //    throw new NotImplementedException();
