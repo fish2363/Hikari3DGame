@@ -10,6 +10,8 @@ public class PencilSharpener : BossBass
 
     [field : SerializeField] public GameObject _fallingObjectPrefab;
 
+    [field: SerializeField] public Transform JumpPos;
+
     public DamageCast CastDamge;
 
     protected override void Awake()

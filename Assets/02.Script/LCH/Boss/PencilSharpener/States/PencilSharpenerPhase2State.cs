@@ -61,8 +61,12 @@ public class PencilSharpenerPhase2State : EntityState
 
     private IEnumerator ChangeChaseState()
     {
-        yield return new WaitForSeconds(1F);
-        _pencilSharpener.ChangeState(BossState.Chase);
+        if (!_pencilSharpener.IsDead)
+        {
+
+            yield return new WaitForSeconds(1F);
+            _pencilSharpener.ChangeState(BossState.Chase);
+        }
     }
 
     public override void Exit()

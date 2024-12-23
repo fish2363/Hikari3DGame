@@ -42,10 +42,13 @@ public class ScissorsPhase3State : EntityState
 
     private IEnumerator ChanseChaseState()
     {
-        yield return new WaitForSeconds(1f);
-        _scissors.ChangeState(BossState.Chase);
-        _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
-        _scissors.DamgeCaster.Damage = _originDamge;
-        Debug.Log(_scissors.EnemyStat.ChasingSpeed);
+        if (!_scissors.IsDead)
+        {
+            yield return new WaitForSeconds(1f);
+            _scissors.ChangeState(BossState.Chase);
+            _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
+            _scissors.DamgeCaster.Damage = _originDamge;
+            
+        }
     }
 }

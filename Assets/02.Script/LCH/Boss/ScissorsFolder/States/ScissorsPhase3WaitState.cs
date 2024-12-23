@@ -38,7 +38,11 @@ public class ScissorsPhase3WaitState : EntityState
 
     private IEnumerator ChangePhase3State()
     {
-        yield return new WaitForSeconds(2f);
-        _scissors.ChangeState(BossState.Phase3);
+        if (!_scissors.IsDead)
+        {
+            yield return new WaitForSeconds(2f);
+            _scissors.ChangeState(BossState.Phase3);
+        }
+       
     }
 }

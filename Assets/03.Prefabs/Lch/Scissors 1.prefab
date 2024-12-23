@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5133679499112173244}
   - component: {fileID: 5025200441666124923}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamgeCast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 800976011500056090}
   - component: {fileID: 6756715633899526682}
   - component: {fileID: 6920061839123004593}
+  - component: {fileID: 8769260743754966851}
   m_Layer: 7
   m_Name: Scissors 1
   m_TagString: Untagged
@@ -201,7 +202,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4526980493147139085}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -242,6 +243,18 @@ MonoBehaviour:
   effet: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563, type: 3}
   originPos: {x: 0, y: 0, z: 0}
   DamgeCaster: {fileID: 0}
+  _groundChecker:
+    serializedVersion: 2
+    m_Bits: 256
+  WhatIsWall:
+    serializedVersion: 2
+    m_Bits: 512
+  colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &6920061839123004593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +270,27 @@ MonoBehaviour:
   MaxHealth: 850
   _currentHealth: 0
   _knockBackTime: 0.5
+--- !u!65 &8769260743754966851
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526980493147139085}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.6267214, y: 1, z: 7.9153976}
+  m_Center: {x: -0.11394048, y: 0, z: 0.36358547}
 --- !u!1 &6168107123854163528
 GameObject:
   m_ObjectHideFlags: 0

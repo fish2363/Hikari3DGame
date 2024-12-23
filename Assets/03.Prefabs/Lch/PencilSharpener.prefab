@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 72689751663515703}
   - component: {fileID: 3979239716652070536}
   - component: {fileID: 7766873904981582148}
+  - component: {fileID: 6900790844618501654}
   m_Layer: 7
   m_Name: PencilSharpener
   m_TagString: Untagged
@@ -319,6 +320,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4367962456302895072}
+  - {fileID: 1858891282447635395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &72689751663515703
@@ -373,6 +375,7 @@ MonoBehaviour:
   shotPos: {fileID: 7447535647409929240}
   _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
     type: 3}
+  JumpPos: {fileID: 1858891282447635395}
   CastDamge: {fileID: 0}
 --- !u!114 &7766873904981582148
 MonoBehaviour:
@@ -386,9 +389,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bdfed7e36b67046baf2e023d274c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
+  MaxHealth: 1350
   _currentHealth: 0
   _knockBackTime: 0.5
+--- !u!65 &6900790844618501654
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613810998116403422}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 4.0562468, z: 1.8433956}
+  m_Center: {x: 0, y: 0.016622066, z: -0.1240893}
 --- !u!1 &2334634058731851236
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +633,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3396018944585280537, guid: 842d3f947630c9d47a055860749dcab2, type: 3}
+--- !u!1 &7229041016814650434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1858891282447635395}
+  m_Layer: 7
+  m_Name: JumpPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1858891282447635395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7229041016814650434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7219049846091421951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8725142903253341676
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3612231384139861678}
   - component: {fileID: 5781794045226537079}
+  - component: {fileID: 9116070884462304507}
   m_Layer: 0
   m_Name: DamgeCaster
   m_TagString: Untagged
@@ -764,9 +820,30 @@ MonoBehaviour:
     m_Bits: 64
   _maxAvailableCount: 4
   _castSize: {x: 1.95, y: 3.92, z: 1.95}
-  _damage: 5
+  Damage: 0
   _knockBackForce: {x: 5, y: 3, z: 0}
   cnt: []
+--- !u!65 &9116070884462304507
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8742441332317521009}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 4.0819235, z: 2.2009068}
+  m_Center: {x: 0, y: -0.08425343, z: -0.00783968}
 --- !u!1 &8831418362458891064
 GameObject:
   m_ObjectHideFlags: 0

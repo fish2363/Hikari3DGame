@@ -40,7 +40,10 @@ public class PencilSharpenerPhase3WaitState : EntityState
 
     private IEnumerator ChangePhase3State()
     {
-        yield return new WaitForSeconds(3f);
-        _pencilSharpener.ChangeState(BossState.Phase3);
+        if (!_pencilSharpener.IsDead)
+        {
+            yield return new WaitForSeconds(3f);
+            _pencilSharpener.ChangeState(BossState.Phase3);
+        }
     }
 }

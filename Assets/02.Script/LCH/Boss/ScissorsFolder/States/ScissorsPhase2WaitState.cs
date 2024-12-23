@@ -40,8 +40,10 @@ public class ScissorsPhase2WaitState : EntityState
 
     private IEnumerator ChangePhase2State()
     {
-        Debug.Log("너 이상해");
-        yield return new WaitForSeconds(2f);
-        _scissors.ChangeState(BossState.Phase2);
+        if (!_scissors.IsDead)
+        {
+            yield return new WaitForSeconds(2f);
+            _scissors.ChangeState(BossState.Phase2);
+        }
     }
 }

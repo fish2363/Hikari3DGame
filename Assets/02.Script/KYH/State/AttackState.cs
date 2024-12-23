@@ -71,9 +71,14 @@ public class AttackState : State
         {
             _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
 
-            hittor.transform.TryGetComponent(out IDamageable attackIner);
+            Debug.Log(hittor);
+            
 
-            attackIner.ApplyDamage(_player.currentWeaponData.weaponDamage);
+            if(hittor.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.ApplyDamage(_player.currentWeaponData.weaponDamage);
+            }
+            
         }
     }
 
