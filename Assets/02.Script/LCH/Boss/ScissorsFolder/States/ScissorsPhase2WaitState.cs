@@ -22,6 +22,7 @@ public class ScissorsPhase2WaitState : EntityState
     public override void UpdateState()
     {
         base.UpdateState();
+
         Vector3 direction = _scissors.player.transform.position - _scissors.transform.position;
 
         direction.y = 0;

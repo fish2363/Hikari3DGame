@@ -528,24 +528,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47be9d58e9620c948afcd896ba291f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contactFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  _whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
   _maxAvailableCount: 4
-  _castSize: {x: 1.95, y: -3.78, z: 1.95}
+  _castSize: {x: 1.95, y: 3.92, z: 1.95}
   _damage: 5
   _knockBackForce: {x: 5, y: 3, z: 0}
+  cnt: []
 --- !u!1 &7873927844978338082
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,11 +731,13 @@ MonoBehaviour:
   targetDir: {x: 0, y: 0, z: 0}
   RigidCompo: {fileID: 0}
   player: {fileID: 0}
+  effet: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563, type: 3}
   pencilBelt: {fileID: 9077059784681249045, guid: 105b107ee34db614c9f016f1f40d1a35,
     type: 3}
   shotPos: {fileID: 3824018423739464748}
   _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
     type: 3}
+  CastDamge: {fileID: 0}
 --- !u!95 &6153265541318318302
 Animator:
   serializedVersion: 5
@@ -804,7 +796,7 @@ Transform:
   m_GameObject: {fileID: 9136939356166239220}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.203, z: 0.855}
+  m_LocalPosition: {x: 0, y: 1.203, z: 1.113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -76,10 +76,13 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Player player;
     private bool isChange;
     public List<GameObject> weaponCount = new List<GameObject>();
+
     public List<GameObject> LeftWeaponManager = new List<GameObject>();
     [SerializeField] private GameObject currentWeaapon;
 
-    
+    private bool _isChangeSecontWaepon;
+    private bool _isChangeThirdWaepon;
+
 
     private void Awake()
     {
@@ -88,6 +91,9 @@ public class WeaponManager : MonoBehaviour
         player.currentWeaponData = weaponCount[0].GetComponent<ThisWeaponData>().weaponData;
         player.animator.runtimeAnimatorController = weaponCount[0].GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
         currentWeaapon = weaponCount[0];
+
+        _isChangeSecontWaepon = false;
+        _isChangeThirdWaepon = false;
     }
 
     private void Update()
@@ -110,7 +116,16 @@ public class WeaponManager : MonoBehaviour
 
     public void GetWeapon(WeaponData weaponData)
     {
-        weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}").transform.GetChild(0).gameObject);
+        if (_isChangeSecontWaepon == false)
+        {
+            weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}").transform.GetChild(0).gameObject);
+            _isChangeSecontWaepon = true;
+        }
+        else if (_isChangeSecontWaepon)
+        {
+            weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}").transform.GetChild(0).gameObject);
+            _isChangeThirdWaepon = true;
+        }
     }
 
     private void ChangeWeapon()
@@ -119,24 +134,17 @@ public class WeaponManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                if (weaponCount[1] == null || weaponCount[2] == null)
-                    return;
                 ChangeItem(0, 0);
                 StartCoroutine(ChangeWait());
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && _isChangeSecontWaepon)
             {
-                if (weaponCount[1] == null)
-                    return;
                 ChangeItem(0, 1);
                 StartCoroutine(ChangeWait());
-
             }
 
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && _isChangeThirdWaepon)
             {
-                if (weaponCount[2] == null)
-                    return;
                 ChangeItem(0, 2);
                 StartCoroutine(ChangeWait());
 
