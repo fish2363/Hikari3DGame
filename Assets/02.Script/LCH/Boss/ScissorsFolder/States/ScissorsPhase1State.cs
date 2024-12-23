@@ -23,7 +23,11 @@ public class ScissorsPhase1State : EntityState
 
     private IEnumerator ChanseChaseState()
     {
-        yield return new WaitForSeconds(1f);
-        _scissors.ChangeState(BossState.Chase);
+        if (!_scissors.IsDead)
+        {
+
+            yield return new WaitForSeconds(1f);
+            _scissors.ChangeState(BossState.Chase);
+        }
     }
 }

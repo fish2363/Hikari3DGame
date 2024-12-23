@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PencilSharpenerPhase1State : EntityState
 {
 
     private PencilSharpener _pencilSharpener;
+    private Vector3 _oringinPos;
 
     public PencilSharpenerPhase1State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
@@ -15,7 +17,9 @@ public class PencilSharpenerPhase1State : EntityState
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(Vector3.up * 8,ForceMode.Impulse);
+        _oringinPos = new Vector3(_pencilSharpener.transform.position.x
+            ,_pencilSharpener.transform.position.y,_pencilSharpener.transform.position.z);
+        _pencilSharpener.transform.DOMoveY(_pencilSharpener.JumpPos.position.y,1.2F);
         _pencilSharpener.StartCoroutine(AttackWaitCoroutine());
     }
 
@@ -40,8 +44,12 @@ public class PencilSharpenerPhase1State : EntityState
 
     private IEnumerator ChangeChaseState()
     {
-        yield return new WaitForSeconds(1f);
-        _pencilSharpener.ChangeState(BossState.Chase);
+        if (!_pencilSharpener.IsDead)
+        {
+            _pencilSharpener.transform.DOMove(_oringinPos, 0.5f);
+            yield return new WaitForSeconds(1f);
+            _pencilSharpener.ChangeState(BossState.Chase);
+        }
     }
 
     public override void Exit()

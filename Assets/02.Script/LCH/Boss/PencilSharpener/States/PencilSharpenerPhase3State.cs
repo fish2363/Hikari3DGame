@@ -34,13 +34,16 @@ public class PencilSharpenerPhase3State : EntityState
 
     private IEnumerator ChangeToChase()
     {
-        yield return new WaitForSeconds(1f);
-        _pencilSharpener.ChangeState(BossState.Chase);
+        if (!_pencilSharpener.IsDead)
+        {
+            yield return new WaitForSeconds(1f);
+            _pencilSharpener.ChangeState(BossState.Chase);
+            _pencilSharpener.CastDamge.Damage = _oringinDamge;
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
-        _pencilSharpener.CastDamge.Damage = _oringinDamge;
     }
 }

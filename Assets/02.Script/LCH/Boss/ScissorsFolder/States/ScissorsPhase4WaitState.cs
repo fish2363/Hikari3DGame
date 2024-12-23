@@ -72,8 +72,11 @@ public class ScissorsPhase4WaitState : EntityState
 
     private IEnumerator ChangeToPhase4State()
 	{
-		yield return new WaitForSeconds(0.5f);
-		_scissors.ChangeState(BossState.Phase4);
+        if (!_scissors.IsDead)
+        {
+			yield return new WaitForSeconds(0.5f);
+			_scissors.ChangeState(BossState.Phase4);
+		}
 	}
 
 	private Transform FindNearestWall()
