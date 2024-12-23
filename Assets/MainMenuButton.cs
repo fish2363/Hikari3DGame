@@ -17,7 +17,7 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField] private PlayableDirector startTimeLine;
     private CinemachineBasicMultiChannelPerlin noise;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-
+    [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private AudioSource bgm;
 
 
@@ -37,7 +37,7 @@ public class MainMenuButton : MonoBehaviour
         startTimeLine.Play();
         //이후 작업
         bgm.Stop();
-
+        particleSystem.gameObject.SetActive(false);
         blackImage.GetComponent<FadeEffect>().FadeIn();
 
         StartCoroutine(SceneMove());
