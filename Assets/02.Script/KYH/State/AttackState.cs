@@ -84,10 +84,12 @@ public class AttackState : State
 
             if (_player.currentWeaponData.name == "Pencil")
             {
+                BroAudio.Pause(_player._PencilSwingSfx);
                 BroAudio.Play(_player._PencilAttackSfx);
             }
             else if (_player.currentWeaponData.name == "Spon")
             {
+                BroAudio.Pause(_player._sponSwingSfx);
                 BroAudio.Play(_player._sponAttackSfx);
             }
 
