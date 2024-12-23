@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ami.BroAudio;
 
 public class Scissors : BossBass
 {
@@ -16,6 +17,12 @@ public class Scissors : BossBass
     [field: SerializeField] public LayerMask WhatIsWall;
 
     [field : SerializeField] public Collider[] colliders;
+
+    [field: SerializeField] public SoundID ScissorsSfx;
+
+    [field: SerializeField] public SoundID ScissorsThrowingSfx;
+
+    [field: SerializeField] public SoundID QuickScissorsSfx;
 
     protected override void Awake()
     {
