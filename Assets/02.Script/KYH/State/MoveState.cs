@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Unity.Mathematics;
+using Ami.BroAudio;
 
 public class MoveState : State
 {
@@ -26,6 +27,7 @@ public class MoveState : State
 
     public override void Enter()
     {
+        BroAudio.Play(_player._walkSound);
         base.Enter();
         _player.RigidCompo.velocity = Vector3.zero;
     }
@@ -112,6 +114,7 @@ public class MoveState : State
 
     public override void Exit()
     {
+        BroAudio.Pause(_player._walkSound);
         base.Exit();
     }
 }
