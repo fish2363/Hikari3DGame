@@ -173,7 +173,11 @@ MonoBehaviour:
   <range>k__BackingField: 0
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  getDamageEffect: {fileID: 0}
+  getDamageEffect: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563,
+    type: 3}
+  stunEffect: {fileID: 4889642763405941913, guid: ced1e4629e8d2414e847606e9f0d72c6,
+    type: 3}
+  _stunTrasform: {fileID: 8809541181578753508}
   _isAttack: 0
   _isSkill: 0
   _isMove: 0
@@ -182,9 +186,6 @@ MonoBehaviour:
   _isLook: 0
   hitEffect: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563,
     type: 3}
-  stunEffect: {fileID: 4889642763405941913, guid: ced1e4629e8d2414e847606e9f0d72c6,
-    type: 3}
-  stunTransform: {fileID: 8809541181578753508}
 --- !u!114 &7597013774016474790
 MonoBehaviour:
   m_ObjectHideFlags: 0

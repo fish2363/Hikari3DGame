@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BWindUpDoll : WindUpDoll
 {
-    public GameObject explostionEffect;
+    public GameObject explostionEffect1;
+    public GameObject explostionEffect2;
+    public GameObject explosionSmokeEffect;
 
     protected override void Awake()
     {

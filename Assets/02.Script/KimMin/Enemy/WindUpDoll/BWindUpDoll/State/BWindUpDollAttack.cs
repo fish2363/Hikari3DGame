@@ -17,6 +17,12 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         _windUpDoll.MoveCompo.StopImmediately();
+
+        Vector3 spawnPos = _windUpDoll.transform.position;
+        spawnPos.y += 1;
+
+        GameObject.Instantiate(_windUpDoll.explosionSmokeEffect, spawnPos, Quaternion.identity);
+
     }
 
     public override void UpdateState()
@@ -33,7 +39,10 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
 
     private void Explostion()
     {
+        Vector3 spawnPos = _windUpDoll.transform.position;
+        GameObject.Instantiate(_windUpDoll.explostionEffect1, spawnPos, Quaternion.identity);
+        spawnPos.y += 2;
+        GameObject.Instantiate(_windUpDoll.explostionEffect2, spawnPos, Quaternion.identity);
         _windUpDoll.gameObject.SetActive(false);
-        _windUpDoll.InstantiateObject(_windUpDoll.explostionEffect, _windUpDoll.transform.position);
     }
 }
