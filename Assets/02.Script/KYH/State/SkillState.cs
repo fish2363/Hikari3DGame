@@ -15,14 +15,23 @@ public class SkillState : State
 
     public override void Enter()
     {
-        _player.StartCoroutine(Skill());
-        _player.animator.SetBool("Attack", true);
+        if (_player.currentWeaponData.name == "Pencil")
+        {
+            _player.StartCoroutine(Skill());
+        }
+        else if (_player.currentWeaponData.name == "Spon")
+        {
+            _player.StartCoroutine(Skill2());
+        }
+
         base.Enter();
 
     }
 
     IEnumerator Skill()
     {
+        _player.ShowAttackEffect();
+        _player.animator.SetBool("Skill", true);
         _player._isSkill = false;
 
         _player._isSkillCoolTime = false;
@@ -32,14 +41,48 @@ public class SkillState : State
         AttackPlayer();
 
         _player._isSkill = true;
+        _player.animator.SetBool("Skill", false);
 
         yield return new WaitForSeconds(18.7f);
         _player._isSkillCoolTime = true;
     }
 
-    private void AttackPlayer()
+    IEnumerator Skill2()
     {
         _player.ShowAttackEffect();
+        _player.animator.SetBool("Attack", true);
+        _player._isSkill = false;
+
+        _player._isSkillCoolTime = false;
+
+
+        yield return new WaitForSeconds(0.93f);
+        CrashEnemy();
+
+        _player._isSkill = true;
+        _player.animator.SetBool("Attack", false);
+
+        yield return new WaitForSeconds(18.7f);
+        _player._isSkillCoolTime = true;
+    }
+
+    public void CrashEnemy()
+    {
+        
+        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
+
+        foreach (Collider hittor in hit)
+        {
+            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
+
+            hittor.TryGetComponent(out IDamageable damamge);
+
+            damamge.ApplyDamage(_player.currentWeaponData.weaponDamage += 30);
+        }
+    }
+
+    private void AttackPlayer()
+    {
         Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
 
         foreach (Collider hittor in hit)
@@ -62,7 +105,7 @@ public class SkillState : State
     public override void Exit()
     {
         base.Exit();
-        _player.animator.SetBool("Attack", false);
+ 
         _player.animator.SetFloat("Velocity", 0);
     }
 }
