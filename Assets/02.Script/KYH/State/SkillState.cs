@@ -30,6 +30,7 @@ public class SkillState : State
 
     IEnumerator Skill()
     {
+        _player.ShowAttackEffect();
         _player.animator.SetBool("Skill", true);
         _player._isSkill = false;
 
@@ -48,6 +49,7 @@ public class SkillState : State
 
     IEnumerator Skill2()
     {
+        _player.ShowAttackEffect();
         _player.animator.SetBool("Attack", true);
         _player._isSkill = false;
 
@@ -66,7 +68,6 @@ public class SkillState : State
 
     public void CrashEnemy()
     {
-        _player.ShowAttackEffect();
         
         Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
 
@@ -82,7 +83,6 @@ public class SkillState : State
 
     private void AttackPlayer()
     {
-        _player.ShowAttackEffect();
         Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
 
         foreach (Collider hittor in hit)

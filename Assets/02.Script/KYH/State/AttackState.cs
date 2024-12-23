@@ -14,6 +14,7 @@ public class AttackState : State
 
     public override void Enter()
     {
+        
         base.Enter();
         Attack();
     }
@@ -34,6 +35,8 @@ public class AttackState : State
 
     IEnumerator CommonSword()
     {
+        _player.ShowAttackEffect();
+
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
 
         AttackPlayer();
@@ -48,11 +51,11 @@ public class AttackState : State
 
     IEnumerator DoubleSword()
     {
-        AttackPlayer();
+        DoubleAttackPlayer();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
 
-        AttackPlayer();
+        DoubleAttackPlayer();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
         _player.isAttack = true;
@@ -61,6 +64,21 @@ public class AttackState : State
     }
 
     private void AttackPlayer()
+    {
+        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.size, _player.transform.rotation, _player.whatIsEnemy);
+
+        foreach (Collider hittor in hit)
+        {
+            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
+
+            hittor.transform.TryGetComponent(out IDamageable attackIner);
+
+            attackIner.ApplyDamage(_player.currentWeaponData.weaponDamage);
+        }
+    }
+
+
+    private void DoubleAttackPlayer()
     {
         _player.ShowAttackEffect();
         Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.size, _player.transform.rotation, _player.whatIsEnemy);
@@ -74,7 +92,6 @@ public class AttackState : State
             attackIner.ApplyDamage(_player.currentWeaponData.weaponDamage);
         }
     }
-
     public override void StateUpdate()
     {
         base.StateUpdate();
