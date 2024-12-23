@@ -8,5 +8,6 @@ public enum StateEnum
     Move,
     Attack,
     Dash,
-    Sheld
+    Sheld,
+    Die
 }

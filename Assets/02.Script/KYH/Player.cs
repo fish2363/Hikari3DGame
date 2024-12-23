@@ -6,7 +6,7 @@ using UnityEngine;
 using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
@@ -80,6 +80,9 @@ public class Player : MonoBehaviour
         isBlock = true;
 
         maxHp = currentHp.Value;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -102,6 +105,16 @@ public class Player : MonoBehaviour
         freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
         freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
 
+        Die();
+        MinusPlayerHealth();
+    }
+
+    public void MinusPlayerHealth()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            currentHp.Value -= 1000;
+        }
     }
 
     private void FixedUpdate()
@@ -177,15 +190,15 @@ public class Player : MonoBehaviour
         stateDictionary[currentEnum].Enter();
     }
 
-    public void MinusHp(float attackDamage)
+    public void ApplyDamage(float damage)
     {
         if (!isStop)
         {
             if (!isBlock)
-                currentHp.Value -= attackDamage / 2;
+                currentHp.Value -= damage / 2;
             else if (isBlock)
             {
-                currentHp.Value -= attackDamage;
+                currentHp.Value -= damage;
             }
         }
     }
@@ -193,6 +206,14 @@ public class Player : MonoBehaviour
     public void PlusHp(float Heal)
     {
         currentHp.Value += Heal;
+    }
+
+    public void Die()
+    {
+        if(currentHp.Value <= 0)
+        {
+            ChangeState(StateEnum.Die);
+        }
     }
 
     public void MinusMoveSpeed(float MinusSpeed)
@@ -228,4 +249,5 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireCube(RayTransform.position, size);
         Gizmos.color = Color.white;
     }
+
 }

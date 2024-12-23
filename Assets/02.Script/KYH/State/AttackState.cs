@@ -1,9 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
-using DG.Tweening;
-using System.Numerics;
 
-public class AttackState : State, IAttackable
+public class AttackState : State
 {
     private Player _player;
 
@@ -27,28 +26,50 @@ public class AttackState : State, IAttackable
 
         _player.ShowAttackEffect();
 
-        _player.StartCoroutine(ChangeIdle());
+        if (_player.currentWeaponData.name == "Clip")
+            _player.StartCoroutine(DoubleSword());
+        else
+            _player.StartCoroutine(CommonSword());
     }
 
-    IEnumerator ChangeIdle()
+    IEnumerator CommonSword()
     {
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
 
-        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.size, _player.transform.rotation, _player.whatIsEnemy);
-
-        foreach (Collider hittor in hit)
-        {
-            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10,90);
-
-            hittor.transform.TryGetComponent(out IAttackable attackIner);
-
-            attackIner.HitEnemy(_player.currentWeaponData.weaponDamage, 3);
-        }
+        AttackPlayer();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
         _player.isAttack = true;
         _player.animator.SetBool("Attack", false);
         _player.ChangeState(StateEnum.Idle);
+    }
+
+    IEnumerator DoubleSword()
+    {
+        AttackPlayer();
+
+        yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
+
+        AttackPlayer();
+
+        yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
+        _player.isAttack = true;
+        _player.animator.SetBool("Attack", false);
+        _player.ChangeState(StateEnum.Idle);
+    }
+
+    private void AttackPlayer()
+    {
+        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.size, _player.transform.rotation, _player.whatIsEnemy);
+
+        foreach (Collider hittor in hit)
+        {
+            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
+
+            hittor.transform.TryGetComponent(out IDamageable attackIner);
+
+            attackIner.ApplyDamage(_player.currentWeaponData.weaponDamage);
+        }
     }
 
     public override void StateUpdate()
@@ -60,15 +81,5 @@ public class AttackState : State, IAttackable
     {
         _player.animator.SetFloat("Velocity", 0);
         base.Exit();
-    }
-
-    public void Attack(Player agent, LayerMask hittable, UnityEngine.Vector3 direction)
-    {
-
-    }
-
-    public void HitEnemy(float damage, float knockbackPower)
-    {
-
     }
 }

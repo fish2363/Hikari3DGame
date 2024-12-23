@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Soilder : Enemy, IAttackable
+public class Soilder : Enemy, IDamageable
 {
     public Vector3 startPos;
     public float moveRadius = 10;
@@ -70,11 +70,10 @@ public class Soilder : Enemy, IAttackable
         throw new System.NotImplementedException();
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
         var hitEffect = Instantiate(getDamageEffect);
         hitEffect.SetPositionAndPlay(transform.position, transform);
-
     }
 }
