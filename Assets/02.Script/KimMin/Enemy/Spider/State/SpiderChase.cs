@@ -24,10 +24,6 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         ChaseTarget();
         CheckSight();
 
-        if (_spider.isCollision)
-        {
-            _spider.stateMachine.ChangeState(EnemyStatEnum.Attack);
-        }
         if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);

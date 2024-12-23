@@ -1,9 +1,6 @@
 using DG.Tweening;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class SkillState : State
 {
@@ -15,11 +12,11 @@ public class SkillState : State
 
     public override void Enter()
     {
-        if (_player.currentWeaponData.name == "Pencil")
+        if (_player.currentWeaponData.name == "Spon")
         {
             _player.StartCoroutine(Skill());
         }
-        else if (_player.currentWeaponData.name == "Spon")
+        else if (_player.currentWeaponData.name == "Pencil")
         {
             _player.StartCoroutine(Skill2());
         }
@@ -31,7 +28,7 @@ public class SkillState : State
     IEnumerator Skill()
     {
         _player.ShowAttackEffect();
-        _player.animator.SetBool("Skill", true);
+        _player.animator.SetBool("Attack", true);
         _player._isSkill = false;
 
         _player._isSkillCoolTime = false;
@@ -41,71 +38,63 @@ public class SkillState : State
         AttackPlayer();
 
         _player._isSkill = true;
-        _player.animator.SetBool("Skill", false);
-
-        yield return new WaitForSeconds(18.7f);
-        _player._isSkillCoolTime = true;
-    }
-
-    IEnumerator Skill2()
-    {
-        _player.ShowAttackEffect();
-        _player.animator.SetBool("Attack", true);
-        _player._isSkill = false;
-
-        _player._isSkillCoolTime = false;
-
-
-        yield return new WaitForSeconds(0.7f);
-        CrashEnemy();
-
-        _player._isSkill = true;
         _player.animator.SetBool("Attack", false);
 
         yield return new WaitForSeconds(18.7f);
         _player._isSkillCoolTime = true;
     }
 
-    public void CrashEnemy()
+
+    public IEnumerator Skill2()
     {
-        
-        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
+        player.animator.SetBool("Sheld", true);
+        _player.RigidCompo.velocity = UnityEngine.Vector3.zero;
+        _player._isSkill = false;
+        _player.isFullSheld = true;
 
-        foreach (Collider hittor in hit)
-        {
-            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
+        _player._isSkillCoolTime = false;
 
-            hittor.TryGetComponent(out IDamageable damamge);
+        yield return new WaitForSeconds(3);
 
-            damamge.ApplyDamage(_player.currentWeaponData.weaponDamage += 30);
-        }
-    }
+        _player._isSkill = true;
+        _player.animator.SetBool("Sheld", false);
+        _player.isFullSheld = false;
 
-    private void AttackPlayer()
-    {
-        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
-
-        foreach (Collider hittor in hit)
-        {
-            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
-
-            hittor.GetComponent<Enemy>().stateMachine.ChangeState(EnemyStatEnum.Stun);
-        }
+        yield return new WaitForSeconds(17f);
+        _player._isSkillCoolTime = true;
     }
 
 
-    public override void StateUpdate()
+private void AttackPlayer()
+{
+    Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
+
+    foreach (Collider hittor in hit)
     {
-        base.StateUpdate();
-        if(_player._isSkill)
-        {
-            _player.ChangeState(StateEnum.Idle);
-        }
+        _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
+
+            if (hittor.TryGetComponent(out Enemy enemy))
+            {
+                enemy.stateMachine.ChangeState(EnemyStatEnum.Stun);
+            }
+            else
+                return;
     }
-    public override void Exit()
+}
+
+
+public override void StateUpdate()
+{
+    base.StateUpdate();
+    if (_player._isSkill)
     {
-        base.Exit();
- 
-        _player.animator.SetFloat("Velocity", 0);
+        _player.ChangeState(StateEnum.Idle);
     }
+}
+public override void Exit()
+{
+    base.Exit();
+
+    _player.animator.SetFloat("Velocity", 0);
+}
 }

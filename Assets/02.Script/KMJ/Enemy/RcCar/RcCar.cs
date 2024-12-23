@@ -17,9 +17,6 @@ public class RcCar : Enemy, IDamageable
 
     public ShowEffect hitEffect;
 
-    public ShowEffect stunEffect;
-
-    public Transform stunTransform;
 
 
     protected override void Awake()
@@ -41,10 +38,14 @@ public class RcCar : Enemy, IDamageable
 
     private void Update()
     {
+
+        range = Vector3.Distance(transform.position, _player.transform.position);
+
+
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 6)
+        if (range <= 10)
         {
             MoveCompo.isMove = true;
         }
@@ -149,14 +150,6 @@ public class RcCar : Enemy, IDamageable
     {
         throw new System.NotImplementedException();
     }
-
-    public void StunEffect()
-    {
-        var stun = Instantiate(stunEffect);
-
-        stun.SetPositionAndPlay(stunTransform.position, transform);
-    }
-
     protected override void EnemyDie()
     {
 
