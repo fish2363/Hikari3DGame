@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3252975155758894034}
   - component: {fileID: 930817049622953543}
   - component: {fileID: 4869698945973638744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,11 @@ MonoBehaviour:
   <range>k__BackingField: 5
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  getDamageEffect: {fileID: 0}
+  getDamageEffect: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563,
+    type: 3}
+  stunEffect: {fileID: 4889642763405941913, guid: ced1e4629e8d2414e847606e9f0d72c6,
+    type: 3}
+  _stunTrasform: {fileID: 4676139693861701964}
   interV: {x: 0, y: 0, z: 0}
   _radius: {x: 2.5, y: 0.25, z: 2.5}
   nextPos: {x: 1.7938833, y: 1.5, z: -28.01408}
@@ -132,6 +136,37 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 512
+--- !u!1 &3884503596465930307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4676139693861701964}
+  m_Layer: 0
+  m_Name: StunTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4676139693861701964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3884503596465930307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2299146163173301838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1757120995968743845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -163,7 +198,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 83907bba20719114d8b963febd3d33da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 83907bba20719114d8b963febd3d33da,
         type: 3}
@@ -210,9 +245,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 6684295394808222897, guid: 83907bba20719114d8b963febd3d33da,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf21ceaf18a0f82488cf0a31fb8d9df6, type: 2}
+    - target: {fileID: 8879528566716807029, guid: 83907bba20719114d8b963febd3d33da,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 83907bba20719114d8b963febd3d33da,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4676139693861701964}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83907bba20719114d8b963febd3d33da,
         type: 3}
