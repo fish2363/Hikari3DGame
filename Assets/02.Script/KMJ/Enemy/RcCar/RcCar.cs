@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RcCar : Enemy, IAttackable
+public class RcCar : Enemy, IDamageable
 {
     public bool _isAttack;
     public bool _isSkill;
@@ -129,14 +129,14 @@ public class RcCar : Enemy, IAttackable
 
             if (_isAttackTrue)
             {
-                player.MinusHp(damage);
+                player.ApplyDamage(damage);
                 stateMachine.ChangeState(EnemyStatEnum.Stun);
 
             }
             else if (_isSkillTrue)
             {
                 stateMachine.ChangeState(EnemyStatEnum.Stun);
-                player.MinusHp(damage += 2);
+                player.ApplyDamage(damage += 2);
             }
 
             RigidCompo.velocity = Vector3.zero;
@@ -167,11 +167,10 @@ public class RcCar : Enemy, IAttackable
 
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
         var hit = Instantiate(hitEffect);
         hit.SetPositionAndPlay(transform.position, transform);
-        print(hit);
     }
 }

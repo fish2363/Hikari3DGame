@@ -366,7 +366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -474777704, guid: 74e859d7cd2aac64cad4bfbfd97af6bb, type: 3}
+  m_Sprite: {fileID: -1128563426, guid: 74e859d7cd2aac64cad4bfbfd97af6bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1540,17 +1540,17 @@ PrefabInstance:
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.017769353
+      value: -0.017769333
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000001727083
+      value: 0.000000017170136
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.0694003e-10
+      value: 3.0515004e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2757844550832605364, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
@@ -6644,6 +6644,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RcCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285957443374700532, guid: 19b824e8eded34f47a7c81c7d0aa3f39,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

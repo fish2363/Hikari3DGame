@@ -15,9 +15,9 @@ public class WeaponAttack : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy") && !_player.isAttack)
         {
-            other.TryGetComponent(out IAttackable attack);
+            other.TryGetComponent(out IDamageable attack);
 
-            attack.HitEnemy(10, 3);
+            attack.ApplyDamage(10);
         }
     }
 }

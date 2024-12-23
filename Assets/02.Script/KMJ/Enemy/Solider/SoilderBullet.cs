@@ -30,7 +30,7 @@ public class SoilderBullet : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.TryGetComponent(out Player player);
-            player.MinusHp(1);
+            player.ApplyDamage(1);
             gameObject.SetActive(false);
         }
     }
