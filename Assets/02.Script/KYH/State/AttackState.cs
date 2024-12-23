@@ -61,10 +61,11 @@ public class AttackState : State
 
     IEnumerator DoubleSword()
     {
+        BroAudio.Play(_player._clipSwingkSfx);
         DoubleAttackPlayer();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
-
+        BroAudio.Play(_player._clipSwingkSfx);
         DoubleAttackPlayer();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
