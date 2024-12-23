@@ -22,15 +22,15 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
+        _windUpDoll.FlipEnemy();
         ChaseTarget();
         CheckSight();
 
-        if (_windUpDoll.isCollision)
+        if (_windUpDoll._distance < _windUpDoll.EnemyStat.AttackRadius)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
-
-        if (_windUpDoll._distance > _windUpDoll.EnemyStat.AttackRadius * 2)
+        else if (_windUpDoll._distance > _windUpDoll.detectRadius)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }

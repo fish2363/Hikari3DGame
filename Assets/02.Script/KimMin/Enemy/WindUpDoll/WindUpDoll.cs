@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
-public class WindUpDoll : Enemy,IAttackable
+public class WindUpDoll : Enemy, IDamageable
 {
     [HideInInspector] public float _distance;
     [HideInInspector] public Vector3 nextPos;
@@ -13,33 +13,38 @@ public class WindUpDoll : Enemy,IAttackable
     public Vector3 startPos;
     public float moveRadius;
 
-    private Vector3 _prev;
+    private Vector3 _prev = Vector3.zero;
+    private Vector3 _radius;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        startPos = transform.position;
+    }
 
     protected virtual void Update()
     {
         _distance = (player.transform.position - transform.position).magnitude;
-
-        FlipEnemy();
     }
 
     public Vector3 GetNextPos()
     {
-        Vector3 radius = new Vector3(startPos.x + moveRadius, startPos.y, startPos.z + moveRadius);
+        _radius = new Vector3(moveRadius, startPos.y, moveRadius) / 2;
 
-        float x = Random.Range(radius.x, -radius.x);
-        float z = Random.Range(radius.z, -radius.z);
+        float x = Random.Range(_radius.x, -_radius.x);
+        float z = Random.Range(_radius.z, -_radius.z);
 
-        Vector3 result = new Vector3(x, transform.localScale.y / 2, z);
+        nextPos = startPos + new Vector3(x , transform.localScale.y, z);
 
-        if (_prev != null && (_prev - result).magnitude < 5)
+        if (_prev != null && (_prev - nextPos).magnitude < 3)
         {
             return GetNextPos();
         }
 
-        return result;
+        return nextPos;
     }
 
-    private void FlipEnemy()
+    public void FlipEnemy()
     {
         transform.rotation = Quaternion.LookRotation(new Vector3(RigidCompo.velocity.x, 0, RigidCompo.velocity.z));
     }
@@ -54,13 +59,25 @@ public class WindUpDoll : Enemy,IAttackable
 
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
-    {
-
-    }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
 
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Hp -= damage;
+        var item = Instantiate(getDamageEffect);
+        item.SetPositionAndPlay(transform.position, transform);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.TryGetComponent(out IDamageable damageable))
+        {
+            int damage = Mathf.RoundToInt(Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage));
+            damageable.ApplyDamage(damage);
+        }
     }
 }

@@ -7,5 +7,8 @@ public enum StateEnum
     Idle,
     Move,
     Attack,
-    Dash
+    Dash,
+    Sheld,
+    Die,
+    Skill
 }

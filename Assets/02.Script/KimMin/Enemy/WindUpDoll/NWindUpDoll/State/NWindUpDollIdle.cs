@@ -14,6 +14,7 @@ public class NWindUpDollIdle : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
     }
 
     public override void UpdateState()

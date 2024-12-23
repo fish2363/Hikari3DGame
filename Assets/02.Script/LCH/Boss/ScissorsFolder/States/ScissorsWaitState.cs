@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ScissorsWaitState : EnemyState<BossState>
+public class ScissorsWaitState : EntityState
 {
     private Scissors _scissors;
-    public ScissorsWaitState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ScissorsWaitState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _scissors = enemy as Scissors;
+        _scissors = entity as Scissors;
+
     }
 
     public override void Enter()
@@ -21,21 +23,21 @@ public class ScissorsWaitState : EnemyState<BossState>
     private IEnumerator PhaseSelect()
     {
         yield return new WaitForSeconds(0.5F);
-        int Phases = /*Random.Range(1, 4);*/ 2;
+        int Phases = /*Random.Range(1, 4)*/4;
 
         switch (Phases)
         {
             case 1:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase1);
+                _scissors.ChangeState(BossState.Phase1Wait);
                 break;
             case 2:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase2);
+                _scissors.ChangeState(BossState.Phase2Wait);
                 break;
             case 3:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase3);
+                _scissors.ChangeState(BossState.Phase3Wait);
                 break;
             case 4:
-                _scissors.BossStateMachine.ChangeState(BossState.Phase4);
+                _scissors.ChangeState(BossState.Phase4Wait);
                 break;
         }
     }

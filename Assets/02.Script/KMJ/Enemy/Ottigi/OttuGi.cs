@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class OttuGi : Enemy, IAttackable
+public class OttuGi : Enemy, IDamageable
 {
     public bool _isSkill;
 
@@ -100,7 +100,7 @@ public class OttuGi : Enemy, IAttackable
         {
             int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
             collision.transform.TryGetComponent(out Player player);
-            player.MinusHp(damage);
+            player.ApplyDamage(damage);
 
             RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 1.3f, ForceMode.Impulse);
@@ -123,9 +123,11 @@ public class OttuGi : Enemy, IAttackable
         throw new System.NotImplementedException();
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
-        print("¾Æ¾ß");
+        var hit = Instantiate(getDamageEffect);
+        hit.SetPositionAndPlay(transform.position, transform);
     }
 }

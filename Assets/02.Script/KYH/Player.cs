@@ -1,24 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
-    [field: SerializeField] public CharacterController ControllerCompo { get; private set; }
+    [field: SerializeField] public Transform virtualCamera { get; private set; }
+
+    public bool isShield { get; set; }
+    public bool isStop { get; set; }
+
+    public bool _isSkill { get; set; }
+
+    public bool _isSkillCoolTime { get; set; }
 
     public float MaxHp { get { return maxHp; } }
-    public float CurrentHp { get { return currentHp; } }
+    //  public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; } }
+    public CinemachineFreeLook freelook;
+    public CinemachineFreeLook combatCamera;
+    private CinemachineFreeLook currentCamera;
 
-
-    [field : SerializeField]
+    [field: SerializeField]
     public GroundCheck GroundCheck { get; private set; }
 
-    [field : SerializeField]
+    [field: SerializeField]
     public Transform RayTransform { get; private set; }
 
     [field: SerializeField] public GameObject playerCam { get; set; }
@@ -26,18 +37,25 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     protected float maxHp;
-    [SerializeField]
-    protected float currentHp;
+
+    [field: SerializeField]
+    public NotifyValue<float> currentHp { get; set; } = new NotifyValue<float>();
+
     [SerializeField]
     protected float moveSpeed, gravity = -9.8f;
 
     public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
     public bool isAttack { get; set; }
+    public bool isBlock { get; set; }
+
+    public Vector3 size;
+
+    [field: SerializeField] public Vector3 SkillSize { get; set; }
 
 
     [field: SerializeField] public WeaponData currentWeaponData;
-    [field : SerializeField] public Animator animator { get; private set; }
+    [field: SerializeField] public Animator animator { get; private set; }
 
     [SerializeField] private float _dashCoolTime;
     [SerializeField] private float _attckCoolTime;
@@ -49,27 +67,118 @@ public class Player : MonoBehaviour
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
 
+    public ShowEffect attackEffect;
+
+    float scroll;
+
+    public CinemachineVirtualCamera leftCamera;
+    public CinemachineVirtualCamera rightCamera;
+    public bool isCameraOn;
+
+
+
+
     private void Awake()
     {
-        foreach(StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
+
+
+        isShield = true;
+        foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
         {
             Type t = Type.GetType($"{enumState}State");
             State state = Activator.CreateInstance(t, new object[] { this }) as State;
-            stateDictionary.Add(enumState,state);
+            stateDictionary.Add(enumState, state);
         }
         ChangeState(StateEnum.Idle);
 
+        InputReader.OnSkillEvent += HandleSkillEvent;
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
         InputReader.AttackEvent += HandleAttackEvent;
+        InputReader.OnSheldEvent += HandleBlaockEvent;
+        InputReader.OnZoomEvent += HandleZoomEvent;
 
         isAttack = true;
+        isBlock = true;
+
+        maxHp = currentHp.Value;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        _isSkillCoolTime = true;
+        _isSkill = true;
+        currentCamera = freelook;
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void HandleZoomEvent()
+    {
+        isCameraOn = !isCameraOn;
+
+        currentCamera.Priority = 0;
+        if (isCameraOn) currentCamera = combatCamera;
+        else currentCamera = freelook;
+        currentCamera.Priority = 10;
+
+        //if (isCameraOn)
+        //{
+        //    freelook.Priority = 0;
+        //    combatCamera.Priority = 10;
+        //    //if (!SettingManager.Instance.LRInversion)
+        //    //{
+        //    //    print("왼");
+        //    //    leftCamera.Priority = 11;
+        //    //}
+        //    //else
+        //    //{
+        //    //    print("오");
+        //    //    rightCamera.Priority = 11;
+        //    //}
+        //}
+        //else
+        //{
+        //    freelook.Priority = 10;
+        //    combatCamera.Priority = 0;
+        //    //if (!SettingManager.Instance.LRInversion)
+        //    //{
+        //    //    print("왼");
+        //    //    leftCamera.Priority = 0;
+        //    //}
+        //    //else
+        //    //{
+        //    //    print("오");
+        //    //    rightCamera.Priority = 0;
+
+        //    //}
+        //}
+    }
 
     private void Update()
     {
+        try
+        {
+            currentCamera.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
+            currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
+        }
+        catch (Exception e)
+        {
+            print("Mainmenu부터 실행하지 않으면 ESC 안됨미다");
+        }
+        print(currentHp);
         stateDictionary[currentEnum].StateUpdate();
+        scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
+        //freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
+        if (!isCameraOn)
+            freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius += scroll, 2f, 12f);
+        else
+            combatCamera.m_Orbits[2].m_Radius = Mathf.Clamp(freelook.m_Orbits[2].m_Radius += scroll, 2f, 12f);
+
+        Die();
     }
 
     private void FixedUpdate()
@@ -79,9 +188,34 @@ public class Player : MonoBehaviour
 
     private void HandleAttackEvent()
     {
-        if (isAttack)
+        if (!isStop)
         {
-            ChangeState(StateEnum.Attack);
+            if (isAttack)
+            {
+                ChangeState(StateEnum.Attack);
+            }
+        }
+    }
+
+    private void HandleBlaockEvent()
+    {
+        if (currentWeaponData.weaponName == "Pencil")
+        {
+            if (isShield)
+            {
+                ChangeState(StateEnum.Sheld);
+            }
+        }
+    }
+
+    private void HandleSkillEvent()
+    {
+        if (currentWeaponData.weaponName == "Spon" || currentWeaponData.weaponName == "Pencil")
+        {
+            if (_isSkillCoolTime)
+            {
+                ChangeState(StateEnum.Skill);
+            }
         }
     }
 
@@ -93,9 +227,12 @@ public class Player : MonoBehaviour
 
     private void HandleDashEvent()
     {
-        if (AttemptDash())
+        if (!isStop)
         {
-            ChangeState(StateEnum.Dash);
+            if (AttemptDash())
+            {
+                ChangeState(StateEnum.Dash);
+            }
         }
     }
 
@@ -128,14 +265,30 @@ public class Player : MonoBehaviour
         stateDictionary[currentEnum].Enter();
     }
 
-    public void MinusHp(float attackDamage)
+    public void ApplyDamage(float damage)
     {
-        currentHp -= attackDamage;
+        if (!isStop)
+        {
+            if (!isBlock)
+                currentHp.Value -= damage / 2;
+            else if (isBlock)
+            {
+                currentHp.Value -= damage;
+            }
+        }
     }
 
     public void PlusHp(float Heal)
     {
-        currentHp += Heal;
+        currentHp.Value += Heal;
+    }
+
+    public void Die()
+    {
+        if (currentHp.Value <= 0)
+        {
+            ChangeState(StateEnum.Die);
+        }
     }
 
     public void MinusMoveSpeed(float MinusSpeed)
@@ -157,13 +310,23 @@ public class Player : MonoBehaviour
         moveSpeed = 300;
     }
 
-    
+    public void ShowAttackEffect()
+    {
+        var attacEffect = Instantiate(attackEffect);
+        attacEffect.SetPositionAndPlay(transform.position, transform);
+    }
+
 
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(RayTransform.position, transform.forward);
+        Gizmos.DrawWireCube(RayTransform.position, size);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(RayTransform.position, SkillSize);
         Gizmos.color = Color.white;
     }
+
+
 }

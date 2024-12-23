@@ -1,13 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class Soilder : Enemy, IAttackable
+public class Soilder : Enemy, IDamageable
 {
     public Vector3 startPos;
     public float moveRadius = 10;
 
     private Vector3 _prev = Vector3.zero;
 
+    public Animation[] _animation { get; set; }
     public bool _isAttack { get; set; }
     [field: SerializeField] public bool _isMove { get; set; }
 
@@ -21,6 +22,7 @@ public class Soilder : Enemy, IAttackable
 
         _isAttack = true;
         _isMove = false;
+        _animation = GetComponentsInChildren<Animation>();
     }
 
     private void Start()
@@ -48,7 +50,7 @@ public class Soilder : Enemy, IAttackable
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 5)
+        if (range <= 8)
         {
             _isMove = true;
         }
@@ -70,8 +72,10 @@ public class Soilder : Enemy, IAttackable
         throw new System.NotImplementedException();
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
+        var hitEffect = Instantiate(getDamageEffect);
+        hitEffect.SetPositionAndPlay(transform.position, transform);
     }
 }

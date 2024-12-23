@@ -24,7 +24,8 @@ public class BWindUpDoll : WindUpDoll
     public void InstantiateObject(GameObject targetObj, Vector3 pos)
     {
         Instantiate(targetObj, pos, Quaternion.identity);
-    }
+    
+}
 
     private void OnDrawGizmos()
     {

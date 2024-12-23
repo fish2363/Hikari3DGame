@@ -4,76 +4,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PencilSharpenerPhase2State : EnemyState<BossState>
+public class PencilSharpenerPhase2State : EntityState
 {
 
     private PencilSharpener _pencilSharpener;
     private Vector3 playerPosition;
-    private Vector3 _yRange;
-    private Vector3 _xRange;
-    private float _spawnRadius = 5f;
-    private int Count = 10;
-    private Coroutine _coroutine;
-    public PencilSharpenerPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    private int Count = 0;
+
+    public PencilSharpenerPhase2State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _pencilSharpener = enemy as PencilSharpener;
+        _pencilSharpener = entity as PencilSharpener;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-        playerPosition = _pencilSharpener.player.transform.position;
-      _coroutine = _pencilSharpener.StartCoroutine(DropBoomCoroutine());
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
-        if(Count <= 0)
-        {
-            _pencilSharpener.StopCoroutine(_coroutine);
-            _pencilSharpener.StartCoroutine(ChangeChaseStaet());
-        }
-    }
-
-    private IEnumerator ChangeChaseStaet()
-    {
-        yield return new WaitForSeconds(1F);
         Count = 10;
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+        playerPosition = _pencilSharpener.player.transform.position;
+        _pencilSharpener.StartCoroutine(DropBoomCoroutine());
     }
 
     private IEnumerator DropBoomCoroutine()
     {
-        while(Count> 0)
+        while (Count > 0 && !_pencilSharpener.IsPhaseEnd)
         {
-            yield return new WaitForSeconds(0.5f);
-            DropBoom();
+            yield return new WaitForSeconds(0.5f); 
+            DropBoom(); 
         }
-        yield return null;
+
+        if (Count <= 0 && !_pencilSharpener.IsPhaseEnd)
+        {
+            _pencilSharpener.IsPhaseEnd = true;
+            _pencilSharpener.StartCoroutine(ChangeChaseState());
+        }
     }
 
     private void DropBoom()
     {
-         playerPosition = _pencilSharpener.player.transform.position;
-
-        Vector3 spawnPosition = playerPosition + GetRandomPositionAroundPlayer();
-
-        GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, spawnPosition, Quaternion.identity);
-
-        Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (Count > 0 && !_pencilSharpener.IsPhaseEnd)
         {
-            rb.useGravity = true; 
+            playerPosition = _pencilSharpener.player.transform.position;
+            playerPosition = new Vector3(playerPosition.x, playerPosition.y + 10, playerPosition.z); 
+
+            GameObject fallingObject = GameObject.Instantiate(_pencilSharpener._fallingObjectPrefab, playerPosition, Quaternion.identity);
+
+            Rigidbody rb = fallingObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.useGravity = true;
+            }
+
+            Count--; 
         }
-        Count -= 1;
     }
 
-    private Vector3 GetRandomPositionAroundPlayer()
+    private IEnumerator ChangeChaseState()
     {
-        float angle = Random.Range(0, 360);
-        float x = Mathf.Cos(angle) * _spawnRadius;
-        float z = Mathf.Sin(angle) * _spawnRadius;
-        return new Vector3(x, 10f, z);
+        yield return new WaitForSeconds(1F);
+        _pencilSharpener.ChangeState(BossState.Chase);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConversPhase4State : EnemyState<BossState>
+public class ConversPhase4State : EntityState
 {
 
     private Converse _converse;
     private float _originMoveSpeed;
-    public ConversPhase4State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ConversPhase4State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _converse = enemy as Converse;
+        _converse = entity as Converse;
     }
 
     public override void Enter()
     {
         base.Enter();
-        _originMoveSpeed = _converse.EnemyStat.ProwlSpeed;
-        _converse.EnemyStat.ProwlSpeed = 7f;
+        _originMoveSpeed = _converse.EnemyStat.ChasingSpeed;
+        _converse.EnemyStat.ChasingSpeed = 7f;
         _converse.StartCoroutine(PhaseEndCoroutine());
     }
     private IEnumerator PhaseEndCoroutine()
@@ -32,7 +33,7 @@ public class ConversPhase4State : EnemyState<BossState>
         if (!_converse.IsPhaseEnd)
         {
             _converse.targetDir = _converse.player.transform.position - _converse.transform.position;
-            _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ProwlSpeed;
+            _converse.RigidCompo.velocity = _converse.targetDir.normalized * _converse.EnemyStat.ChasingSpeed;
         }
 
         if (_converse.IsPhaseEnd)
@@ -45,12 +46,12 @@ public class ConversPhase4State : EnemyState<BossState>
     private IEnumerator ChangeChaseState()
     {
         yield return new WaitForSeconds(1f);
-        _converse.BossStateMachine.ChangeState(BossState.Chase);
+        _converse.ChangeState(BossState.Chase);
     }
 
     public override void Exit()
     {
         base.Exit();
-        _converse.EnemyStat.ProwlSpeed = _originMoveSpeed;
+        _converse.EnemyStat.ChasingSpeed = _originMoveSpeed;
     }
 }

@@ -1,36 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System;
 
-public class PencilSharpenerPhase3State : EnemyState<BossState>
+public class PencilSharpenerPhase3State : EntityState
 {
 
     private PencilSharpener _pencilSharpener;
+    private float _oringinDamge;
 
-    public PencilSharpenerPhase3State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+    public PencilSharpenerPhase3State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _pencilSharpener = enemy as PencilSharpener;
+        _pencilSharpener = entity as PencilSharpener;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-        _pencilSharpener.RigidCompo.AddForce(_pencilSharpener.player.transform.position * 7f, ForceMode.Impulse);
+        _oringinDamge = _pencilSharpener.CastDamge.Damage;
+        _pencilSharpener.CastDamge.Damage = 35f;
+        Sequence seq = DOTween.Sequence();
+       seq.Append(_pencilSharpener.transform.DOJump(_pencilSharpener.player.transform.position, 7f, 1, 1.5f)
+           .AppendCallback(()=> _pencilSharpener.StartCoroutine(ChangeToChase())));
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_pencilSharpener.WallChecker)
-        {
-            _pencilSharpener.RigidCompo.velocity = Vector3.zero;
-            _pencilSharpener.StartCoroutine(ChangeChaseState());
-        }
+        _pencilSharpener.CastDamge.CastDamage();
     }
 
-    private IEnumerator ChangeChaseState()
+    private IEnumerator ChangeToChase()
     {
         yield return new WaitForSeconds(1f);
-        _pencilSharpener.BossStateMachine.ChangeState(BossState.Chase);
+        _pencilSharpener.ChangeState(BossState.Chase);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _pencilSharpener.CastDamge.Damage = _oringinDamge;
     }
 }

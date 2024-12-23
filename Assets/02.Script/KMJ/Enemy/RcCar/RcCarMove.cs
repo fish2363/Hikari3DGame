@@ -15,7 +15,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
     {
         rcCar = _enemy.GetComponent<RcCar>();
         Debug.Log("나도 왔다");
-        base.Enter();
+       
     }
 
     public override void UpdateState()
@@ -23,10 +23,20 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
 
         _enemy.range = Vector3.Distance(_enemy.player.transform.position, _enemy.transform.position);
 
-     
+        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
+
+        direction.y = 0;
 
 
-        if(_enemy.range <= 0.2)
+        if (direction.sqrMagnitude > 0.001f)
+        {
+             direction.Normalize();
+
+            _enemy.transform.rotation = Quaternion.LookRotation(direction);
+        }
+
+
+        if (_enemy.range <= 0.2)
         {
             _enemy.RigidCompo.velocity = Vector3.zero;
         }
@@ -36,19 +46,7 @@ public class RcCarMove : EnemyState<EnemyStatEnum>
         }
        // _enemy.transform.LookAt(_enemy.transform);
 
-        Vector3 direction = _enemy.player.transform.position - _enemy.transform.position;
-
-        direction.y = 0;
-
-
-        if (direction.sqrMagnitude > 0.001f)
-        {
-            direction.Normalize();
-
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-            _enemy.transform.rotation = lookRotation;
-        }
+        
 
         if (_enemy.range <= _enemy.EnemyStat.ContactAttackRadius && rcCar._isSkill)
         {

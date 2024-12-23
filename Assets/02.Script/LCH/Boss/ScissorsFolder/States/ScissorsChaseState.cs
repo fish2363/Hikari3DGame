@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScissorsChaseState : EnemyState<BossState>
+public class ScissorsChaseState : EntityState
 {
     private Scissors _scissors;
     int timer = 0;
-    public ScissorsChaseState(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ScissorsChaseState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _scissors = enemy as Scissors;
+        _scissors = entity as Scissors;
     }
 
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("따라가기");
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
         _scissors.IsPhaseEnd = false;
@@ -22,14 +24,27 @@ public class ScissorsChaseState : EnemyState<BossState>
     private IEnumerator ChangeWaitState(int timer)
     {
         yield return new WaitForSeconds(timer);
-        _scissors.BossStateMachine.ChangeState(BossState.Wait);
+        _scissors.ChangeState(BossState.Wait);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+        Vector3 direction = _scissors.player.transform.position - _scissors.transform.position;
+
+        direction.y = 0;
+
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            _scissors.transform.rotation = lookRotation;
+        }
         _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
-        _scissors.RigidCompo.velocity =  _scissors.targetDir.normalized * _scissors.EnemyStat.ProwlSpeed;
+        _scissors.RigidCompo.velocity =  _scissors.targetDir.normalized * _scissors.EnemyStat.ChasingSpeed;
     }
 
     public override void Exit()
