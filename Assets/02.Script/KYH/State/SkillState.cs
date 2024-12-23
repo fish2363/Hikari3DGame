@@ -37,7 +37,7 @@ public class SkillState : State
         _player._isSkillCoolTime = false;
 
 
-        yield return new WaitForSeconds(0.93f);
+        yield return new WaitForSeconds(0.7f);
         AttackPlayer();
 
         _player._isSkill = true;
@@ -56,7 +56,7 @@ public class SkillState : State
         _player._isSkillCoolTime = false;
 
 
-        yield return new WaitForSeconds(0.93f);
+        yield return new WaitForSeconds(0.7f);
         CrashEnemy();
 
         _player._isSkill = true;
