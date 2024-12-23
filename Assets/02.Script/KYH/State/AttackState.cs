@@ -1,6 +1,8 @@
+using Ami.BroAudio;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class AttackState : State
 {
@@ -35,6 +37,14 @@ public class AttackState : State
 
     IEnumerator CommonSword()
     {
+        if (_player.currentWeaponData.name == "Pencil")
+        {
+            BroAudio.Play(_player._PencilSwingSfx);
+        }
+        else if (_player.currentWeaponData.name == "Spon")
+        {
+            BroAudio.Play(_player._sponSwingSfx);
+        }
         _player.ShowAttackEffect();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
@@ -71,8 +81,14 @@ public class AttackState : State
         {
             _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
 
-            Debug.Log(hittor);
-            
+            if (_player.currentWeaponData.name == "Pencil")
+            {
+                BroAudio.Play(_player._PencilAttackSfx);
+            }
+            else if (_player.currentWeaponData.name == "Spon")
+            {
+                BroAudio.Play(_player._sponAttackSfx);
+            }
 
             if(hittor.gameObject.TryGetComponent(out IDamageable damageable))
             {
@@ -91,6 +107,8 @@ public class AttackState : State
         foreach (Collider hittor in hit)
         {
             _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
+
+            BroAudio.Play(_player._clipAttackSfx);
 
             hittor.transform.TryGetComponent(out IDamageable attackIner);
 

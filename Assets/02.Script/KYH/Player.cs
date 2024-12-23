@@ -7,6 +7,7 @@ using Cinemachine;
 using UnityEngine.Rendering.Universal;
 using DG.Tweening;
 using UnityEngine.Rendering;
+using Ami.BroAudio;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IDamageable
@@ -67,6 +68,13 @@ public class Player : MonoBehaviour, IDamageable
 
     public LayerMask whatIsEnemy;
 
+    [field: SerializeField] public SoundID _sponAttackSfx;
+    [field: SerializeField] public SoundID _sponSwingSfx;
+    [field: SerializeField] public SoundID _clipAttackSfx;
+    [field: SerializeField] public SoundID _clipSwingkSfx;
+    [field: SerializeField] public SoundID _PencilAttackSfx;
+    [field: SerializeField] public SoundID _PencilSwingSfx;
+
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
     private StateEnum currentEnum;
@@ -85,7 +93,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header("대쉬 유지")]
     public float dashTime = 0.4f;
 
-    public Volume dashVolume;
+    //public Volume dashVolume;
 
     private LevelLoader loader;
 
@@ -251,11 +259,11 @@ public class Player : MonoBehaviour, IDamageable
 
 
 
-        if (dashVolume.profile.TryGet(out lens))
-        {
-            DOTween.KillAll();
-            DOTween.To(() => startVignette, vloom => lens.intensity.value = vloom, endVignette, 0.2f);
-        }
+        //if (dashVolume.profile.TryGet(out lens))
+        //{
+        //    DOTween.KillAll();
+        //    DOTween.To(() => startVignette, vloom => lens.intensity.value = vloom, endVignette, 0.2f);
+        //}
     }
 
     private void HandleJumpEvent()
