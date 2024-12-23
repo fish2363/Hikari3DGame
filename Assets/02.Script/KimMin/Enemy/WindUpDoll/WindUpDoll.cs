@@ -71,4 +71,13 @@ public class WindUpDoll : Enemy, IDamageable
         var item = Instantiate(getDamageEffect);
         item.SetPositionAndPlay(transform.position, transform);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.TryGetComponent(out IDamageable damageable))
+        {
+            int damage = Mathf.RoundToInt(Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage));
+            damageable.ApplyDamage(damage);
+        }
+    }
 }

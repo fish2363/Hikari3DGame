@@ -24,6 +24,8 @@ public class NWindUpDoll : WindUpDoll
     {
         base.Update();
         stateMachine.CurrentState.UpdateState();
+
+        Debug.Log(Hp);
     }
 
     private void OnDrawGizmos()
