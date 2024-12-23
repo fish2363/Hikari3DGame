@@ -87,7 +87,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public Volume dashVolume;
 
-
+    private LevelLoader loader;
 
 
     private void Awake()
@@ -121,6 +121,8 @@ public class Player : MonoBehaviour, IDamageable
         _isSkill = true;
         currentCamera = freelook;
         isFullSheld = false;
+        loader = FindAnyObjectByType<LevelLoader>();
+        loader.LoadLevelComplete();
     }
 
     private void Start()
@@ -263,6 +265,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleDashEvent()
     {
+        print("실행");
         if (!isStop)
         {
             if (AttemptDash())
