@@ -80,4 +80,9 @@ public class Tape : Enemy, IDamageable
         var hit = Instantiate(getDamageEffect);
         hit.SetPositionAndPlay(transform.position, transform);
     }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class MainMenuButton : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField] private Image vinette;
     [SerializeField] private GameObject filter;
     [SerializeField] private PlayableDirector startTimeLine;
+    private CinemachineBasicMultiChannelPerlin noise;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     [SerializeField] private AudioSource bgm;
 
@@ -22,6 +25,7 @@ public class MainMenuButton : MonoBehaviour
 
     private void Start()
     {
+        noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -37,6 +41,20 @@ public class MainMenuButton : MonoBehaviour
         blackImage.GetComponent<FadeEffect>().FadeIn();
 
         StartCoroutine(SceneMove());
+    }
+    public void CameraShake()
+    {
+        noise.m_FrequencyGain=1;
+        noise.m_AmplitudeGain =3;
+        StartCoroutine(CameraShakeSecond());
+
+    }
+    private IEnumerator CameraShakeSecond()
+    {
+        DOTween.KillAll();
+        yield return new WaitForSeconds(1f);
+        DOTween.To(() => noise.m_FrequencyGain, x => noise.m_FrequencyGain = x, 0f, 0.5f);
+        DOTween.To(() => noise.m_AmplitudeGain, x => noise.m_AmplitudeGain = x, 0f, 0.5f);
     }
 
     private IEnumerator SceneMove()

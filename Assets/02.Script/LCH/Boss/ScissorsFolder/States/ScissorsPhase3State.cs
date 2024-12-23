@@ -20,40 +20,18 @@ public class ScissorsPhase3State : EntityState
         base.Enter();
         _originDamge = _scissors.DamgeCaster.Damage;
         _scissors.DamgeCaster.Damage = 20f;
-        _scissors.StartCoroutine(AttackWaitCoroutine());
         originMoveSpeed = _scissors.EnemyStat.ChasingSpeed;
         _scissors.EnemyStat.ChasingSpeed = 10f;
+        _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
+        _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.ChasingSpeed;
+        _scissors.StartCoroutine(PlayerChase());
         
     }
 
-    private IEnumerator AttackWaitCoroutine()
-    {
-        yield return new WaitForSeconds(1f);
-        _isAttackWait = false;
-
-        _scissors.StartCoroutine(PhaseEndCoroutine());
-    }
-
-    private IEnumerator PhaseEndCoroutine()
+    private IEnumerator PlayerChase()
     {
         yield return new WaitForSeconds(7f);
-        _scissors.IsPhaseEnd = true;
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
-        if (!_scissors.IsPhaseEnd && !_isAttackWait)
-        {
-            _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
-            _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.ChasingSpeed;
-        }
-
-        if (_scissors.IsPhaseEnd)
-        {
-            _scissors.RigidCompo.velocity = Vector3.zero;
-            _scissors.StartCoroutine(ChanseChaseState());
-        }
+        _scissors.StartCoroutine(ChanseChaseState());
     }
 
     private IEnumerator ChanseChaseState()

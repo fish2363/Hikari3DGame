@@ -32,7 +32,6 @@ public class ScissorsWaitState : EntityState
                 break;
             case 2:
                 _scissors.ChangeState(BossState.Phase2Wait);
-                Debug.Log("이거때문이지롱");
                 break;
             case 3:
                 _scissors.ChangeState(BossState.Phase3Wait);
