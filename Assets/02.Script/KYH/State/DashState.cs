@@ -5,7 +5,6 @@ using UnityEngine;
 public class DashState : State
 {
     private Player _player;
-    private Coroutine coroutine;
 
     public DashState(Player player) : base(player)
     {
@@ -15,21 +14,10 @@ public class DashState : State
     public override void Enter()
     {
         base.Enter();
-        coroutine = StartCoroutine(DashCoroutine());
-    }
-
-    private IEnumerator DashCoroutine()
-    {
-        yield return null;
-    }
-
-    public override void StateUpdate()
-    {
-        base.StateUpdate();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
+        _player.isDash = true;
+        _player.isBlock = true;
+        _player.animator.SetFloat("Velocity", 0f);
+        if (_player.velocity == Vector3.zero) _player.velocity = _player.transform.forward;
+        _player.DashCool();
     }
 }
