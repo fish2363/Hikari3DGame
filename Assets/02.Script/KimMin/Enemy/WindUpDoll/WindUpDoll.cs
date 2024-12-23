@@ -60,7 +60,7 @@ public class WindUpDoll : Enemy, IDamageable
 
     protected override void EnemyDie()
     {
-
+        stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
 

@@ -11,10 +11,11 @@ public class BWindUpDoll : WindUpDoll
         base.Awake();
         stateMachine.AddState(EnemyStatEnum.Walk, new BWindUpDollMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new BWindUpDollAttack(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyStatEnum.Dead, new BWindUpDollDead(this, stateMachine, "Dead"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
     }
-
+        
     protected override void Update()
     {
         base.Update();
