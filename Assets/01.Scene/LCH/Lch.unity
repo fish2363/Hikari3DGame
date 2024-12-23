@@ -1416,6 +1416,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 800976011500056090, guid: 131655edbe4271847b600eaf88013712,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4526980493147139085, guid: 131655edbe4271847b600eaf88013712,
         type: 3}
       propertyPath: m_Name
@@ -1439,7 +1444,7 @@ PrefabInstance:
     - target: {fileID: 6046141768916714283, guid: 131655edbe4271847b600eaf88013712,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.52
       objectReference: {fileID: 0}
     - target: {fileID: 6046141768916714283, guid: 131655edbe4271847b600eaf88013712,
         type: 3}
@@ -1842,6 +1847,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PencilSharpener
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613810998116403422, guid: 190f6589b898b0f49a67b83e545bcb7a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5781794045226537079, guid: 190f6589b898b0f49a67b83e545bcb7a,
         type: 3}

@@ -35,13 +35,16 @@ public class ScissorsPhase2State : EntityState
 
     private IEnumerator AttackEnemy()
     {
+        Debug.Log("A");
         Sequence seq = DOTween.Sequence();
         yield return new WaitForSeconds(0.2f);
+        Debug.Log("B");
         _scissors.transform.position =
             new Vector3(_scissors.player.transform.position.x,
         _scissors.transform.position.y,
         _scissors.player.transform.position.z);
         yield return new WaitForSeconds(1f);
+        Debug.Log("C");
         _scissors.transform.position =
             new Vector3(_scissors.player.transform.position.x,
         _scissors.transform.position.y,
