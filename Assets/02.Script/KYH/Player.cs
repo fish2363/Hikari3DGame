@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
   //  public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; }  }
     public CinemachineFreeLook freelook;
+    public CinemachineFreeLook combatCamera;
 
     [field: SerializeField]
     public GroundCheck GroundCheck { get; private set; }
@@ -65,6 +66,9 @@ public class Player : MonoBehaviour
     public CinemachineVirtualCamera rightCamera;
     public bool isCameraOn;
 
+
+    
+
     private void Awake()
     {
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
@@ -98,53 +102,56 @@ public class Player : MonoBehaviour
         isCameraOn = !isCameraOn;
         if (isCameraOn)
         {
-            if (!SettingManager.Instance.LRInversion)
-            {
-                print("왼");
-                leftCamera.Priority = 11;
-            }
-            else
-            {
-                print("오");
-                rightCamera.Priority = 11;
-            }
+            freelook.Priority = 0;
+            combatCamera.Priority = 10;
+            //if (!SettingManager.Instance.LRInversion)
+            //{
+            //    print("왼");
+            //    leftCamera.Priority = 11;
+            //}
+            //else
+            //{
+            //    print("오");
+            //    rightCamera.Priority = 11;
+            //}
         }
         else
         {
-            if (!SettingManager.Instance.LRInversion)
-            {
-                print("왼");
-                leftCamera.Priority = 0;
-            }
-            else
-            {
-                print("오");
-                rightCamera.Priority = 0;
+            freelook.Priority = 10;
+            combatCamera.Priority = 0;
+            //if (!SettingManager.Instance.LRInversion)
+            //{
+            //    print("왼");
+            //    leftCamera.Priority = 0;
+            //}
+            //else
+            //{
+            //    print("오");
+            //    rightCamera.Priority = 0;
 
-            }
+            //}
         }
     }
 
     private void Update()
     {
-        
-        if(!isStop)
+        try
         {
-            try
-            {
-                freelook.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
-                freelook.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
-            }
-            catch (Exception e)
-            {
-                print("Mainmenu부터 실행하지 않으면 ESC 안됨미다");
-            }
-            print(currentHp);
-            stateDictionary[currentEnum].StateUpdate();
+            freelook.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
+            freelook.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
         }
+        catch (Exception e)
+        {
+            print("Mainmenu부터 실행하지 않으면 ESC 안됨미다");
+        }
+        print(currentHp);
+        stateDictionary[currentEnum].StateUpdate();
         scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
-        freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
-        freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
+        //freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
+        if(!isCameraOn)
+            freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
+        else
+            combatCamera.m_Orbits[2].m_Radius = Mathf.Clamp(freelook.m_Orbits[2].m_Radius += scroll, 2f, 12f);
 
     }
 

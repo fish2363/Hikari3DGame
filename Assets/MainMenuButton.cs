@@ -44,8 +44,8 @@ public class MainMenuButton : MonoBehaviour
     }
     public void CameraShake()
     {
-        noise.m_FrequencyGain++;
-        noise.m_AmplitudeGain+=2;
+        noise.m_FrequencyGain=1;
+        noise.m_AmplitudeGain =3;
         StartCoroutine(CameraShakeSecond());
 
     }
@@ -53,8 +53,8 @@ public class MainMenuButton : MonoBehaviour
     {
         DOTween.KillAll();
         yield return new WaitForSeconds(1f);
-        DOTween.To(() => noise.m_FrequencyGain, x => noise.m_FrequencyGain = x, 0f, 1);
-        DOTween.To(() => noise.m_AmplitudeGain, x => noise.m_AmplitudeGain = x, 0f, 1);
+        DOTween.To(() => noise.m_FrequencyGain, x => noise.m_FrequencyGain = x, 0f, 0.5f);
+        DOTween.To(() => noise.m_AmplitudeGain, x => noise.m_AmplitudeGain = x, 0f, 0.5f);
     }
 
     private IEnumerator SceneMove()
