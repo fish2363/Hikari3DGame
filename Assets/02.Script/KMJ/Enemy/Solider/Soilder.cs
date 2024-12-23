@@ -8,6 +8,7 @@ public class Soilder : Enemy, IDamageable
 
     private Vector3 _prev = Vector3.zero;
 
+    public Animation[] _animation { get; set; }
     public bool _isAttack { get; set; }
     [field: SerializeField] public bool _isMove { get; set; }
 
@@ -21,6 +22,7 @@ public class Soilder : Enemy, IDamageable
 
         _isAttack = true;
         _isMove = false;
+        _animation = GetComponentsInChildren<Animation>();
     }
 
     private void Start()
