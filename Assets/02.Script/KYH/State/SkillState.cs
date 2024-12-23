@@ -1,9 +1,6 @@
 using DG.Tweening;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class SkillState : State
 {
@@ -47,65 +44,57 @@ public class SkillState : State
         _player._isSkillCoolTime = true;
     }
 
-    IEnumerator Skill2()
+
+    public IEnumerator Skill2()
     {
-        _player.ShowAttackEffect();
-        _player.animator.SetBool("Skill", true);
+        player.animator.SetBool("Sheld", true);
+        _player.RigidCompo.velocity = UnityEngine.Vector3.zero;
         _player._isSkill = false;
+        _player.isFullSheld = true;
 
         _player._isSkillCoolTime = false;
 
-
-        yield return new WaitForSeconds(0.7f);
-        CrashEnemy();
+        yield return new WaitForSeconds(3);
 
         _player._isSkill = true;
-        _player.animator.SetBool("Skill", false);
+        _player.animator.SetBool("Sheld", false);
+        _player.isFullSheld = false;
 
-        yield return new WaitForSeconds(18.7f);
+        yield return new WaitForSeconds(17f);
         _player._isSkillCoolTime = true;
     }
 
-    public void CrashEnemy()
+
+private void AttackPlayer()
+{
+    Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
+
+    foreach (Collider hittor in hit)
     {
-        
-        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
+        _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
 
-        foreach (Collider hittor in hit)
-        {
-            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
-
-            hittor.TryGetComponent(out IDamageable damamge);
-
-            damamge.ApplyDamage(_player.currentWeaponData.weaponDamage += 30);
-        }
+            if (hittor.TryGetComponent(out Enemy enemy))
+            {
+                enemy.stateMachine.ChangeState(EnemyStatEnum.Stun);
+            }
+            else
+                return;
     }
+}
 
-    private void AttackPlayer()
+
+public override void StateUpdate()
+{
+    base.StateUpdate();
+    if (_player._isSkill)
     {
-        Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.SkillSize, _player.transform.rotation, _player.whatIsEnemy);
-
-        foreach (Collider hittor in hit)
-        {
-            _player.playerCam.transform.DOShakePosition(0.4f, 0.2f, 10, 90);
-
-            hittor.GetComponent<Enemy>().stateMachine.ChangeState(EnemyStatEnum.Stun);
-        }
+        _player.ChangeState(StateEnum.Idle);
     }
+}
+public override void Exit()
+{
+    base.Exit();
 
-
-    public override void StateUpdate()
-    {
-        base.StateUpdate();
-        if(_player._isSkill)
-        {
-            _player.ChangeState(StateEnum.Idle);
-        }
-    }
-    public override void Exit()
-    {
-        base.Exit();
- 
-        _player.animator.SetFloat("Velocity", 0);
-    }
+    _player.animator.SetFloat("Velocity", 0);
+}
 }
