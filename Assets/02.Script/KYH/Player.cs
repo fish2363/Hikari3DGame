@@ -151,7 +151,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleSkillEvent()
     {
-        if(currentWeaponData.weaponName == "Spon")
+        if(currentWeaponData.weaponName == "Spon" || currentWeaponData.weaponName == "Pencil")
         {
             if(_isSkillCoolTime)
             {
