@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
-public class WindUpDoll : Enemy, IDamageable
+public class WindUpDoll : Enemy,IAttackable
 {
     [HideInInspector] public float _distance;
     [HideInInspector] public Vector3 nextPos;
@@ -61,16 +61,13 @@ public class WindUpDoll : Enemy, IDamageable
 
     }
 
-
-    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
+    public void HitEnemy(float damage, float knockbackPower)
     {
 
     }
 
-    public void ApplyDamage(float damage)
+    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-        Hp -= damage;
-        var item = Instantiate(getDamageEffect);
-        item.SetPositionAndPlay(transform.position, transform);
+
     }
 }

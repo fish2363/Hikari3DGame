@@ -17,7 +17,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.Enter();
 
-        _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+        _windUpDoll.StopImmediately();
         _windUpDoll.nextPos = _windUpDoll.GetNextPos();
     }
 
@@ -39,7 +39,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
 
         if ((_windUpDoll.nextPos - _windUpDoll.transform.position).magnitude <= 2f)
         {
-            _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+            _windUpDoll.MoveCompo.StopImmediately();
             _windUpDoll.nextPos = _windUpDoll.GetNextPos();
         }
 

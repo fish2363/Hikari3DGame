@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5778963441529381471
 Transform:
   m_ObjectHideFlags: 0
@@ -191,13 +191,11 @@ MonoBehaviour:
   <range>k__BackingField: 0
   targetDir: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  getDamageEffect: {fileID: 663475144594094022, guid: f4a98ce7d0689054a9fc4514242fb563,
-    type: 3}
+  getDamageEffect: {fileID: 0}
   _isAttack: 0
   _isTrueMove: 0
   _tapeBulletPrbs: {fileID: 1536709985262345721, guid: f6a93982cab01a64ab792ed1819f3677,
     type: 3}
-  _shootTranform: {fileID: 3972111256753307064}
 --- !u!54 &5767427493925410836
 Rigidbody:
   m_ObjectHideFlags: 0

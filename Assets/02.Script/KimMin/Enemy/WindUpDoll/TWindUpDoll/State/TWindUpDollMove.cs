@@ -37,7 +37,7 @@ public class TWindUpDollMove : EnemyState<EnemyStatEnum>
 
         if ((_nextPos - _windUpDoll.transform.position).magnitude <= 2f)
         {
-            _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+            _windUpDoll.MoveCompo.StopImmediately();
             _nextPos = _windUpDoll.GetNextPos();
         }
 
