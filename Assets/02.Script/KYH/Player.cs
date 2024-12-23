@@ -24,6 +24,7 @@ public class Player : MonoBehaviour, IDamageable
     public float MoveSpeed { get { return moveSpeed; }  }
     public CinemachineFreeLook freelook;
     public CinemachineFreeLook combatCamera;
+    private CinemachineFreeLook currentCamera;
 
     [field: SerializeField]
     public GroundCheck GroundCheck { get; private set; }
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour, IDamageable
         Cursor.lockState = CursorLockMode.Locked;
         _isSkillCoolTime = true;
         _isSkill = true;
+        currentCamera = freelook;
     }
 
     private void Start()
@@ -117,45 +119,51 @@ public class Player : MonoBehaviour, IDamageable
     public void HandleZoomEvent()
     {
         isCameraOn = !isCameraOn;
-        if (isCameraOn)
-        {
-            freelook.Priority = 0;
-            combatCamera.Priority = 10;
-            //if (!SettingManager.Instance.LRInversion)
-            //{
-            //    print("¿Þ");
-            //    leftCamera.Priority = 11;
-            //}
-            //else
-            //{
-            //    print("¿À");
-            //    rightCamera.Priority = 11;
-            //}
-        }
-        else
-        {
-            freelook.Priority = 10;
-            combatCamera.Priority = 0;
-            //if (!SettingManager.Instance.LRInversion)
-            //{
-            //    print("¿Þ");
-            //    leftCamera.Priority = 0;
-            //}
-            //else
-            //{
-            //    print("¿À");
-            //    rightCamera.Priority = 0;
 
-            //}
-        }
+        currentCamera.Priority = 0;
+        if (isCameraOn) currentCamera = combatCamera;
+        else currentCamera = freelook;
+        currentCamera.Priority = 10;
+
+        //if (isCameraOn)
+        //{
+        //    freelook.Priority = 0;
+        //    combatCamera.Priority = 10;
+        //    //if (!SettingManager.Instance.LRInversion)
+        //    //{
+        //    //    print("¿Þ");
+        //    //    leftCamera.Priority = 11;
+        //    //}
+        //    //else
+        //    //{
+        //    //    print("¿À");
+        //    //    rightCamera.Priority = 11;
+        //    //}
+        //}
+        //else
+        //{
+        //    freelook.Priority = 10;
+        //    combatCamera.Priority = 0;
+        //    //if (!SettingManager.Instance.LRInversion)
+        //    //{
+        //    //    print("¿Þ");
+        //    //    leftCamera.Priority = 0;
+        //    //}
+        //    //else
+        //    //{
+        //    //    print("¿À");
+        //    //    rightCamera.Priority = 0;
+
+        //    //}
+        //}
     }
 
     private void Update()
     {
         try
         {
-            freelook.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
-            freelook.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
+            currentCamera.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
+            currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
         }
         catch (Exception e)
         {
@@ -169,24 +177,6 @@ public class Player : MonoBehaviour, IDamageable
             freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
         else
             combatCamera.m_Orbits[2].m_Radius = Mathf.Clamp(freelook.m_Orbits[2].m_Radius += scroll, 2f, 12f);
-
-    }
-
-    private void LateUpdate()
-    {
-        Vector3 direction = (transform.position - freelook.transform.position).normalized;
-        RaycastHit[] hits = Physics.RaycastAll(freelook.transform.position, direction, Mathf.Infinity,
-            1 << LayerMask.NameToLayer("Wall"));
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            MeshRenderer[] obj = hits[i].transform.GetComponentsInChildren<MeshRenderer>();
-
-            for(int j =0; j<obj.Length;j++)
-            {
-                obj[j].material.color = new Color(obj[j].material.color.r, obj[j].material.color.g, obj[j].material.color.b, 0.2f);
-            }
-        }
 
         Die();
     }
