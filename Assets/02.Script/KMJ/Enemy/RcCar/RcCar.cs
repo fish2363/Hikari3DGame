@@ -15,7 +15,12 @@ public class RcCar : Enemy, IAttackable
 
     private Vector3 _moveDir;
 
-   
+    public ShowEffect hitEffect;
+
+    public ShowEffect stunEffect;
+
+    public Transform stunTransform;
+
 
     protected override void Awake()
     {
@@ -27,6 +32,7 @@ public class RcCar : Enemy, IAttackable
         stateMachine.AddState(EnemyStatEnum.Attack, new RcCarAttack(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Skill, new RcCarSkill(this, stateMachine, "Skill"));
         stateMachine.AddState(EnemyStatEnum.Dead, new RcCarDie(this, stateMachine, "Die"));
+        stateMachine.AddState(EnemyStatEnum.Stun, new RcStun(this, stateMachine, "Stun"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Idle, this);
         _isSkillTrue = false;
@@ -42,7 +48,7 @@ public class RcCar : Enemy, IAttackable
         {
             MoveCompo.isMove = true;
         }
-      
+
     }
 
     public void DashSkill()
@@ -85,7 +91,7 @@ public class RcCar : Enemy, IAttackable
         yield return new WaitForSecondsRealtime(8f);
         _isSkill = true;
 
-       
+
     }
 
     IEnumerator AttackTime()
@@ -102,7 +108,7 @@ public class RcCar : Enemy, IAttackable
         RigidCompo.velocity += moveDir * 10;
 
         yield return new WaitForSeconds(0.1f);
-        
+
         RigidCompo.velocity = Vector3.zero;
         _isAttackTrue = false;
         _isMove = true;
@@ -111,22 +117,31 @@ public class RcCar : Enemy, IAttackable
         _isAttack = true;
     }
 
-   
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             //기본공격
             int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
             collision.transform.TryGetComponent(out Player player);
 
             if (_isAttackTrue)
+            {
                 player.MinusHp(damage);
+                stateMachine.ChangeState(EnemyStatEnum.Stun);
+
+            }
             else if (_isSkillTrue)
+            {
+                stateMachine.ChangeState(EnemyStatEnum.Stun);
                 player.MinusHp(damage += 2);
+            }
 
             RigidCompo.velocity = Vector3.zero;
+
+
         }
     }
 
@@ -135,18 +150,28 @@ public class RcCar : Enemy, IAttackable
         throw new System.NotImplementedException();
     }
 
+    public void StunEffect()
+    {
+        var stun = Instantiate(stunEffect);
+
+        stun.SetPositionAndPlay(stunTransform.position, transform);
+    }
+
     protected override void EnemyDie()
     {
-        
+
     }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
-        
+
     }
 
     public void HitEnemy(float damage, float knockbackPower)
     {
         Hp -= damage;
+        var hit = Instantiate(hitEffect);
+        hit.SetPositionAndPlay(transform.position, transform);
+        print(hit);
     }
 }

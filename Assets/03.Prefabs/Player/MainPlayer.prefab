@@ -393,11 +393,13 @@ MonoBehaviour:
     type: 2}
   <RigidCompo>k__BackingField: {fileID: 5342990280515782562}
   <virtualCamera>k__BackingField: {fileID: 7316146524626033510}
+  freelook: {fileID: 7250079275210111631}
   <GroundCheck>k__BackingField: {fileID: 5780554807550530315}
   <RayTransform>k__BackingField: {fileID: 4886247924539965181}
   <playerCam>k__BackingField: {fileID: 3848925261426839961}
   maxHp: 0
-  currentHp: 1000
+  <currentHp>k__BackingField:
+    value: 1000
   moveSpeed: 300
   gravity: -9.8
   size: {x: 1.62, y: 1.31, z: 1.36}
@@ -408,6 +410,8 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
+  attackEffect: {fileID: 6021288747852077177, guid: 0fecd790876c3d54eb8648cf3fee863a,
+    type: 3}
 --- !u!54 &5342990280515782562
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2746,7 +2750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448254904819045863}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017769353, y: -0.00000001727083, z: -3.0694003e-10, w: 0.99984217}
+  m_LocalRotation: {x: -0.017769333, y: 0.000000017170136, z: 3.0515004e-10, w: 0.99984217}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6016,7 +6020,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -10954,7 +10958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4830950396102988722}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.022325635, y: -0.0077707064, z: -0.00017353443, w: 0.9997206}
+  m_LocalRotation: {x: -0.022325635, y: -0.007770708, z: -0.00017353447, w: 0.9997206}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21112,9 +21116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7662594877164334688}
   weaponCount:
-  - {fileID: 8146385937443103460}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1796001170795439095}
   LeftWeaponManager:
   - {fileID: 4480028684709802260}
   - {fileID: 1738218110647011669}

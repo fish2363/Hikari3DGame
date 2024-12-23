@@ -4,14 +4,15 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-public class ScissorsPhase2State : EnemyState<BossState>
+public class ScissorsPhase2State : EntityState
 {
     private Scissors _scissors;
     private bool _isAttackWait;
     private Transform _cameraPos;
-    public ScissorsPhase2State(EnemyAgent enemy, StateMachine<BossState> state, string animHashName) : base(enemy, state, animHashName)
+
+    public ScissorsPhase2State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
-        _scissors = enemy as Scissors;
+        _scissors = entity as Scissors;
     }
 
     public override void Enter()
@@ -21,6 +22,12 @@ public class ScissorsPhase2State : EnemyState<BossState>
         _cameraPos = GameObject.FindWithTag("VirtualCamera").transform;
         _scissors.transform.DOMoveY(_scissors.transform.position.y + 25, 1F);
         _scissors.StartCoroutine(AttackEnemy());
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _scissors.DamgeCaster.CastDamage();
     }
 
     private IEnumerator AttackEnemy()
@@ -45,6 +52,6 @@ public class ScissorsPhase2State : EnemyState<BossState>
     {
         Debug.Log("A->C");
         yield return new WaitForSeconds(1f);
-        _scissors.BossStateMachine.ChangeState(BossState.Chase);
+        _scissors.ChangeState(BossState.Chase);
     }
 }
