@@ -49,7 +49,7 @@ MonoBehaviour:
     m_Bits: 64
   _maxAvailableCount: 4
   _castSize: {x: 0.76, y: 1.27, z: 0.37}
-  _damage: 5
+  Damage: 15
   _knockBackForce: {x: 5, y: 3, z: 0}
   cnt: []
 --- !u!1 &1634749105535225938
@@ -201,7 +201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4526980493147139085}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -215,7 +215,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bdfed7e36b67046baf2e023d274c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
+  MaxHealth: 850
   _currentHealth: 0
   _knockBackTime: 0.5
 --- !u!1 &6168107123854163528

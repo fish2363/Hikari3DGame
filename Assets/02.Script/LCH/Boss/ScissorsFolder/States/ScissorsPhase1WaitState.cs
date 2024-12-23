@@ -39,7 +39,7 @@ public class ScissorsPhase1WaitState : EntityState
     private IEnumerator ChangePhase1State()
     {
         Debug.Log("§∏§§¿ÃªÛ«ÿ");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         _scissors.ChangeState(BossState.Phase1);
     }
 }
