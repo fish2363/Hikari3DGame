@@ -1,9 +1,12 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Rendering.Universal;
+using DG.Tweening;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IDamageable
@@ -44,10 +47,10 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     protected float moveSpeed, gravity = -9.8f;
 
-    public CharacterController CControllerCompo { get; private set; }
     public bool IsRunning { get; private set; }
     public bool isAttack { get; set; }
     public bool isBlock { get; set; }
+    public bool isDash { get; set; }
 
     public Vector3 size;
 
@@ -74,6 +77,14 @@ public class Player : MonoBehaviour, IDamageable
     public CinemachineVirtualCamera leftCamera;
     public CinemachineVirtualCamera rightCamera;
     public bool isCameraOn;
+    public Vector3 velocity { get; set; }
+    [Header("ëŒ€ì‰¬")]
+    public float dashPower = 10f;
+    public float dashCoolTime = 5f;
+    [Header("ëŒ€ì‰¬ ìœ ì§€")]
+    public float dashTime = 0.4f;
+
+    public Volume dashVolume;
 
 
 
@@ -131,12 +142,12 @@ public class Player : MonoBehaviour, IDamageable
         //    combatCamera.Priority = 10;
         //    //if (!SettingManager.Instance.LRInversion)
         //    //{
-        //    //    print("¿Þ");
+        //    //    print("ì™¼");
         //    //    leftCamera.Priority = 11;
         //    //}
         //    //else
         //    //{
-        //    //    print("¿À");
+        //    //    print("ì˜¤");
         //    //    rightCamera.Priority = 11;
         //    //}
         //}
@@ -146,12 +157,12 @@ public class Player : MonoBehaviour, IDamageable
         //    combatCamera.Priority = 0;
         //    //if (!SettingManager.Instance.LRInversion)
         //    //{
-        //    //    print("¿Þ");
+        //    //    print("ì™¼");
         //    //    leftCamera.Priority = 0;
         //    //}
         //    //else
         //    //{
-        //    //    print("¿À");
+        //    //    print("ì˜¤");
         //    //    rightCamera.Priority = 0;
 
         //    //}
@@ -163,11 +174,11 @@ public class Player : MonoBehaviour, IDamageable
         try
         {
             currentCamera.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
-            currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
+            //currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
         }
         catch (Exception e)
         {
-            print("MainmenuºÎÅÍ ½ÇÇàÇÏÁö ¾ÊÀ¸¸é ESC ¾ÈµÊ¹Ì´Ù");
+            print("Mainmenuë¶€í„° ì‹¤í–‰í•˜ì§€ ì•Šìœ¼ë©´ ESC ì•ˆë¨ë¯¸ë‹¤");
         }
         print(currentHp);
         stateDictionary[currentEnum].StateUpdate();
@@ -218,7 +229,30 @@ public class Player : MonoBehaviour, IDamageable
             }
         }
     }
+    private void Dash(bool on)
+    {
+        LensDistortion lens;
+        float startVignette;
+        float endVignette;
+        if (on)
+        {
+            startVignette = 0f;
+            endVignette = -0.8f;
+        }
+        else
+        {
+            startVignette = -0.8f;
+            endVignette = 0f;
+        }
 
+
+
+        if (dashVolume.profile.TryGet(out lens))
+        {
+            DOTween.KillAll();
+            DOTween.To(() => startVignette, vloom => lens.intensity.value = vloom, endVignette, 0.2f);
+        }
+    }
 
     private void HandleJumpEvent()
     {
@@ -248,13 +282,39 @@ public class Player : MonoBehaviour, IDamageable
 
     }*/
 
+    public void DashCool()
+    {
+        StartCoroutine(DashCoroutine());
+    }
+    private IEnumerator DashCoroutine()
+    {
+        float currentTime = 0f;
+        Dash(true);
+        while (true)
+        {
+            RigidCompo.velocity = velocity * dashPower;
+            currentTime += Time.deltaTime;
+            if (currentTime >= dashTime)
+            {
+                Dash(false);
+                RigidCompo.velocity = Vector3.zero;
+                break;
+            }
+        }
+        ChangeState(StateEnum.Idle);
+        isBlock = false;
+
+        yield return new WaitForSeconds(dashCoolTime);
+        isDash = false;
+    }
+
     private bool AttemptDash()
     {
-        if (currentEnum == StateEnum.Dash) return false;
+        if (currentEnum == StateEnum.Dash || isDash) return false;
 
-        if (_lastDashTime + _dashCoolTime > Time.time) return false;
+        //if (_lastDashTime + _dashCoolTime > Time.time) return false;
 
-        _lastDashTime = Time.time;
+        //_lastDashTime = Time.time;
         return true;
     }
 
@@ -316,7 +376,15 @@ public class Player : MonoBehaviour, IDamageable
         attacEffect.SetPositionAndPlay(transform.position, transform);
     }
 
-
+    private void OnDisable()
+    {
+        InputReader.OnSkillEvent -= HandleSkillEvent;
+        InputReader.OnDashEvent -= HandleDashEvent;
+        InputReader.OnJumpEvent -= HandleJumpEvent;
+        InputReader.AttackEvent -= HandleAttackEvent;
+        InputReader.OnSheldEvent -= HandleBlaockEvent;
+        InputReader.OnZoomEvent -= HandleZoomEvent;
+    }
 
     private void OnDrawGizmos()
     {

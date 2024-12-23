@@ -38,7 +38,6 @@ public class MainMenuButton : MonoBehaviour
         //이후 작업
         bgm.Stop();
         particleSystem.gameObject.SetActive(false);
-        blackImage.GetComponent<FadeEffect>().FadeIn();
 
         StartCoroutine(SceneMove());
     }
