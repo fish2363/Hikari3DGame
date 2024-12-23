@@ -12,7 +12,13 @@ public class Player : MonoBehaviour, IDamageable
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
     [field: SerializeField] public Transform virtualCamera { get; private set; }
 
+    public bool isShield { get; set; }
     public bool isStop { get; set; }
+
+    public bool _isSkill { get; set; }
+
+    public bool _isSkillCoolTime { get; set; }
+
     public float MaxHp { get { return maxHp; } }
   //  public float CurrentHp { get { return currentHp; } }
     public float MoveSpeed { get { return moveSpeed; }  }
@@ -44,6 +50,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public Vector3 size;
 
+    [field: SerializeField] public Vector3 SkillSize { get; set; }
+
 
     [field: SerializeField] public WeaponData currentWeaponData;
     [field: SerializeField] public Animator animator { get; private set; }
@@ -71,6 +79,9 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+
+
+        isShield = true;
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
         {
             Type t = Type.GetType($"{enumState}State");
@@ -79,6 +90,7 @@ public class Player : MonoBehaviour, IDamageable
         }
         ChangeState(StateEnum.Idle);
 
+        InputReader.OnSkillEvent += HandleSkillEvent;
         InputReader.OnDashEvent += HandleDashEvent;
         InputReader.OnJumpEvent += HandleJumpEvent;
         InputReader.AttackEvent += HandleAttackEvent;
@@ -92,6 +104,8 @@ public class Player : MonoBehaviour, IDamageable
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        _isSkillCoolTime = true;
+        _isSkill = true;
     }
 
     private void Start()
@@ -175,15 +189,6 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         Die();
-        MinusPlayerHealth();
-    }
-
-    public void MinusPlayerHealth()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            currentHp.Value -= 1000;
-        }
     }
 
     private void FixedUpdate()
@@ -206,9 +211,20 @@ public class Player : MonoBehaviour, IDamageable
     {
         if(currentWeaponData.weaponName == "Pencil")
         {
-            if (isBlock)
+            if (isShield)
             {
                 ChangeState(StateEnum.Sheld);
+            }
+        }
+    }
+
+    private void HandleSkillEvent()
+    {
+        if(currentWeaponData.weaponName == "Spon")
+        {
+            if(_isSkillCoolTime)
+            {
+                ChangeState(StateEnum.Skill);
             }
         }
     }
@@ -252,7 +268,7 @@ public class Player : MonoBehaviour, IDamageable
         return true;
     }
 
-    public void ChangeState(StateEnum newEnum)
+    public void ChangeState(StateEnum newEnum)  
     {
         stateDictionary[currentEnum].Exit();
         currentEnum = newEnum;
@@ -316,7 +332,11 @@ public class Player : MonoBehaviour, IDamageable
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(RayTransform.position, size);
+      
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(RayTransform.position, SkillSize);
         Gizmos.color = Color.white;
     }
+
 
 }

@@ -24,7 +24,7 @@ public class AttackState : State
         _player.animator.SetBool("Attack", true);
         _player.RigidCompo.velocity = UnityEngine.Vector3.zero;
 
-        _player.ShowAttackEffect();
+        
 
         if (_player.currentWeaponData.name == "Clip")
             _player.StartCoroutine(DoubleSword());
@@ -39,8 +39,10 @@ public class AttackState : State
         AttackPlayer();
 
         yield return new WaitForSeconds(_player.currentWeaponData.weaponAttackCoolTime / 2);
+
         _player.isAttack = true;
         _player.animator.SetBool("Attack", false);
+
         _player.ChangeState(StateEnum.Idle);
     }
 
@@ -60,6 +62,7 @@ public class AttackState : State
 
     private void AttackPlayer()
     {
+        _player.ShowAttackEffect();
         Collider[] hit = Physics.OverlapBox(_player.RayTransform.position, _player.size, _player.transform.rotation, _player.whatIsEnemy);
 
         foreach (Collider hittor in hit)
