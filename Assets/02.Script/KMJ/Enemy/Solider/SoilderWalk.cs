@@ -34,7 +34,7 @@ public class SoilderWalk : EnemyState<EnemyStatEnum>
 
         soilderObject.ToList().ForEach(t => t.transform.rotation = Quaternion.LookRotation(new Vector3(_enemy.RigidCompo.velocity.x, 0, _enemy.RigidCompo.velocity.z)));
 
-        if (_soilder._isMove)
+        if (_soilder.MoveCompo.isMove)
             _stateMachine.ChangeState(EnemyStatEnum.Chase);
 
         if (_soilder.Hp <= 0)

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Soilder : Enemy, IDamageable
 {
@@ -12,6 +13,8 @@ public class Soilder : Enemy, IDamageable
     public bool _isAttack { get; set; }
     [field: SerializeField] public bool _isMove { get; set; }
 
+    private Player _player;
+
     protected override void Awake()
     {
         base.Awake();
@@ -19,6 +22,9 @@ public class Soilder : Enemy, IDamageable
         stateMachine.AddState(EnemyStatEnum.Chase, new SoilderChase(this, stateMachine, "Chase"));
         stateMachine.AddState(EnemyStatEnum.Attack, new SoilderShoot(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Dead, new SoilderDie(this, stateMachine, "Die"));
+        stateMachine.AddState(EnemyStatEnum.Stun, new RcStun(this, stateMachine, "Walk"));
+
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
         _isAttack = true;
         _isMove = false;
@@ -41,18 +47,24 @@ public class Soilder : Enemy, IDamageable
         {
             return GetNextPos();
         }
-
         return result;
     }
 
     private void Update()
     {
+
+
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 8)
+        range = Vector3.Distance(transform.position,_player.transform.position);
+
+        print(range);
+
+        print(MoveCompo.isMove);
+        if (range <= 10)
         {
-            _isMove = true;
+            MoveCompo.isMove = true;
         }
     }
 
