@@ -9,6 +9,7 @@ public class ScissorsPhase2State : EntityState
     private Scissors _scissors;
     private bool _isAttackWait;
     private Transform _cameraPos;
+    private float _originDamge;
 
     public ScissorsPhase2State(Entity entity, AnimParamSO animParam) : base(entity, animParam)
     {
@@ -19,6 +20,8 @@ public class ScissorsPhase2State : EntityState
     {
         Debug.Log("´Ï ¿Ö ½ÇÇàµÅ");
         base.Enter();
+        _originDamge = _scissors.DamgeCaster.Damage;
+        _scissors.DamgeCaster.Damage = 35f;
         _cameraPos = GameObject.FindWithTag("VirtualCamera").transform;
         _scissors.transform.DOMoveY(_scissors.transform.position.y + 25, 1F);
         _scissors.StartCoroutine(AttackEnemy());
@@ -53,5 +56,11 @@ public class ScissorsPhase2State : EntityState
         Debug.Log("A->C");
         yield return new WaitForSeconds(1f);
         _scissors.ChangeState(BossState.Chase);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _scissors.DamgeCaster.Damage = _originDamge;
     }
 }

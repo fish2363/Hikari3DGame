@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotSpeed: 1
-  _damge: 75
+  _damge: 40
 --- !u!54 &2249198640559267240
 Rigidbody:
   m_ObjectHideFlags: 0

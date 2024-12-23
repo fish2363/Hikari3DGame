@@ -5,7 +5,7 @@ public class DamageCast : MonoBehaviour
     [SerializeField] private LayerMask _whatIsPlayer;
     [SerializeField] private int _maxAvailableCount = 4;
     [SerializeField] private Vector3 _castSize;
-    [SerializeField] private float _damage = 5f;
+    [field:SerializeField] public float Damage;
     [SerializeField] private Vector3 _knockBackForce = new Vector2(5f, 3f);
     public Collider[] cnt;
     public void CastDamage()
@@ -16,7 +16,7 @@ public class DamageCast : MonoBehaviour
         {
             if (cnt[i].TryGetComponent(out IDamageable damageable))
             {
-                damageable.ApplyDamage(_damage);
+                damageable.ApplyDamage(Damage);
             }
         }
     }
