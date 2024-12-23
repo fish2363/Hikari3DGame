@@ -270,7 +270,7 @@ public class Player : MonoBehaviour, IDamageable
         if (!isStop)
         {
             if (!isBlock)
-                currentHp.Value -= damage / 2;
+                return;
             else if (isBlock)
             {
                 currentHp.Value -= damage;

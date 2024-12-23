@@ -15,11 +15,11 @@ public class SkillState : State
 
     public override void Enter()
     {
-        if (_player.currentWeaponData.name == "Pencil")
+        if (_player.currentWeaponData.name == "Spon")
         {
             _player.StartCoroutine(Skill());
         }
-        else if (_player.currentWeaponData.name == "Spon")
+        else if (_player.currentWeaponData.name == "Pencil")
         {
             _player.StartCoroutine(Skill2());
         }
@@ -31,7 +31,7 @@ public class SkillState : State
     IEnumerator Skill()
     {
         _player.ShowAttackEffect();
-        _player.animator.SetBool("Skill", true);
+        _player.animator.SetBool("Attack", true);
         _player._isSkill = false;
 
         _player._isSkillCoolTime = false;
@@ -41,7 +41,7 @@ public class SkillState : State
         AttackPlayer();
 
         _player._isSkill = true;
-        _player.animator.SetBool("Skill", false);
+        _player.animator.SetBool("Attack", false);
 
         yield return new WaitForSeconds(18.7f);
         _player._isSkillCoolTime = true;
@@ -50,7 +50,7 @@ public class SkillState : State
     IEnumerator Skill2()
     {
         _player.ShowAttackEffect();
-        _player.animator.SetBool("Attack", true);
+        _player.animator.SetBool("Skill", true);
         _player._isSkill = false;
 
         _player._isSkillCoolTime = false;
@@ -60,7 +60,7 @@ public class SkillState : State
         CrashEnemy();
 
         _player._isSkill = true;
-        _player.animator.SetBool("Attack", false);
+        _player.animator.SetBool("Skill", false);
 
         yield return new WaitForSeconds(18.7f);
         _player._isSkillCoolTime = true;
