@@ -16,6 +16,6 @@ public class WeaponPickable : Pickable
 
     public override void PickUp(Player agent)
     {
-        agent.PickUp(_weaponData);
+        //agent.PickUp(_weaponData);
     }
 }
