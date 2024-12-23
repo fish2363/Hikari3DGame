@@ -20,8 +20,8 @@ public class Player : MonoBehaviour, IDamageable
     public bool _isSkillCoolTime { get; set; }
 
     public float MaxHp { get { return maxHp; } }
-  //  public float CurrentHp { get { return currentHp; } }
-    public float MoveSpeed { get { return moveSpeed; }  }
+    //  public float CurrentHp { get { return currentHp; } }
+    public float MoveSpeed { get { return moveSpeed; } }
     public CinemachineFreeLook freelook;
     public CinemachineFreeLook combatCamera;
     private CinemachineFreeLook currentCamera;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     protected float maxHp;
 
-    [field : SerializeField]
+    [field: SerializeField]
     public NotifyValue<float> currentHp { get; set; } = new NotifyValue<float>();
 
     [SerializeField]
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour, IDamageable
     public bool isCameraOn;
 
 
-    
+
 
     private void Awake()
     {
@@ -173,8 +173,8 @@ public class Player : MonoBehaviour, IDamageable
         stateDictionary[currentEnum].StateUpdate();
         scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
         //freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
-        if(!isCameraOn)
-            freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius+=scroll, 2f, 12f);
+        if (!isCameraOn)
+            freelook.m_Orbits[1].m_Radius = Mathf.Clamp(freelook.m_Orbits[1].m_Radius += scroll, 2f, 12f);
         else
             combatCamera.m_Orbits[2].m_Radius = Mathf.Clamp(freelook.m_Orbits[2].m_Radius += scroll, 2f, 12f);
 
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleBlaockEvent()
     {
-        if(currentWeaponData.weaponName == "Pencil")
+        if (currentWeaponData.weaponName == "Pencil")
         {
             if (isShield)
             {
@@ -210,9 +210,9 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleSkillEvent()
     {
-        if(currentWeaponData.weaponName == "Spon")
+        if (currentWeaponData.weaponName == "Spon" || currentWeaponData.weaponName == "Pencil")
         {
-            if(_isSkillCoolTime)
+            if (_isSkillCoolTime)
             {
                 ChangeState(StateEnum.Skill);
             }
@@ -258,7 +258,7 @@ public class Player : MonoBehaviour, IDamageable
         return true;
     }
 
-    public void ChangeState(StateEnum newEnum)  
+    public void ChangeState(StateEnum newEnum)
     {
         stateDictionary[currentEnum].Exit();
         currentEnum = newEnum;
@@ -285,7 +285,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        if(currentHp.Value <= 0)
+        if (currentHp.Value <= 0)
         {
             ChangeState(StateEnum.Die);
         }
@@ -322,7 +322,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(RayTransform.position, size);
-      
+
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(RayTransform.position, SkillSize);
         Gizmos.color = Color.white;
