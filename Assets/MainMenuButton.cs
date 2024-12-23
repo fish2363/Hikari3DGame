@@ -38,8 +38,6 @@ public class MainMenuButton : MonoBehaviour
         //이후 작업
         bgm.Stop();
 
-        blackImage.GetComponent<FadeEffect>().FadeIn();
-
         StartCoroutine(SceneMove());
     }
     public void CameraShake()
