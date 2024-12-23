@@ -9,5 +9,6 @@ public enum StateEnum
     Attack,
     Dash,
     Sheld,
-    Die
+    Die,
+    Skill
 }

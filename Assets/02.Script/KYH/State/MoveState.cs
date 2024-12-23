@@ -19,6 +19,16 @@ public class MoveState : State
 
     Vector3 moveDir;
 
+    private Vector3 difValue;
+    public float Yaxis;
+    public float Xaxis;
+    private Vector3 currentVel;
+
+    private float rotSensitive = 3f;
+    private float rotationMin = -10f;
+    private float rotationMax = 80f;
+
+
     public MoveState(Player player) : base(player)
     {
         _player = player;
@@ -97,18 +107,19 @@ public class MoveState : State
     private void LookAt()
     {
         var rot = Camera.main.transform.rotation;
-        Vector3 moveVector;
-        GetCommonMoveVectorFromPlayerInput(_player.InputReader.direction.x, _player.InputReader.direction.z, rot, out moveVector);
+            Vector3 moveVector;
+            GetCommonMoveVectorFromPlayerInput(_player.InputReader.direction.x, _player.InputReader.direction.z, rot, out moveVector);
 
-        Quaternion targetAngle = Quaternion.LookRotation(moveVector);
-        _player.transform.rotation = Quaternion.Lerp(
-        _player.transform.rotation, targetAngle, Time.deltaTime * rotateSpeed);
+        if(!_player.isCameraOn)
+        {
+            Quaternion targetAngle = Quaternion.LookRotation(moveVector);
+            _player.transform.rotation = Quaternion.Lerp(
+            _player.transform.rotation, targetAngle, Time.deltaTime * rotateSpeed);
+        }
 
         //_player.transform.forward = moveVector;
         moveDir = moveVector;
-        moveDir.y = 0;
-
-        //Debug.Log($"x:{_player.InputReader.direction.x} y:{_player.InputReader.direction.y} dir:{moveDir}");
+            moveDir.y = 0;
     }
 
     public override void Exit()
