@@ -9,7 +9,7 @@ public class BWindUpDoll : WindUpDoll
     protected override void Awake()
     {
         base.Awake();
-        stateMachine.AddState(EnemyStatEnum.Walk, new BWindUpDollMove(this, stateMachine, "Move"));
+        stateMachine.AddState(EnemyStatEnum.Walk, new BWindUpDollMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new BWindUpDollAttack(this, stateMachine, "Attack"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
@@ -24,8 +24,7 @@ public class BWindUpDoll : WindUpDoll
     public void InstantiateObject(GameObject targetObj, Vector3 pos)
     {
         Instantiate(targetObj, pos, Quaternion.identity);
-    
-}
+    }
 
     private void OnDrawGizmos()
     {

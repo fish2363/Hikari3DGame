@@ -16,10 +16,14 @@ public class WindUpDoll : Enemy, IDamageable
     private Vector3 _prev = Vector3.zero;
     private Vector3 _radius;
 
+    private void OnValidate()
+    {
+        startPos = transform.position;
+    }
+
     protected override void Awake()
     {
         base.Awake();
-        startPos = transform.position;
     }
 
     protected virtual void Update()
