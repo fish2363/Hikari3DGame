@@ -24,5 +24,10 @@ public abstract class Enemy : EnemyAgent
         stateMachine = new StateMachine<EnemyStatEnum>();
     }
 
+    public void StopImmediately()
+    {
+        RigidCompo.velocity = Vector3.zero;
+    }
+
     protected abstract void AnimEndTrigger();
 }

@@ -25,8 +25,6 @@ public class WindUpDoll : Enemy, IDamageable
     protected virtual void Update()
     {
         _distance = (player.transform.position - transform.position).magnitude;
-
-        FlipEnemy();
     }
 
     public Vector3 GetNextPos()
@@ -46,7 +44,7 @@ public class WindUpDoll : Enemy, IDamageable
         return nextPos;
     }
 
-    private void FlipEnemy()
+    public void FlipEnemy()
     {
         transform.rotation = Quaternion.LookRotation(new Vector3(RigidCompo.velocity.x, 0, RigidCompo.velocity.z));
     }
@@ -72,5 +70,14 @@ public class WindUpDoll : Enemy, IDamageable
         Hp -= damage;
         var item = Instantiate(getDamageEffect);
         item.SetPositionAndPlay(transform.position, transform);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.TryGetComponent(out IDamageable damageable))
+        {
+            int damage = Mathf.RoundToInt(Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage));
+            damageable.ApplyDamage(damage);
+        }
     }
 }

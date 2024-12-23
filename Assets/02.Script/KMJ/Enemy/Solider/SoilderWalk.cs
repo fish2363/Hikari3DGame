@@ -52,7 +52,7 @@ public class SoilderWalk : EnemyState<EnemyStatEnum>
 
         if ((_nextPos - _soilder.transform.position).magnitude <= 2f)
         {
-            _soilder.MoveCompo.StopImmediately(_soilder);
+            _soilder.MoveCompo.StopImmediately();
             _nextPos = _soilder.GetNextPos();
         }
 

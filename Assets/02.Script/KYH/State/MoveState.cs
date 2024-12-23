@@ -108,7 +108,7 @@ public class MoveState : State
         moveDir = moveVector;
         moveDir.y = 0;
 
-        Debug.Log($"x:{_player.InputReader.direction.x} y:{_player.InputReader.direction.y} dir:{moveDir}");
+        //Debug.Log($"x:{_player.InputReader.direction.x} y:{_player.InputReader.direction.y} dir:{moveDir}");
     }
 
     public override void Exit()

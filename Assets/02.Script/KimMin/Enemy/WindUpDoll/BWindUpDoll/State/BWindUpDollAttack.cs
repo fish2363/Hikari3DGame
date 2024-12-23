@@ -16,7 +16,7 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+        _windUpDoll.MoveCompo.StopImmediately();
     }
 
     public override void UpdateState()

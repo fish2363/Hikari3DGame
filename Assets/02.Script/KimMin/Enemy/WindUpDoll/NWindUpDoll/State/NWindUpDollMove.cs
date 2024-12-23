@@ -15,6 +15,7 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
+        _windUpDoll.FlipEnemy();
         Move();
 
         if(_windUpDoll._distance <  _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
@@ -32,6 +33,7 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         moveDir.y = 0;
 
-        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed * Time.deltaTime;
+
+        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed;
     }
 }
