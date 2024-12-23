@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class NWindUpDoll : WindUpDoll
 {
     public float detectRadius = 4.0f;
     public bool canAttack = true;
+    private EntityHealth _healthCompo;
 
     protected override void Awake()
     {
@@ -13,6 +15,12 @@ public class NWindUpDoll : WindUpDoll
         stateMachine.AddState(EnemyStatEnum.Idle, new NWindUpDollIdle(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyStatEnum.Walk, new NWindUpDollMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Attack, new NWindUpDollAttack(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyStatEnum.Dead, new NWindUpDollDead(this, stateMachine, "Dead"));
+
+        _healthCompo = GetComponent<EntityHealth>();
+        _healthCompo.MaxHealth = EnemyStat.HP;
+
+        _healthCompo.OnDeath += HandleOnDeath;
     }
 
     private void Start()
@@ -24,8 +32,11 @@ public class NWindUpDoll : WindUpDoll
     {
         base.Update();
         stateMachine.CurrentState.UpdateState();
+    }
 
-        Debug.Log(Hp);
+    private void HandleOnDeath()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
