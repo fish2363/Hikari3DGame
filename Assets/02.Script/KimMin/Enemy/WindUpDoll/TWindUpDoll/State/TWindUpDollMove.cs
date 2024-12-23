@@ -23,6 +23,7 @@ public class TWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
+        _windUpDoll.FlipEnemy();
         MoveNextPos();
 
         if (_windUpDoll._distance < _windUpDoll.detectRadius)

@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
-public class WindUpDoll : Enemy,IAttackable
+public class WindUpDoll : Enemy, IDamageable
 {
     [HideInInspector] public float _distance;
     [HideInInspector] public Vector3 nextPos;
@@ -25,8 +25,6 @@ public class WindUpDoll : Enemy,IAttackable
     protected virtual void Update()
     {
         _distance = (player.transform.position - transform.position).magnitude;
-
-        FlipEnemy();
     }
 
     public Vector3 GetNextPos()
@@ -46,7 +44,7 @@ public class WindUpDoll : Enemy,IAttackable
         return nextPos;
     }
 
-    private void FlipEnemy()
+    public void FlipEnemy()
     {
         transform.rotation = Quaternion.LookRotation(new Vector3(RigidCompo.velocity.x, 0, RigidCompo.velocity.z));
     }
@@ -61,13 +59,25 @@ public class WindUpDoll : Enemy,IAttackable
 
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
-    {
-
-    }
 
     public void Attack(Player agent, LayerMask hittable, Vector3 direction)
     {
 
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Hp -= damage;
+        var item = Instantiate(getDamageEffect);
+        item.SetPositionAndPlay(transform.position, transform);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.TryGetComponent(out IDamageable damageable))
+        {
+            int damage = Mathf.RoundToInt(Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage));
+            damageable.ApplyDamage(damage);
+        }
     }
 }

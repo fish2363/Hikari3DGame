@@ -12,7 +12,6 @@ public class WeaponAttack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("Enemy") && !_player.isAttack)
         {
             other.TryGetComponent(out IDamageable attack);

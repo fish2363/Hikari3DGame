@@ -8,6 +8,7 @@ public class DamageCast : MonoBehaviour
     [field:SerializeField] public float Damage;
     [SerializeField] private Vector3 _knockBackForce = new Vector2(5f, 3f);
     public Collider[] cnt;
+
     public void CastDamage()
     {
        cnt  = Physics.OverlapBox(transform.position, _castSize, Quaternion.identity, _whatIsPlayer);

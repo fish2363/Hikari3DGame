@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 {
-    private float _dashPower = 25f, _currentTime, _dashTime = 0.5f;
+    private float _dashPower = 5f, _currentTime, _dashTime = 1f;
 
     private NWindUpDoll _windUpDoll;
 
