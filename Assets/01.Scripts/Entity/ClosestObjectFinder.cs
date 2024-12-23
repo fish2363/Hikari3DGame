@@ -4,28 +4,41 @@ using UnityEngine;
 public class ClosestObjectFinder : MonoBehaviour
 {
     public float searchRadius = 5.0f;
-    public LayerMask targetLayer;
-    [SerializeField] private Transform targetTransform;
+    public LayerMask targetLayer = 0;
+    [SerializeField] private Transform targetTransform = null;
+    private bool PathSerchRadius = false;
+    private bool SerchFlag = true;
+    Collider closest = null;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Collider closest = FindClosestObject(transform.position, searchRadius, targetLayer);
-
+            closest = FindClosestObject(transform.position, searchRadius, targetLayer);
+            if (SerchFlag)
+            { SerchFlag = false; }
+            if (!SerchFlag) 
+            { SerchFlag = true; }
+          
+           
             if (closest != null)
             {
-                transform.DOLookAt(closest.transform.position,0.5f);
-                targetTransform.position = closest.transform.position;
-
+                PathSerchRadius = true;
+                targetTransform.position = closest.transform.GetChild(0).position;
             }
+
 
             else
             {
                 Debug.Log("연호 코는 기네스 신기록");
             }
-            
         }
+        if (PathSerchRadius && !SerchFlag)
+        {
+            transform.DOLookAt(closest.transform.position, 0.5f);
+        }
+
+
     }
 
     Collider FindClosestObject(Vector3 position, float radius, LayerMask layerMask)
@@ -51,7 +64,7 @@ public class ClosestObjectFinder : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-       
-        Gizmos.DrawWireSphere(transform.position, searchRadius);    
+
+        Gizmos.DrawWireSphere(transform.position, searchRadius);
     }
 }
