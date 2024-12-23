@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ public class NWindUpDoll : WindUpDoll
     public float detectRadius = 4.0f;
     public bool canAttack = true;
     private EntityHealth _healthCompo;
+
+    [field: SerializeField] public SoundID Dash { get; set; }
 
     protected override void Awake()
     {

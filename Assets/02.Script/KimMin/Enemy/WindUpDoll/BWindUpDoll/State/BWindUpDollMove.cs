@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,6 +20,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
 
         _windUpDoll.StopImmediately();
         _windUpDoll.nextPos = _windUpDoll.GetNextPos();
+        BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -32,6 +34,12 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void MoveNextPos()

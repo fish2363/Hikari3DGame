@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         HeadAttack();
+        BroAudio.Play(_windUpDoll.Dash);
 
         _currentTime = 0;
     }
@@ -36,6 +38,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         base.Exit();
         _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+        BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void HeadAttack()

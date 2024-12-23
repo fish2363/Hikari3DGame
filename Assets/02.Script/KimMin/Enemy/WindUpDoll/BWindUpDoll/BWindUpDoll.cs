@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class BWindUpDoll : WindUpDoll
     public GameObject explostionEffect1;
     public GameObject explostionEffect2;
     public GameObject explosionSmokeEffect;
+
+    [field: SerializeField] public SoundID ExplosionSound { get; set; }
+    [field: SerializeField] public SoundID ExplosionIgnition { get; set; }
 
     protected override void Awake()
     {

@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using Ami.BroAudio;
 
 public class WindUpDoll : Enemy, IDamageable
 {
     [HideInInspector] public float _distance;
     [HideInInspector] public Vector3 nextPos;
     [HideInInspector] public Vector3 moveDir;
+
+    [field: SerializeField] public SoundID WindUp { get; set; }
+
 
     public Vector3 startPos;
     public float moveRadius;

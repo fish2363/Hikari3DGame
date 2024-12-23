@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         _windUpDoll.MoveCompo.StopImmediately();
+        BroAudio.Play(_windUpDoll.ExplosionIgnition);
 
         Vector3 spawnPos = _windUpDoll.transform.position;
         spawnPos.y += 1;
@@ -37,8 +39,15 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
         }
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_windUpDoll.WindUp);
+    }
+
     private void Explostion()
     {
+        BroAudio.Play(_windUpDoll.ExplosionSound);
         Vector3 spawnPos = _windUpDoll.transform.position;
         GameObject.Instantiate(_windUpDoll.explostionEffect1, spawnPos, Quaternion.identity);
         spawnPos.y += 2;

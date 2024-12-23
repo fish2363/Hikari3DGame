@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,6 +17,7 @@ public class TWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         _windUpDoll.isCollision = true;
+        BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -32,5 +34,6 @@ public class TWindUpDollAttack : EnemyState<EnemyStatEnum>
     {
         base.Exit();
         _windUpDoll.isCollision = false;
+        BroAudio.Pause(_windUpDoll.WindUp);
     }
 }
