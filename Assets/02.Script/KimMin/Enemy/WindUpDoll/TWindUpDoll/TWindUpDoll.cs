@@ -8,6 +8,7 @@ public class TWindUpDoll : WindUpDoll
     [HideInInspector] public Vector3 interV = Vector3.zero;
     [HideInInspector] public bool isCollision = false;
     [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 2f;
+    [HideInInspector] public bool canAttack = true;
 
     public float angleRange = 30f;
     public float radius = 3f;

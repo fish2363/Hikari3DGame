@@ -25,16 +25,20 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         base.UpdateState();
 
         _windUpDoll.FlipEnemy();
-        ChaseTarget();
         CheckSight();
 
-        if (_windUpDoll._distance < _windUpDoll.EnemyStat.AttackRadius)
-        {
-            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
-        }
-        else if (_windUpDoll._distance > _windUpDoll.detectRadius)
+        if (_windUpDoll._distance > 4)
+            ChaseTarget();
+        else
+            LookPlayer();
+
+        if (_windUpDoll._distance > _windUpDoll.detectRadius)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
+        }
+        if (_windUpDoll._distance < _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
     }
 
@@ -50,6 +54,12 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         moveDir.y = 0;
 
         _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ChasingSpeed;
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 dir = _windUpDoll.player.transform.position - _windUpDoll.transform.position;
+        _windUpDoll.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     private void CheckSight()

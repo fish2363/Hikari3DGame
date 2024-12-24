@@ -15,7 +15,7 @@ MonoBehaviour:
   AttackRadius: 6
   WallRadius: 1
   KnockbackPower: 5
-  AttackDelay: 5
+  AttackDelay: 2
   ContactAttackRadius: 2
   MinAttackDamage: 8
   MaxAttackDamage: 11

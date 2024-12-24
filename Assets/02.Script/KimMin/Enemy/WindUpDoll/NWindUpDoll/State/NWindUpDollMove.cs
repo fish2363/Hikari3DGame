@@ -23,9 +23,13 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         base.UpdateState();
 
         _windUpDoll.FlipEnemy();
-        Move();
 
-        if(_windUpDoll._distance <  _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
+        if (_windUpDoll._distance < 4)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Idle);
+        }
+
+        if (_windUpDoll._distance <  _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
@@ -33,6 +37,8 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Idle);
         }
+
+        Move();
     }
 
     public override void Exit()
