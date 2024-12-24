@@ -7,13 +7,14 @@ public class BossHpBar : MonoBehaviour
 {
 	private EntityHealth _entityHealth;
 
-    [SerializeField] private Image _hpBar;
+   private Image _hpBar;
 
     private float _hpFillAmount;
 
     private void Awake()
     {
         _entityHealth = GetComponentInParent<EntityHealth>();
+        _hpBar = GameObject.Find("fill").GetComponent<Image>();
     }
 
     private void Update()
