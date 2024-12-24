@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Ami.BroAudio;
 using System.Linq;
 
 public class ScissorsPhase4State : EntityState
@@ -52,14 +53,17 @@ public class ScissorsPhase4State : EntityState
         {
             Vector3 directionAwayFromWall = firstWall.transform.position;
             Vector3 firstTargetPosition = _scissors.transform.position + directionAwayFromWall * 3f;
+            BroAudio.Play(_scissors.ScissorsDashSfx);
 
             EnemyDash(firstTargetPosition, () =>
             {
+
                 Transform secondWall = FindWallOppositeToFacingDirection();
                 if (secondWall != null)
                 {
                     Vector3 secondDirectionAwayFromWall = secondWall.transform.position;
                     Vector3 secondTargetPosition = _scissors.transform.position + secondDirectionAwayFromWall * 3f;
+                    BroAudio.Play(_scissors.ScissorsDashSfx);
 
                     EnemyDash(secondTargetPosition, () =>
                     {
