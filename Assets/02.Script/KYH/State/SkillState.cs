@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
@@ -27,6 +28,7 @@ public class SkillState : State
 
     IEnumerator Skill()
     {
+        BroAudio.Play(_player._sponSwingSfx);
         _player.ShowAttackEffect();
         _player.animator.SetBool("Attack", true);
         _player._isSkill = false;
@@ -36,7 +38,6 @@ public class SkillState : State
 
         yield return new WaitForSeconds(0.7f);
         AttackPlayer();
-
         _player._isSkill = true;
         _player.animator.SetBool("Attack", false);
 
@@ -75,6 +76,7 @@ private void AttackPlayer()
 
             if (hittor.TryGetComponent(out Enemy enemy))
             {
+                BroAudio.Play(_player._sponAttackSfx);
                 enemy.stateMachine.ChangeState(EnemyStatEnum.Stun);
             }
             else
