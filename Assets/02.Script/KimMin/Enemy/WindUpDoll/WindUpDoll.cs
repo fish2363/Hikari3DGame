@@ -13,7 +13,7 @@ public class WindUpDoll : Enemy, IDamageable
 
     [field: SerializeField] public SoundID WindUp { get; set; }
 
-
+    public LayerMask whatisPlayer;
     public Vector3 startPos;
     public float moveRadius;
 

@@ -22,5 +22,5 @@ MonoBehaviour:
   Name: "\uC090\uC57D \uD0DC\uC5FD \uC778\uD615"
   Key: NwindUpDoll
   HP: 150
-  ProwlSpeed: 4
-  ChasingSpeed: 2.5
+  ProwlSpeed: 2
+  ChasingSpeed: 2

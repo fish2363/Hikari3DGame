@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 {
-    private float _dashPower = 5f, _currentTime, _dashTime = 1f;
+    private float _dashPower = 10f, _currentTime, _dashTime = 1f;
 
     private NWindUpDoll _windUpDoll;
 
@@ -21,6 +21,7 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
         BroAudio.Play(_windUpDoll.Dash);
 
         _currentTime = 0;
+        _windUpDoll.canAttack = false;
     }
 
     public override void UpdateState()
@@ -52,7 +53,6 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
 
     private IEnumerator NWindUpDollDashRoutine()
     {
-        _windUpDoll.canAttack = false;
         yield return new WaitForSeconds(_enemy.EnemyStat.AttackDelay);
         _windUpDoll.canAttack = true;
     }

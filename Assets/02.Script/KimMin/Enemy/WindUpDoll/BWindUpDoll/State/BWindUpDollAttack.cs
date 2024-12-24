@@ -53,5 +53,21 @@ public class BWindUpDollAttack : EnemyState<EnemyStatEnum>
         spawnPos.y += 2;
         GameObject.Instantiate(_windUpDoll.explostionEffect2, spawnPos, Quaternion.identity);
         _windUpDoll.gameObject.SetActive(false);
+
+        Collider[] colliders = Physics.OverlapSphere(
+            _windUpDoll.transform.position, 
+            _windUpDoll.EnemyStat.AttackRadius, _windUpDoll.whatisPlayer);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.TryGetComponent(out IDamageable damageable))
+            {
+                int attackPower = Random.Range(
+                    _windUpDoll.EnemyStat.MinAttackDamage,
+                    _windUpDoll.EnemyStat.MaxAttackDamage);
+
+                damageable.ApplyDamage(attackPower);
+            }
+        }
     }
 }
