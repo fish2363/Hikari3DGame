@@ -24,6 +24,6 @@ public class BossHpBar : MonoBehaviour
     public void BossHpSetting(float damge)
     {
         _hpFillAmount = Mathf.Clamp(_entityHealth.MaxHealth - damge, 0, 1);
-        _hpBar.fillAmount = _hpFillAmount;
+        _hpBar.transform.localScale = new Vector3(_hpFillAmount, 0, 0);
     }
 }
