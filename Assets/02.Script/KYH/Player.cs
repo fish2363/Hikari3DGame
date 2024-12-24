@@ -130,8 +130,11 @@ public class Player : MonoBehaviour, IDamageable
         _isSkill = true;
         currentCamera = freelook;
         isFullSheld = false;
-        loader = FindAnyObjectByType<LevelLoader>();
-        loader.LoadLevelComplete();
+        if(loader != null)
+        {
+            loader = FindAnyObjectByType<LevelLoader>();
+            loader.LoadLevelComplete();
+        }
     }
 
     private void Start()
