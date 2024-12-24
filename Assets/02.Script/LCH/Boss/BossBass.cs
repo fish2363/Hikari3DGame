@@ -33,7 +33,7 @@ public abstract class BossBass : Entity
         base.Awake();
         RigidCompo = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        //GetCompo<EntityAnimator>(true).OnAnimationEnd += HandleAnimationEnd;
+        GetCompo<EntityAnimator>(true).OnAnimationEnd += HandleAnimationEnd;
         _health = GetCompo<EntityHealth>();
         _health.OnDeath += DeadState;
         _health.OnHit += HitState;
@@ -41,7 +41,7 @@ public abstract class BossBass : Entity
 
     private void OnDestroy()
     {
-        //GetCompo<EntityAnimator>(true).OnAnimationEnd -= HandleAnimationEnd;
+        GetCompo<EntityAnimator>(true).OnAnimationEnd -= HandleAnimationEnd;
         _health.OnDeath -= DeadState;
         _health.OnHit -= HitState;
     }
