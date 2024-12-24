@@ -48,6 +48,8 @@ public class NWindUpDollAttack : EnemyState<EnemyStatEnum>
         direction.y = 0;
 
         _windUpDoll.RigidCompo.AddForce(direction * _dashPower, ForceMode.Impulse);
+        _windUpDoll.transform.rotation = Quaternion.LookRotation(direction);
+
         _windUpDoll.StartCoroutine(NWindUpDollDashRoutine());
     }
 

@@ -16,8 +16,8 @@ public class RcCar : Enemy, IDamageable
     private Vector3 _moveDir;
 
     public ShowEffect hitEffect;
-
-
+    [SerializeField]
+    private float moveSpeed = 10f;
 
     protected override void Awake()
     {
@@ -106,7 +106,7 @@ public class RcCar : Enemy, IDamageable
 
         _isAttackTrue = true;
 
-        RigidCompo.velocity += moveDir * 10;
+        RigidCompo.velocity += moveDir * moveSpeed;
 
         yield return new WaitForSeconds(0.1f);
 
