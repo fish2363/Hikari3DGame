@@ -25,7 +25,7 @@ public class ScissorsWaitState : EntityState
         yield return new WaitForSeconds(0.5F);
         if (!_scissors.IsDead)
         {
-            int Phases = Random.Range(1, 4);
+            int Phases = /*Random.Range(1, 4)*/4;
             switch (Phases)
             {
                 case 1:

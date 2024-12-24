@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ami.BroAudio;
 
 public class ScissorsChaseState : EntityState
 {
@@ -33,6 +34,7 @@ public class ScissorsChaseState : EntityState
     public override void UpdateState()
     {
         base.UpdateState();
+
         Vector3 direction = _scissors.player.transform.position - _scissors.transform.position;
 
         direction.y = 0;

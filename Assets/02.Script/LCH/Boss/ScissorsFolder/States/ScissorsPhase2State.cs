@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Ami.BroAudio;
 using System;
 
 public class ScissorsPhase2State : EntityState
@@ -52,7 +53,7 @@ public class ScissorsPhase2State : EntityState
         if (seq == null || !seq.IsActive())
         {
             seq = DOTween.Sequence(); 
-        } 
+        }
         seq.Append(_scissors.transform.DOMove(_scissors.player.transform.position, 0.25f).SetEase(Ease.Linear))
             .AppendCallback(()=>_scissors.StartCoroutine(ChangeChaseState()));
 
@@ -62,6 +63,7 @@ public class ScissorsPhase2State : EntityState
     {
         if (!_scissors.IsDead)
         {
+            BroAudio.Play(_scissors.ScissorsThrowingSfx);
             yield return new WaitForSeconds(1f);
             _scissors.ChangeState(BossState.Chase);
             _scissors.DamgeCaster.Damage = _originDamge;
