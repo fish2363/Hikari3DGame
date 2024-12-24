@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,6 +17,7 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -34,6 +36,12 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void ChaseTarget()

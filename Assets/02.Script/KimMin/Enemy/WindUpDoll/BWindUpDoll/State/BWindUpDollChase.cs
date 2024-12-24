@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,12 +12,14 @@ public class BWindUpDollChase : EnemyState<EnemyStatEnum>
     public BWindUpDollChase(EnemyAgent enemy, StateMachine<EnemyStatEnum> state, string animHashName) : base(enemy, state, animHashName)
     {
         _windUpDoll = enemy as BWindUpDoll;
+
     }
 
     public override void Enter()
     {
         base.Enter();
         _currrentTime = 0;
+        BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -29,5 +32,11 @@ public class BWindUpDollChase : EnemyState<EnemyStatEnum>
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_windUpDoll.WindUp);
     }
 }
