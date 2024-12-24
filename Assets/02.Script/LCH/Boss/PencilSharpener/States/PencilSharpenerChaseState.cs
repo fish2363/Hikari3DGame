@@ -30,6 +30,7 @@ public class PencilSharpenerChaseState : EntityState
         if (!_pencilSharpener.IsDead)
         {
             yield return new WaitForSeconds(timer);
+            BroAudio.Pause(_pencilSharpener.ChaseSound);
             _pencilSharpener.ChangeState(BossState.Wait);
         }
     }
