@@ -255,6 +255,26 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  ScissorsSfx:
+    ID: 1073741847
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4526980493147139085}
+  ScissorsThrowingSfx:
+    ID: 1073741850
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4526980493147139085}
+  ScissorsFastSfx:
+    ID: 1073741855
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4526980493147139085}
+  QuickScissorsSfx:
+    ID: 1073741848
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4526980493147139085}
+  ScissorsDashSfx:
+    ID: 1073741849
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4526980493147139085}
 --- !u!114 &6920061839123004593
 MonoBehaviour:
   m_ObjectHideFlags: 0

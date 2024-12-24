@@ -19,7 +19,7 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private AudioSource bgm;
-
+    [SerializeField] private LevelLoader loader;
 
     private CanvasGroup canvasGroup;
 
@@ -38,7 +38,6 @@ public class MainMenuButton : MonoBehaviour
         //이후 작업
         bgm.Stop();
         particleSystem.gameObject.SetActive(false);
-
         StartCoroutine(SceneMove());
     }
     public void CameraShake()
@@ -60,7 +59,10 @@ public class MainMenuButton : MonoBehaviour
     {
         vinette.DOFade(0, 2);
         yield return new WaitForSecondsRealtime(5);
+        loader.LoadNextLevel();
+        yield return new WaitForSecondsRealtime(2);
         filter.SetActive(false);
         SceneManager.LoadScene(nameScene);
+
     }
 }

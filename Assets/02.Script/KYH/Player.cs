@@ -74,6 +74,9 @@ public class Player : MonoBehaviour, IDamageable
     [field: SerializeField] public SoundID _clipSwingkSfx;
     [field: SerializeField] public SoundID _PencilAttackSfx;
     [field: SerializeField] public SoundID _PencilSwingSfx;
+    [field: SerializeField] public SoundID _walkSound;
+    [field: SerializeField] public SoundID _deFenseSound;
+    [field: SerializeField] public SoundID _hitSound;
 
 
     private Dictionary<StateEnum, State> stateDictionary = new Dictionary<StateEnum, State>();
@@ -95,13 +98,11 @@ public class Player : MonoBehaviour, IDamageable
 
     //public Volume dashVolume;
 
-
+    private LevelLoader loader;
 
 
     private void Awake()
     {
-
-
         isShield = true;
         foreach (StateEnum enumState in Enum.GetValues(typeof(StateEnum)))
         {
@@ -129,6 +130,11 @@ public class Player : MonoBehaviour, IDamageable
         _isSkill = true;
         currentCamera = freelook;
         isFullSheld = false;
+        if(loader != null)
+        {
+            loader = FindAnyObjectByType<LevelLoader>();
+            loader.LoadLevelComplete();
+        }
     }
 
     private void Start()
@@ -271,6 +277,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleDashEvent()
     {
+        print("실행");
         if (!isStop)
         {
             if (AttemptDash())
@@ -340,13 +347,18 @@ public class Player : MonoBehaviour, IDamageable
         if (!isStop)
         {
             if (isFullSheld)
+            {
+                BroAudio.Play(_deFenseSound);
                 return;
+            }
             else if (isBlock)
             {
+                BroAudio.Play(_hitSound);
                 currentHp.Value -= damage;
             }
             else if(!isShield)
             {
+                BroAudio.Play(_deFenseSound);
                 currentHp.Value -= damage / 2;
             }
         }
@@ -356,6 +368,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         currentHp.Value += Heal;
     }
+
 
     public void Die()
     {
