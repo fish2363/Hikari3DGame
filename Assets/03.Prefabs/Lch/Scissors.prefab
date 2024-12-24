@@ -147,15 +147,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f7fd4b2c2ad5e4597a88376801a724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  EnemyStat: {fileID: 11400000, guid: 297333f54229dec4fb01db00318edf1e, type: 2}
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 64
-  <range>k__BackingField: 0
-  targetDir: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
   IsPhaseEnd: 0
+  WallChecker: 0
+  _bossFSM: {fileID: 0}
+  EnemyStat: {fileID: 11400000, guid: 297333f54229dec4fb01db00318edf1e, type: 2}
+  targetDir: {x: 0, y: 0, z: 0}
+  RigidCompo: {fileID: 0}
+  player: {fileID: 0}
+  effet: {fileID: 0}
+  originPos: {x: 0, y: 0, z: 0}
+  DamgeCaster: {fileID: 0}
+  _groundChecker:
+    serializedVersion: 2
+    m_Bits: 0
+  WhatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  colliders: []
+  ScissorsSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 975721741881480935}
+  ScissorsThrowingSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 975721741881480935}
+  QuickScissorsSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 975721741881480935}
+  ScissorsDashSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 975721741881480935}
 --- !u!114 &1393602874084848192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bbd096e26c75c419908d0dcf31ad10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <isMove>k__BackingField: 0

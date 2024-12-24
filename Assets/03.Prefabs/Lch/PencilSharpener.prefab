@@ -375,6 +375,22 @@ MonoBehaviour:
   shotPos: {fileID: 7447535647409929240}
   _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
     type: 3}
+  ChaseSound:
+    ID: 1073741851
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
+  ShotPencil:
+    ID: 1073741852
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
+  Phase2Sfx:
+    ID: 1073741853
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
+  Phase3Sfx:
+    ID: 1073741854
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
   JumpPos: {fileID: 1858891282447635395}
   CastDamge: {fileID: 0}
 --- !u!114 &7766873904981582148

@@ -22,6 +22,8 @@ public class Scissors : BossBass
 
     [field: SerializeField] public SoundID ScissorsThrowingSfx;
 
+    [field: SerializeField] public SoundID ScissorsFastSfx;
+
     [field: SerializeField] public SoundID QuickScissorsSfx;
 
     [field: SerializeField] public SoundID ScissorsDashSfx;
