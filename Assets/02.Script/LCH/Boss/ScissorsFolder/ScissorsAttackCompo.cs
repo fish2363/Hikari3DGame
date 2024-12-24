@@ -14,6 +14,12 @@ public class ScissorsAttackCompo : MonoBehaviour ,IEntityComponent
         _damgeCast = GetComponentInChildren<DamageCast>();
     }
 
+    public void Phase1Attack()
+    {
+        BroAudio.Play(_scissors.ScissorsFastSfx);
+        _damgeCast.CastDamage();
+    }
+
     public void ChaseAttack()
     {
         BroAudio.Play(_scissors.ScissorsSfx);

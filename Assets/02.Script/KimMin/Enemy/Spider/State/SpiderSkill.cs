@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,6 +39,10 @@ public class SpiderSkill : EnemyState<EnemyStatEnum>
         _spider.canAttack = false;
         _spider.transform
             .DOJump(_spider.player.transform.position, 12f, 1, 1.5f)
+            .JoinCallback(() =>
+            {
+                BroAudio.Play(_spider.SpiderJump);
+            })
             .OnComplete(() =>
             {
                 _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);

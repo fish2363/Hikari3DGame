@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Ami.BroAudio;
 
 public class PencilSharpenerPhase1State : EntityState
 {
@@ -27,6 +28,7 @@ public class PencilSharpenerPhase1State : EntityState
     {
         _pencilSharpener.transform.LookAt(_pencilSharpener.player.transform);
         yield return new WaitForSeconds(2f);
+        BroAudio.Play(_pencilSharpener.ShotPencil);
         GameObject.Instantiate(_pencilSharpener.pencilBelt, _pencilSharpener.shotPos);
         _pencilSharpener.RigidCompo.useGravity = true;
         _pencilSharpener.transform.rotation = Quaternion.Euler(0, 0, 0);

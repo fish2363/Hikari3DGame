@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4367962456302895072}
   - component: {fileID: 2891649026872308453}
   - component: {fileID: 7598754854150325174}
+  - component: {fileID: 3620223197642781541}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -72,6 +73,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8806f5b1a143714ebd8c7993ae1416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3620223197642781541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441570020588399522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53c7f9d3f2de924a8d5e082c849fb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &683596208400371761
@@ -375,6 +388,22 @@ MonoBehaviour:
   shotPos: {fileID: 7447535647409929240}
   _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
     type: 3}
+  ChaseSound:
+    ID: 1073741851
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
+  ShotPencil:
+    ID: 1073741852
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
+  Phase2Sfx:
+    ID: 1073741853
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
+  Phase3Sfx:
+    ID: 1073741854
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1613810998116403422}
   JumpPos: {fileID: 1858891282447635395}
   CastDamge: {fileID: 0}
 --- !u!114 &7766873904981582148

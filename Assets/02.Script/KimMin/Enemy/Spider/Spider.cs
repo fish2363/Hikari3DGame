@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -17,6 +18,9 @@ public class Spider : Enemy, IDamageable
 
     [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 4f;
     [HideInInspector] public float distance => (player.transform.position - transform.position).magnitude;
+
+    [field: SerializeField] public SoundID SpiderJump { get; set; }
+    [field: SerializeField] public SoundID SpiderWalk { get; set; }
 
     [Header("Setting")]
     public float maxHeight = 10f;

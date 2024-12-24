@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Ami.BroAudio;
 
 public class PencilSharpenerChaseState : EntityState
 {
@@ -17,6 +18,7 @@ public class PencilSharpenerChaseState : EntityState
     public override void Enter()
     {
         base.Enter();
+        BroAudio.Play(_pencilSharpener.ChaseSound);
         Debug.Log("µé¾î°¨");
         timer = Random.Range(4, 7);
         _pencilSharpener.StartCoroutine(ChangeWaitState(timer));
@@ -28,6 +30,7 @@ public class PencilSharpenerChaseState : EntityState
         if (!_pencilSharpener.IsDead)
         {
             yield return new WaitForSeconds(timer);
+            BroAudio.Pause(_pencilSharpener.ChaseSound);
             _pencilSharpener.ChangeState(BossState.Wait);
         }
     }

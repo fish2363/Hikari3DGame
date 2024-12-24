@@ -12,6 +12,8 @@ public class EntityHealth : MonoBehaviour, IEntityComponent, IDamageable
 
     public event Action OnHit;
     public event Action OnDeath;
+
+    public float Damge;
     
     public void Initialize(Entity entity)
     {
@@ -29,6 +31,9 @@ public class EntityHealth : MonoBehaviour, IEntityComponent, IDamageable
 
     public void ApplyDamage(float damage)
     {
+
+        Damge = damage;
+
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, MaxHealth);
         OnHit?.Invoke();
 
