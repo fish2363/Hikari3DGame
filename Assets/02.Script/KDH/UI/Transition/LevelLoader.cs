@@ -9,25 +9,32 @@ public class LevelLoader : MonoBehaviour
 
     public float transitionTime = 1f;
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            LoadNextLevel();
-        }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadStartLevel());
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    public void LoadLevelComplete()
+    {
+        StartCoroutine(LoadEndLevel());
+    }
+
+    IEnumerator LoadStartLevel()
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
+    }
 
-        SceneManager.LoadScene(levelIndex);
+    IEnumerator LoadEndLevel()
+    {
+        transition.SetTrigger("End");
+
+        yield return new WaitForSeconds(transitionTime);
     }
 }
