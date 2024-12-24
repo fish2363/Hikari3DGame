@@ -263,6 +263,10 @@ MonoBehaviour:
     ID: 1073741850
     _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
     <DebugObject>k__BackingField: {fileID: 4526980493147139085}
+  ScissorsFastSfx:
+    ID: 1073741855
+    _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4526980493147139085}
   QuickScissorsSfx:
     ID: 1073741848
     _sourceAsset: {fileID: 11400000, guid: a92993676f401914289117de37978d39, type: 2}
