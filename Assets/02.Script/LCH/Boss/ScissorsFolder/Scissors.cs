@@ -24,6 +24,8 @@ public class Scissors : BossBass
 
     [field: SerializeField] public SoundID QuickScissorsSfx;
 
+    [field: SerializeField] public SoundID ScissorsDashSfx;
+
     protected override void Awake()
     {
         base.Awake();
