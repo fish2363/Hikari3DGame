@@ -277,14 +277,14 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleDashEvent()
     {
-        print("실행");
-        if (!isStop)
-        {
-            if (AttemptDash())
-            {
-                ChangeState(StateEnum.Dash);
-            }
-        }
+        //print("실행");
+        //if (!isStop)
+        //{
+        //    if (AttemptDash())
+        //    {
+        //        ChangeState(StateEnum.Dash);
+        //    }
+        //}
     }
 
     /*private bool AttemptAttaack()
