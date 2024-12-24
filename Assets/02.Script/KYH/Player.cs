@@ -96,7 +96,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header("대쉬 유지")]
     public float dashTime = 0.4f;
 
-    //public Volume dashVolume;
+    public UnityEngine.Rendering.Volume dashVolume;
 
     private LevelLoader loader;
 
@@ -263,11 +263,11 @@ public class Player : MonoBehaviour, IDamageable
 
 
 
-        //if (dashVolume.profile.TryGet(out lens))
-        //{
-        //    DOTween.KillAll();
-        //    DOTween.To(() => startVignette, vloom => lens.intensity.value = vloom, endVignette, 0.2f);
-        //}
+        if (dashVolume.profile.TryGet(out lens))
+        {
+            DOTween.KillAll();
+            DOTween.To(() => startVignette, vloom => lens.intensity.value = vloom, endVignette, 0.2f);
+        }
     }
 
     private void HandleJumpEvent()
