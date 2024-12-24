@@ -18,7 +18,16 @@ public class BossDeadState : EntityState
     {
         base.Enter();
         _boss.IsDead = true;
-        _boss.RigidCompo.isKinematic = true;
         _boss.gameObject.layer = _deadLayer;
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        if (_isTriggerCall)
+        {
+            _boss.IsDead = false;
+            GameObject.Destroy(_boss.gameObject);
+        }
     }
 }
