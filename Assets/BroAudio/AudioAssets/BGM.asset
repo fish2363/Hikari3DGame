@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BGM
   m_EditorClassIdentifier: 
   Entities:
-  - <Name>k__BackingField: 
+  - <Name>k__BackingField: 1
     <ID>k__BackingField: 0
     MulticlipsPlayMode: 0
     Clips:
@@ -40,7 +40,7 @@ MonoBehaviour:
       BPM: 0
       Beats: 0
     SnapToFullVolume: 0
-  - <Name>k__BackingField: 
+  - <Name>k__BackingField: 2
     <ID>k__BackingField: 0
     MulticlipsPlayMode: 0
     Clips:
