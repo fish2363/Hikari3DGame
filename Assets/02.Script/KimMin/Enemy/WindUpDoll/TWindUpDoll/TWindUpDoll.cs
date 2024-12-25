@@ -34,7 +34,7 @@ public class TWindUpDoll : WindUpDoll
         stateMachine.CurrentState.UpdateState();
     }
 
-    private void OnDrawGizmos()
+/*    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
@@ -50,5 +50,5 @@ public class TWindUpDoll : WindUpDoll
         Handles.color = isCollision ? _red : _blue; 
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    }
+    }*/
 }

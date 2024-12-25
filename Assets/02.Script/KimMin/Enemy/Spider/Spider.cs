@@ -109,20 +109,20 @@ public class Spider : Enemy, IDamageable
         item.SetPositionAndPlay(transform.position, transform);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, detectRadius);
-        Gizmos.DrawWireSphere(transform.position, moveRadius);
-        Gizmos.DrawLine(transform.position, nextPos);
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, EnemyStat.AttackRadius);
+    //    Gizmos.color = Color.white;
+    //    Gizmos.DrawWireSphere(transform.position, detectRadius);
+    //    Gizmos.DrawWireSphere(transform.position, moveRadius);
+    //    Gizmos.DrawLine(transform.position, nextPos);
 
-        if (interV == null) return;
-        Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
+    //    if (interV == null) return;
+    //    Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
 
-        Handles.color = isCollision ? _red : _blue;
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    }
+    //    Handles.color = isCollision ? _red : _blue;
+    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
+    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
+    //}
 }
