@@ -191,7 +191,7 @@ public class Player : MonoBehaviour, IDamageable
         try
         {
             currentCamera.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
-            //currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
+            currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 0.7f;
         }
         catch (Exception e)
         {
