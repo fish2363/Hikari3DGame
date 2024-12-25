@@ -22,7 +22,12 @@ public class ScissorsAttackCompo : MonoBehaviour ,IEntityComponent
 
     public void ChaseAttack()
     {
-        //BroAudio.Play(_scissors.ScissorsSfx);
+        BroAudio.Play(_scissors.ScissorsSfx);
+        _damgeCast.CastDamage();
+    }
+
+    public void Phase2Attack()
+    {
         _damgeCast.CastDamage();
     }
 
