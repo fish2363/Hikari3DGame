@@ -20,6 +20,8 @@ public abstract class BossBass : Entity
 
     public EntityState CurrentState => _stateMachine.currentState;
 
+    private EntityAnimator _animator;
+
     private EntityHealth _health; 
 
     public Player player;
@@ -31,9 +33,22 @@ public abstract class BossBass : Entity
         base.Awake();
         RigidCompo = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        GetCompo<EntityAnimator>(true).OnAnimationEnd += HandleAnimationEnd;
         _health = GetCompo<EntityHealth>();
         _health.OnDeath += DeadState;
         _health.OnHit += HitState;
+    }
+
+    private void OnDestroy()
+    {
+        GetCompo<EntityAnimator>(true).OnAnimationEnd -= HandleAnimationEnd;
+        _health.OnDeath -= DeadState;
+        _health.OnHit -= HitState;
+    }
+
+        private void HandleAnimationEnd()
+    {
+        CurrentState.AnimationEndTrigger();
     }
 
     private void HitState()

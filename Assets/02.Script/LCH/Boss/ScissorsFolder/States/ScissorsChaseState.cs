@@ -55,6 +55,5 @@ public class ScissorsChaseState : EntityState
     public override void Exit()
     {
         base.Exit();
-        timer = 0;
     }
 }

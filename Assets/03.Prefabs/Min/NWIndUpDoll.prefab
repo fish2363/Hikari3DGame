@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6226612875473448398
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     m_Bits: 64
   _maxAvailableCount: 4
   _castSize: {x: 1.45, y: 0.81, z: 1.22}
-  Damage: 0
+  Damage: 5
   _knockBackForce: {x: 5, y: 3, z: 0}
   cnt: []
 --- !u!114 &7040771236401987655
@@ -85,7 +85,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4612736817399505403
 Transform:
   m_ObjectHideFlags: 0
@@ -177,10 +177,21 @@ MonoBehaviour:
   _distance: 0
   nextPos: {x: 0, y: 0, z: 0}
   moveDir: {x: 0, y: 0, z: 0}
+  <WindUp>k__BackingField:
+    ID: 1073741848
+    _sourceAsset: {fileID: 11400000, guid: f3ce8a6f47410ab4e8f1a8c4a58a8fd5, type: 2}
+    <DebugObject>k__BackingField: {fileID: 7742548977126682083}
+  whatisPlayer:
+    serializedVersion: 2
+    m_Bits: 64
   startPos: {x: -53.7, y: 1, z: -17.9}
   moveRadius: 40
   detectRadius: 16
   canAttack: 1
+  <Dash>k__BackingField:
+    ID: 1073741845
+    _sourceAsset: {fileID: 11400000, guid: f3ce8a6f47410ab4e8f1a8c4a58a8fd5, type: 2}
+    <DebugObject>k__BackingField: {fileID: 7742548977126682083}
 --- !u!114 &4472479791099646779
 MonoBehaviour:
   m_ObjectHideFlags: 0
