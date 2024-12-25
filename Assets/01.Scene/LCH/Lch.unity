@@ -720,12 +720,12 @@ PrefabInstance:
     - target: {fileID: 816147890019664202, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017310013
+      value: 0.00000001731001
       objectReference: {fileID: 0}
     - target: {fileID: 816147890019664202, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000010241676
+      value: 0.0000000010241674
       objectReference: {fileID: 0}
     - target: {fileID: 1268220792982786175, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
@@ -790,27 +790,27 @@ PrefabInstance:
     - target: {fileID: 2749734099554100295, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.007770708
+      value: -0.0077707074
       objectReference: {fileID: 0}
     - target: {fileID: 2749734099554100295, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00017353457
+      value: -0.00017353456
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.017769346
+      value: -0.017769367
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017170136
+      value: 0.00000001727083
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.051503e-10
+      value: 3.0694025e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2840937203131931489, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
@@ -1105,7 +1105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052818132}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.022325655, y: -0.0077707088, z: -0.00017353465, w: 0.9997206}
+  m_LocalRotation: {x: -0.022325655, y: -0.0077707083, z: -0.00017353463, w: 0.9997206}
   m_LocalPosition: {x: 6.449459, y: 1.1, z: 5.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1207,6 +1207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979239716652070536, guid: 190f6589b898b0f49a67b83e545bcb7a,
+        type: 3}
+      propertyPath: LoadSceneName
+      value: Main Menu (Desktop)
       objectReference: {fileID: 0}
     - target: {fileID: 7219049846091421951, guid: 190f6589b898b0f49a67b83e545bcb7a,
         type: 3}
@@ -1555,6 +1560,7 @@ MonoBehaviour:
   WallChecker: 0
   _bossFSM: {fileID: 11400000, guid: 836b058c1b150064dbdac1b67bf04480, type: 2}
   EnemyStat: {fileID: 11400000, guid: bbfe9591e510ed24cbfbded7a04537bf, type: 2}
+  LoadSceneName: 
   targetDir: {x: 0, y: 0, z: 0}
   RigidCompo: {fileID: 0}
   player: {fileID: 0}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossDeadState : EntityState
 {
@@ -27,6 +28,7 @@ public class BossDeadState : EntityState
         if (_isTriggerCall)
         {
             _boss.IsDead = false;
+            SceneManager.LoadScene(_boss.LoadSceneName);
             GameObject.Destroy(_boss.gameObject);
         }
     }

@@ -14,6 +14,8 @@ public abstract class BossBass : Entity
 
     [field : SerializeField] public EnemyStatSO EnemyStat;
 
+    [field: SerializeField] public string LoadSceneName;
+
     public Vector3 targetDir;
 
     public Rigidbody RigidCompo;
