@@ -68,7 +68,7 @@ namespace Michsky.UI.Dark
             if (gameObject.GetComponent<Animator>() != null)
             {
                 animator = gameObject.GetComponent<Animator>();
-                cachedStateLength = DarkInternalTools.GetAnimatorClipLength(animator, "Highlighted") + 0.1f;
+               // cachedStateLength = DarkInternalTools.GetAnimatorClipLength(animator, "Highlighted") + 0.1f;
             }
         }
 

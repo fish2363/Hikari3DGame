@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    public Animator transition;
+    //public Animator transition;
 
     public float transitionTime = 1f;
 
@@ -16,25 +16,6 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadStartLevel());
-    }
-
-    public void LoadLevelComplete()
-    {
-        StartCoroutine(LoadEndLevel());
-    }
-
-    IEnumerator LoadStartLevel()
-    {
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(transitionTime);
-    }
-
-    IEnumerator LoadEndLevel()
-    {
-        transition.SetTrigger("End");
-
-        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene("Stage1");
     }
 }

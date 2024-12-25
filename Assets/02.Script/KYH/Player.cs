@@ -135,7 +135,6 @@ public class Player : MonoBehaviour, IDamageable
         if(loader != null)
         {
             loader = FindAnyObjectByType<LevelLoader>();
-            loader.LoadLevelComplete();
         }
     }
 
