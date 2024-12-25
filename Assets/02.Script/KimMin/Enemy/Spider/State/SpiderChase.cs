@@ -23,8 +23,13 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
-        ChaseTarget();
-        CheckSight();
+        if (_spider.distance > 4)
+        {
+            ChaseTarget();
+            CheckSight();
+        }
+        else
+            LookPlayer();
 
         if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
         {
@@ -47,6 +52,12 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     {
         base.Exit();
         BroAudio.Pause(_spider.SpiderWalk);
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 dir = _spider.player.transform.position - _spider.transform.position;
+        _spider.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     private void ChaseTarget()
