@@ -10,9 +10,9 @@ public class PauseManager : MonoBehaviour
     public void ConttolPlayer()
     {
         print("여기서 ESC 눌러서 플레이어 멈추는 거 확인하셈 Find임");
-        if (GameObject.Find("MainPlayer"))
+        if (GameObject.Find("MainPlayer(KYHTest)"))
         {
-            Player player = GameObject.Find("MainPlayer").GetComponentInChildren<Player>();
+            Player player = GameObject.Find("Player(Test)").GetComponentInChildren<Player>();
             player.isCameraOn = false;
             print(player.isStop);
             if (stop)
