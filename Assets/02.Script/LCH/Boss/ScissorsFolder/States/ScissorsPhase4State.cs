@@ -102,6 +102,7 @@ public class ScissorsPhase4State : EntityState
             _scissors.transform.DOJump(_scissors.originPos, 15F, 1, 0.5F);
             yield return new WaitForSeconds(1f);
             _scissors.ChangeState(BossState.Chase);
+            _scissors.DamgeCaster.Damage = _originDamge;
         }
     }
 
@@ -152,7 +153,6 @@ public class ScissorsPhase4State : EntityState
     public override void Exit()
     {
         base.Exit();
-        _scissors.DamgeCaster.Damage = _originDamge;
     }
 }
 //217206
