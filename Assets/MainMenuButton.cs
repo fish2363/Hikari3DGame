@@ -58,11 +58,11 @@ public class MainMenuButton : MonoBehaviour
     private IEnumerator SceneMove()
     {
         vinette.DOFade(0, 2);
-        yield return new WaitForSecondsRealtime(5);
-        loader.LoadNextLevel();
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(4);
+        filter.GetComponent<Image>().DOFade(0, 1).WaitForRewind();
+        yield return new WaitForSecondsRealtime(1);
         filter.SetActive(false);
-        SceneManager.LoadScene(nameScene);
-
+        loader.LoadNextLevel();
     }
 }
