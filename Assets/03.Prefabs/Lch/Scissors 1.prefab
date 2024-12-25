@@ -582,6 +582,7 @@ MonoBehaviour:
   WallChecker: 0
   _bossFSM: {fileID: 11400000, guid: 52a93ed92f2d05d43811b4d1075cea1f, type: 2}
   EnemyStat: {fileID: 11400000, guid: 297333f54229dec4fb01db00318edf1e, type: 2}
+  LoadSceneName: Stage3
   targetDir: {x: 0, y: 0, z: 0}
   RigidCompo: {fileID: 0}
   player: {fileID: 0}
