@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Ami.BroAudio;
 using System;
 
 public class ScissorsPhase2State : EntityState
@@ -35,20 +36,24 @@ public class ScissorsPhase2State : EntityState
 
     private IEnumerator AttackEnemy()
     {
-        Debug.Log("A");
+        
         Sequence seq = DOTween.Sequence();
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("B");
+        
         _scissors.transform.position =
             new Vector3(_scissors.player.transform.position.x,
         _scissors.transform.position.y,
         _scissors.player.transform.position.z);
         yield return new WaitForSeconds(1f);
-        Debug.Log("C");
+        
         _scissors.transform.position =
             new Vector3(_scissors.player.transform.position.x,
         _scissors.transform.position.y,
         _scissors.player.transform.position.z);
+        if (seq == null || !seq.IsActive())
+        {
+            seq = DOTween.Sequence(); 
+        }
         seq.Append(_scissors.transform.DOMove(_scissors.player.transform.position, 0.25f).SetEase(Ease.Linear))
             .AppendCallback(()=>_scissors.StartCoroutine(ChangeChaseState()));
 
@@ -56,14 +61,17 @@ public class ScissorsPhase2State : EntityState
 
     private IEnumerator ChangeChaseState()
     {
-        Debug.Log("A->C");
-        yield return new WaitForSeconds(1f);
-        _scissors.ChangeState(BossState.Chase);
+        if (!_scissors.IsDead)
+        {
+            BroAudio.Play(_scissors.ScissorsThrowingSfx);
+            yield return new WaitForSeconds(1f);
+            _scissors.ChangeState(BossState.Chase);
+            _scissors.DamgeCaster.Damage = _originDamge;
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
-        _scissors.DamgeCaster.Damage = _originDamge;
     }
 }

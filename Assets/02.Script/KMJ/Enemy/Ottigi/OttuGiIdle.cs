@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class OttugiIdle : EnemyState<EnemyStatEnum>
@@ -11,7 +12,6 @@ public class OttugiIdle : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        
     }
     public override void UpdateState()
     {

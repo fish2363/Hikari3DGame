@@ -14,5 +14,7 @@ public class NWindUpDollDead : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+
+        GameObject.Destroy(_windUpDoll.gameObject);
     }
 }

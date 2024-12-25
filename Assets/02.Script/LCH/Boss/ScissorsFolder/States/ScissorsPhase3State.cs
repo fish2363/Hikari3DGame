@@ -18,14 +18,20 @@ public class ScissorsPhase3State : EntityState
     public override void Enter()
     {
         base.Enter();
-        _originDamge = _scissors.DamgeCaster.Damage;
+        _originDamge += _scissors.DamgeCaster.Damage;
         _scissors.DamgeCaster.Damage = 20f;
         originMoveSpeed = _scissors.EnemyStat.ChasingSpeed;
-        _scissors.EnemyStat.ChasingSpeed = 10f;
-        _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
-        _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.ChasingSpeed;
+        _scissors.EnemyStat.ChasingSpeed = 2f;
+     
         _scissors.StartCoroutine(PlayerChase());
         
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _scissors.targetDir = _scissors.player.transform.position - _scissors.transform.position;
+        _scissors.RigidCompo.velocity = _scissors.targetDir.normalized * _scissors.EnemyStat.ChasingSpeed;
     }
 
     private IEnumerator PlayerChase()
@@ -36,14 +42,13 @@ public class ScissorsPhase3State : EntityState
 
     private IEnumerator ChanseChaseState()
     {
-        yield return new WaitForSeconds(1f);
-        _scissors.ChangeState(BossState.Chase);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
-        _scissors.DamgeCaster.Damage = _originDamge;
+        if (!_scissors.IsDead)
+        {
+            yield return new WaitForSeconds(1f);
+            _scissors.ChangeState(BossState.Chase);
+            _scissors.EnemyStat.ChasingSpeed = originMoveSpeed;
+            _scissors.DamgeCaster.Damage = _originDamge;
+            
+        }
     }
 }

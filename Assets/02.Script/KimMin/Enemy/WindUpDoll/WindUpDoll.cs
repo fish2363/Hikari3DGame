@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using Ami.BroAudio;
 
 public class WindUpDoll : Enemy, IDamageable
 {
@@ -10,16 +11,23 @@ public class WindUpDoll : Enemy, IDamageable
     [HideInInspector] public Vector3 nextPos;
     [HideInInspector] public Vector3 moveDir;
 
+    [field: SerializeField] public SoundID WindUp { get; set; }
+
+    public LayerMask whatisPlayer;
     public Vector3 startPos;
     public float moveRadius;
 
     private Vector3 _prev = Vector3.zero;
     private Vector3 _radius;
 
+    private void OnValidate()
+    {
+        startPos = transform.position;
+    }
+
     protected override void Awake()
     {
         base.Awake();
-        startPos = transform.position;
     }
 
     protected virtual void Update()
@@ -56,7 +64,7 @@ public class WindUpDoll : Enemy, IDamageable
 
     protected override void EnemyDie()
     {
-
+        stateMachine.ChangeState(EnemyStatEnum.Dead);
     }
 
 

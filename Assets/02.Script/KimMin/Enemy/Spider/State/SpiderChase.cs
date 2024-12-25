@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        BroAudio.Play(_spider.SpiderWalk);
     }
 
     public override void UpdateState()
@@ -24,10 +26,6 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
         ChaseTarget();
         CheckSight();
 
-        if (_spider.isCollision)
-        {
-            _spider.stateMachine.ChangeState(EnemyStatEnum.Attack);
-        }
         if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);
@@ -43,6 +41,12 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
             if (rand == 1)
                 _spider.stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_spider.SpiderWalk);
     }
 
     private void ChaseTarget()

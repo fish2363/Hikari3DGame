@@ -15,7 +15,7 @@ MonoBehaviour:
   AttackRadius: 2
   WallRadius: 0
   KnockbackPower: 0
-  AttackDelay: 0
+  AttackDelay: 2
   ContactAttackRadius: 2.5
   MinAttackDamage: 30
   MaxAttackDamage: 45

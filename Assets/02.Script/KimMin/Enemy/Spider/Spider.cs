@@ -1,9 +1,10 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Spider : Enemy, IAttackable
+public class Spider : Enemy, IDamageable
 {
     private readonly float _gravity = -9.81f;
 
@@ -17,6 +18,9 @@ public class Spider : Enemy, IAttackable
 
     [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 4f;
     [HideInInspector] public float distance => (player.transform.position - transform.position).magnitude;
+
+    [field: SerializeField] public SoundID SpiderJump { get; set; }
+    [field: SerializeField] public SoundID SpiderWalk { get; set; }
 
     [Header("Setting")]
     public float maxHeight = 10f;
@@ -39,8 +43,7 @@ public class Spider : Enemy, IAttackable
         base.Awake();
         stateMachine.AddState(EnemyStatEnum.Walk, new SpiderMove(this, stateMachine, "Move"));
         stateMachine.AddState(EnemyStatEnum.Chase, new SpiderChase(this, stateMachine, "Chase"));
-        stateMachine.AddState(EnemyStatEnum.Attack, new SpiderAttack(this, stateMachine, "Attack"));
-        stateMachine.AddState(EnemyStatEnum.Skill, new SpiderSkill(this, stateMachine, "Skill"));
+        stateMachine.AddState(EnemyStatEnum.Skill, new SpiderSkill(this, stateMachine, "Attack"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
 
@@ -90,6 +93,30 @@ public class Spider : Enemy, IAttackable
         return nextPos;
     }
 
+    protected override void AnimEndTrigger()
+    {
+
+    }
+
+    protected override void EnemyDie()
+    {
+
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Hp -= damage;
+
+        if (Hp <= 0)
+        {
+            EnemyDie();
+            return;
+        }
+
+        var item = Instantiate(getDamageEffect);
+        item.SetPositionAndPlay(transform.position, transform);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -100,30 +127,10 @@ public class Spider : Enemy, IAttackable
         Gizmos.DrawLine(transform.position, nextPos);
 
         if (interV == null) return;
-         Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
+        Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
 
         Handles.color = isCollision ? _red : _blue;
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    }
-
-    protected override void AnimEndTrigger()
-    {
-
-    }
-
-    protected override void EnemyDie()
-    {
-        
-    }
-
-    public void HitEnemy(float damage, float knockbackPower)
-    {
-        Hp -= damage;
-    }
-
-    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
-    {
-
     }
 }

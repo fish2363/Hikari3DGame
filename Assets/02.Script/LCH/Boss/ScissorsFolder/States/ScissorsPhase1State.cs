@@ -17,13 +17,17 @@ public class ScissorsPhase1State : EntityState
     public override void Enter()
     {
         base.Enter();
-       _scissors.RigidCompo.velocity = _scissors.player.transform.position*3;
+       _scissors.RigidCompo.velocity = _scissors.player.transform.position*5f;
         _scissors.StartCoroutine(ChanseChaseState());
     }
 
     private IEnumerator ChanseChaseState()
     {
-        yield return new WaitForSeconds(1f);
-        _scissors.ChangeState(BossState.Chase);
+        if (!_scissors.IsDead)
+        {
+
+            yield return new WaitForSeconds(1f);
+            _scissors.ChangeState(BossState.Chase);
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Unity.Mathematics;
+using Ami.BroAudio;
 
 public class MoveState : State
 {
@@ -26,8 +27,9 @@ public class MoveState : State
 
     public override void Enter()
     {
-        print("Okay");
+        BroAudio.Play(_player._walkSound);
         base.Enter();
+        _player.RigidCompo.velocity = Vector3.zero;
     }
 
    
@@ -47,8 +49,6 @@ public class MoveState : State
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
-    float smoothTime = 0.1f;
-    float turnSmoothVelocity;
 
     public override void StateFixedUpdate()
     {
@@ -67,12 +67,12 @@ public class MoveState : State
             animationSpeed = 1f;
             bool isOnSlope = IsOnSlope();
             bool isGrounded = _player.GroundCheck.IsGrounded();
-            Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(moveDir.normalized) : moveDir.normalized;
+            _player.velocity = isOnSlope ? AdjustDirectionToSlope(moveDir.normalized) : moveDir.normalized;
             Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(_player.RigidCompo.velocity.y);
 
             if (isGrounded && isOnSlope)
             {
-                velocity = AdjustDirectionToSlope(_player.InputReader.direction);
+                _player.velocity = AdjustDirectionToSlope(_player.InputReader.direction);
                 gravity = Vector3.zero;
                 _player.RigidCompo.useGravity = false;
             }
@@ -83,7 +83,7 @@ public class MoveState : State
 
             LookAt();
             //_player.ControllerCompo.Move(velocity * currentMoveSpeed + gravity);
-            _player.RigidCompo.velocity = velocity * currentMoveSpeed + gravity;
+            _player.RigidCompo.velocity = _player.velocity * currentMoveSpeed + gravity;
             _player.animator.SetFloat("Velocity", animationSpeed);
         }
 
@@ -97,22 +97,24 @@ public class MoveState : State
     private void LookAt()
     {
         var rot = Camera.main.transform.rotation;
-        Vector3 moveVector;
-        GetCommonMoveVectorFromPlayerInput(_player.InputReader.direction.x, _player.InputReader.direction.z, rot, out moveVector);
+            Vector3 moveVector;
+            GetCommonMoveVectorFromPlayerInput(_player.InputReader.direction.x, _player.InputReader.direction.z, rot, out moveVector);
 
-        Quaternion targetAngle = Quaternion.LookRotation(moveVector);
-        _player.transform.rotation = Quaternion.Lerp(
-        _player.transform.rotation, targetAngle, Time.deltaTime * rotateSpeed);
+        if(!_player.isCameraOn)
+        {
+            Quaternion targetAngle = Quaternion.LookRotation(moveVector);
+            _player.transform.rotation = Quaternion.Lerp(
+            _player.transform.rotation, targetAngle, Time.deltaTime * rotateSpeed);
+        }
 
         //_player.transform.forward = moveVector;
         moveDir = moveVector;
-        moveDir.y = 0;
-
-        //Debug.Log($"x:{_player.InputReader.direction.x} y:{_player.InputReader.direction.y} dir:{moveDir}");
+            moveDir.y = 0;
     }
 
     public override void Exit()
     {
+        BroAudio.Pause(_player._walkSound);
         base.Exit();
     }
 }

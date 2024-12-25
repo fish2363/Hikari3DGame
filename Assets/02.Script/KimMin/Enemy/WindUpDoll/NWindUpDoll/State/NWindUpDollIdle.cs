@@ -21,9 +21,14 @@ public class NWindUpDollIdle : EnemyState<EnemyStatEnum>
     {
         base.UpdateState();
 
-        if (_windUpDoll._distance < _windUpDoll.detectRadius)
+        if (_windUpDoll._distance < _windUpDoll.detectRadius && _windUpDoll._distance > 4)
         {
            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
+        }
+
+        if (_windUpDoll.canAttack && _windUpDoll._distance < _windUpDoll.EnemyStat.AttackRadius)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
     }
 }

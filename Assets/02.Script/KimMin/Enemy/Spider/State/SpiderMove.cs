@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         _spider.StopImmediately();
+        BroAudio.Play(_spider.SpiderWalk);
     }
 
     public override void UpdateState()
@@ -29,6 +31,12 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Chase);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_spider.SpiderWalk);
     }
 
     private void MoveNextPos()

@@ -49,7 +49,7 @@ MonoBehaviour:
     m_Bits: 64
   _maxAvailableCount: 4
   _castSize: {x: 1.44, y: 0.27, z: 0.77}
-  _damage: 5
+  Damage: 0
   _knockBackForce: {x: 5, y: 3, z: 0}
   cnt: []
 --- !u!1 &6840588564781585013
@@ -256,8 +256,36 @@ MonoBehaviour:
   targetDir: {x: 0, y: 0, z: 0}
   RigidCompo: {fileID: 0}
   player: {fileID: 0}
+  effet: {fileID: 0}
   originPos: {x: 0, y: 0, z: 0}
   DamgeCaster: {fileID: 0}
+  _groundChecker:
+    serializedVersion: 2
+    m_Bits: 0
+  WhatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  colliders: []
+  ScissorsSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8807181735809483894}
+  ScissorsThrowingSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8807181735809483894}
+  ScissorsFastSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8807181735809483894}
+  QuickScissorsSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8807181735809483894}
+  ScissorsDashSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8807181735809483894}
 --- !u!95 &5215499972774647555
 Animator:
   serializedVersion: 5

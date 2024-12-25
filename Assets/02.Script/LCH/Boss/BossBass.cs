@@ -14,11 +14,15 @@ public abstract class BossBass : Entity
 
     [field : SerializeField] public EnemyStatSO EnemyStat;
 
+    [field: SerializeField] public string LoadSceneName;
+
     public Vector3 targetDir;
 
     public Rigidbody RigidCompo;
 
     public EntityState CurrentState => _stateMachine.currentState;
+
+    private EntityAnimator _animator;
 
     private EntityHealth _health; 
 
@@ -31,9 +35,22 @@ public abstract class BossBass : Entity
         base.Awake();
         RigidCompo = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        GetCompo<EntityAnimator>(true).OnAnimationEnd += HandleAnimationEnd;
         _health = GetCompo<EntityHealth>();
         _health.OnDeath += DeadState;
         _health.OnHit += HitState;
+    }
+
+    private void OnDestroy()
+    {
+        GetCompo<EntityAnimator>(true).OnAnimationEnd -= HandleAnimationEnd;
+        _health.OnDeath -= DeadState;
+        _health.OnHit -= HitState;
+    }
+
+        private void HandleAnimationEnd()
+    {
+        CurrentState.AnimationEndTrigger();
     }
 
     private void HitState()

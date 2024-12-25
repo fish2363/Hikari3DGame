@@ -17,7 +17,6 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
         _ottugi = _enemy.GetComponent<OttuGi>();
 
         
-        Debug.Log("나도 왔다");
     }
 
     public override void UpdateState()
@@ -49,7 +48,7 @@ public class OttuGiWalk : EnemyState<EnemyStatEnum>
             _stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
 
-        if (_enemy.range <= _enemy.EnemyStat.AttackRadius && _ottugi._isSkillExit)
+        if (_enemy.range <= _enemy.EnemyStat.AttackRadius && _ottugi._isSkilling == false)
         {
             _stateMachine.ChangeState(EnemyStatEnum.Attack);
         }

@@ -19,7 +19,7 @@ public class ChatManager : MonoBehaviour
 
     private void Start()
     {
-        TextMessage("1번째 텍스트", 3f,Color.red, TextStyle.UI | TextStyle.FadeIn)
+        TextMessage("1번째 텍스트", 5f,Color.red, TextStyle.UI | TextStyle.FadeIn)
             .TextMessage("2번째 텍스트", 1f, Color.blue, TextStyle.UI | TextStyle.FadeIn)
             .TextMessage("3번째 텍스트", 1f, Color.green, TextStyle.UI | TextStyle.FadeIn)
             .End();

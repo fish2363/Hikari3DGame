@@ -16,11 +16,8 @@ public class RcCar : Enemy, IDamageable
     private Vector3 _moveDir;
 
     public ShowEffect hitEffect;
-
-    public ShowEffect stunEffect;
-
-    public Transform stunTransform;
-
+    [SerializeField]
+    private float moveSpeed = 10f;
 
     protected override void Awake()
     {
@@ -41,10 +38,14 @@ public class RcCar : Enemy, IDamageable
 
     private void Update()
     {
+
+        range = Vector3.Distance(transform.position, _player.transform.position);
+
+
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 6)
+        if (range <= 10)
         {
             MoveCompo.isMove = true;
         }
@@ -105,7 +106,7 @@ public class RcCar : Enemy, IDamageable
 
         _isAttackTrue = true;
 
-        RigidCompo.velocity += moveDir * 10;
+        RigidCompo.velocity += moveDir * moveSpeed;
 
         yield return new WaitForSeconds(0.1f);
 
@@ -149,14 +150,6 @@ public class RcCar : Enemy, IDamageable
     {
         throw new System.NotImplementedException();
     }
-
-    public void StunEffect()
-    {
-        var stun = Instantiate(stunEffect);
-
-        stun.SetPositionAndPlay(stunTransform.position, transform);
-    }
-
     protected override void EnemyDie()
     {
 

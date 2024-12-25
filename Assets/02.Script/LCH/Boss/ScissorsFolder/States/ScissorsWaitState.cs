@@ -23,22 +23,25 @@ public class ScissorsWaitState : EntityState
     private IEnumerator PhaseSelect()
     {
         yield return new WaitForSeconds(0.5F);
-        int Phases = Random.Range(1, 4);;
-
-        switch (Phases)
+        if (!_scissors.IsDead)
         {
-            case 1:
-                _scissors.ChangeState(BossState.Phase1Wait);
-                break;
-            case 2:
-                _scissors.ChangeState(BossState.Phase2Wait);
-                break;
-            case 3:
-                _scissors.ChangeState(BossState.Phase3Wait);
-                break;
-            case 4:
-                _scissors.ChangeState(BossState.Phase4Wait);
-                break;
+            int Phases = Random.Range(1, 4);
+            switch (Phases)
+            {
+                case 1:
+                    _scissors.ChangeState(BossState.Phase1Wait);
+                    break;
+                case 2:
+                    _scissors.ChangeState(BossState.Phase2Wait);
+                    break;
+                case 3:
+                    _scissors.ChangeState(BossState.Phase3Wait);
+                    break;
+                case 4:
+                    _scissors.ChangeState(BossState.Phase4Wait);
+                    break;
+            }
         }
+       
     }
 }
