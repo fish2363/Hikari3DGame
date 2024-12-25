@@ -5,6 +5,7 @@ using UnityEngine;
 public class LineControllor : MonoBehaviour
 {
     private LineRenderer line;
+    [SerializeField]
     private Transform[] points;
 
     private void Awake()
@@ -24,10 +25,17 @@ public class LineControllor : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < points.Length; i++)
+        if(SettingManager.Instance.isLine)
         {
-            line.SetPosition(i, points[i].position);
+            line.enabled = true;
+            for (int i = 0; i < points.Length; i++)
+            {
+                line.SetPosition(i, points[i].position);
+            }
         }
-
+        else
+        {
+            line.enabled = false;
+        }
     }
 }

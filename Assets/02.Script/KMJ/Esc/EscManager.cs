@@ -12,11 +12,11 @@ public class EscManager : MonoBehaviour
     private void Awake()
     {
         _isOpen = true;
-        _esc.SetActive(false);
+        //_esc.SetActive(false);
     }
     private void Update()
     {
-        Esc();
+        //Esc();
     }
 
     private void Esc()

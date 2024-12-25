@@ -101,6 +101,8 @@ public class Player : MonoBehaviour, IDamageable
     public UnityEngine.Rendering.Volume dashVolume;
 
     private LevelLoader loader;
+    [SerializeField]
+    private ThisWeaponData loaddaser;
 
 
     private void Awake()
@@ -191,7 +193,7 @@ public class Player : MonoBehaviour, IDamageable
         try
         {
             currentCamera.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
-            //currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
+            currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 0.7f;
         }
         catch (Exception e)
         {
