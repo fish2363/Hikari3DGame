@@ -11717,17 +11717,17 @@ PrefabInstance:
     - target: {fileID: 4864301738606167746, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.038490586
+      value: 0.03849061
       objectReference: {fileID: 0}
     - target: {fileID: 4864301738606167746, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000002978024
+      value: -1.7710917e-15
       objectReference: {fileID: 0}
     - target: {fileID: 4864301738606167746, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000001147109
+      value: 1.6246987e-16
       objectReference: {fileID: 0}
     - target: {fileID: 5241909719488101119, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -11782,7 +11782,7 @@ PrefabInstance:
     - target: {fileID: 5402421758272909980, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00014994778
+      value: 0.00014994777
       objectReference: {fileID: 0}
     - target: {fileID: 5562242037627462264, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -14003,6 +14003,73 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1160404259}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1161016500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161016501}
+  - component: {fileID: 1161016503}
+  - component: {fileID: 1161016502}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161016501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161016500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.01, z: -0.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1588458058}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161016502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161016500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c24075c345ad644b9c0c85b6da7a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Stage2Boss
+--- !u!65 &1161016503
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161016500}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 23.814415, y: 4.275601, z: 3.5722177}
+  m_Center: {x: 1.9730153, y: 1.6377957, z: -0.04650034}
 --- !u!1 &1164003243
 GameObject:
   m_ObjectHideFlags: 0
@@ -17381,8 +17448,6 @@ GameObject:
   - component: {fileID: 1588458058}
   - component: {fileID: 1588458057}
   - component: {fileID: 1588458056}
-  - component: {fileID: 1588458055}
-  - component: {fileID: 1588458054}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -17390,40 +17455,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1588458054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588458053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c24075c345ad644b9c0c85b6da7a43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Stage2Boss
---- !u!65 &1588458055
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588458053}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20.545097, y: 2.84, z: 2.84}
-  m_Center: {x: 0.8653178, y: 0, z: 0}
 --- !u!199 &1588458056
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -22291,7 +22322,8 @@ Transform:
   m_LocalPosition: {x: 18.9, y: 0.32, z: -43.7}
   m_LocalScale: {x: 1.6560066, y: 1.5133656, z: 1.5878304}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1161016501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 1.095, y: 0, z: 0}
 --- !u!1001 &1599168858
