@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, IDamageable
     [field: SerializeField] public Rigidbody RigidCompo { get; private set; }
     [field: SerializeField] public Transform virtualCamera { get; private set; }
 
+    public event Action OnAttackEvent;
+
     public bool isFullSheld { get; set; }
     public bool isShield { get; set; }
     public bool isStop { get; set; }
@@ -219,6 +221,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             if (isAttack)
             {
+                OnAttackEvent?.Invoke();
                 ChangeState(StateEnum.Attack);
             }
         }

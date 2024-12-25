@@ -7,14 +7,13 @@ public class CoolTimeSlider : MonoBehaviour
 {
     [SerializeField] private Color _filledCol;
 
-    private WeaponData _weaponData;
     private List<Image> _imageList;
+
     private float _childCount;
     private float _currentTime;
+    private float _targetTime;
 
-    private bool _isCoolTime;
-
-    private float testCooltime = 5f;
+    public bool isCoolTime;
 
     private void Awake()
     {
@@ -32,16 +31,17 @@ public class CoolTimeSlider : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            _isCoolTime = true;
-            _currentTime = testCooltime;
-        }
-
-        if (_isCoolTime)
+        if (isCoolTime)
         {
             SetSlider();
         }
+    }
+
+    public void CallbackSlider(float value)
+    {
+        isCoolTime = true;
+        _currentTime = value;
+        _targetTime = value;
     }
 
     public void SetSlider()
@@ -50,7 +50,7 @@ public class CoolTimeSlider : MonoBehaviour
        
         for (int i = 0; i < _childCount; i++)
         {
-            _imageList[i].color = (_currentTime / testCooltime) * _childCount > i ? _filledCol : Color.white;
+            _imageList[i].color = (_currentTime / _targetTime) * _childCount > i ? _filledCol : Color.white;
         }
     }
 }
