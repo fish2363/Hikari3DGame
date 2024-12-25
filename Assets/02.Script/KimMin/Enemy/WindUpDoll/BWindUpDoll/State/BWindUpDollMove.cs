@@ -20,7 +20,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
 
         _windUpDoll.StopImmediately();
         _windUpDoll.nextPos = _windUpDoll.GetNextPos();
-        BroAudio.Play(_windUpDoll.WindUp);
+        //BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -39,7 +39,7 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        BroAudio.Pause(_windUpDoll.WindUp);
+        //BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void MoveNextPos()

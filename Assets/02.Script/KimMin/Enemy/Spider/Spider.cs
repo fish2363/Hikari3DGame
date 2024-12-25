@@ -53,21 +53,13 @@ public class Spider : Enemy, IDamageable
 
     private void Update()
     {
-        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
         FlipEnemy();
     }
 
     private void FixedUpdate()
     {
-        HandleGravity();
-    }
-
-    private void HandleGravity()
-    {
-        _gravityDir = transform.up * _gravity;
-
-        RigidCompo.velocity += _gravityDir;
+        //HandleGravity();
     }
 
     private void FlipEnemy()
