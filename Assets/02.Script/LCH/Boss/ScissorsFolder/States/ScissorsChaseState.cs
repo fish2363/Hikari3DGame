@@ -16,7 +16,6 @@ public class ScissorsChaseState : EntityState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("따라가기");
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
         _scissors.IsPhaseEnd = false;
