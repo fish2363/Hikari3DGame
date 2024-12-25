@@ -43,7 +43,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3494240020791422984}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a10d42f05fe4c584e85ffcced74b89f2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   moveRadius: 20
   interV: {x: 0, y: 0, z: 0}
   isCollision: 0
+  canAttack: 1
   angleRange: 60
   radius: 6
 --- !u!114 &5998914650756120553
