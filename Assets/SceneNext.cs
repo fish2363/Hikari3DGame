@@ -7,9 +7,9 @@ public class SceneNext : MonoBehaviour
 {
     public string sceneName;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Player"))
         {
             SceneManager.LoadScene(sceneName);
         }

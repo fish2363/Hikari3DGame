@@ -41,6 +41,7 @@ public class SettingManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI text;
+    public bool isLine = true;
 
     private void Awake()
     {
@@ -70,22 +71,13 @@ public class SettingManager : MonoBehaviour
         Debug.LogWarning($"GameObject with name '{name}' not found.");
         return null;
     }
-
+    public void ToggleSettingToOff(string settingName)
+    {
+        isLine = false;
+    }
     public void ToggleSettingToOn(string settingName)
     {
-        if (boolSettings.ContainsKey(settingName))
-        {
-            boolSettings[settingName] = true;
-            if (settingName == "WayMark" && GameObject.Find("길안내 오브젝트 이름"))
-            {
-                //GameObject.Find("PlayerCharacter(AudioInput)").GetComponent<Animator>().enabled = true;
-            }
-            else if (settingName == "Change" && FindGameObjectByName("LeftCamera") && FindGameObjectByName("RightCamera"))
-            {
-                LRInversion = !LRInversion;
-                print(LRInversion);
-            }
-        }
+        isLine = true;
     }
     public void SettingFloatValue(int type)
     {
