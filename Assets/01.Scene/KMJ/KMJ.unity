@@ -1808,17 +1808,17 @@ PrefabInstance:
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.017769353
+      value: -0.017769333
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000001727083
+      value: 0.000000017170136
       objectReference: {fileID: 0}
     - target: {fileID: 2757061267905122136, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.0694003e-10
+      value: 3.0515004e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2757844550832605364, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
@@ -3850,6 +3850,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1230583171522687065, guid: 2d062ac82a26a2c47984e26ed5ebefdf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -450
+      objectReference: {fileID: 0}
     - target: {fileID: 1254154458970592973, guid: 2d062ac82a26a2c47984e26ed5ebefdf,
         type: 3}
       propertyPath: m_Name
@@ -3954,6 +3959,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8058713409499219340, guid: 2d062ac82a26a2c47984e26ed5ebefdf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384725115805990836, guid: 2d062ac82a26a2c47984e26ed5ebefdf,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 507
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384725115805990836, guid: 2d062ac82a26a2c47984e26ed5ebefdf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384725115805990836, guid: 2d062ac82a26a2c47984e26ed5ebefdf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
