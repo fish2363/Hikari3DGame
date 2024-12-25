@@ -534,6 +534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5406848848028814841}
+  - component: {fileID: 8332878802173165766}
   m_Layer: 5
   m_Name: DefenseCoolTime
   m_TagString: Untagged
@@ -572,6 +573,20 @@ RectTransform:
   m_AnchoredPosition: {x: -520, y: -455}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8332878802173165766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2414512528126749305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227b44cf79e08f548b907f714db5fcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _filledCol: {r: 0, g: 0, b: 0, a: 0}
+  isCoolTime: 0
 --- !u!1 &2504906193047366138
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _filledCol: {r: 0.5568628, g: 0.972549, b: 1, a: 1}
+  isCoolTime: 0
 --- !u!1 &3465689009991725720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1903,7 @@ GameObject:
   - component: {fileID: 3041997830627371912}
   - component: {fileID: 3970242240095435797}
   m_Layer: 5
-  m_Name: Visual
+  m_Name: WeaponImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2187,6 +2203,7 @@ GameObject:
   - component: {fileID: 1395233019269459296}
   - component: {fileID: 8422522155707155980}
   - component: {fileID: 5082718900943113461}
+  - component: {fileID: 9086540564072780271}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -2277,6 +2294,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9086540564072780271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903724307694854816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4cdf748b20a4f40acd93c9cdcd4b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponManager: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &8372029779784112060
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,14 +7,13 @@ public class BossHpBar : MonoBehaviour
 {
 	private EntityHealth _entityHealth;
 
-   private Image _hpBar;
+    [SerializeField] private Image _hpBar;
 
     private float _hpFillAmount;
 
     private void Awake()
     {
         _entityHealth = GetComponentInParent<EntityHealth>();
-        _hpBar = GameObject.Find("fill").GetComponent<Image>();
     }
 
     private void Update()
@@ -24,7 +23,7 @@ public class BossHpBar : MonoBehaviour
 
     public void BossHpSetting(float damge)
     {
-        _hpFillAmount = Mathf.Clamp(_entityHealth.MaxHealth - damge, 0, 1);
-        _hpBar.transform.localScale = new Vector3(_hpFillAmount, 0, 0);
+        _hpFillAmount = Mathf.Clamp(_entityHealth._currentHealth / _entityHealth.MaxHealth, 0, 1);
+        _hpBar.transform.localScale = new Vector3(_hpFillAmount, 1, 1);
     }
 }

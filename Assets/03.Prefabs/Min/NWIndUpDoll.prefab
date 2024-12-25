@@ -109,7 +109,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7742548977126682083}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a10d42f05fe4c584e85ffcced74b89f2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -220,6 +220,7 @@ MonoBehaviour:
   MaxHealth: 100
   _currentHealth: 0
   _knockBackTime: 0.5
+  Damge: 0
 --- !u!1 &7959394724549866002
 GameObject:
   m_ObjectHideFlags: 0
