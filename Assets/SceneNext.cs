@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneNext : MonoBehaviour
 {
     public string sceneName;
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.transform.CompareTag("Player"))
         {
             SceneManager.LoadScene(sceneName);
         }
