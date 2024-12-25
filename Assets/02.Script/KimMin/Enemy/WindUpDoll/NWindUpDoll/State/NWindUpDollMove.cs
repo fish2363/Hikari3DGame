@@ -15,7 +15,7 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        BroAudio.Play(_windUpDoll.WindUp);
+        //BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -44,7 +44,7 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        BroAudio.Pause(_windUpDoll.WindUp);
+        //BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void Move()

@@ -16,7 +16,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        BroAudio.Play(_spider.SpiderWalk);
+        //BroAudio.Play(_spider.SpiderWalk);
     }
 
     public override void UpdateState()
@@ -51,7 +51,7 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        BroAudio.Pause(_spider.SpiderWalk);
+        //BroAudio.Pause(_spider.SpiderWalk);
     }
 
     private void LookPlayer()
