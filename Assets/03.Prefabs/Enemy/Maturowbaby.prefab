@@ -269,6 +269,9 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1001 &2830202039005639161
 PrefabInstance:
@@ -391,6 +394,9 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4621593881900216883}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d41314fae15deff458c4b266483212dd,
