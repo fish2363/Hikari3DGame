@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,6 +74,9 @@ public class WeaponManager : MonoBehaviour
        // SwapWeaponModel(_weaponStorage.SwapWeapon().weaponModel);
     }*/
 
+    public event Action OnWeaponChanged;
+    public event Action OnAttack;
+
     [SerializeField] private Player player;
     private bool isChange;
     public List<GameObject> weaponCount = new List<GameObject>();
@@ -81,7 +85,6 @@ public class WeaponManager : MonoBehaviour
 
     private bool _isChangeSecontWaepon;
     private bool _isChangeThirdWaepon;
-
 
 
     private void Awake()
@@ -157,6 +160,8 @@ public class WeaponManager : MonoBehaviour
         currentWeaapon = weaponCount[ItemNum];
         player.currentWeaponData = weaponCount[ItemNum].GetComponent<ThisWeaponData>().weaponData;
         player.animator.runtimeAnimatorController = weaponCount[ItemNum].GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
+
+        OnWeaponChanged?.Invoke();
     }
 
     private IEnumerator ChangeWait()

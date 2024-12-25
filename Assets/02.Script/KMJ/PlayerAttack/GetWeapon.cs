@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using System;
 
 public class GetWeapon : MonoBehaviour
 {
-    [SerializeField] private WeaponData _thisWeapon;
+    public WeaponData _thisWeapon;
     private TextMeshProUGUI Gettxt;
 
     private void Awake()

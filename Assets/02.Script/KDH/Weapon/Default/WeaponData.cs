@@ -9,6 +9,7 @@ public class WeaponData : ScriptableObject
     public Mesh weaponModel;
     public int weaponDamage;
     public float weaponAttackCoolTime;
+    public Sprite weaponSprite;
     public AudioClip weaponSwingSound;
     public Material weaponMaterial;
     public RuntimeAnimatorController animatorControlloer;

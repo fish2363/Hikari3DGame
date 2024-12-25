@@ -17,6 +17,7 @@ MonoBehaviour:
     type: 3}
   weaponDamage: 45
   weaponAttackCoolTime: 1
+  weaponSprite: {fileID: 21300000, guid: 872a63e8352fb6440be54dacacb19f3a, type: 3}
   weaponSwingSound: {fileID: 0}
   weaponMaterial: {fileID: 2100000, guid: 3c1198d71b288b141be5ef8729e9b3af, type: 2}
   animatorControlloer: {fileID: 9100000, guid: 50f693bdeae208f4a860a82742df310d, type: 2}
