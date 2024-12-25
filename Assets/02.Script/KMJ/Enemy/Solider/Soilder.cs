@@ -1,15 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class Soilder : Enemy, IAttackable
+public class Soilder : Enemy, IDamageable
 {
     public Vector3 startPos;
     public float moveRadius = 10;
 
     private Vector3 _prev = Vector3.zero;
 
+    public Animation[] _animation { get; set; }
     public bool _isAttack { get; set; }
     [field: SerializeField] public bool _isMove { get; set; }
+
+    private Player _player;
 
     protected override void Awake()
     {
@@ -18,9 +22,13 @@ public class Soilder : Enemy, IAttackable
         stateMachine.AddState(EnemyStatEnum.Chase, new SoilderChase(this, stateMachine, "Chase"));
         stateMachine.AddState(EnemyStatEnum.Attack, new SoilderShoot(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyStatEnum.Dead, new SoilderDie(this, stateMachine, "Die"));
+        stateMachine.AddState(EnemyStatEnum.Stun, new RcStun(this, stateMachine, "Walk"));
+
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
         _isAttack = true;
         _isMove = false;
+        _animation = GetComponentsInChildren<Animation>();
     }
 
     private void Start()
@@ -39,18 +47,24 @@ public class Soilder : Enemy, IAttackable
         {
             return GetNextPos();
         }
-
         return result;
     }
 
     private void Update()
     {
+
+
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 8)
+        range = Vector3.Distance(transform.position,_player.transform.position);
+
+        print(range);
+
+        print(MoveCompo.isMove);
+        if (range <= 10)
         {
-            _isMove = true;
+            MoveCompo.isMove = true;
         }
     }
 
@@ -70,11 +84,10 @@ public class Soilder : Enemy, IAttackable
         throw new System.NotImplementedException();
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
         var hitEffect = Instantiate(getDamageEffect);
         hitEffect.SetPositionAndPlay(transform.position, transform);
-
     }
 }

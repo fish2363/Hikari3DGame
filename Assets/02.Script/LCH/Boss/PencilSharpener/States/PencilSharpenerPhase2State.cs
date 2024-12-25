@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Ami.BroAudio;
 
 public class PencilSharpenerPhase2State : EntityState
 {
@@ -42,6 +43,9 @@ public class PencilSharpenerPhase2State : EntityState
 
     private void DropBoom()
     {
+
+        BroAudio.Play(_pencilSharpener.Phase2Sfx);
+
         if (Count > 0 && !_pencilSharpener.IsPhaseEnd)
         {
             playerPosition = _pencilSharpener.player.transform.position;
@@ -61,8 +65,12 @@ public class PencilSharpenerPhase2State : EntityState
 
     private IEnumerator ChangeChaseState()
     {
-        yield return new WaitForSeconds(1F);
-        _pencilSharpener.ChangeState(BossState.Chase);
+        if (!_pencilSharpener.IsDead)
+        {
+
+            yield return new WaitForSeconds(1F);
+            _pencilSharpener.ChangeState(BossState.Chase);
+        }
     }
 
     public override void Exit()

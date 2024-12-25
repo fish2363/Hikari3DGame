@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885da8cbebd400447867210f8f14a67e, type: 3}
   m_Name: NWindUpDoll
   m_EditorClassIdentifier: 
-  AttackRadius: 10
+  AttackRadius: 6
   WallRadius: 1
   KnockbackPower: 5
   AttackDelay: 5
@@ -22,5 +22,5 @@ MonoBehaviour:
   Name: "\uC090\uC57D \uD0DC\uC5FD \uC778\uD615"
   Key: NwindUpDoll
   HP: 150
-  ProwlSpeed: 6
-  ChasingSpeed: 2.5
+  ProwlSpeed: 2
+  ChasingSpeed: 2

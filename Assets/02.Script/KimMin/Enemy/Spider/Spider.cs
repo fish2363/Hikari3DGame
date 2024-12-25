@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -18,6 +19,9 @@ public class Spider : Enemy, IDamageable
     [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 4f;
     [HideInInspector] public float distance => (player.transform.position - transform.position).magnitude;
 
+    [field: SerializeField] public SoundID SpiderJump { get; set; }
+    [field: SerializeField] public SoundID SpiderWalk { get; set; }
+
     [Header("Setting")]
     public float maxHeight = 10f;
     public float angleRange = 30f;
@@ -34,42 +38,28 @@ public class Spider : Enemy, IDamageable
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
     private Color _red = new Color(1f, 0f, 0f, 0.2f);
 
-    private void OnValidate()
-    {
-        startPos = transform.position;
-        GetNextPos();
-    }
-
     protected override void Awake()
     {
         base.Awake();
         stateMachine.AddState(EnemyStatEnum.Walk, new SpiderMove(this, stateMachine, "Move"));
         stateMachine.AddState(EnemyStatEnum.Chase, new SpiderChase(this, stateMachine, "Chase"));
-        stateMachine.AddState(EnemyStatEnum.Attack, new SpiderAttack(this, stateMachine, "Attack"));
-        stateMachine.AddState(EnemyStatEnum.Skill, new SpiderSkill(this, stateMachine, "Skill"));
+        stateMachine.AddState(EnemyStatEnum.Skill, new SpiderSkill(this, stateMachine, "Attack"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
 
+        startPos = transform.position;
         canAttack = false;
     }
 
     private void Update()
     {
-        Debug.Log(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
         FlipEnemy();
     }
 
     private void FixedUpdate()
     {
-        HandleGravity();
-    }
-
-    private void HandleGravity()
-    {
-        _gravityDir = transform.up * _gravity;
-
-        RigidCompo.velocity += _gravityDir;
+        //HandleGravity();
     }
 
     private void FlipEnemy()
@@ -95,6 +85,30 @@ public class Spider : Enemy, IDamageable
         return nextPos;
     }
 
+    protected override void AnimEndTrigger()
+    {
+
+    }
+
+    protected override void EnemyDie()
+    {
+
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Hp -= damage;
+
+        if (Hp <= 0)
+        {
+            EnemyDie();
+            return;
+        }
+
+        var item = Instantiate(getDamageEffect);
+        item.SetPositionAndPlay(transform.position, transform);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -105,33 +119,10 @@ public class Spider : Enemy, IDamageable
         Gizmos.DrawLine(transform.position, nextPos);
 
         if (interV == null) return;
-         Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
+        Debug.DrawRay(transform.position, new Vector3(0, 0, 0), Color.red);
 
         Handles.color = isCollision ? _red : _blue;
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    }
-
-    protected override void AnimEndTrigger()
-    {
-
-    }
-
-    protected override void EnemyDie()
-    {
-        
-    }
-
-    public void Attack(Player agent, LayerMask hittable, Vector3 direction)
-    {
-
-    }
-
-    public void ApplyDamage(float damage)
-    {
-        Hp -= damage;
-
-        var item = Instantiate(getDamageEffect);
-        item.SetPositionAndPlay(transform.position, transform);
     }
 }

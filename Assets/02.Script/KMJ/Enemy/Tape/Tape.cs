@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class Tape : Enemy, IAttackable
+public class Tape : Enemy, IDamageable
 {
     public bool _isAttack;
 
@@ -19,6 +20,7 @@ public class Tape : Enemy, IAttackable
         stateMachine.AddState(EnemyStatEnum.Walk, new TapeWalk(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Dead, new TapeDie(this, stateMachine, "Die"));
         stateMachine.AddState(EnemyStatEnum.Attack, new TapeAttack(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyStatEnum.Stun, new RcStun(this, stateMachine, "Idle"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
         _isAttack = true;
@@ -26,11 +28,13 @@ public class Tape : Enemy, IAttackable
 
     private void Update()
     {
-        if (player == null) return;
+        range = Vector3.Distance(transform.position, player.transform.position);
 
+
+        if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 8)
+        if (range <= 10)
         {
             MoveCompo.isMove = true;
         }
@@ -73,10 +77,16 @@ public class Tape : Enemy, IAttackable
         throw new NotImplementedException();
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
         var hit = Instantiate(getDamageEffect);
         hit.SetPositionAndPlay(transform.position, transform);
+    }
+
+    public void HitEnemy(float damage, float knockbackPower)
+    {
+        throw new NotImplementedException();
     }
 }

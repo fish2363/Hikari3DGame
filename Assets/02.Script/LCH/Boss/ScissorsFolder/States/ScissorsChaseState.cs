@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ami.BroAudio;
 
 public class ScissorsChaseState : EntityState
 {
@@ -15,7 +16,6 @@ public class ScissorsChaseState : EntityState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("따라가기");
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
         _scissors.IsPhaseEnd = false;
@@ -24,12 +24,16 @@ public class ScissorsChaseState : EntityState
     private IEnumerator ChangeWaitState(int timer)
     {
         yield return new WaitForSeconds(timer);
-        _scissors.ChangeState(BossState.Wait);
+        if (!_scissors.IsDead)
+        {
+            _scissors.ChangeState(BossState.Wait);
+        }
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+
         Vector3 direction = _scissors.player.transform.position - _scissors.transform.position;
 
         direction.y = 0;
@@ -50,6 +54,5 @@ public class ScissorsChaseState : EntityState
     public override void Exit()
     {
         base.Exit();
-        timer = 0;
     }
 }

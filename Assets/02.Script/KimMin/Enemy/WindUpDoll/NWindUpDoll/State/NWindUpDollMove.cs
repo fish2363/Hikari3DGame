@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +12,24 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         _windUpDoll = enemy as NWindUpDoll;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        //BroAudio.Play(_windUpDoll.WindUp);
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();
 
-        Move();
+        _windUpDoll.FlipEnemy();
 
-        if(_windUpDoll._distance <  _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
+        if (_windUpDoll._distance < 4)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Idle);
+        }
+
+        if (_windUpDoll._distance <  _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
         }
@@ -25,6 +37,14 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Idle);
         }
+
+        Move();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        //BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void Move()
@@ -32,6 +52,7 @@ public class NWindUpDollMove : EnemyState<EnemyStatEnum>
         Vector3 moveDir = (_windUpDoll.player.transform.position - _windUpDoll.transform.position).normalized;
         moveDir.y = 0;
 
-        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed * Time.deltaTime;
+
+        _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ProwlSpeed;
     }
 }

@@ -533,7 +533,7 @@ MonoBehaviour:
     m_Bits: 64
   _maxAvailableCount: 4
   _castSize: {x: 1.95, y: 3.92, z: 1.95}
-  _damage: 5
+  Damage: 0
   _knockBackForce: {x: 5, y: 3, z: 0}
   cnt: []
 --- !u!1 &7873927844978338082
@@ -737,6 +737,23 @@ MonoBehaviour:
   shotPos: {fileID: 3824018423739464748}
   _fallingObjectPrefab: {fileID: 4949601656437418384, guid: 24b76d47801c94a48b8dacf14154b32e,
     type: 3}
+  ChaseSound:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8032496398704748937}
+  ShotPencil:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8032496398704748937}
+  Phase2Sfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8032496398704748937}
+  Phase3Sfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 8032496398704748937}
+  JumpPos: {fileID: 0}
   CastDamge: {fileID: 0}
 --- !u!95 &6153265541318318302
 Animator:

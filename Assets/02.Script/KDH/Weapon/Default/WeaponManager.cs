@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,10 +74,12 @@ public class WeaponManager : MonoBehaviour
        // SwapWeaponModel(_weaponStorage.SwapWeapon().weaponModel);
     }*/
 
+    public event Action OnWeaponChanged;
+    public event Action OnAttack;
+
     [SerializeField] private Player player;
     private bool isChange;
     public List<GameObject> weaponCount = new List<GameObject>();
-
     public List<GameObject> LeftWeaponManager = new List<GameObject>();
     [SerializeField] private GameObject currentWeaapon;
 
@@ -91,9 +94,6 @@ public class WeaponManager : MonoBehaviour
         player.currentWeaponData = weaponCount[0].GetComponent<ThisWeaponData>().weaponData;
         player.animator.runtimeAnimatorController = weaponCount[0].GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
         currentWeaapon = weaponCount[0];
-
-        _isChangeSecontWaepon = false;
-        _isChangeThirdWaepon = false;
     }
 
     private void Update()
@@ -116,6 +116,7 @@ public class WeaponManager : MonoBehaviour
 
     public void GetWeapon(WeaponData weaponData)
     {
+        weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}").transform.GetChild(0).gameObject);
         if (_isChangeSecontWaepon == false)
         {
             weaponCount.Add(GameObject.Find($"Weapon_{weaponData.weaponName}").transform.GetChild(0).gameObject);
@@ -141,6 +142,7 @@ public class WeaponManager : MonoBehaviour
             {
                 ChangeItem(0, 1);
                 StartCoroutine(ChangeWait());
+
             }
 
             else if (Input.GetKeyDown(KeyCode.Alpha3) && _isChangeThirdWaepon)
@@ -158,6 +160,8 @@ public class WeaponManager : MonoBehaviour
         currentWeaapon = weaponCount[ItemNum];
         player.currentWeaponData = weaponCount[ItemNum].GetComponent<ThisWeaponData>().weaponData;
         player.animator.runtimeAnimatorController = weaponCount[ItemNum].GetComponent<ThisWeaponData>().weaponData.animatorControlloer;
+
+        OnWeaponChanged?.Invoke();
     }
 
     private IEnumerator ChangeWait()

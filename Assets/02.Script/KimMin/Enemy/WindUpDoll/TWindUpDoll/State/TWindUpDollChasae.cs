@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,23 +17,35 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        ChaseTarget();
+        _windUpDoll.FlipEnemy();
         CheckSight();
 
-        if (_windUpDoll._distance < _windUpDoll.EnemyStat.AttackRadius)
-        {
-            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
-        }
-        else if (_windUpDoll._distance > _windUpDoll.detectRadius)
+        if (_windUpDoll._distance > 4)
+            ChaseTarget();
+        else
+            LookPlayer();
+
+        if (_windUpDoll._distance > _windUpDoll.detectRadius)
         {
             _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Walk);
         }
+        if (_windUpDoll._distance < _windUpDoll.EnemyStat.AttackRadius && _windUpDoll.canAttack)
+        {
+            _windUpDoll.stateMachine.ChangeState(EnemyStatEnum.Attack);
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private void ChaseTarget()
@@ -41,6 +54,12 @@ public class TWindUpDollChase : EnemyState<EnemyStatEnum>
         moveDir.y = 0;
 
         _windUpDoll.RigidCompo.velocity = moveDir * _enemy.EnemyStat.ChasingSpeed;
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 dir = _windUpDoll.player.transform.position - _windUpDoll.transform.position;
+        _windUpDoll.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     private void CheckSight()

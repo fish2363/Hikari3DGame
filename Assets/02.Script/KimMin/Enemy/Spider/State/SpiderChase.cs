@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,19 +16,21 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
+        //BroAudio.Play(_spider.SpiderWalk);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        ChaseTarget();
-        CheckSight();
-
-        if (_spider.isCollision)
+        if (_spider.distance > 4)
         {
-            _spider.stateMachine.ChangeState(EnemyStatEnum.Attack);
+            ChaseTarget();
+            CheckSight();
         }
+        else
+            LookPlayer();
+
         if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
         {
             _spider.stateMachine.ChangeState(EnemyStatEnum.Walk);
@@ -43,6 +46,18 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
             if (rand == 1)
                 _spider.stateMachine.ChangeState(EnemyStatEnum.Skill);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        //BroAudio.Pause(_spider.SpiderWalk);
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 dir = _spider.player.transform.position - _spider.transform.position;
+        _spider.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     private void ChaseTarget()

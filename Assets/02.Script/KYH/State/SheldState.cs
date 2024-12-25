@@ -20,11 +20,15 @@ public class SheldState : State
     }
     public IEnumerator SheldDamage()
     {
+        _player.isShield = false;
         _player.isBlock = false;
 
         yield return new WaitForSeconds(3);
 
         _player.isBlock = true;
+
+        yield return new WaitForSeconds(17f);
+        _player.isShield = true;
     }
 
     public override void StateUpdate()
@@ -35,6 +39,7 @@ public class SheldState : State
 
     public override void Exit()
     {
+        _player.animator.SetFloat("Velocity", 0);
         _player.animator.SetBool("Sheld", false);
     }
 

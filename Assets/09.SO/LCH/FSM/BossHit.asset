@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 11
   className: BossHitState
-  animParam: {fileID: 11400000, guid: a995be519e127da4987a69036a07f494, type: 2}
+  animParam: {fileID: 11400000, guid: 0518ad9d897d06446b05ecc0e7413096, type: 2}

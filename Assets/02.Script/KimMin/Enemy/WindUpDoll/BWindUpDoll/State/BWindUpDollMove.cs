@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,14 +18,16 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
     {
         base.Enter();
 
-        _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+        _windUpDoll.StopImmediately();
         _windUpDoll.nextPos = _windUpDoll.GetNextPos();
+        //BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
+        _windUpDoll.FlipEnemy();
         MoveNextPos();
 
         if (_windUpDoll._distance <= _windUpDoll.EnemyStat.AttackRadius)
@@ -33,13 +36,19 @@ public class BWindUpDollMove : EnemyState<EnemyStatEnum>
         }
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        //BroAudio.Pause(_windUpDoll.WindUp);
+    }
+
     private void MoveNextPos()
     {
         Vector3 dir = (_windUpDoll.nextPos - _windUpDoll.transform.position).normalized;
 
         if ((_windUpDoll.nextPos - _windUpDoll.transform.position).magnitude <= 2f)
         {
-            _windUpDoll.MoveCompo.StopImmediately(_windUpDoll);
+            _windUpDoll.MoveCompo.StopImmediately();
             _windUpDoll.nextPos = _windUpDoll.GetNextPos();
         }
 

@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        _spider.MoveCompo.StopImmediately(_spider);
-
+        _spider.StopImmediately();
+        BroAudio.Play(_spider.SpiderWalk);
     }
 
     public override void UpdateState()
@@ -32,13 +33,19 @@ public class SpiderMove : EnemyState<EnemyStatEnum>
         }
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        BroAudio.Pause(_spider.SpiderWalk);
+    }
+
     private void MoveNextPos()
     {
         Vector3 dir = (_spider.nextPos - _spider.transform.position).normalized;
 
         if ((_spider.nextPos - _spider.transform.position).magnitude <= 2f)
         {
-            _spider.MoveCompo.StopImmediately(_spider);
+            _spider.MoveCompo.StopImmediately();
             _spider.nextPos = _spider.GetNextPos();
         }
         _spider.RigidCompo.velocity = dir * _spider.EnemyStat.ProwlSpeed;

@@ -8,6 +8,7 @@ public class TWindUpDoll : WindUpDoll
     [HideInInspector] public Vector3 interV = Vector3.zero;
     [HideInInspector] public bool isCollision = false;
     [HideInInspector] public float detectRadius => EnemyStat.AttackRadius * 2f;
+    [HideInInspector] public bool canAttack = true;
 
     public float angleRange = 30f;
     public float radius = 3f;
@@ -21,6 +22,7 @@ public class TWindUpDoll : WindUpDoll
         stateMachine.AddState(EnemyStatEnum.Walk, new TWindUpDollMove(this, stateMachine, "Walk"));
         stateMachine.AddState(EnemyStatEnum.Chase, new TWindUpDollChase(this, stateMachine, "Chase"));
         stateMachine.AddState(EnemyStatEnum.Attack, new TWindUpDollAttack(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyStatEnum.Dead, new TWindUpDollDead(this, stateMachine, "Dead"));
 
         stateMachine.InitInitialize(EnemyStatEnum.Walk, this);
         GetNextPos();

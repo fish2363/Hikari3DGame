@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RcCar : Enemy, IAttackable
+public class RcCar : Enemy, IDamageable
 {
     public bool _isAttack;
     public bool _isSkill;
@@ -16,11 +16,8 @@ public class RcCar : Enemy, IAttackable
     private Vector3 _moveDir;
 
     public ShowEffect hitEffect;
-
-    public ShowEffect stunEffect;
-
-    public Transform stunTransform;
-
+    [SerializeField]
+    private float moveSpeed = 10f;
 
     protected override void Awake()
     {
@@ -41,10 +38,14 @@ public class RcCar : Enemy, IAttackable
 
     private void Update()
     {
+
+        range = Vector3.Distance(transform.position, _player.transform.position);
+
+
         if (player == null) return;
         stateMachine.CurrentState.UpdateState();
 
-        if (range <= 6)
+        if (range <= 10)
         {
             MoveCompo.isMove = true;
         }
@@ -105,7 +106,7 @@ public class RcCar : Enemy, IAttackable
 
         _isAttackTrue = true;
 
-        RigidCompo.velocity += moveDir * 10;
+        RigidCompo.velocity += moveDir * moveSpeed;
 
         yield return new WaitForSeconds(0.1f);
 
@@ -129,14 +130,14 @@ public class RcCar : Enemy, IAttackable
 
             if (_isAttackTrue)
             {
-                player.MinusHp(damage);
+                player.ApplyDamage(damage);
                 stateMachine.ChangeState(EnemyStatEnum.Stun);
 
             }
             else if (_isSkillTrue)
             {
                 stateMachine.ChangeState(EnemyStatEnum.Stun);
-                player.MinusHp(damage += 2);
+                player.ApplyDamage(damage += 2);
             }
 
             RigidCompo.velocity = Vector3.zero;
@@ -149,14 +150,6 @@ public class RcCar : Enemy, IAttackable
     {
         throw new System.NotImplementedException();
     }
-
-    public void StunEffect()
-    {
-        var stun = Instantiate(stunEffect);
-
-        stun.SetPositionAndPlay(stunTransform.position, transform);
-    }
-
     protected override void EnemyDie()
     {
 
@@ -167,11 +160,10 @@ public class RcCar : Enemy, IAttackable
 
     }
 
-    public void HitEnemy(float damage, float knockbackPower)
+    public void ApplyDamage(float damage)
     {
         Hp -= damage;
         var hit = Instantiate(hitEffect);
         hit.SetPositionAndPlay(transform.position, transform);
-        print(hit);
     }
 }
