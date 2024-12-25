@@ -19,7 +19,7 @@ public class BWindUpDollChase : EnemyState<EnemyStatEnum>
     {
         base.Enter();
         _currrentTime = 0;
-        BroAudio.Play(_windUpDoll.WindUp);
+        //BroAudio.Play(_windUpDoll.WindUp);
     }
 
     public override void UpdateState()
@@ -37,6 +37,6 @@ public class BWindUpDollChase : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        BroAudio.Pause(_windUpDoll.WindUp);
+        //BroAudio.Pause(_windUpDoll.WindUp);
     }
 }

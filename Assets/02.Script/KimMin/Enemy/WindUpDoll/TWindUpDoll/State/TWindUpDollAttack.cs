@@ -21,7 +21,7 @@ public class TWindUpDollAttack : EnemyState<EnemyStatEnum>
         _windUpDoll.canAttack = false;
         _currentTime = 0;
 
-        BroAudio.Play(_windUpDoll.WindUp);
+        //BroAudio.Play(_windUpDoll.WindUp);
         _windUpDoll.StartCoroutine(AttackRoutine());
     }
 
@@ -39,7 +39,7 @@ public class TWindUpDollAttack : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        BroAudio.Pause(_windUpDoll.WindUp);
+        //BroAudio.Pause(_windUpDoll.WindUp);
     }
 
     private IEnumerator AttackRoutine()

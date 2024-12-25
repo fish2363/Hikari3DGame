@@ -79,7 +79,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -140,7 +140,7 @@ MonoBehaviour:
   radius: 5
   moveRadius: 5
   skillCoolTime: 8
-  startPos: {x: 2.9, y: 0.5, z: -29.2}
+  startPos: {x: 2.9, y: 0.6, z: -29.2}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 512
@@ -186,27 +186,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7088943e5f2a79449bf95f16535d666e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7088943e5f2a79449bf95f16535d666e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7088943e5f2a79449bf95f16535d666e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7088943e5f2a79449bf95f16535d666e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7088943e5f2a79449bf95f16535d666e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7088943e5f2a79449bf95f16535d666e,
         type: 3}

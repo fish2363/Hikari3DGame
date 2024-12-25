@@ -16,15 +16,20 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     public override void Enter()
     {
         base.Enter();
-        BroAudio.Play(_spider.SpiderWalk);
+        //BroAudio.Play(_spider.SpiderWalk);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        ChaseTarget();
-        CheckSight();
+        if (_spider.distance > 4)
+        {
+            ChaseTarget();
+            CheckSight();
+        }
+        else
+            LookPlayer();
 
         if (_spider.distance >= _spider.EnemyStat.AttackRadius * 4f)
         {
@@ -46,7 +51,13 @@ public class SpiderChase : EnemyState<EnemyStatEnum>
     public override void Exit()
     {
         base.Exit();
-        BroAudio.Pause(_spider.SpiderWalk);
+        //BroAudio.Pause(_spider.SpiderWalk);
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 dir = _spider.player.transform.position - _spider.transform.position;
+        _spider.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     private void ChaseTarget()
