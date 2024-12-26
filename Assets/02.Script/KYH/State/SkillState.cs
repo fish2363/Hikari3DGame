@@ -57,9 +57,9 @@ public class SkillState : State
 
         yield return new WaitForSeconds(3);
 
+        _player.isFullSheld = false;
         _player._isSkill = true;
         _player.animator.SetBool("Sheld", false);
-        _player.isFullSheld = false;
 
         yield return new WaitForSeconds(17f);
         _player._isSkillCoolTime = true;

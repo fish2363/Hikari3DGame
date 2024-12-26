@@ -24,16 +24,24 @@ public class HealthUI : MonoBehaviour
 
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _entityHealth = _player.GetComponent<EntityHealth>();
-        //_player.currentHp.OnValueChanged += SetupHP;
+        _player.currentHp.OnValueChanged += SetupHP;
     }
 
-    public void SetupHP()
+    public void SetupHP(float entityHealth, float nextHealth)
     {
-        hpBarObj.rectTransform.localScale = new Vector3(_entityHealth._currentHealth / _entityHealth.MaxHealth, 1, 1);
+        hpBarObj.fillAmount = _player.currentHp.Value / _player.MaxHp;
+
+        _lastHitTime = Time.time;
     }
 
     private void Update()
     {
-        SetupHP();
+        if (!_isChaseFill && _lastHitTime + delayTime > Time.time)
+        {
+            _isChaseFill = true;
+            hpBgBarObj.DOFillAmount(hpBarObj.fillAmount, 0.6f)
+                .SetEase(Ease.InCubic)
+                .OnComplete(() => _isChaseFill = false);
+        }
     }
 }
