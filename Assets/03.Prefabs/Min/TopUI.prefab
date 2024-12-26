@@ -259,9 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b28c37141744e4b809ce61c50db961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarObj: {fileID: 642032362970230654}
-  hpBgBarObj: {fileID: 1753755374797450523}
-  delayTime: 1
 --- !u!1 &9204044553514604292
 GameObject:
   m_ObjectHideFlags: 0

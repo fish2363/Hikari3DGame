@@ -3627,6 +3627,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7250079275210111631, guid: 09d9139aab395f2408e712d277385fb2,
         type: 3}
+      propertyPath: m_YAxis.m_MaxSpeed
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7250079275210111631, guid: 09d9139aab395f2408e712d277385fb2,
+        type: 3}
       propertyPath: m_XAxis.m_InvertInput
       value: 0
       objectReference: {fileID: 0}
