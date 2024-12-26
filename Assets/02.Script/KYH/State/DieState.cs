@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DieState : State
 {
@@ -22,6 +23,6 @@ public class DieState : State
 
         yield return new WaitForSeconds(1.4f);
 
-        _player.gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

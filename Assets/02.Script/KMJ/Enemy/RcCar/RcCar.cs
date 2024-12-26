@@ -126,7 +126,7 @@ public class RcCar : Enemy, IDamageable
         {
             //기본공격
             int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
-            collision.transform.TryGetComponent(out Player player);
+            collision.transform.TryGetComponent(out IDamageable player);
 
             if (_isAttackTrue)
             {

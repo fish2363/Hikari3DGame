@@ -29,7 +29,7 @@ public class SoilderBullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.TryGetComponent(out Player player);
+            other.TryGetComponent(out IDamageable player);
             player.ApplyDamage(1);
             gameObject.SetActive(false);
         }

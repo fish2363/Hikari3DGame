@@ -9,24 +9,29 @@ public class HealthUI : MonoBehaviour
 {
     private Player _player;
 
-    [SerializeField] private Image hpBarObj;
-    [SerializeField] private Image hpBgBarObj;
+    private Image hpBarObj;
+    private Image hpBgBarObj;
     private float _lastHitTime;
     private bool _isChaseFill;
-    [SerializeField] private float delayTime = 1;
+    private float delayTime = 1;
+
+    private EntityHealth _entityHealth;
 
     private void Awake()
     {
+        hpBarObj = transform.Find("HpBar").GetComponent<Image>();
+        hpBgBarObj = transform.Find("HpBarBack").GetComponent<Image>();
+
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _entityHealth = _player.GetComponent<EntityHealth>();
         _player.currentHp.OnValueChanged += SetupHP;
     }
 
-    public void SetupHP(float prevHealth, float nextHealth)
+    public void SetupHP(float entityHealth, float nextHealth)
     {
-        hpBarObj.fillAmount = (float)_player.currentHp.Value / _player.MaxHp;
+        hpBarObj.fillAmount = _player.currentHp.Value / _player.MaxHp;
 
         _lastHitTime = Time.time;
-        transform.DOShakePosition(0.4f, 1f, 100);
     }
 
     private void Update()

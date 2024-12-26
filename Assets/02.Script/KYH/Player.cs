@@ -101,6 +101,8 @@ public class Player : MonoBehaviour, IDamageable
     public UnityEngine.Rendering.Volume dashVolume;
 
     private LevelLoader loader;
+    [SerializeField]
+    private ThisWeaponData loaddaser;
 
 
     private void Awake()
@@ -191,13 +193,13 @@ public class Player : MonoBehaviour, IDamageable
         try
         {
             currentCamera.m_XAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 100;
-            //currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity;
+            currentCamera.m_YAxis.m_MaxSpeed = SettingManager.Instance.Sensitivity * 0.7f;
         }
         catch (Exception e)
         {
             print("Mainmenu부터 실행하지 않으면 ESC 안됨미다");
         }
-        print(currentHp);
+        print(currentHp.Value);
         stateDictionary[currentEnum].StateUpdate();
         scroll = -(Input.GetAxis("Mouse ScrollWheel") * 10);
         //freelook.m_YAxis.Value=Mathf.Clamp(freelook.m_YAxis.Value, 0.4f, 1f);
@@ -348,6 +350,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!isStop)
         {
+            print("나 데미지 받음");
             if (isFullSheld)
             {
                 BroAudio.Play(_deFenseSound);

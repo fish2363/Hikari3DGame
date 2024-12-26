@@ -6811,12 +6811,70 @@ MonoBehaviour:
   <InputReader>k__BackingField: {fileID: 11400000, guid: 1a040acad41af3347b4fda55c1d9ef5f,
     type: 2}
   <RigidCompo>k__BackingField: {fileID: 916531949118942844}
+  <virtualCamera>k__BackingField: {fileID: 0}
+  freelook: {fileID: 0}
+  combatCamera: {fileID: 0}
   <GroundCheck>k__BackingField: {fileID: 3306053298939961836}
+  <RayTransform>k__BackingField: {fileID: 0}
+  <playerCam>k__BackingField: {fileID: 0}
   maxHp: 0
-  currentHp: 0
+  <currentHp>k__BackingField:
+    value: 0
   moveSpeed: 300
+  gravity: -9.8
+  size: {x: 0, y: 0, z: 0}
+  <SkillSize>k__BackingField: {x: 0, y: 0, z: 0}
+  currentWeaponData: {fileID: 0}
   <animator>k__BackingField: {fileID: 4896807696004790070}
   _dashCoolTime: 0
+  _attckCoolTime: 0
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
+  _sponAttackSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _sponSwingSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _clipAttackSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _clipSwingkSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _PencilAttackSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _PencilSwingSfx:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _walkSound:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _deFenseSound:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  _hitSound:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 3202570440107935346}
+  attackEffect: {fileID: 0}
+  leftCamera: {fileID: 0}
+  rightCamera: {fileID: 0}
+  isCameraOn: 0
+  dashPower: 10
+  dashCoolTime: 5
+  dashTime: 0.4
+  dashVolume: {fileID: 0}
 --- !u!54 &916531949118942844
 Rigidbody:
   m_ObjectHideFlags: 0
