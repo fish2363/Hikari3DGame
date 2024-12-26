@@ -101,6 +101,8 @@ public class Player : MonoBehaviour, IDamageable
     public UnityEngine.Rendering.Volume dashVolume;
 
     private LevelLoader loader;
+    [SerializeField]
+    private ThisWeaponData loaddaser;
 
 
     private void Awake()

@@ -14,8 +14,7 @@ public class PauseManager : MonoBehaviour
         {
             Player player = GameObject.Find("Player(Test)").GetComponentInChildren<Player>();
             player.isCameraOn = false;
-            print(player.isStop);
-            if (stop)
+            if (player.isStop)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;

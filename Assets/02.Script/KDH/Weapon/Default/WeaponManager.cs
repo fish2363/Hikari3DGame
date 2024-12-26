@@ -78,12 +78,15 @@ public class WeaponManager : MonoBehaviour
     public event Action OnAttack;
 
     [SerializeField] private Player player;
+    [SerializeField]
     private bool isChange;
     public List<GameObject> weaponCount = new List<GameObject>();
     public List<GameObject> LeftWeaponManager = new List<GameObject>();
     [SerializeField] private GameObject currentWeaapon;
 
+    [SerializeField]
     private bool _isChangeSecontWaepon;
+    [SerializeField]
     private bool _isChangeThirdWaepon;
 
 
