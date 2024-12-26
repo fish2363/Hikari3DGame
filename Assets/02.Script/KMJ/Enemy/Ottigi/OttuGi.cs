@@ -114,8 +114,11 @@ public class OttuGi : Enemy, IDamageable
         if (collision.gameObject.CompareTag("Player") && !_isSkill)
         {
             int damage = Random.Range(EnemyStat.MinAttackDamage, EnemyStat.MaxAttackDamage);
-            collision.transform.TryGetComponent(out Player player);
-            player.ApplyDamage(damage);
+
+            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.ApplyDamage(damage);
+            }
 
             RigidCompo.AddForce(Vector3.up * 7, ForceMode.Impulse);
             RigidCompo.AddForce(Vector3.back * 2.5f, ForceMode.Impulse);

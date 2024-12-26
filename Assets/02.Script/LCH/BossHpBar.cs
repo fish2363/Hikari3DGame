@@ -7,12 +7,13 @@ public class BossHpBar : MonoBehaviour
 {
 	private EntityHealth _entityHealth;
 
-    [SerializeField] private Image _hpBar;
+    private Image _hpBar;
 
     private float _hpFillAmount;
 
     private void Awake()
     {
+        _hpBar = transform.Find("background/fill").GetComponent<Image>();
         _entityHealth = GetComponentInParent<EntityHealth>();
     }
 
