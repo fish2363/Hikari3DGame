@@ -61,8 +61,8 @@ public class MainMenuButton : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         yield return new WaitForSecondsRealtime(4);
         filter.GetComponent<Image>().DOFade(0, 1).WaitForRewind();
+        loader.LoadNextLevel();
         yield return new WaitForSecondsRealtime(1);
         filter.SetActive(false);
-        loader.LoadNextLevel();
     }
 }
