@@ -39,7 +39,7 @@ public class SpiderSkill : EnemyState<EnemyStatEnum>
         _spider.canAttack = false;
         _spider.transform
             .DOJump(_spider.player.transform.position, 12f, 1, 1.5f)
-            .JoinCallback(() =>
+            .InsertCallback(1f,() =>
             {
                 BroAudio.Play(_spider.SpiderJump);
             })
