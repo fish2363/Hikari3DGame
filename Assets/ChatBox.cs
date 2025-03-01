@@ -5,6 +5,7 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.Playables;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class ChatBox : MonoBehaviour
 {
@@ -132,6 +133,14 @@ public class ChatBox : MonoBehaviour
     {
         talkNum = 0;
         HideChatBox();
+        Effector.FadeInBlackImage();
+        StartCoroutine(AAARoutine());
+    }
+
+    private IEnumerator AAARoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Stage1");
     }
 
     public void HideChatBox()

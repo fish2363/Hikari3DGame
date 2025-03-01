@@ -6,11 +6,10 @@ using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Cinemachine;
+using Ami.BroAudio;
 
 public class MainMenuButton : MonoBehaviour
 {
-    [SerializeField]
-    private string nameScene;
     [SerializeField] private Image blackImage;
     [SerializeField] private Image vinette;
     [SerializeField] private GameObject filter;
@@ -18,7 +17,7 @@ public class MainMenuButton : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin noise;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private ParticleSystem particleSystem;
-    [SerializeField] private AudioSource bgm;
+    [SerializeField] private SoundSource bgm;
     [SerializeField] private LevelLoader loader;
 
     private CanvasGroup canvasGroup;
@@ -36,7 +35,6 @@ public class MainMenuButton : MonoBehaviour
         canvasGroup.DOFade(0, .5f);
         startTimeLine.Play();
         //이후 작업
-        bgm.Stop();
         particleSystem.gameObject.SetActive(false);
         StartCoroutine(SceneMove());
     }
@@ -64,5 +62,6 @@ public class MainMenuButton : MonoBehaviour
         loader.LoadNextLevel();
         yield return new WaitForSecondsRealtime(1);
         filter.SetActive(false);
+        bgm.Stop();
     }
 }
