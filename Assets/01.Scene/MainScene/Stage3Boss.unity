@@ -8295,17 +8295,17 @@ PrefabInstance:
     - target: {fileID: 7513668148755284021, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.18578024
+      value: 0.18578026
       objectReference: {fileID: 0}
     - target: {fileID: 7513668148755284021, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000000845342
+      value: 0.00000000845342
       objectReference: {fileID: 0}
     - target: {fileID: 7513668148755284021, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000015983027
+      value: -0.0000000015983028
       objectReference: {fileID: 0}
     - target: {fileID: 7615047482346212668, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -8360,12 +8360,12 @@ PrefabInstance:
     - target: {fileID: 7704987434627490531, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017163677
+      value: -0.00000001716367
       objectReference: {fileID: 0}
     - target: {fileID: 7704987434627490531, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000012115536
+      value: 0.0000000012115532
       objectReference: {fileID: 0}
     - target: {fileID: 8004946555797487867, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -9514,7 +9514,7 @@ PrefabInstance:
     - target: {fileID: 3979239716652070536, guid: 190f6589b898b0f49a67b83e545bcb7a,
         type: 3}
       propertyPath: LoadSceneName
-      value: Stage4
+      value: Credit
       objectReference: {fileID: 0}
     - target: {fileID: 7219049846091421951, guid: 190f6589b898b0f49a67b83e545bcb7a,
         type: 3}
