@@ -19,7 +19,6 @@ public class ScissorsPhase2State : EntityState
 
     public override void Enter()
     {
-        Debug.Log("´Ï ¿Ö ½ÇÇàµÅ");
         base.Enter();
         _originDamge = _scissors.DamgeCaster.Damage;
         _scissors.DamgeCaster.Damage = 35f;
@@ -55,6 +54,7 @@ public class ScissorsPhase2State : EntityState
             seq = DOTween.Sequence(); 
         }
         seq.Append(_scissors.transform.DOMove(_scissors.player.transform.position, 0.25f).SetEase(Ease.Linear))
+            .AppendCallback(()=> BroAudio.Play(_scissors.ScissorsThrowingSfx))
             .AppendCallback(()=>_scissors.StartCoroutine(ChangeChaseState()));
 
     }

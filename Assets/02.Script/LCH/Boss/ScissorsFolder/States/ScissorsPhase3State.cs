@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ public class ScissorsPhase3State : EntityState
 
     private IEnumerator PlayerChase()
     {
+        BroAudio.Play(_scissors.ScissorsFastSfx);
         yield return new WaitForSeconds(7f);
         _scissors.StartCoroutine(ChanseChaseState());
     }
