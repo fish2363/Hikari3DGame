@@ -1787,7 +1787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400507925}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1812943, y: -0.0076438366, z: 0.0014091791, w: 0.9833982}
+  m_LocalRotation: {x: 0.18129432, y: -0.0076447297, z: 0.0014093437, w: 0.9833982}
   m_LocalPosition: {x: 19.56438, y: 2.780573, z: -48.769894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8015,12 +8015,12 @@ PrefabInstance:
     - target: {fileID: 3526227883168040247, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017024478
+      value: -0.00000001702447
       objectReference: {fileID: 0}
     - target: {fileID: 3526227883168040247, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000024953666
+      value: 0.0000000024953655
       objectReference: {fileID: 0}
     - target: {fileID: 3533729334861688460, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -8105,12 +8105,12 @@ PrefabInstance:
     - target: {fileID: 4864301738606167746, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017659898
+      value: 0.000000017659904
       objectReference: {fileID: 0}
     - target: {fileID: 4864301738606167746, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000016404653
+      value: -0.0000000016404658
       objectReference: {fileID: 0}
     - target: {fileID: 5241909719488101119, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -8160,12 +8160,12 @@ PrefabInstance:
     - target: {fileID: 5402421758272909980, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.004143421
+      value: -0.004143905
       objectReference: {fileID: 0}
     - target: {fileID: 5402421758272909980, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00037467532
+      value: 0.000374719
       objectReference: {fileID: 0}
     - target: {fileID: 5562242037627462264, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -8445,12 +8445,12 @@ PrefabInstance:
     - target: {fileID: 8497389565465726142, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0076438356
+      value: -0.0076447288
       objectReference: {fileID: 0}
     - target: {fileID: 8497389565465726142, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0014091787
+      value: 0.0014093433
       objectReference: {fileID: 0}
     - target: {fileID: 8885954410953094341, guid: afa4548424962874f87c88d2c47db166,
         type: 3}
@@ -9510,11 +9510,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PencilSharpener (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3979239716652070536, guid: 190f6589b898b0f49a67b83e545bcb7a,
-        type: 3}
-      propertyPath: LoadSceneName
-      value: Credit
       objectReference: {fileID: 0}
     - target: {fileID: 7219049846091421951, guid: 190f6589b898b0f49a67b83e545bcb7a,
         type: 3}
