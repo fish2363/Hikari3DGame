@@ -97497,7 +97497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 9011390427737829330}
-  sceneName: Tutorial
+  sceneName: Stage1
   transitionTime: 1
 --- !u!4 &9053274887972523273
 Transform:
