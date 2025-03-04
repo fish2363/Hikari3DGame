@@ -13,8 +13,7 @@ public enum BossState
     Phase3Wait,
     Phase4,
     Phase4Wait,
-    Die,
-    Hit,
+    Die
 }
 
 [CreateAssetMenu(fileName = "EntityFSMSO", menuName = "SO/FSM/EntityFSM")]

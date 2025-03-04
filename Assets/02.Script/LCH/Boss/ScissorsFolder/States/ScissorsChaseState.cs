@@ -16,6 +16,7 @@ public class ScissorsChaseState : EntityState
     public override void Enter()
     {
         base.Enter();
+        BroAudio.Play(_scissors.ScissorsSfx);
         timer = Random.Range(4, 7);
         _scissors.StartCoroutine(ChangeWaitState(timer));
         _scissors.IsPhaseEnd = false;
