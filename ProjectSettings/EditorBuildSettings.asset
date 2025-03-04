@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/MainScene/Stage3Boss.unity
     guid: f47d4bc8f14f2ce4cae9ba1a83b9c9e6
+  - enabled: 1
+    path: Assets/01.Scene/MainScene/Credit.unity
+    guid: bfa44c0a1bf221f468db8005ea8bd37f
   m_configObjects: {}
