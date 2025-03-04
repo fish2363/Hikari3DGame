@@ -27,8 +27,8 @@ public class BossDeadState : EntityState
         base.UpdateState();
         if (_isTriggerCall)
         {
-            _boss.IsDead = false;
             SceneManager.LoadScene(_boss.LoadSceneName);
+            _boss.IsDead = false;
             GameObject.Destroy(_boss.gameObject);
         }
     }

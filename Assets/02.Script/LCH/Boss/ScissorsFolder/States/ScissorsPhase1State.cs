@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ public class ScissorsPhase1State : EntityState
     public override void Enter()
     {
         base.Enter();
+        BroAudio.Play(_scissors.QuickScissorsSfx);
        _scissors.RigidCompo.velocity = _scissors.player.transform.position.normalized*5f;
         _scissors.StartCoroutine(ChanseChaseState());
     }
@@ -25,7 +27,6 @@ public class ScissorsPhase1State : EntityState
     {
         if (!_scissors.IsDead)
         {
-
             yield return new WaitForSeconds(1f);
             _scissors.ChangeState(BossState.Chase);
         }

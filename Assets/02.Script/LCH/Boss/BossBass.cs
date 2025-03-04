@@ -38,26 +38,19 @@ public abstract class BossBass : Entity
         GetCompo<EntityAnimator>(true).OnAnimationEnd += HandleAnimationEnd;
         _health = GetCompo<EntityHealth>();
         _health.OnDeath += DeadState;
-        _health.OnHit += HitState;
     }
 
     private void OnDestroy()
     {
         GetCompo<EntityAnimator>(true).OnAnimationEnd -= HandleAnimationEnd;
         _health.OnDeath -= DeadState;
-        _health.OnHit -= HitState;
     }
 
-        private void HandleAnimationEnd()
+    private void HandleAnimationEnd()
     {
         CurrentState.AnimationEndTrigger();
     }
 
-    private void HitState()
-    {
-        if (IsDead) return;
-        _stateMachine.ChageState(BossState.Hit);
-    }
 
     private void DeadState()
     {
